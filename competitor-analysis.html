@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<!-- GTM-META
+title: Agen Competitor Analysis
+date: 2026-02-13
+category: research
+tags: competitors, market-intel, agen-for-saas, agen-for-work
+description: Comprehensive competitive landscape across Agen for SaaS and Agen for Work - 50+ competitors mapped with Why We Win context
+skill: market-intel
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agen Competitor Analysis</title>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --muted: #555;
+    --light: #888;
+    --border: #e0e0e0;
+    --bg: #fff;
+    --bg-alt: #f8f8f8;
+    --blue: #2d5be3;
+    --blue-light: #eef2ff;
+    --purple: #7c3aed;
+    --purple-light: #f3f0ff;
+    --red: #d1344b;
+    --red-light: #fef2f2;
+    --amber: #b45309;
+    --amber-light: #fffbeb;
+    --green: #16803c;
+    --green-light: #f0fdf4;
+    --cyan: #0891b2;
+    --cyan-light: #ecfeff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+    background: var(--bg);
+  }
+
+  /* Header */
+  .header { margin-bottom: 32px; padding-bottom: 20px; border-bottom: 3px solid var(--ink); }
+  .header-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+  h1 { font-size: 30px; font-weight: 700; line-height: 1.2; }
+  .subtitle { font-size: 15px; color: var(--muted); margin-top: 6px; }
+
+  /* Filter tabs */
+  .filters { display: flex; gap: 8px; margin: 20px 0 8px; flex-wrap: wrap; }
+  .filter-btn {
+    padding: 6px 16px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: var(--muted);
+    user-select: none;
+  }
+  .filter-btn:hover { border-color: var(--ink); color: var(--ink); }
+  .filter-btn.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+  /* Stats row */
+  .stats { display: flex; gap: 16px; margin-bottom: 28px; flex-wrap: wrap; }
+  .stat {
+    background: var(--bg-alt);
+    border-radius: 8px;
+    padding: 14px 20px;
+    flex: 1;
+    min-width: 160px;
+  }
+  .stat-value { font-size: 24px; font-weight: 700; }
+  .stat-label { font-size: 12px; color: var(--light); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+
+  /* Sections */
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 36px 0 6px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-subtitle { font-size: 13px; color: var(--light); margin-bottom: 16px; }
+  h3 { font-size: 15px; font-weight: 700; margin: 24px 0 10px; color: var(--muted); }
+
+  /* Threat cards */
+  .threat-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 16px 0; }
+  .threat-card {
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--red);
+    border-radius: 8px;
+    padding: 16px 20px;
+    transition: box-shadow 0.15s;
+  }
+  .threat-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .threat-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+  .threat-name { font-weight: 700; font-size: 16px; }
+  .threat-name a { color: var(--ink); text-decoration: none; }
+  .threat-name a:hover { text-decoration: underline; }
+  .threat-meta { font-size: 12px; color: var(--light); }
+  .threat-desc { font-size: 14px; color: var(--muted); margin-bottom: 10px; }
+  .threat-context { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+  .threat-win, .threat-when {
+    font-size: 12px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    line-height: 1.5;
+  }
+  .threat-win { background: var(--green-light); color: var(--green); }
+  .threat-when { background: var(--amber-light); color: var(--amber); }
+  .threat-win strong, .threat-when strong { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+
+  /* Competitor table */
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 20px; font-size: 13px; }
+  th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--light);
+    padding: 8px 10px;
+    border-bottom: 2px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+  }
+  td { padding: 10px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+  tr:hover td { background: var(--bg-alt); }
+  .comp-name { font-weight: 700; white-space: nowrap; }
+  .comp-name a { color: var(--ink); text-decoration: none; }
+  .comp-name a:hover { text-decoration: underline; }
+
+  /* Why We Win / Real Threat When in tables */
+  .col-win { color: var(--green); font-size: 12px; }
+  .col-threat { color: var(--amber); font-size: 12px; }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 3px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .tag-saas { background: var(--blue-light); color: var(--blue); }
+  .tag-work { background: var(--purple-light); color: var(--purple); }
+  .tag-both { background: var(--amber-light); color: var(--amber); }
+  .tag-leader { background: var(--red-light); color: var(--red); }
+  .tag-challenger { background: var(--amber-light); color: var(--amber); }
+  .tag-emerging { background: var(--green-light); color: var(--green); }
+
+  /* M&A table */
+  .ma-table td:nth-child(3) { font-weight: 700; }
+
+  /* Positioning section */
+  .positioning {
+    background: var(--bg-alt);
+    border-radius: 8px;
+    padding: 24px;
+    margin: 24px 0;
+  }
+  .positioning h2 { margin-top: 0; border-bottom-color: #ddd; }
+  .positioning ol { margin: 12px 0 0 20px; }
+  .positioning li { margin-bottom: 10px; }
+  .positioning li strong { color: var(--ink); }
+
+  .footer {
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--light);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* Filter logic */
+  .competitor-row.hidden { display: none; }
+
+  @media (max-width: 700px) {
+    .threat-context { grid-template-columns: 1fr; }
+    .stats { flex-direction: column; }
+  }
+  @media print {
+    .filters { display: none; }
+    body { padding: 0; max-width: none; font-size: 11px; }
+    .threat-card, .positioning, .stat { break-inside: avoid; }
+    table { font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div>
+      <h1>Agen Competitor Analysis</h1>
+      <p class="subtitle">Competitive landscape across Agen for SaaS and Agen for Work - Feb 2026</p>
+    </div>
+  </div>
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterAll(this)">All</button>
+    <button class="filter-btn" onclick="filterBy('saas', this)" style="border-color:var(--blue);color:var(--blue)">Agen for SaaS</button>
+    <button class="filter-btn" onclick="filterBy('work', this)" style="border-color:var(--purple);color:var(--purple)">Agen for Work</button>
+    <button class="filter-btn" onclick="filterBy('both', this)" style="border-color:var(--amber);color:var(--amber)">Both</button>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-value">$6.34B</div><div class="stat-label">AI Security Funding 2025 (3x vs 2024)</div></div>
+  <div class="stat"><div class="stat-value">$4.5B+</div><div class="stat-label">M&A in Space (2025)</div></div>
+  <div class="stat"><div class="stat-value">40%</div><div class="stat-label">Enterprise Apps w/ AI Agents by 2026</div></div>
+  <div class="stat"><div class="stat-value">~70%</div><div class="stat-label">MCP Servers Powered by FastMCP</div></div>
+</div>
+
+<!-- CRITICAL THREATS -->
+<h2>Critical Threats</h2>
+<p class="section-subtitle">Monitor weekly - highest overlap and market power. 7 companies that demand constant attention.</p>
+
+<div class="threat-grid">
+  <div class="threat-card competitor-row" data-product="saas">
+    <div class="threat-top">
+      <div>
+        <div class="threat-name"><a href="https://konghq.com" target="_blank">Kong</a> <span class="tag tag-saas">SaaS</span></div>
+        <div class="threat-meta">Context Mesh - $2B valuation - Launched Feb 2026</div>
+      </div>
+    </div>
+    <div class="threat-desc">Auto-discovers APIs, transforms to MCP tools, deploys with governance. Massive API gateway install base makes this the most dangerous competitive move in the SaaS space.</div>
+    <div class="threat-context">
+      <div class="threat-win"><strong>Why We Win</strong>Identity-first vs infra-first. Agen has per-tenant tool exposure, delegated admin, and customer-facing analytics. Kong treats MCP as another API - no multi-tenant identity model.</div>
+      <div class="threat-when"><strong>Real Threat When</strong>Customer already uses Kong as their API gateway.</div>
+    </div>
+  </div>
+
+  <div class="threat-card competitor-row" data-product="saas">
+    <div class="threat-top">
+      <div>
+        <div class="threat-name"><a href="https://cloudflare.com" target="_blank">Cloudflare</a> <span class="tag tag-saas">SaaS</span></div>
+        <div class="threat-meta">MCP Server Portals - ~$40B market cap</div>
+      </div>
+    </div>
+    <div class="threat-desc">MCP Server Portals with Zero Trust, role-based access, device posture, geofencing. Agents SDK for remote MCP on Workers. Millions of developers already on Cloudflare.</div>
+    <div class="threat-context">
+      <div class="threat-win"><strong>Why We Win</strong>Platform-agnostic vs Cloudflare lock-in. Deeper multi-tenant identity controls. Cloudflare's MCP is infrastructure, not a product layer.</div>
+      <div class="threat-when"><strong>Real Threat When</strong>Only if customer runs everything on Cloudflare and wants to keep it that way. Not a threat for non-CF customers.</div>
+    </div>
+  </div>
+
+  <div class="threat-card competitor-row" data-product="both">
+    <div class="threat-top">
+      <div>
+        <div class="threat-name"><a href="https://okta.com" target="_blank">Okta / Auth0</a> <span class="tag tag-both">Both</span></div>
+        <div class="threat-meta">Auth0 for AI Agents - ~$15B market cap</div>
+      </div>
+    </div>
+    <div class="threat-desc">Agent auth bound to human identity, Cross App Access (XAA) extending OAuth for agent-to-app, MCP Server for identity management. SaaS companies on Auth0 could adopt directly.</div>
+    <div class="threat-context">
+      <div class="threat-win"><strong>Why We Win</strong>Purpose-built for agentic access vs auth bolt-on. Faster MCP time-to-value. Auth0 adds agent features to existing auth - Agen is built agent-first with MCP-native architecture.</div>
+      <div class="threat-when"><strong>Real Threat When</strong>SaaS company already on Auth0 for CIAM and wants to extend what they have.</div>
+    </div>
+  </div>
+
+  <div class="threat-card competitor-row" data-product="saas">
+    <div class="threat-top">
+      <div>
+        <div class="threat-name"><a href="https://prefect.io" target="_blank">Prefect</a> <span class="tag tag-saas">SaaS</span></div>
+        <div class="threat-meta">Horizon + FastMCP - $350M+ total funding</div>
+      </div>
+    </div>
+    <div class="threat-desc">FastMCP powers ~70% of MCP servers. Horizon platform: MCP generation, orchestration, observability, security. 4 pillars: Create, Connect, Observe, Secure. Developer ecosystem dominance.</div>
+    <div class="threat-context">
+      <div class="threat-win"><strong>Why We Win</strong>Agen is enterprise identity + governance focused vs Prefect's developer tooling origin. No per-tenant controls, no delegated admin, no customer-facing analytics. Great dev tool, weak enterprise product.</div>
+      <div class="threat-when"><strong>Real Threat When</strong>Dev teams already using FastMCP in production who want to stay in one ecosystem.</div>
+    </div>
+  </div>
+
+  <div class="threat-card competitor-row" data-product="both">
+    <div class="threat-top">
+      <div>
+        <div class="threat-name"><a href="https://descope.com" target="_blank">Descope</a> <span class="tag tag-both">Both</span></div>
+        <div class="threat-meta">Agentic Identity Hub 2.0 - $103M total funding</div>
+      </div>
+    </div>
+    <div class="threat-desc">CIAM competitor (like Frontegg itself). Agent auth flows, MCP server identity, agentic session management. Directly competes with Frontegg's core business AND agent strategy.</div>
+    <div class="threat-context">
+      <div class="threat-win"><strong>Why We Win</strong>Agen is further ahead on MCP governance + Work product. Descope is still CIAM-first with agent features bolted on. Frontegg has 300+ existing CIAM customers to cross-sell.</div>
+      <div class="threat-when"><strong>Real Threat When</strong>Net-new CIAM deals where Descope competes directly with Frontegg's core business.</div>
+    </div>
+  </div>
+
+  <div class="threat-card competitor-row" data-product="work">
+    <div class="threat-top">
+      <div>
+        <div class="threat-name"><a href="https://lumia.security" target="_blank">Lumia Security</a> <span class="tag tag-work">Work</span></div>
+        <div class="threat-meta">$18M Seed - Team8-backed, ex-NSA advisory</div>
+      </div>
+    </div>
+    <div class="threat-desc">Monitors content/context/intent/action of every AI interaction in the enterprise. Agentless network-layer deployment. Former NSA Director on advisory board.</div>
+    <div class="threat-context">
+      <div class="threat-win"><strong>Why We Win</strong>Agen covers both SaaS + Work in one platform. Lumia is Work-only. Agen's cross-sell from CIAM base is a GTM advantage Lumia can't match.</div>
+      <div class="threat-when"><strong>Real Threat When</strong>Enterprise security-first buyer focused purely on workforce AI governance.</div>
+    </div>
+  </div>
+
+  <div class="threat-card competitor-row" data-product="work">
+    <div class="threat-top">
+      <div>
+        <div class="threat-name"><a href="https://barndoor.ai" target="_blank">Barndoor AI</a> <span class="tag tag-work">Work</span></div>
+        <div class="threat-meta">$13.6M Seed</div>
+      </div>
+    </div>
+    <div class="threat-desc">"Control plane for agentic AI workforces." MCP server registration, granular policies, immutable audit logs, shadow MCP detection. Nearly identical positioning to Agen for Work.</div>
+    <div class="threat-context">
+      <div class="threat-win"><strong>Why We Win</strong>Agen covers both products + has 300 CIAM customers. Barndoor is a Work-only startup with no SaaS product and no existing customer base.</div>
+      <div class="threat-when"><strong>Real Threat When</strong>Pure Work deal where Barndoor's narrow focus is positioned as depth.</div>
+    </div>
+  </div>
+</div>
+
+<!-- AGEN FOR SAAS -->
+<h2 class="product-section" data-product="saas">Agen for SaaS <span class="tag tag-saas" style="font-size:11px;vertical-align:middle;margin-left:6px">25 competitors</span></h2>
+
+<h3>API-to-Agent Translation / MCP Generation</h3>
+<table>
+  <tr><th>Competitor</th><th>What They Do</th><th class="col-win">Why We Win</th><th class="col-threat">Real Threat When</th><th>Funding</th><th>Position</th></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://speakeasy.com" target="_blank">Speakeasy</a></td><td>Generates MCP servers from OpenAPI specs. Self-hostable.</td><td class="col-win">Generates code, not a platform. No runtime, governance, or analytics.</td><td class="col-threat">Customer just needs code gen, not a managed platform.</td><td>$15M Series A (GV)</td><td><span class="tag tag-challenger">Challenger</span></td></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://stainless.com" target="_blank">Stainless</a></td><td>MCP servers + SDKs from API specs. Used by OpenAI, Anthropic, Meta.</td><td class="col-win">SDK generation only. No hosting, governance, or tenant management.</td><td class="col-threat">Teams wanting to self-host everything.</td><td>$25M Series A (a16z, Sequoia)</td><td><span class="tag tag-challenger">Challenger</span></td></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://buildwithfern.com" target="_blank">Fern</a> (Postman)</td><td>SDK/docs generation from API specs. Acquired by Postman Jan 2026.</td><td class="col-win">Adjacent - docs/SDK focus. Postman distribution is the real watch.</td><td class="col-threat">Postman adds MCP gen. Not a threat today.</td><td>Acquired by Postman</td><td><span class="tag tag-challenger">Challenger</span></td></tr>
+</table>
+
+<h3>MCP Hosting & Gateways</h3>
+<table>
+  <tr><th>Competitor</th><th>What They Do</th><th class="col-win">Why We Win</th><th class="col-threat">Real Threat When</th><th>Funding</th><th>Position</th></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://mintmcp.com" target="_blank">MintMCP</a></td><td>1-click MCP deployment, OAuth wrapping, SSO, audit trails. SOC 2 Type II.</td><td class="col-win">Early-stage, limited multi-tenant depth. Agen has deeper identity model.</td><td class="col-threat">Watch if they add per-tenant controls.</td><td>Early-stage (Feb 2026)</td><td><span class="tag tag-emerging">Emerging</span></td></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://truefoundry.com" target="_blank">TrueFoundry</a></td><td>Combined LLM + MCP gateway in single control plane.</td><td class="col-win">ML-infra focused. MCP is one feature of their broader LLM platform.</td><td class="col-threat">Companies looking for all-in-one ML + MCP infra.</td><td>$19M Series A (Intel Capital)</td><td><span class="tag tag-emerging">Emerging</span></td></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://manufact.com" target="_blank">Manufact</a> (ex mcp-use)</td><td>OSS SDK + cloud for MCP servers. 5M+ downloads, 9K+ GitHub stars.</td><td class="col-win">Community/dev tool. No identity, no tenant isolation, no governance.</td><td class="col-threat">Developer mindshare becomes pipeline threat if they add enterprise features.</td><td>$6.3M Seed (YC W26)</td><td><span class="tag tag-emerging">Emerging</span></td></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://lunar.dev" target="_blank">Lunar.dev</a> (MCPX)</td><td>MCP gateway with auth, rate limiting, monitoring. OSS approach.</td><td class="col-win">Infra-focused MCP proxy. No multi-tenant model, no customer-facing features.</td><td class="col-threat">Teams wanting lightweight OSS MCP proxy.</td><td>Early-stage</td><td><span class="tag tag-emerging">Emerging</span></td></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://runlayer.com" target="_blank">Runlayer</a></td><td>Runtime auth + governance for MCP. MCP protocol creator as advisor.</td><td class="col-win">Close positioning but earlier stage. Advisor pedigree strong, product nascent.</td><td class="col-threat">Gains traction from MCP creator's endorsement. Watch closely.</td><td>$8M Seed</td><td><span class="tag tag-emerging">Emerging</span></td></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://portkey.ai" target="_blank">Portkey AI</a></td><td>AI Gateway with MCP support. Routing, guardrails, caching, observability.</td><td class="col-win">LLM routing gateway vs MCP platform. Portkey optimizes LLM calls - different layer.</td><td class="col-threat">Companies wanting combined LLM gateway + MCP management.</td><td>$18M total</td><td><span class="tag tag-emerging">Emerging</span></td></tr>
+</table>
+
+<h3>Agent Access Control & Identity</h3>
+<table>
+  <tr><th>Competitor</th><th>What They Do</th><th class="col-win">Why We Win</th><th class="col-threat">Real Threat When</th><th>Funding</th><th>Position</th></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://keycard.dev" target="_blank">Keycard</a></td><td>Agent-to-app auth via MCP. Granular permissions, session mgmt. a16z-backed.</td><td class="col-win">Authz-only vs full platform. Keycard is one layer - we're the whole stack.</td><td class="col-threat">Customer already has MCP infra and just needs auth layer.</td><td>$38M (a16z)</td><td><span class="tag tag-challenger">Challenger</span></td></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://permit.io" target="_blank">Permit.io</a></td><td>Fine-grained authz for human + agent identities. AI Access Control framework.</td><td class="col-win">Authorization-only. Agen includes authz as part of broader platform.</td><td class="col-threat">Complex RBAC/ABAC needs wanting dedicated authz.</td><td>$14M total</td><td><span class="tag tag-challenger">Challenger</span></td></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://cerbos.dev" target="_blank">Cerbos</a></td><td>Authorization for Zero Trust + AI. Policy-driven control for MCP servers.</td><td class="col-win">Policy engine only. Complementary, not competitive.</td><td class="col-threat">Rarely - more complementary than competitive.</td><td>$11M total</td><td><span class="tag tag-challenger">Challenger</span></td></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://osohq.com" target="_blank">Oso</a></td><td>Unified authz for agents + apps. Per-tool-call authorization.</td><td class="col-win">Authz-only. Agen provides the platform these tools plug into.</td><td class="col-threat">Large enterprise with dedicated authz team.</td><td>~$26M (Sequoia)</td><td><span class="tag tag-challenger">Challenger</span></td></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://workos.com" target="_blank">WorkOS</a></td><td>Enterprise identity (SSO, FGA) + agent auth via AuthKit, audit logging.</td><td class="col-win">SSO/directory focused. Agent auth is a bolt-on. Agen is agent-native.</td><td class="col-threat">Companies already on WorkOS wanting to add agent features.</td><td>$99M total, $30M ARR</td><td><span class="tag tag-challenger">Challenger</span></td></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://token.security" target="_blank">Token Security</a></td><td>AI Agent Identity Security. Discovery, lifecycle governance.</td><td class="col-win">Discovery tool, not MCP platform. More of a Work competitor.</td><td class="col-threat">Rarely competitive for SaaS.</td><td>$27M total</td><td><span class="tag tag-emerging">Emerging</span></td></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://arcade.dev" target="_blank">Arcade AI</a></td><td>Authenticated tool-calling. "SSO for AI agents." Pre-built tools.</td><td class="col-win">Agents-to-SaaS direction vs Agen's SaaS-to-agents platform.</td><td class="col-threat">Teams wanting fastest path to connect agents to SaaS tools.</td><td>$12M Seed</td><td><span class="tag tag-emerging">Emerging</span></td></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://nango.dev" target="_blank">Nango</a></td><td>Unified API + agent auth. 300+ pre-built integrations with auth mgmt.</td><td class="col-win">Integration platform (agents-to-SaaS). Nango helps consumers, Agen helps producers.</td><td class="col-threat">Confused as simpler alt when customer misses SaaS-vendor value prop.</td><td>$25M Series A</td><td><span class="tag tag-challenger">Challenger</span></td></tr>
+</table>
+
+<h3>Agent Security & Governance</h3>
+<table>
+  <tr><th>Competitor</th><th>What They Do</th><th class="col-win">Why We Win</th><th class="col-threat">Real Threat When</th><th>Funding</th><th>Position</th></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://zenity.io" target="_blank">Zenity</a></td><td>Security + governance for AI agents across SaaS, cloud, endpoint. Fortune 500.</td><td class="col-win">Security-observability focused. Different buyer: CISO vs VP Eng/Product.</td><td class="col-threat">Security team drives the agent strategy (not product/eng).</td><td>$38M Series B</td><td><span class="tag tag-challenger">Challenger</span></td></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://lasso.security" target="_blank">Lasso Security</a></td><td>OSS MCP Gateway with prompt injection detection, PII masking.</td><td class="col-win">Security layer only. Could be complementary.</td><td class="col-threat">Companies looking for dedicated AI security proxy.</td><td>$28M total</td><td><span class="tag tag-challenger">Challenger</span></td></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://operant.ai" target="_blank">Operant AI</a></td><td>Runtime security. MCP Gateway + Agent Protector. Shadow agent discovery.</td><td class="col-win">Runtime security focus vs platform approach. Different stack layer.</td><td class="col-threat">Runtime security mandate for agent-specific coverage.</td><td>$13.5M total</td><td><span class="tag tag-emerging">Emerging</span></td></tr>
+</table>
+
+<h3>Agent Integration Platforms</h3>
+<table>
+  <tr><th>Competitor</th><th>What They Do</th><th class="col-win">Why We Win</th><th class="col-threat">Real Threat When</th><th>Funding</th><th>Position</th></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://composio.dev" target="_blank">Composio</a></td><td>850+ connectors for AI agents. Managed auth + dashboards.</td><td class="col-win">Opposite direction: agents TO SaaS. Not competitive - potentially complementary.</td><td class="col-threat">Rarely - different value chain position.</td><td>$29M Series A</td><td><span class="tag tag-challenger">Challenger</span></td></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://zapier.com/mcp" target="_blank">Zapier</a></td><td>8K apps, 30K actions via MCP. No-code setup.</td><td class="col-win">Horizontal integration. No per-tenant controls, no governance. Fast but shallow.</td><td class="col-threat">SaaS in Zapier ecosystem takes path of least resistance.</td><td>Private, >$200M ARR</td><td><span class="tag tag-leader">Leader</span></td></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://stackone.com" target="_blank">StackOne</a></td><td>Integration infra for agents. 10K+ actions, 200+ connectors.</td><td class="col-win">Agents-to-SaaS direction. Not competitive with SaaS-vendor platform.</td><td class="col-threat">Rarely - different value chain position.</td><td>$24M Series A (GV)</td><td><span class="tag tag-challenger">Challenger</span></td></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://superface.ai" target="_blank">Superface</a></td><td>Tool generation from API docs with managed OAuth.</td><td class="col-win">Lightweight translation. No hosting, governance, or identity.</td><td class="col-threat">Simple, quick integration without enterprise features.</td><td>$6.15M total</td><td><span class="tag tag-emerging">Emerging</span></td></tr>
+  <tr class="competitor-row" data-product="saas"><td class="comp-name"><a href="https://aci.dev" target="_blank">ACI.dev</a></td><td>OSS unified MCP server. 600+ tools, multi-tenant.</td><td class="col-win">OSS community tool. Multi-tenant but lacks enterprise identity depth.</td><td class="col-threat">Developer-led adoption before enterprise evaluation.</td><td>$3M Pre-Seed</td><td><span class="tag tag-emerging">Emerging</span></td></tr>
+</table>
+
+<!-- AGEN FOR WORK -->
+<h2 class="product-section" data-product="work">Agen for Work <span class="tag tag-work" style="font-size:11px;vertical-align:middle;margin-left:6px">23 competitors</span></h2>
+
+<h3>AI Agent Governance (Direct Competitors)</h3>
+<table>
+  <tr><th>Competitor</th><th>What They Do</th><th class="col-win">Why We Win</th><th class="col-threat">Real Threat When</th><th>Funding</th><th>Position</th></tr>
+  <tr class="competitor-row" data-product="work"><td class="comp-name"><a href="https://barndoor.ai" target="_blank">Barndoor AI</a></td><td>Control plane for agentic AI workforces. MCP registration, policies, shadow MCP.</td><td class="col-win">Agen covers both SaaS + Work. 300 CIAM customers. Barndoor is Work-only.</td><td class="col-threat">Pure Work deals where narrow focus = depth.</td><td>$13.6M Seed</td><td><span class="tag tag-emerging">Emerging</span></td></tr>
+  <tr class="competitor-row" data-product="work"><td class="comp-name"><a href="https://lumia.security" target="_blank">Lumia Security</a></td><td>Monitors every AI interaction. Content/context/intent/action. Agentless.</td><td class="col-win">Both products. Lumia is passive monitoring vs Agen's active governance.</td><td class="col-threat">Enterprise CISO-led deals focused on monitoring.</td><td>$18M Seed (Team8)</td><td><span class="tag tag-emerging">Emerging</span></td></tr>
+  <tr class="competitor-row" data-product="work"><td class="comp-name"><a href="https://witness.ai" target="_blank">WitnessAI</a></td><td>Monitors all AI interactions, catalogs AI inventory incl. MCP servers.</td><td class="col-win">Observation-only. WitnessAI watches, Agen controls.</td><td class="col-threat">Large enterprises wanting visibility before governance. "Phase 1" buyer.</td><td>$58M total</td><td><span class="tag tag-challenger">Challenger</span></td></tr>
+  <tr class="competitor-row" data-product="work"><td class="comp-name"><a href="https://nudgesecurity.com" target="_blank">Nudge Security</a></td><td>Discovers AI apps, agents, MCP servers at workforce edge. Browser guardrails.</td><td class="col-win">SaaS discovery extending to AI. Breadth-focused vs Agen's agent depth.</td><td class="col-threat">Agent governance = extension of SaaS security.</td><td>$22.5M Series A</td><td><span class="tag tag-challenger">Challenger</span></td></tr>
+  <tr class="competitor-row" data-product="work"><td class="comp-name"><a href="https://noma.security" target="_blank">Noma Security</a></td><td>AI security platform. Agent governance, posture mgmt, supply chain security.</td><td class="col-win">Broad AI security (mile wide, inch deep on agents). Agen is deep on agent access + governance.</td><td class="col-threat">Enterprise CISO consolidating AI security tools. Noma's breadth wins bake-offs.</td><td>$132M total</td><td><span class="tag tag-challenger">Challenger</span></td></tr>
+</table>
+
+<h3>Non-Human Identity (NHI) & Agent Identity</h3>
+<table>
+  <tr><th>Competitor</th><th>What They Do</th><th class="col-win">Why We Win</th><th class="col-threat">Real Threat When</th><th>Funding</th><th>Position</th></tr>
+  <tr class="competitor-row" data-product="work"><td class="comp-name"><a href="https://astrix.security" target="_blank">Astrix Security</a></td><td>AI Agent Control Plane (ACP). MCP security research. NHI governance.</td><td class="col-win">NHI-focused. Agents = another NHI to them. Agen understands agent context.</td><td class="col-threat">Enterprises already managing NHIs via Astrix who extend to agents.</td><td>$85M total</td><td><span class="tag tag-challenger">Challenger</span></td></tr>
+  <tr class="competitor-row" data-product="work"><td class="comp-name"><a href="https://token.security" target="_blank">Token Security</a></td><td>AI Agent Identity Security. Discovery, lifecycle governance.</td><td class="col-win">Discovery-focused. Tells what agents exist, not how to govern them.</td><td class="col-threat">Combined with governance tool to fill visibility gap.</td><td>$27M total</td><td><span class="tag tag-emerging">Emerging</span></td></tr>
+  <tr class="competitor-row" data-product="work"><td class="comp-name"><a href="https://1password.com" target="_blank">1Password</a></td><td>Extending credential management to AI agents and MCP servers.</td><td class="col-win">Credential mgmt =/= governance. 1Password manages secrets, Agen governs access.</td><td class="col-threat">Companies wanting agent credentials alongside human passwords.</td><td>Private, large</td><td><span class="tag tag-leader">Leader</span></td></tr>
+  <tr class="competitor-row" data-product="work"><td class="comp-name"><a href="https://aembit.io" target="_blank">Aembit</a></td><td>Non-human identity. Workload-to-workload access management. MCP-aware.</td><td class="col-win">Infra-level workload IAM vs application-level agent governance.</td><td class="col-threat">Deals framed as "NHI management" rather than "agent governance."</td><td>$25M Series A</td><td><span class="tag tag-emerging">Emerging</span></td></tr>
+  <tr class="competitor-row" data-product="work"><td class="comp-name"><a href="https://strata.io" target="_blank">Strata Identity</a></td><td>Identity orchestration. Extending to agent identity governance across multi-cloud.</td><td class="col-win">Identity orchestration is complementary infra. Agen is the product layer on top.</td><td class="col-threat">Complex multi-IDP enterprises looking to orchestrate agent identity.</td><td>$42M total</td><td><span class="tag tag-challenger">Challenger</span></td></tr>
+</table>
+
+<h3>Shadow AI Detection & Compliance</h3>
+<table>
+  <tr><th>Competitor</th><th>What They Do</th><th class="col-win">Why We Win</th><th class="col-threat">Real Threat When</th><th>Funding</th><th>Position</th></tr>
+  <tr class="competitor-row" data-product="work"><td class="comp-name"><a href="https://harmonicsecurity.com" target="_blank">Harmonic Security</a></td><td>AI data protection. Tracks sensitive data flowing through AI tools.</td><td class="col-win">DLP for AI vs agent governance. Harmonic protects data, Agen governs access.</td><td class="col-threat">Deals led by data protection requirements.</td><td>$17.5M Series A</td><td><span class="tag tag-emerging">Emerging</span></td></tr>
+  <tr class="competitor-row" data-product="work"><td class="comp-name"><a href="https://reco.ai" target="_blank">Reco AI</a></td><td>SaaS security + AI governance. Discovers unsanctioned AI usage.</td><td class="col-win">Broad SaaS security extending to AI. Shallow on agent specifics.</td><td class="col-threat">Companies framing this as "shadow SaaS" problem.</td><td>$51M total</td><td><span class="tag tag-challenger">Challenger</span></td></tr>
+  <tr class="competitor-row" data-product="work"><td class="comp-name"><a href="https://docontrol.io" target="_blank">DoControl</a></td><td>SaaS data security. Expanding to AI governance and remediation.</td><td class="col-win">SaaS data security extending to AI. Breadth vs depth on agents.</td><td class="col-threat">Existing DoControl customers expanding scope to AI.</td><td>$50M total</td><td><span class="tag tag-challenger">Challenger</span></td></tr>
+  <tr class="competitor-row" data-product="work"><td class="comp-name"><a href="https://grip.security" target="_blank">Grip Security</a></td><td>SaaS identity risk. Discovers all SaaS including AI tools.</td><td class="col-win">Finds shadow AI but doesn't govern agent access or MCP connections.</td><td class="col-threat">Companies treating AI tools as another SaaS to catalog.</td><td>$65M total</td><td><span class="tag tag-challenger">Challenger</span></td></tr>
+  <tr class="competitor-row" data-product="work"><td class="comp-name"><a href="https://acuvity.ai" target="_blank">Acuvity</a> (Proofpoint)</td><td>AI security and governance. MCP monitoring. Acquired by Proofpoint Feb 2026.</td><td class="col-win">Part of broader email/data security suite. Agent governance is a feature, not the product.</td><td class="col-threat">Proofpoint customers getting AI governance bundled.</td><td>Acquired by Proofpoint</td><td><span class="tag tag-challenger">Challenger</span></td></tr>
+</table>
+
+<h3>Enterprise IAM Platforms (Expanding to Agents)</h3>
+<table>
+  <tr><th>Competitor</th><th>What They Do</th><th class="col-win">Why We Win</th><th class="col-threat">Real Threat When</th><th>Funding</th><th>Position</th></tr>
+  <tr class="competitor-row" data-product="work"><td class="comp-name"><a href="https://microsoft.com" target="_blank">Microsoft Entra</a></td><td>Agent identity within Entra. Free/bundled with Microsoft ecosystem.</td><td class="col-win">"Good enough" bundled vs purpose-built. Lacks depth on MCP governance, cost optimization.</td><td class="col-threat">Microsoft-only shops where "free with E5" wins over best-of-breed.</td><td>Public (MSFT)</td><td><span class="tag tag-leader">Leader</span></td></tr>
+  <tr class="competitor-row" data-product="work"><td class="comp-name"><a href="https://saviynt.com" target="_blank">Saviynt</a></td><td>Identity governance. AI agent + MCP governance on 2026 roadmap.</td><td class="col-win">On roadmap, not in market. IGA platforms ship slow. Agen is shipping now.</td><td class="col-threat">If/when Saviynt ships and existing customers adopt.</td><td>$3B valuation</td><td><span class="tag tag-leader">Leader</span></td></tr>
+  <tr class="competitor-row" data-product="work"><td class="comp-name"><a href="https://crowdstrike.com" target="_blank">CrowdStrike</a> (SGNL)</td><td>Acquired SGNL ($740M) for dynamic authorization incl. agents.</td><td class="col-win">Integration takes time. Security-first, not agent governance-first.</td><td class="col-threat">Falcon customers looking for "one more module."</td><td>Public, massive</td><td><span class="tag tag-leader">Leader</span></td></tr>
+  <tr class="competitor-row" data-product="work"><td class="comp-name"><a href="https://servicenow.com" target="_blank">ServiceNow</a> (Veza)</td><td>Acquired Veza (~$1B) for identity security. ITSM distribution.</td><td class="col-win">Acquisition integration takes 12-18 months. Agen is shipping now.</td><td class="col-threat">ServiceNow customers adding Veza module for agent identity.</td><td>Public, massive</td><td><span class="tag tag-leader">Leader</span></td></tr>
+</table>
+
+<h3>AI Security Platforms</h3>
+<table>
+  <tr><th>Competitor</th><th>What They Do</th><th class="col-win">Why We Win</th><th class="col-threat">Real Threat When</th><th>Funding</th><th>Position</th></tr>
+  <tr class="competitor-row" data-product="work"><td class="comp-name"><a href="https://zenity.io" target="_blank">Zenity</a></td><td>Security + governance for AI agents. Full lifecycle. Fortune 500.</td><td class="col-win">Security-observability vs active governance. Different buyer (CISO vs VP IT/VP Eng).</td><td class="col-threat">CISO-driven deals where security posture is primary.</td><td>$38M Series B</td><td><span class="tag tag-challenger">Challenger</span></td></tr>
+  <tr class="competitor-row" data-product="work"><td class="comp-name"><a href="https://cisco.com" target="_blank">Cisco AI Defense</a></td><td>Feb 2026 expansion for agentic security. Enterprise reach.</td><td class="col-win">Feature in massive platform. Not purpose-built. Slow to innovate.</td><td class="col-threat">Cisco shops adding agent security as module. Not a startup threat.</td><td>Public (massive)</td><td><span class="tag tag-leader">Leader</span></td></tr>
+  <tr class="competitor-row" data-product="work"><td class="comp-name"><a href="https://operant.ai" target="_blank">Operant AI</a></td><td>Runtime security. Agent Protector. Shadow agent discovery.</td><td class="col-win">Runtime layer vs governance platform. Operant detects, Agen prevents via policy.</td><td class="col-threat">Companies wanting agent detection/response alongside governance.</td><td>$13.5M total</td><td><span class="tag tag-emerging">Emerging</span></td></tr>
+  <tr class="competitor-row" data-product="work"><td class="comp-name"><a href="https://lasso.security" target="_blank">Lasso Security</a></td><td>MCP Gateway security. Prompt injection, PII masking.</td><td class="col-win">Security proxy vs governance platform. Could be complementary layer.</td><td class="col-threat">Companies concerned about prompt injection and data leakage.</td><td>$28M total</td><td><span class="tag tag-challenger">Challenger</span></td></tr>
+</table>
+
+<!-- M&A -->
+<h2>Notable M&A (2025-2026)</h2>
+<table class="ma-table">
+  <tr><th>Company</th><th>Acquirer</th><th>Price</th><th>Date</th><th>Relevance</th></tr>
+  <tr><td>Securiti.ai</td><td>Veeam</td><td>~$1.8B</td><td>Oct 2025</td><td>Data security + AI governance</td></tr>
+  <tr><td>Veza</td><td>ServiceNow</td><td>~$1B</td><td>Dec 2025</td><td>Identity security</td></tr>
+  <tr><td>SGNL</td><td>CrowdStrike</td><td>~$740M</td><td>Jan 2026</td><td>Dynamic authorization</td></tr>
+  <tr><td>Protect AI</td><td>Palo Alto Networks</td><td>~$500M</td><td>Apr 2025</td><td>AI security</td></tr>
+  <tr><td>Prompt Security</td><td>SentinelOne</td><td>~$250M</td><td>Sep 2025</td><td>AI security</td></tr>
+  <tr><td>CalypsoAI</td><td>F5</td><td>~$180M</td><td>Sep 2025</td><td>AI security</td></tr>
+  <tr><td>Acuvity</td><td>Proofpoint</td><td>Undisclosed</td><td>Feb 2026</td><td>AI governance + MCP</td></tr>
+  <tr><td>Lakera</td><td>Check Point</td><td>Undisclosed</td><td>Q4 2025</td><td>AI guardrails</td></tr>
+  <tr><td>Fern</td><td>Postman</td><td>Undisclosed</td><td>Jan 2026</td><td>API-to-SDK/MCP</td></tr>
+</table>
+
+<!-- POSITIONING -->
+<div class="positioning">
+  <h2>Agen's Unique Positioning</h2>
+  <p class="section-subtitle">Gaps no competitor fully covers</p>
+  <ol>
+    <li><strong>The SaaS vendor perspective</strong> - most competitors help agent builders connect TO SaaS or provide horizontal security. Agen helps SaaS companies control their own agent experience with per-tenant tool exposure, customer-facing analytics, and delegated admin.</li>
+    <li><strong>Cost optimization for agentic usage</strong> - completely uncontested across all competitors in the Work space.</li>
+    <li><strong>No single competitor covers all 5 Agen for Work pillars</strong> - Observe + Permission + Audit + Security + Cost Optimization.</li>
+    <li><strong>Cross-sell to 300+ existing CIAM customers</strong> - a GTM advantage no pure-play competitor can replicate.</li>
+    <li><strong>Both SaaS and Work in one platform</strong> - no competitor addresses both "help SaaS be agent-ready" AND "govern workforce agent access" together.</li>
+    <li><strong>FastMCP ecosystem gap</strong> - Prefect dominates the developer layer but has no enterprise governance. Companies using FastMCP to build MCPs still need Agen to govern, secure, and monetize them.</li>
+    <li><strong>Identity heritage</strong> - Frontegg's CIAM DNA means Agen thinks identity-first, not infra-first (vs Kong, Cloudflare) or security-first (vs Zenity, Lasso).</li>
+  </ol>
+</div>
+
+<div class="footer">
+  <span>Agen - Competitor Analysis</span>
+  <span>Feb 2026 - Sources: Web research, company sites, funding announcements</span>
+</div>
+
+<script>
+function filterAll(btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.competitor-row').forEach(r => r.classList.remove('hidden'));
+  document.querySelectorAll('.product-section').forEach(s => s.style.display = '');
+  document.querySelectorAll('h3').forEach(s => s.style.display = '');
+  document.querySelectorAll('table').forEach(t => t.style.display = '');
+}
+
+function filterBy(product, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  // Show/hide competitor rows
+  document.querySelectorAll('.competitor-row').forEach(r => {
+    var p = r.getAttribute('data-product');
+    r.classList.toggle('hidden', p !== product && p !== 'both');
+  });
+
+  // Show/hide product sections
+  document.querySelectorAll('.product-section').forEach(s => {
+    var p = s.getAttribute('data-product');
+    var show = p === product;
+    s.style.display = show ? '' : 'none';
+    // Show/hide the tables and h3s after this h2 until next h2
+    var el = s.nextElementSibling;
+    while (el && el.tagName !== 'H2') {
+      el.style.display = show ? '' : 'none';
+      el = el.nextElementSibling;
+    }
+  });
+}
+</script>
+
+</body>
+</html>
