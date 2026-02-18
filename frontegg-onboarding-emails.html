@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<!-- GTM-META
+title: Frontegg Onboarding Email Flowchart
+type: flowchart
+category: internal
+tags: hubspot, email, onboarding, nurture, frontegg, agen
+created: 2026-02-17
+author: ori
+description: Visual map of current Frontegg HubSpot onboarding email workflows with improvement suggestions and Agen introduction opportunity
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frontegg Onboarding Email Flowchart</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface-2: #242836;
+    --border: #2e3346;
+    --text: #e4e7f1;
+    --text-dim: #8b90a5;
+    --accent: #6c5ce7;
+    --accent-light: #a29bfe;
+    --green: #00b894;
+    --green-dim: #00b89433;
+    --orange: #fdcb6e;
+    --orange-dim: #fdcb6e22;
+    --red: #e17055;
+    --red-dim: #e1705522;
+    --blue: #74b9ff;
+    --blue-dim: #74b9ff22;
+    --cyan: #81ecec;
+    --pink: #fd79a8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--accent-light), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .header p {
+    color: var(--text-dim);
+    font-size: 1rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .header .date {
+    display: inline-block;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 0.3rem 1rem;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-top: 0.75rem;
+  }
+
+  /* Stats bar */
+  .stats-bar {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.75rem;
+    text-align: center;
+    min-width: 150px;
+  }
+
+  .stat-card .value { font-size: 2rem; font-weight: 700; }
+  .stat-card .label { font-size: 0.8rem; color: var(--text-dim); margin-top: 0.25rem; }
+  .stat-card.warn .value { color: var(--orange); }
+  .stat-card.danger .value { color: var(--red); }
+  .stat-card.info .value { color: var(--blue); }
+  .stat-card.ok .value { color: var(--green); }
+
+  /* Shared */
+  .flow-section { max-width: 1200px; margin: 0 auto 3rem; }
+
+  .section-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .badge {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+
+  .badge-live { background: var(--green-dim); color: var(--green); border: 1px solid var(--green); }
+  .badge-suggestion { background: var(--orange-dim); color: var(--orange); border: 1px solid var(--orange); }
+
+  /* Flow nodes */
+  .flow { display: flex; flex-direction: column; align-items: center; gap: 0; }
+
+  .flow-node {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.75rem;
+    width: 100%;
+    max-width: 500px;
+    transition: border-color 0.2s;
+  }
+
+  .flow-node:hover { border-color: var(--accent); }
+  .flow-node .node-type { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 0.4rem; }
+  .flow-node .node-title { font-size: 1rem; font-weight: 600; }
+  .flow-node .node-detail { font-size: 0.85rem; color: var(--text-dim); margin-top: 0.4rem; }
+
+  .node-metric {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+
+  .metric-ctr { background: var(--blue-dim); color: var(--blue); }
+  .metric-goal { background: var(--green-dim); color: var(--green); }
+  .metric-warn { background: var(--orange-dim); color: var(--orange); }
+  .metric-slack { background: #6c5ce722; color: var(--accent-light); }
+
+  .flow-connector {
+    width: 2px;
+    height: 32px;
+    background: var(--border);
+    position: relative;
+  }
+
+  .flow-connector::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid var(--border);
+  }
+
+  /* Branch */
+  .branch-container { width: 100%; max-width: 1200px; }
+
+  .branch-header {
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: 1.25rem 1.75rem;
+    text-align: center;
+  }
+
+  .branch-header .node-type { color: var(--accent-light); }
+
+  .branch-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .branch-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .branch-label {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+  }
+
+  .branch-label.dev { border-color: var(--blue); color: var(--blue); }
+  .branch-label.sec { border-color: var(--pink); color: var(--pink); }
+  .branch-label.founder { border-color: var(--orange); color: var(--orange); }
+  .branch-label.none { border-color: var(--text-dim); color: var(--text-dim); }
+
+  .branch-node {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .branch-node .email-name { font-size: 0.8rem; font-weight: 600; margin-bottom: 0.25rem; }
+  .branch-node .email-detail { font-size: 0.7rem; color: var(--text-dim); }
+
+  .branch-connector { width: 2px; height: 14px; background: var(--border); }
+
+  .branch-end {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    background: var(--surface-2);
+    border-radius: 20px;
+    padding: 0.3rem 1rem;
+    border: 1px solid var(--border);
+  }
+
+  .delay-node {
+    background: var(--surface-2);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 0.4rem 0.8rem;
+    width: 100%;
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+  }
+
+  .slack-node {
+    background: var(--surface-2);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.4rem 0.8rem;
+    width: 100%;
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--accent-light);
+  }
+
+  .email-node {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .email-node:hover { border-color: var(--blue); }
+  .email-node .email-name { font-size: 0.8rem; font-weight: 600; margin-bottom: 0.2rem; }
+  .email-node .email-detail { font-size: 0.7rem; color: var(--text-dim); }
+
+  a.email-link {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+  }
+
+  a.email-link:hover .email-node,
+  a.email-link:hover .email-name { color: var(--blue); }
+
+  a.email-link .email-node { cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; }
+  a.email-link:hover .email-node { border-color: var(--blue); box-shadow: 0 0 12px var(--blue-dim); }
+
+  .email-table a { color: var(--blue); text-decoration: none; font-weight: 600; }
+  .email-table a:hover { text-decoration: underline; color: var(--cyan); }
+
+  .open-icon { font-size: 0.6rem; opacity: 0.5; margin-left: 0.3rem; }
+
+  /* Suggestions */
+  .suggestions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.25rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .suggestion-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border-left: 3px solid var(--orange);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .suggestion-card:hover { border-color: var(--orange); transform: translateY(-2px); }
+
+  .suggestion-card.agen {
+    border-left-color: var(--accent);
+    background: linear-gradient(135deg, var(--surface), #1e1a2e);
+  }
+
+  .suggestion-card.agen:hover { border-color: var(--accent); }
+  .suggestion-card.critical { border-left-color: var(--red); }
+  .suggestion-card.critical:hover { border-color: var(--red); }
+
+  .suggestion-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+  .suggestion-card p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.6; }
+
+  .priority {
+    display: inline-block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+
+  .priority-high { background: var(--red-dim); color: var(--red); }
+  .priority-med { background: var(--orange-dim); color: var(--orange); }
+  .priority-new { background: #6c5ce722; color: var(--accent-light); }
+
+  /* Timeline */
+  .timeline {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    overflow-x: auto;
+    padding: 1rem 0;
+  }
+
+  .timeline-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 180px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .timeline-step .step-dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    background: var(--bg);
+    z-index: 2;
+  }
+
+  .timeline-step .step-dot.active { background: var(--accent); }
+
+  .timeline-step .step-dot.new {
+    border-color: var(--green);
+    background: var(--green);
+    box-shadow: 0 0 12px var(--green-dim);
+  }
+
+  .timeline-step .step-line {
+    position: absolute;
+    top: 7px; left: 50%;
+    width: 100%; height: 2px;
+    background: var(--border);
+    z-index: 1;
+  }
+
+  .timeline-step:last-child .step-line { display: none; }
+
+  .timeline-step .step-content {
+    margin-top: 1rem;
+    text-align: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+    width: 165px;
+  }
+
+  .timeline-step .step-content.new-step {
+    border-color: var(--green);
+    background: linear-gradient(135deg, var(--surface), #0d2a22);
+  }
+
+  .timeline-step .step-day { font-size: 0.7rem; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+  .timeline-step .step-title { font-size: 0.8rem; font-weight: 600; }
+  .timeline-step .step-desc { font-size: 0.7rem; color: var(--text-dim); margin-top: 0.3rem; }
+
+  .agen-tag {
+    display: inline-block;
+    font-size: 0.6rem;
+    background: #6c5ce722;
+    color: var(--accent-light);
+    border: 1px solid var(--accent);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin: 2rem auto;
+    flex-wrap: wrap;
+  }
+
+  .legend-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; color: var(--text-dim); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  .footer {
+    text-align: center;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 0.75rem;
+  }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 2rem; }
+
+  .tab-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+
+  .tab-btn:hover { border-color: var(--accent); color: var(--text); }
+  .tab-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* Email table */
+  .email-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.85rem;
+  }
+
+  .email-table th {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    background: var(--surface-2);
+    border-bottom: 2px solid var(--border);
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+  }
+
+  .email-table td {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+
+  .email-table tr:hover td { background: var(--surface-2); }
+
+  .email-table .type-email { color: var(--blue); font-weight: 600; }
+  .email-table .type-delay { color: var(--text-dim); }
+  .email-table .type-slack { color: var(--accent-light); }
+
+  .ctr-good { color: var(--green); font-weight: 600; }
+  .ctr-low { color: var(--orange); }
+  .ctr-zero { color: var(--red); }
+  .ctr-na { color: var(--text-dim); }
+
+  .persona-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    padding: 0.15rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  .persona-tag.dev { background: var(--blue-dim); color: var(--blue); }
+  .persona-tag.sec { background: #fd79a822; color: var(--pink); }
+  .persona-tag.founder { background: var(--orange-dim); color: var(--orange); }
+  .persona-tag.legacy { background: var(--red-dim); color: var(--red); }
+
+  @media (max-width: 900px) {
+    .branch-grid { grid-template-columns: repeat(2, 1fr); }
+    .suggestions-grid { grid-template-columns: 1fr; }
+    body { padding: 1rem; }
+  }
+
+  @media (max-width: 600px) {
+    .branch-grid { grid-template-columns: 1fr; }
+    .stats-bar { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Frontegg Onboarding Email Flowchart</h1>
+  <p>Complete map of current HubSpot nurture workflows for portal signups - all emails, delays, and Slack notifications across 4 persona branches</p>
+  <div class="date">February 17, 2026 - HubSpot Account 7615593</div>
+</div>
+
+<!-- Stats Summary -->
+<div class="stats-bar">
+  <div class="stat-card info">
+    <div class="value">17</div>
+    <div class="label">Total emails across all branches</div>
+  </div>
+  <div class="stat-card ok">
+    <div class="value">4</div>
+    <div class="label">Persona branches</div>
+  </div>
+  <div class="stat-card warn">
+    <div class="value">4</div>
+    <div class="label">Slack notifications</div>
+  </div>
+  <div class="stat-card danger">
+    <div class="value">0</div>
+    <div class="label">Agen mentions</div>
+  </div>
+  <div class="stat-card warn">
+    <div class="value">2023</div>
+    <div class="label">Legacy fallback year</div>
+  </div>
+</div>
+
+<!-- Tabs -->
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('current')">Current Flow</button>
+  <button class="tab-btn" onclick="showTab('detail')">Email Detail</button>
+  <button class="tab-btn" onclick="showTab('proposed')">Improvements</button>
+  <button class="tab-btn" onclick="showTab('agen')">Agen Introduction</button>
+</div>
+
+<!-- TAB: Current Flow -->
+<div id="tab-current" class="tab-panel active">
+  <div class="flow-section">
+    <div class="section-title">
+      Current Onboarding Email Architecture
+      <span class="badge badge-live">Live</span>
+    </div>
+
+    <div class="flow">
+      <!-- Trigger -->
+      <div class="flow-node" style="border-color: var(--green);">
+        <div class="node-type">Upstream Trigger</div>
+        <div class="node-title">Form Interaction Workflow</div>
+        <div class="node-detail">Captures portal signups and form submissions, then enrolls contacts into the dispatcher</div>
+      </div>
+
+      <div class="flow-connector"></div>
+
+      <!-- Dispatcher -->
+      <div class="flow-node" style="border-color: var(--accent);">
+        <div class="node-type">Dispatcher Workflow</div>
+        <div class="node-title">NRT-2025_EVG-Onboarding_Nurture_Dispatcher</div>
+        <div class="node-detail">Manually triggered enrollment - branches contacts by Job Title Group property</div>
+        <span class="node-metric metric-warn">Re-enrollment: ON</span>
+      </div>
+
+      <div class="flow-connector"></div>
+
+      <!-- Branch -->
+      <div class="branch-container">
+        <div class="branch-header">
+          <div class="node-type">Branch Decision</div>
+          <div class="node-title">Job Title Group</div>
+          <div class="node-detail" style="margin-top: 0.4rem; font-size: 0.85rem;">Check branches in order: Developer, InfoSec, Founders, None met</div>
+        </div>
+
+        <div class="branch-grid">
+
+          <!-- DEVELOPER BRANCH - 4 emails -->
+          <div class="branch-col">
+            <div class="branch-connector"></div>
+            <div class="branch-label dev">Developer (4 emails)</div>
+            <div class="branch-connector"></div>
+            <a class="email-link" href="https://app.hubspot.com/email/7615593/details/193141091705/" target="_blank">
+            <div class="email-node">
+              <div class="email-name">#1 Welcome</div>
+              <div class="email-detail">Onboarding Nurture for Developers #1</div>
+              <div><span class="node-metric metric-ctr">4.63% CTR</span></div>
+            </div>
+            </a>
+            <div class="branch-connector"></div>
+            <div class="delay-node">10 min delay</div>
+            <div class="branch-connector"></div>
+            <div class="slack-node">Slack notification</div>
+            <div class="branch-connector"></div>
+            <div class="delay-node">Wait until Monday</div>
+            <div class="branch-connector"></div>
+            <a class="email-link" href="https://app.hubspot.com/email/7615593/details/193141510416/" target="_blank">
+            <div class="email-node">
+              <div class="email-name">#2</div>
+              <div class="email-detail">Onboarding Nurture for Developers #2</div>
+              <div><span class="node-metric metric-warn">No CTR data</span></div>
+            </div>
+            </a>
+            <div class="branch-connector"></div>
+            <div class="delay-node">Wait until Thursday</div>
+            <div class="branch-connector"></div>
+            <a class="email-link" href="https://app.hubspot.com/email/7615593/details/193141978668/" target="_blank">
+            <div class="email-node">
+              <div class="email-name">#3</div>
+              <div class="email-detail">Onboarding Nurture for Developers #3</div>
+              <div><span class="node-metric metric-ctr">1.14% CTR</span></div>
+            </div>
+            </a>
+            <div class="branch-connector"></div>
+            <div class="delay-node">Wait until Tuesday</div>
+            <div class="branch-connector"></div>
+            <a class="email-link" href="https://app.hubspot.com/email/7615593/details/193142025898/" target="_blank">
+            <div class="email-node">
+              <div class="email-name">#4</div>
+              <div class="email-detail">Onboarding Nurture for Developers #4</div>
+              <div><span class="node-metric metric-ctr">1.2% CTR</span></div>
+            </div>
+            </a>
+            <div class="branch-connector"></div>
+            <div class="delay-node">Wait until Monday</div>
+            <div class="branch-connector"></div>
+            <div class="branch-end">End</div>
+          </div>
+
+          <!-- INFOSEC BRANCH - 5 emails -->
+          <div class="branch-col">
+            <div class="branch-connector"></div>
+            <div class="branch-label sec">InfoSec (5 emails)</div>
+            <div class="branch-connector"></div>
+            <a class="email-link" href="https://app.hubspot.com/email/7615593/details/194793790788/" target="_blank">
+            <div class="email-node">
+              <div class="email-name">#1 Welcome</div>
+              <div class="email-detail">Onboarding Nurture for InfoSec #1</div>
+              <div><span class="node-metric" style="background: var(--red-dim); color: var(--red);">0% CTR</span></div>
+            </div>
+            </a>
+            <div class="branch-connector"></div>
+            <div class="delay-node">10 min delay</div>
+            <div class="branch-connector"></div>
+            <div class="slack-node">Slack notification</div>
+            <div class="branch-connector"></div>
+            <div class="delay-node">Wait until Monday</div>
+            <div class="branch-connector"></div>
+            <a class="email-link" href="https://app.hubspot.com/email/7615593/details/194793791287/" target="_blank">
+            <div class="email-node">
+              <div class="email-name">#2</div>
+              <div class="email-detail">Onboarding Nurture for InfoSec #2</div>
+              <div><span class="node-metric" style="background: var(--red-dim); color: var(--red);">0% CTR</span></div>
+            </div>
+            </a>
+            <div class="branch-connector"></div>
+            <div class="delay-node">Wait until Thursday</div>
+            <div class="branch-connector"></div>
+            <a class="email-link" href="https://app.hubspot.com/email/7615593/details/194793791624/" target="_blank">
+            <div class="email-node">
+              <div class="email-name">#3</div>
+              <div class="email-detail">Onboarding Nurture for InfoSec #3</div>
+              <div><span class="node-metric" style="background: var(--red-dim); color: var(--red);">0% CTR</span></div>
+            </div>
+            </a>
+            <div class="branch-connector"></div>
+            <div class="delay-node">Wait until Tuesday</div>
+            <div class="branch-connector"></div>
+            <a class="email-link" href="https://app.hubspot.com/email/7615593/details/194793791906/" target="_blank">
+            <div class="email-node">
+              <div class="email-name">#4</div>
+              <div class="email-detail">Onboarding Nurture for InfoSec #4</div>
+              <div><span class="node-metric" style="background: var(--red-dim); color: var(--red);">0% CTR</span></div>
+            </div>
+            </a>
+            <div class="branch-connector"></div>
+            <div class="delay-node">Wait until Monday</div>
+            <div class="branch-connector"></div>
+            <a class="email-link" href="https://app.hubspot.com/email/7615593/details/194793792106/" target="_blank">
+            <div class="email-node">
+              <div class="email-name">#5</div>
+              <div class="email-detail">Onboarding Nurture for InfoSec #5</div>
+              <div><span class="node-metric" style="background: var(--red-dim); color: var(--red);">0% CTR</span></div>
+            </div>
+            </a>
+            <div class="branch-connector"></div>
+            <div class="branch-end">End</div>
+          </div>
+
+          <!-- FOUNDERS BRANCH - 5 emails -->
+          <div class="branch-col">
+            <div class="branch-connector"></div>
+            <div class="branch-label founder">Founders (5 emails)</div>
+            <div class="branch-connector"></div>
+            <a class="email-link" href="https://app.hubspot.com/email/7615593/details/196071483722/" target="_blank">
+            <div class="email-node">
+              <div class="email-name">#1 Welcome</div>
+              <div class="email-detail">Onboarding Nurture for Founders #1</div>
+              <div><span class="node-metric metric-goal">2 goals</span> <span class="node-metric" style="background: var(--red-dim); color: var(--red);">0% CTR</span></div>
+            </div>
+            </a>
+            <div class="branch-connector"></div>
+            <div class="delay-node">10 min delay</div>
+            <div class="branch-connector"></div>
+            <div class="slack-node">Slack notification</div>
+            <div class="branch-connector"></div>
+            <div class="delay-node">Wait until Monday</div>
+            <div class="branch-connector"></div>
+            <a class="email-link" href="https://app.hubspot.com/email/7615593/details/196072524658/" target="_blank">
+            <div class="email-node">
+              <div class="email-name">#2</div>
+              <div class="email-detail">Onboarding Nurture for Founders #2</div>
+              <div><span class="node-metric" style="background: var(--green-dim); color: var(--green);">8.33% CTR</span></div>
+            </div>
+            </a>
+            <div class="branch-connector"></div>
+            <div class="delay-node">Wait until Thursday</div>
+            <div class="branch-connector"></div>
+            <a class="email-link" href="https://app.hubspot.com/email/7615593/details/196072525123/" target="_blank">
+            <div class="email-node">
+              <div class="email-name">#3</div>
+              <div class="email-detail">Onboarding Nurture for Founders #3</div>
+              <div><span class="node-metric metric-goal">1 goal</span> <span class="node-metric" style="background: var(--red-dim); color: var(--red);">0% CTR</span></div>
+            </div>
+            </a>
+            <div class="branch-connector"></div>
+            <div class="delay-node">Wait until Tuesday</div>
+            <div class="branch-connector"></div>
+            <a class="email-link" href="https://app.hubspot.com/email/7615593/details/196078736415/" target="_blank">
+            <div class="email-node">
+              <div class="email-name">#4</div>
+              <div class="email-detail">Onboarding Nurture for Founders #4</div>
+              <div><span class="node-metric" style="background: var(--green-dim); color: var(--green);">4.76% CTR</span></div>
+            </div>
+            </a>
+            <div class="branch-connector"></div>
+            <div class="delay-node">Wait until Monday</div>
+            <div class="branch-connector"></div>
+            <a class="email-link" href="https://app.hubspot.com/email/7615593/details/196075567655/" target="_blank">
+            <div class="email-node">
+              <div class="email-name">#5</div>
+              <div class="email-detail">Onboarding Nurture for Founders #5</div>
+              <div><span class="node-metric" style="background: var(--red-dim); color: var(--red);">0% CTR</span></div>
+            </div>
+            </a>
+            <div class="branch-connector"></div>
+            <div class="branch-end">End</div>
+          </div>
+
+          <!-- NONE MET / LEGACY BRANCH - 3 emails -->
+          <div class="branch-col">
+            <div class="branch-connector"></div>
+            <div class="branch-label none">None Met (3 emails)</div>
+            <div class="branch-connector"></div>
+            <a class="email-link" href="https://app.hubspot.com/email/7615593/details/137106540186/" target="_blank">
+            <div class="email-node" style="border-color: var(--red); border-style: dashed;">
+              <div class="email-name">#1 Welcome</div>
+              <div class="email-detail" style="color: var(--red);">Portal signup nurture: Welcome (Sept 2023)</div>
+              <div><span class="node-metric metric-ctr">2.57% CTR</span> <span class="node-metric metric-goal">742 goals</span></div>
+            </div>
+            </a>
+            <div class="branch-connector"></div>
+            <div class="delay-node">10 min delay</div>
+            <div class="branch-connector"></div>
+            <div class="slack-node">Slack notification</div>
+            <div class="branch-connector"></div>
+            <div class="delay-node" style="border-color: var(--red);">22 day delay (240 in queue)</div>
+            <div class="branch-connector"></div>
+            <a class="email-link" href="https://app.hubspot.com/email/7615593/details/137110660453/" target="_blank">
+            <div class="email-node" style="border-color: var(--red); border-style: dashed;">
+              <div class="email-name">#2 Trial Ending</div>
+              <div class="email-detail" style="color: var(--red);">"3 days left" (Sept 2023)</div>
+              <div><span class="node-metric metric-ctr">0.7% CTR</span> <span class="node-metric metric-goal">28 goals</span></div>
+            </div>
+            </a>
+            <div class="branch-connector"></div>
+            <div class="delay-node" style="border-color: var(--red);">7 day delay (64 in queue)</div>
+            <div class="branch-connector"></div>
+            <a class="email-link" href="https://app.hubspot.com/email/7615593/details/137122401024/" target="_blank">
+            <div class="email-node" style="border-color: var(--red); border-style: dashed;">
+              <div class="email-name">#3 Trial Ended</div>
+              <div class="email-detail" style="color: var(--red);">"Trial Ended" (Sept 2023)</div>
+              <div><span class="node-metric metric-ctr">1.04% CTR</span> <span class="node-metric metric-goal">147 goals</span></div>
+            </div>
+            </a>
+            <div class="branch-connector"></div>
+            <div class="branch-end">End</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background: var(--green);"></div> Trigger</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--accent);"></div> Dispatcher / Slack</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--blue);"></div> Email</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--red);"></div> Legacy (2023)</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--border);"></div> Delay</div>
+    </div>
+
+    <p style="text-align: center; color: var(--text-dim); font-size: 0.8rem; margin-top: 1rem;">
+      Note: All persona branches also have a parallel side-branch (1-day delay for Dev/InfoSec/Founders, 5-day for Legacy) used for internal tracking.
+      <br>Emails are sent on a day-of-week cadence: Monday - Thursday - Tuesday - Monday across ~2 weeks.
+    </p>
+  </div>
+</div>
+
+<!-- TAB: Email Detail Table -->
+<div id="tab-detail" class="tab-panel">
+  <div class="flow-section">
+    <div class="section-title">
+      Complete Email Inventory
+      <span class="badge badge-live">17 Emails</span>
+    </div>
+
+    <table class="email-table">
+      <thead>
+        <tr>
+          <th>Branch</th>
+          <th>#</th>
+          <th>Email Name</th>
+          <th>Send Day</th>
+          <th>CTR</th>
+          <th>Goals</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="persona-tag dev">Developer</span></td>
+          <td>1</td>
+          <td><a href="https://app.hubspot.com/email/7615593/details/193141091705/" target="_blank">Onboarding Nurture for Developers #1</a></td>
+          <td>Immediate</td>
+          <td class="ctr-good">4.63%</td>
+          <td>5</td>
+          <td>Aug 2025</td>
+        </tr>
+        <tr>
+          <td><span class="persona-tag dev">Developer</span></td>
+          <td>2</td>
+          <td><a href="https://app.hubspot.com/email/7615593/details/193141510416/" target="_blank">Onboarding Nurture for Developers #2</a></td>
+          <td>Monday</td>
+          <td class="ctr-na">-</td>
+          <td>-</td>
+          <td>Aug 2025</td>
+        </tr>
+        <tr>
+          <td><span class="persona-tag dev">Developer</span></td>
+          <td>3</td>
+          <td><a href="https://app.hubspot.com/email/7615593/details/193141978668/" target="_blank">Onboarding Nurture for Developers #3</a></td>
+          <td>Thursday</td>
+          <td class="ctr-low">1.14%</td>
+          <td>-</td>
+          <td>Aug 2025</td>
+        </tr>
+        <tr>
+          <td><span class="persona-tag dev">Developer</span></td>
+          <td>4</td>
+          <td><a href="https://app.hubspot.com/email/7615593/details/193142025898/" target="_blank">Onboarding Nurture for Developers #4</a></td>
+          <td>Tuesday</td>
+          <td class="ctr-low">1.2%</td>
+          <td>-</td>
+          <td>Aug 2025</td>
+        </tr>
+        <tr style="border-bottom: 2px solid var(--border);"><td colspan="7"></td></tr>
+        <tr>
+          <td><span class="persona-tag sec">InfoSec</span></td>
+          <td>1</td>
+          <td><a href="https://app.hubspot.com/email/7615593/details/194793790788/" target="_blank">Onboarding Nurture for InfoSec #1</a></td>
+          <td>Immediate</td>
+          <td class="ctr-zero">0%</td>
+          <td>-</td>
+          <td>Aug 2025</td>
+        </tr>
+        <tr>
+          <td><span class="persona-tag sec">InfoSec</span></td>
+          <td>2</td>
+          <td><a href="https://app.hubspot.com/email/7615593/details/194793791287/" target="_blank">Onboarding Nurture for InfoSec #2</a></td>
+          <td>Monday</td>
+          <td class="ctr-zero">0%</td>
+          <td>-</td>
+          <td>Aug 2025</td>
+        </tr>
+        <tr>
+          <td><span class="persona-tag sec">InfoSec</span></td>
+          <td>3</td>
+          <td><a href="https://app.hubspot.com/email/7615593/details/194793791624/" target="_blank">Onboarding Nurture for InfoSec #3</a></td>
+          <td>Thursday</td>
+          <td class="ctr-zero">0%</td>
+          <td>-</td>
+          <td>Aug 2025</td>
+        </tr>
+        <tr>
+          <td><span class="persona-tag sec">InfoSec</span></td>
+          <td>4</td>
+          <td><a href="https://app.hubspot.com/email/7615593/details/194793791906/" target="_blank">Onboarding Nurture for InfoSec #4</a></td>
+          <td>Tuesday</td>
+          <td class="ctr-zero">0%</td>
+          <td>-</td>
+          <td>Aug 2025</td>
+        </tr>
+        <tr>
+          <td><span class="persona-tag sec">InfoSec</span></td>
+          <td>5</td>
+          <td><a href="https://app.hubspot.com/email/7615593/details/194793792106/" target="_blank">Onboarding Nurture for InfoSec #5</a></td>
+          <td>Monday</td>
+          <td class="ctr-zero">0%</td>
+          <td>-</td>
+          <td>Aug 2025</td>
+        </tr>
+        <tr style="border-bottom: 2px solid var(--border);"><td colspan="7"></td></tr>
+        <tr>
+          <td><span class="persona-tag founder">Founders</span></td>
+          <td>1</td>
+          <td><a href="https://app.hubspot.com/email/7615593/details/196071483722/" target="_blank">Onboarding Nurture for Founders #1</a></td>
+          <td>Immediate</td>
+          <td class="ctr-zero">0%</td>
+          <td>2</td>
+          <td>Sep 2025</td>
+        </tr>
+        <tr>
+          <td><span class="persona-tag founder">Founders</span></td>
+          <td>2</td>
+          <td><a href="https://app.hubspot.com/email/7615593/details/196072524658/" target="_blank">Onboarding Nurture for Founders #2</a></td>
+          <td>Monday</td>
+          <td class="ctr-good">8.33%</td>
+          <td>-</td>
+          <td>Sep 2025</td>
+        </tr>
+        <tr>
+          <td><span class="persona-tag founder">Founders</span></td>
+          <td>3</td>
+          <td><a href="https://app.hubspot.com/email/7615593/details/196072525123/" target="_blank">Onboarding Nurture for Founders #3</a></td>
+          <td>Thursday</td>
+          <td class="ctr-zero">0%</td>
+          <td>1</td>
+          <td>Sep 2025</td>
+        </tr>
+        <tr>
+          <td><span class="persona-tag founder">Founders</span></td>
+          <td>4</td>
+          <td><a href="https://app.hubspot.com/email/7615593/details/196078736415/" target="_blank">Onboarding Nurture for Founders #4</a></td>
+          <td>Tuesday</td>
+          <td class="ctr-good">4.76%</td>
+          <td>-</td>
+          <td>Sep 2025</td>
+        </tr>
+        <tr>
+          <td><span class="persona-tag founder">Founders</span></td>
+          <td>5</td>
+          <td><a href="https://app.hubspot.com/email/7615593/details/196075567655/" target="_blank">Onboarding Nurture for Founders #5</a></td>
+          <td>Monday</td>
+          <td class="ctr-zero">0%</td>
+          <td>-</td>
+          <td>Sep 2025</td>
+        </tr>
+        <tr style="border-bottom: 2px solid var(--border);"><td colspan="7"></td></tr>
+        <tr>
+          <td><span class="persona-tag legacy">Legacy</span></td>
+          <td>1</td>
+          <td><a href="https://app.hubspot.com/email/7615593/details/137106540186/" target="_blank">Portal signup nurture: Welcome email</a></td>
+          <td>Immediate</td>
+          <td class="ctr-good">2.57%</td>
+          <td>742</td>
+          <td style="color: var(--red);">Sep 2023</td>
+        </tr>
+        <tr>
+          <td><span class="persona-tag legacy">Legacy</span></td>
+          <td>2</td>
+          <td><a href="https://app.hubspot.com/email/7615593/details/137110660453/" target="_blank">Portal signup nurture: 3 days left Trial Ending</a></td>
+          <td>Day 22</td>
+          <td class="ctr-low">0.7%</td>
+          <td>28</td>
+          <td style="color: var(--red);">Sep 2023</td>
+        </tr>
+        <tr>
+          <td><span class="persona-tag legacy">Legacy</span></td>
+          <td>3</td>
+          <td><a href="https://app.hubspot.com/email/7615593/details/137122401024/" target="_blank">Portal signup nurture: Trial Ended</a></td>
+          <td>Day 29</td>
+          <td class="ctr-low">1.04%</td>
+          <td>147</td>
+          <td style="color: var(--red);">Sep 2023</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="suggestions-grid" style="margin-top: 2rem;">
+      <div class="suggestion-card">
+        <h3>Key Observations</h3>
+        <p>
+          <strong>Cadence pattern:</strong> All 2025 branches use a day-of-week cadence (Mon - Thu - Tue - Mon), delivering emails over ~2 weeks.<br><br>
+          <strong>InfoSec CTR is 0% across all 5 emails</strong> - either low volume, deliverability issues, or content not resonating with this persona.<br><br>
+          <strong>Founders #2 performs best</strong> (8.33% CTR) - worth analyzing what that email does differently.<br><br>
+          <strong>Developer #1 is the strongest opener</strong> (4.63% CTR) but engagement drops sharply in later emails (1.14%, 1.2%).<br><br>
+          <strong>Legacy flow has 240 contacts waiting</strong> in the 22-day delay queue and 64 in the 7-day queue. These are active contacts getting 2023 content.
+        </p>
+      </div>
+
+      <div class="suggestion-card">
+        <h3>Structural Notes</h3>
+        <p>
+          <strong>Shared pattern:</strong> All branches start with Email #1 - 10 min delay - Slack notification - then a parallel branch splits off (1-day or 5-day delay for internal tracking).<br><br>
+          <strong>Legacy uses fixed day delays</strong> (22 days, 7 days) tied to trial lifecycle. Persona branches use day-of-week scheduling instead.<br><br>
+          <strong>Developer has 4 emails</strong> while InfoSec and Founders have 5 - Developer may need a 5th email added for consistency.<br><br>
+          <strong>No suppression logic visible</strong> - contacts who convert or become customers may continue receiving nurture emails.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB: Proposed Improvements -->
+<div id="tab-proposed" class="tab-panel">
+  <div class="flow-section">
+    <div class="section-title">
+      Improvement Recommendations
+      <span class="badge badge-suggestion">Suggestions</span>
+    </div>
+
+    <div class="suggestions-grid">
+      <div class="suggestion-card critical">
+        <h3>
+          <span class="priority priority-high">High</span>
+          Fix InfoSec 0% CTR Across All 5 Emails
+        </h3>
+        <p>Every InfoSec email shows 0% click rate. This could indicate: (a) very low volume making stats unreliable, (b) deliverability problems, (c) content that doesn't resonate with security personas, or (d) no trackable links in the emails. Investigate root cause before investing in new content for this branch. If volume is the issue, consider broadening the "InfoSec" job title group matching.</p>
+      </div>
+
+      <div class="suggestion-card critical">
+        <h3>
+          <span class="priority priority-high">High</span>
+          Replace Legacy 2023 Fallback Emails
+        </h3>
+        <p>The "None met" branch uses 3 emails from September 2023. With 240 contacts in the 22-day delay queue and 64 in the 7-day queue, these are actively reaching contacts with 2.5-year-old content referencing outdated product features and messaging. Either update these templates or create a new generic persona branch with current content.</p>
+      </div>
+
+      <div class="suggestion-card critical">
+        <h3>
+          <span class="priority priority-high">High</span>
+          Add Suppression / Conversion Logic
+        </h3>
+        <p>No visible goal-based suppression in any branch. Contacts who convert (book a demo, start a paid plan, become a customer) may continue receiving onboarding nurture emails. Add if/then branches or goal criteria that exit contacts from the nurture when they hit conversion events.</p>
+      </div>
+
+      <div class="suggestion-card">
+        <h3>
+          <span class="priority priority-med">Medium</span>
+          Investigate Engagement Drop-off in Developer Branch
+        </h3>
+        <p>Developer #1 has 4.63% CTR but #3 drops to 1.14% and #4 to 1.2%. This is a common nurture fatigue pattern. Consider: shorter sequence, more compelling mid-funnel content, or adding conditional branches based on engagement (e.g., if they clicked email #1, send different content for #2).</p>
+      </div>
+
+      <div class="suggestion-card">
+        <h3>
+          <span class="priority priority-med">Medium</span>
+          Add Missing Persona Branches
+        </h3>
+        <p>Current branching only covers Developer, InfoSec, and Founders. Product/PM roles, VP/Director of Engineering, DevOps/Platform, and general business roles all fall into the legacy "None met" path with 2023 content. Consider adding at least a "Product Leader" and "General Tech" branch.</p>
+      </div>
+
+      <div class="suggestion-card">
+        <h3>
+          <span class="priority priority-med">Medium</span>
+          Add 5th Email to Developer Branch
+        </h3>
+        <p>InfoSec and Founders both have 5 emails while Developer only has 4. For consistency and to maximize the nurture window, consider adding a 5th Developer email. Look at what Founders #2 (8.33% CTR) and #4 (4.76% CTR) do well and adapt that approach.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB: Agen Introduction -->
+<div id="tab-agen" class="tab-panel">
+  <div class="flow-section">
+    <div class="section-title">
+      Introducing Agen into Frontegg Onboarding
+      <span class="badge" style="background: #6c5ce722; color: var(--accent-light); border: 1px solid var(--accent);">Agen</span>
+    </div>
+
+    <p style="color: var(--text-dim); margin-bottom: 2rem; max-width: 800px; line-height: 1.7;">
+      Every Frontegg CIAM customer is a potential Agen cross-sell (Motion 1). The existing nurture sequences run for ~2 weeks with 4-5 emails per persona. Adding a single Agen touchpoint within the existing flow - rather than after it - ensures maximum visibility while the contact is still actively engaging.
+    </p>
+
+    <div class="suggestions-grid">
+      <div class="suggestion-card agen">
+        <h3>
+          <span class="priority priority-new">Recommended</span>
+          Insert Agen Email as #3 or #4 in Each Branch
+        </h3>
+        <p>The existing sequences already have 4-5 emails per persona. The sweet spot for an Agen teaser is email #3 (Thursday send) - the contact has received 2 Frontegg-specific emails and is still in the engagement window. Replace or insert an Agen-flavored email that bridges from their CIAM setup to the AI-readiness narrative. Not a hard sell - an educational bridge.</p>
+      </div>
+
+      <div class="suggestion-card agen">
+        <h3>
+          <span class="priority priority-new">Developer Version</span>
+          "Your CIAM is Already AI-Agent Ready"
+        </h3>
+        <p><strong>Subject:</strong> Your identity layer is the foundation for AI agents<br><br>
+        <strong>Angle:</strong> "You're setting up Frontegg for authentication - did you know this same identity infrastructure can secure AI agent access to your product? Meet Agen." Link to dev docs or a quick explainer. Speak to the Technical Builder pain point of MCP complexity.</p>
+      </div>
+
+      <div class="suggestion-card agen">
+        <h3>
+          <span class="priority priority-new">InfoSec Version</span>
+          "AI Agents Are Coming - Your IAM Is Ready"
+        </h3>
+        <p><strong>Subject:</strong> How to govern AI agent access before it becomes a problem<br><br>
+        <strong>Angle:</strong> "AI agents are already accessing enterprise tools. With Frontegg's identity layer, you're positioned to govern this with Agen." Speak to the Guardian's fear of uncontrolled agent access and compliance gaps. This might also help improve the 0% CTR by introducing a more compelling topic.</p>
+      </div>
+
+      <div class="suggestion-card agen">
+        <h3>
+          <span class="priority priority-new">Founders Version</span>
+          "The AI Visibility Gap - Don't Be a Ghost"
+        </h3>
+        <p><strong>Subject:</strong> Is your product visible to AI agents?<br><br>
+        <strong>Angle:</strong> "Products invisible to AI agents become invisible to users. Your Frontegg CIAM is the fastest path to making your product AI-agent accessible." Use the Ghost narrative. Link to AmIAGhost.com or an Agen landing page. Founders #2 already gets 8.33% CTR - this topic could perform even better.</p>
+      </div>
+    </div>
+
+    <!-- Proposed timeline -->
+    <div style="margin-top: 3rem;">
+      <div class="section-title">
+        Proposed Modified Timeline (Example: Founders Branch)
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="step-dot active"></div>
+          <div class="step-line"></div>
+          <div class="step-content">
+            <div class="step-day">Immediate</div>
+            <div class="step-title">#1 Welcome</div>
+            <div class="step-desc">Existing Founders #1 (keep as-is)</div>
+          </div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-dot active"></div>
+          <div class="step-line"></div>
+          <div class="step-content">
+            <div class="step-day">Monday</div>
+            <div class="step-title">#2 Value</div>
+            <div class="step-desc">Existing Founders #2 (8.33% CTR - keep)</div>
+          </div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-dot new"></div>
+          <div class="step-line"></div>
+          <div class="step-content new-step">
+            <div class="agen-tag">Agen</div>
+            <div class="step-day">Thursday</div>
+            <div class="step-title">#3 AI Readiness</div>
+            <div class="step-desc">"Don't Be a Ghost" - Agen awareness email</div>
+          </div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-dot active"></div>
+          <div class="step-line"></div>
+          <div class="step-content">
+            <div class="step-day">Tuesday</div>
+            <div class="step-title">#4 Deep Dive</div>
+            <div class="step-desc">Existing Founders #4 (4.76% CTR - keep)</div>
+          </div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-dot active"></div>
+          <div class="step-content">
+            <div class="step-day">Monday</div>
+            <div class="step-title">#5 CTA</div>
+            <div class="step-desc">Existing Founders #5 (update with Agen CTA)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background: var(--accent);"></div> Existing Frontegg email (keep as-is)</div>
+        <div class="legend-item"><div class="legend-dot" style="background: var(--green);"></div> New Agen touchpoint (replace #3)</div>
+      </div>
+
+      <p style="text-align: center; color: var(--text-dim); font-size: 0.8rem; margin-top: 1.5rem;">
+        This approach replaces the lowest-performing email (#3 at 0% CTR for Founders) with an Agen-themed email,
+        <br>preserving high performers (#2, #4) and keeping the total email count the same.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  Frontegg Onboarding Email Flowchart - GTM Engine / Agen - February 2026<br>
+  Source: HubSpot Workflows 1718445104, 1677919579, 1685803950, 1694989868, 234415434
+</div>
+
+<script>
+function showTab(tab) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
