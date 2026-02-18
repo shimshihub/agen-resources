@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<!-- GTM-META
+title: Signup to Onboarding Funnel - Agen & Frontegg
+category: internal
+tags: funnel, tracking, onboarding, GTM, HubSpot, events
+created: 2026-02-17
+description: Visual funnel showing the signup-to-onboarding journey for both Agen and Frontegg products, with event tracking status (live, in testing, planned, TBD).
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signup to Onboarding Funnel - Agen & Frontegg</title>
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --surface: #131829;
+    --surface2: #1a2035;
+    --border: #2a3050;
+    --text: #e2e8f0;
+    --text-dim: #8892a8;
+    --agen-primary: #6366f1;
+    --agen-glow: rgba(99, 102, 241, 0.15);
+    --agen-light: #818cf8;
+    --frontegg-primary: #f97316;
+    --frontegg-glow: rgba(249, 115, 22, 0.15);
+    --frontegg-light: #fb923c;
+    --live: #22c55e;
+    --live-bg: rgba(34, 197, 94, 0.12);
+    --testing: #eab308;
+    --testing-bg: rgba(234, 179, 8, 0.12);
+    --planned: #64748b;
+    --planned-bg: rgba(100, 116, 139, 0.08);
+    --tbd: #a78bfa;
+    --tbd-bg: rgba(167, 139, 250, 0.1);
+    --connector: #334155;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 40px 24px 60px;
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .header p {
+    color: var(--text-dim);
+    font-size: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .legend-dot.live { background: var(--live); }
+  .legend-dot.testing { background: var(--testing); }
+  .legend-dot.planned { background: var(--planned); border: 1.5px dashed var(--planned); background: transparent; }
+  .legend-dot.tbd { background: var(--tbd); }
+
+  /* Entry section */
+  .entry-section {
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .entry-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 32px;
+    position: relative;
+  }
+  .entry-box .icon { font-size: 24px; }
+  .entry-box .label {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .entry-box .sublabel {
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  .entry-sources {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+  .source-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+  .source-chip.agen { border-color: rgba(99, 102, 241, 0.3); }
+  .source-chip.frontegg { border-color: rgba(249, 115, 22, 0.3); }
+  .source-chip .domain { font-weight: 600; }
+  .source-chip.agen .domain { color: var(--agen-light); }
+  .source-chip.frontegg .domain { color: var(--frontegg-light); }
+
+  /* UTM detection */
+  .detection-bar {
+    display: flex;
+    justify-content: center;
+    margin: 16px 0 8px;
+  }
+  .detection-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--live-bg);
+    border: 1px solid rgba(34, 197, 94, 0.25);
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-size: 13px;
+  }
+  .detection-badge .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--live);
+  }
+  .detection-badge code {
+    background: rgba(34, 197, 94, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--live);
+    font-family: 'SF Mono', 'Fira Code', monospace;
+  }
+
+  /* Connector lines */
+  .connector-center {
+    display: flex;
+    justify-content: center;
+    padding: 4px 0;
+  }
+  .connector-line {
+    width: 2px;
+    height: 24px;
+    background: var(--connector);
+  }
+
+  /* Split connector */
+  .split-connector {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    height: 40px;
+    margin-bottom: 0;
+  }
+  .split-connector::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 16px;
+    background: var(--connector);
+    transform: translateX(-50%);
+  }
+  .split-connector::after {
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: calc(25% + 12px);
+    right: calc(25% + 12px);
+    height: 2px;
+    background: var(--connector);
+  }
+  .split-arm-left, .split-arm-right {
+    position: absolute;
+    top: 16px;
+    width: 2px;
+    height: 24px;
+    background: var(--connector);
+  }
+  .split-arm-left { left: calc(25% + 12px); }
+  .split-arm-right { right: calc(25% + 12px); }
+
+  /* Two lanes */
+  .lanes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 0;
+  }
+
+  .lane {
+    border-radius: 16px;
+    padding: 24px 20px;
+    position: relative;
+  }
+  .lane.agen {
+    background: linear-gradient(180deg, var(--agen-glow) 0%, transparent 40%);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+  }
+  .lane.frontegg {
+    background: linear-gradient(180deg, var(--frontegg-glow) 0%, transparent 40%);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+  }
+
+  .lane-header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .lane-header .product-name {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .lane.agen .product-name { color: var(--agen-light); }
+  .lane.frontegg .product-name { color: var(--frontegg-light); }
+  .lane-header .product-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  /* Event steps */
+  .event-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    position: relative;
+    transition: background 0.2s;
+  }
+  .event-step:hover { background: rgba(255,255,255,0.03); }
+
+  .step-indicator {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .step-indicator.live {
+    background: var(--live-bg);
+    color: var(--live);
+    border: 1.5px solid var(--live);
+  }
+  .step-indicator.testing {
+    background: var(--testing-bg);
+    color: var(--testing);
+    border: 1.5px solid var(--testing);
+  }
+  .step-indicator.planned {
+    background: var(--planned-bg);
+    color: var(--planned);
+    border: 1.5px dashed var(--planned);
+  }
+  .step-indicator.tbd {
+    background: var(--tbd-bg);
+    color: var(--tbd);
+    border: 1.5px dotted var(--tbd);
+  }
+
+  .step-content { flex: 1; min-width: 0; }
+  .step-name {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .step-detail {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+
+  .status-tag {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .status-tag.live { background: var(--live-bg); color: var(--live); }
+  .status-tag.testing { background: var(--testing-bg); color: var(--testing); }
+  .status-tag.planned { background: var(--planned-bg); color: var(--planned); }
+  .status-tag.tbd { background: var(--tbd-bg); color: var(--tbd); }
+
+  /* Section dividers within lanes */
+  .lane-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 16px 0 12px;
+    padding: 0 14px;
+  }
+  .lane-divider span {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-dim);
+    white-space: nowrap;
+  }
+  .lane-divider::before, .lane-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* HubSpot property badge */
+  .hs-prop {
+    display: inline-block;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    background: rgba(255,255,255,0.04);
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-top: 3px;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .footer p {
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+  .footer .date {
+    margin-top: 4px;
+    font-size: 11px;
+    color: #4a5568;
+  }
+
+  /* Summary stats */
+  .summary-row {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 32px 0 0;
+    flex-wrap: wrap;
+  }
+  .summary-stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 24px;
+    text-align: center;
+    min-width: 140px;
+  }
+  .summary-stat .num {
+    font-size: 28px;
+    font-weight: 700;
+  }
+  .summary-stat .num.live-c { color: var(--live); }
+  .summary-stat .num.testing-c { color: var(--testing); }
+  .summary-stat .num.planned-c { color: var(--planned); }
+  .summary-stat .num.tbd-c { color: var(--tbd); }
+  .summary-stat .lbl {
+    font-size: 11px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+
+  /* Connector within lanes */
+  .lane-connector {
+    display: flex;
+    justify-content: center;
+    padding: 2px 0;
+  }
+  .lane-connector .dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--connector);
+  }
+
+  /* Open question callout */
+  .open-question {
+    background: var(--tbd-bg);
+    border: 1px dashed rgba(167, 139, 250, 0.3);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin: 12px 14px 0;
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .open-question strong { color: var(--tbd); }
+
+  @media (max-width: 768px) {
+    .lanes { grid-template-columns: 1fr; }
+    .split-connector { display: none; }
+    .entry-sources { flex-direction: column; align-items: center; gap: 8px; }
+    .summary-row { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>Signup to Onboarding Funnel</h1>
+    <p>Event tracking status across the Agen and Frontegg product journeys - from first visit through activation milestones</p>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot live"></div> Live (tracked in HubSpot)</div>
+    <div class="legend-item"><div class="legend-dot testing"></div> In Testing</div>
+    <div class="legend-item"><div class="legend-dot planned"></div> Planned</div>
+    <div class="legend-item"><div class="legend-dot tbd"></div> TBD (needs product input)</div>
+  </div>
+
+  <!-- Entry: Website Visit -->
+  <div class="entry-section">
+    <div class="entry-sources">
+      <div class="source-chip agen">
+        <span>From</span>
+        <span class="domain">agen.co</span>
+      </div>
+      <div class="source-chip frontegg">
+        <span>From</span>
+        <span class="domain">frontegg.com</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector-center"><div class="connector-line"></div></div>
+
+  <!-- Entry: Portal Signup -->
+  <div class="entry-section">
+    <div class="entry-box">
+      <div class="icon">🚪</div>
+      <div>
+        <div class="label">Portal Signup Page</div>
+        <div class="sublabel">Shared signup - user chooses Agen or Frontegg</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UTM Detection -->
+  <div class="detection-bar">
+    <div class="detection-badge">
+      <div class="status-dot"></div>
+      <span>Brand detected via</span>
+      <code>utm_referrer</code>
+      <span class="status-tag live">LIVE</span>
+    </div>
+  </div>
+
+  <!-- Split into two lanes -->
+  <div class="split-connector">
+    <div class="split-arm-left"></div>
+    <div class="split-arm-right"></div>
+  </div>
+
+  <!-- Two product lanes -->
+  <div class="lanes">
+
+    <!-- ==================== AGEN LANE ==================== -->
+    <div class="lane agen">
+      <div class="lane-header">
+        <div class="product-name">Agen</div>
+        <div class="product-desc">AI-Native User Infrastructure (Agent Identity)</div>
+      </div>
+
+      <!-- Onboarding Events -->
+      <div class="lane-divider"><span>Onboarding</span></div>
+
+      <div class="event-step">
+        <div class="step-indicator live">1</div>
+        <div class="step-content">
+          <div class="step-name">
+            Onboarding Started
+            <span class="status-tag live">Live</span>
+          </div>
+          <div class="step-detail">User begins Agen onboarding flow</div>
+          <div class="hs-prop">agen_onboarding_started = Yes</div>
+        </div>
+      </div>
+
+      <div class="lane-connector"><div class="dot"></div></div>
+
+      <div class="event-step">
+        <div class="step-indicator testing">2</div>
+        <div class="step-content">
+          <div class="step-name">
+            Onboarding Completed
+            <span class="status-tag testing">Testing</span>
+          </div>
+          <div class="step-detail">App created - user arrives at MCP Servers page</div>
+          <div class="hs-prop">agen_onboarding_completed = Yes</div>
+        </div>
+      </div>
+
+      <!-- Product Activation Events -->
+      <div class="lane-divider"><span>Product Activation</span></div>
+
+      <div class="event-step">
+        <div class="step-indicator planned">3</div>
+        <div class="step-content">
+          <div class="step-name">
+            Uploaded API Spec
+            <span class="status-tag planned">Planned</span>
+          </div>
+          <div class="step-detail">User uploads OpenAPI/Swagger specification</div>
+          <div class="hs-prop">agen_api_spec_loaded = Yes</div>
+        </div>
+      </div>
+
+      <div class="lane-connector"><div class="dot"></div></div>
+
+      <div class="event-step">
+        <div class="step-indicator planned">4</div>
+        <div class="step-content">
+          <div class="step-name">
+            Created Policies
+            <span class="status-tag planned">Planned</span>
+          </div>
+          <div class="step-detail">User creates access policies or permission rules</div>
+          <div class="hs-prop">agen_policies_created = Yes</div>
+        </div>
+      </div>
+
+      <div class="lane-connector"><div class="dot"></div></div>
+
+      <div class="event-step">
+        <div class="step-indicator planned">5</div>
+        <div class="step-content">
+          <div class="step-name">
+            Access Control
+            <span class="status-tag planned">Planned</span>
+          </div>
+          <div class="step-detail">User configures access control settings</div>
+          <div class="hs-prop">agen_access_control = Yes</div>
+        </div>
+      </div>
+
+      <div class="lane-connector"><div class="dot"></div></div>
+
+      <div class="event-step">
+        <div class="step-indicator planned">6</div>
+        <div class="step-content">
+          <div class="step-name">
+            Data Protection
+            <span class="status-tag planned">Planned</span>
+          </div>
+          <div class="step-detail">User sets up data protection rules</div>
+          <div class="hs-prop">agen_data_protection = Yes</div>
+        </div>
+      </div>
+
+      <div class="lane-connector"><div class="dot"></div></div>
+
+      <div class="event-step">
+        <div class="step-indicator planned">7</div>
+        <div class="step-content">
+          <div class="step-name">
+            Approval Flows
+            <span class="status-tag planned">Planned</span>
+          </div>
+          <div class="step-detail">User configures approval workflows</div>
+          <div class="hs-prop">agen_approval_flows = Yes</div>
+        </div>
+      </div>
+
+      <div class="lane-connector"><div class="dot"></div></div>
+
+      <div class="event-step">
+        <div class="step-indicator planned">8</div>
+        <div class="step-content">
+          <div class="step-name">
+            Hooks
+            <span class="status-tag planned">Planned</span>
+          </div>
+          <div class="step-detail">User sets up webhook integrations</div>
+          <div class="hs-prop">agen_hooks = Yes</div>
+        </div>
+      </div>
+
+      <!-- Usage Metrics -->
+      <div class="lane-divider"><span>Usage Metrics</span></div>
+
+      <div class="event-step">
+        <div class="step-indicator planned">9</div>
+        <div class="step-content">
+          <div class="step-name">
+            Tool Calls per Company
+            <span class="status-tag planned">Planned</span>
+          </div>
+          <div class="step-detail">Aggregate count of MCP tool calls per account</div>
+          <div class="hs-prop">agen_tool_calls_count = (number)</div>
+        </div>
+      </div>
+
+      <div class="lane-connector"><div class="dot"></div></div>
+
+      <div class="event-step">
+        <div class="step-indicator planned">10</div>
+        <div class="step-content">
+          <div class="step-name">
+            Last Tool Call Date
+            <span class="status-tag planned">Planned</span>
+          </div>
+          <div class="step-detail">Timestamp of last MCP tool call for the account</div>
+          <div class="hs-prop">agen_last_tool_call_date = (date)</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ==================== FRONTEGG LANE ==================== -->
+    <div class="lane frontegg">
+      <div class="lane-header">
+        <div class="product-name">Frontegg</div>
+        <div class="product-desc">Customer Identity (CIAM)</div>
+      </div>
+
+      <!-- Onboarding Events -->
+      <div class="lane-divider"><span>Onboarding</span></div>
+
+      <div class="event-step">
+        <div class="step-indicator planned">1</div>
+        <div class="step-content">
+          <div class="step-name">
+            Onboarding Started
+            <span class="status-tag planned">Planned</span>
+          </div>
+          <div class="step-detail">User begins Frontegg CIAM onboarding flow</div>
+          <div class="hs-prop">frontegg_onboarding_started = Yes</div>
+        </div>
+      </div>
+
+      <div class="lane-connector"><div class="dot"></div></div>
+
+      <div class="event-step">
+        <div class="step-indicator planned">2</div>
+        <div class="step-content">
+          <div class="step-name">
+            Onboarding Completed
+            <span class="status-tag planned">Planned</span>
+          </div>
+          <div class="step-detail">User completes CIAM setup and activation</div>
+          <div class="hs-prop">frontegg_onboarding_completed = Yes</div>
+        </div>
+      </div>
+
+      <!-- Usage Metrics -->
+      <div class="lane-divider"><span>Usage Metrics</span></div>
+
+      <div class="event-step">
+        <div class="step-indicator tbd">?</div>
+        <div class="step-content">
+          <div class="step-name">
+            API Calls per Company
+            <span class="status-tag tbd">TBD</span>
+          </div>
+          <div class="step-detail">Number of API calls - pending product team decision</div>
+          <div class="hs-prop">frontegg_api_calls_count = (number)</div>
+        </div>
+      </div>
+
+      <div class="open-question">
+        <strong>Open for product team:</strong> What additional Frontegg onboarding and activation events should we track? What milestones indicate a healthy CIAM setup?
+      </div>
+
+      <!-- Spacer to visually balance with Agen lane -->
+      <div style="flex: 1;"></div>
+    </div>
+
+  </div>
+
+  <!-- Summary Stats -->
+  <div class="summary-row">
+    <div class="summary-stat">
+      <div class="num live-c">2</div>
+      <div class="lbl">Live</div>
+    </div>
+    <div class="summary-stat">
+      <div class="num testing-c">1</div>
+      <div class="lbl">In Testing</div>
+    </div>
+    <div class="summary-stat">
+      <div class="num planned-c">10</div>
+      <div class="lbl">Planned</div>
+    </div>
+    <div class="summary-stat">
+      <div class="num tbd-c">1</div>
+      <div class="lbl">TBD</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Agen GTM Engine - Signup to Onboarding Event Tracking Funnel</p>
+    <p class="date">Updated February 17, 2026</p>
+  </div>
+
+</div>
+</body>
+</html>
