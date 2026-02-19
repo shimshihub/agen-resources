@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<!-- GTM-META
+title: Agen for SaaS - Discovery Call Guide
+category: internal
+tags: discovery, sales, agen-for-saas, call-guide
+created: 2026-02-19
+description: Hyper-focused discovery call guide for Agen for SaaS conversations with structured question flow and mandatory questions
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agen for SaaS - Discovery Call Guide</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            padding: 40px 20px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 50px; }
+        h1 { font-size: 2.5rem; color: #fff; margin-bottom: 10px; }
+        .subtitle { color: #8b8b9e; font-size: 1.1rem; margin-bottom: 8px; }
+        .product-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        /* Sales Journey Flow */
+        .journey-section { margin-bottom: 50px; }
+        .journey-section h2 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+        }
+        .journey-flow {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 0;
+            flex-wrap: wrap;
+        }
+        .journey-step {
+            flex: 1;
+            min-width: 220px;
+            max-width: 320px;
+            text-align: center;
+            position: relative;
+            padding: 0 15px;
+        }
+        .journey-step .step-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin: 0 auto 15px;
+            position: relative;
+            z-index: 2;
+        }
+        .journey-step:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            top: 35px;
+            right: -10px;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 14px solid rgba(102, 126, 234, 0.4);
+            z-index: 1;
+        }
+        .journey-step h3 { color: #fff; margin-bottom: 6px; font-size: 1.1rem; }
+        .journey-step p { color: #8b8b9e; font-size: 0.85rem; line-height: 1.5; }
+        .journey-step .step-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 8px;
+        }
+        .tag-async { background: rgba(17, 153, 142, 0.2); color: #38ef7d; }
+        .tag-live { background: rgba(102, 126, 234, 0.2); color: #667eea; }
+        .icon-outreach { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .icon-discovery { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+        .icon-demo { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+
+        /* Goal Box */
+        .goal-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+            border-radius: 16px;
+            padding: 25px 30px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(102, 126, 234, 0.25);
+            text-align: center;
+        }
+        .goal-box h2 { color: #fff; margin-bottom: 12px; font-size: 1.3rem; }
+        .goal-box p { color: #b0b0c0; line-height: 1.6; max-width: 700px; margin: 0 auto; }
+
+        /* Act Cards */
+        .acts-container { margin-bottom: 40px; }
+        .act-card {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .act-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .act-number {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .act-header h3 { color: #fff; font-size: 1.2rem; }
+        .act-header .act-goal { color: #8b8b9e; font-size: 0.85rem; margin-top: 2px; }
+
+        .question-list { list-style: none; }
+        .question-list li {
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .question-list li .q-icon {
+            flex-shrink: 0;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        /* Mandatory questions */
+        .q-mandatory {
+            background: rgba(34, 197, 94, 0.06);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+        .q-mandatory .q-icon {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+        .q-mandatory .q-text { color: #e0e0e0; }
+        .q-mandatory .q-label {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #22c55e;
+            background: rgba(34, 197, 94, 0.12);
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        /* Optional questions */
+        .q-optional {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .q-optional .q-icon {
+            background: rgba(139, 139, 158, 0.2);
+            color: #8b8b9e;
+        }
+        .q-optional .q-text { color: #b0b0c0; }
+
+        .q-text { flex: 1; }
+        .q-purpose {
+            display: block;
+            font-size: 0.8rem;
+            color: #8b8b9e;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: #8b8b9e;
+        }
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .dot-mandatory { background: #22c55e; }
+        .dot-optional { background: #8b8b9e; }
+
+        /* Transition Tips */
+        .transition-tip {
+            background: rgba(102, 126, 234, 0.08);
+            border-left: 3px solid #667eea;
+            border-radius: 0 8px 8px 0;
+            padding: 12px 16px;
+            margin: 12px 0;
+            font-size: 0.85rem;
+            color: #b0b0c0;
+        }
+        .transition-tip strong { color: #667eea; }
+
+        /* Closing Section */
+        .closing-section {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .closing-section h2 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        .outcomes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+        .outcome-card {
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .outcome-card h4 { margin-bottom: 8px; font-size: 1rem; }
+        .outcome-card p { font-size: 0.85rem; color: #b0b0c0; }
+        .outcome-hot {
+            background: rgba(34, 197, 94, 0.08);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+        .outcome-hot h4 { color: #22c55e; }
+        .outcome-warm {
+            background: rgba(245, 158, 11, 0.08);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+        .outcome-warm h4 { color: #f59e0b; }
+        .outcome-cold {
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+        .outcome-cold h4 { color: #ef4444; }
+
+        /* Red Flags */
+        .red-flags {
+            background: linear-gradient(135deg, rgba(245, 87, 108, 0.08) 0%, rgba(250, 112, 154, 0.08) 100%);
+            border: 1px solid rgba(245, 87, 108, 0.2);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        .red-flags h2 {
+            color: #f5576c;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        .red-flags ul { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+        .red-flags li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        .red-flags li::before {
+            content: "!";
+            background: #f5576c;
+            color: #fff;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        /* Pro Tips */
+        .pro-tips {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .pro-tips h2 { color: #fff; margin-bottom: 20px; font-size: 1.3rem; }
+        .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+        .tip-item {
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: #b0b0c0;
+            line-height: 1.5;
+        }
+        .tip-item strong { color: #e0e0e0; }
+
+        footer {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #8b8b9e;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .journey-step:not(:last-child)::after { display: none; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Discovery Call Guide</h1>
+        <p class="subtitle">Structured question flow for qualifying Agen for SaaS opportunities</p>
+        <span class="product-badge">Agen for SaaS</span>
+    </header>
+
+    <!-- Sales Journey -->
+    <div class="journey-section">
+        <h2>The Sales Journey</h2>
+        <div class="journey-flow">
+            <div class="journey-step">
+                <div class="step-icon icon-outreach">1</div>
+                <h3>Outreach</h3>
+                <p>Cold or warm outreach via email, LinkedIn, or intro. Hook with the "Ghost" narrative or a specific pain trigger.</p>
+                <span class="step-tag tag-async">Async</span>
+            </div>
+            <div class="journey-step">
+                <div class="step-icon icon-discovery">2</div>
+                <h3>Discovery</h3>
+                <p>Understand their AI journey, MCP status, pain points, and urgency. This is the conversation this guide covers.</p>
+                <span class="step-tag tag-live">Live Call</span>
+                <span class="step-tag tag-async">or Async</span>
+            </div>
+            <div class="journey-step">
+                <div class="step-icon icon-demo">3</div>
+                <h3>Demo</h3>
+                <p>Tailored product demo based on what you learned in discovery. Show their specific use case with Agen.</p>
+                <span class="step-tag tag-live">Live Call</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Goal -->
+    <div class="goal-box">
+        <h2>Discovery Goal</h2>
+        <p>Understand where they are on their AI/MCP journey, what's blocking them from going to production, and whether Agen for SaaS solves a real problem for them. By the end you should know if there's a fit - and what to show in the demo.</p>
+    </div>
+
+    <!-- Legend -->
+    <div class="legend">
+        <div class="legend-item"><div class="legend-dot dot-mandatory"></div> Mandatory - always ask</div>
+        <div class="legend-item"><div class="legend-dot dot-optional"></div> Optional - ask if relevant</div>
+    </div>
+
+    <!-- Question Acts -->
+    <div class="acts-container">
+
+        <!-- Act I -->
+        <div class="act-card">
+            <div class="act-header">
+                <div class="act-number" style="background: linear-gradient(135deg, #667eea, #764ba2);">I</div>
+                <div>
+                    <h3>Current State</h3>
+                    <div class="act-goal">Understand where they are today with AI and MCP</div>
+                </div>
+            </div>
+            <ul class="question-list">
+                <li class="q-mandatory">
+                    <div class="q-icon">M</div>
+                    <div class="q-text">
+                        "Tell us about your AI journey so far."<span class="q-label">Must Ask</span>
+                        <span class="q-purpose">Opens the conversation wide. Let them talk - you'll learn if they're an Observer, Experimenter, or AI-Native.</span>
+                    </div>
+                </li>
+                <li class="q-optional">
+                    <div class="q-icon">+</div>
+                    <div class="q-text">
+                        "What pushed you to build an MCP in the first place?"
+                        <span class="q-purpose">Reveals if the initiative is customer-driven (strong signal) or internal experimentation.</span>
+                    </div>
+                </li>
+                <li class="q-optional">
+                    <div class="q-icon">+</div>
+                    <div class="q-text">
+                        "How long did it take from idea to something usable?"
+                        <span class="q-purpose">Gauges how much they've invested and how painful the build was.</span>
+                    </div>
+                </li>
+                <li class="q-optional">
+                    <div class="q-icon">+</div>
+                    <div class="q-text">
+                        "Is it seeing any adoption? Customer-driven or experimentation?"
+                        <span class="q-purpose">Separates real traction from side projects. Customer-driven = higher urgency.</span>
+                    </div>
+                </li>
+            </ul>
+            <div class="transition-tip"><strong>Transition:</strong> "Interesting - so you've [summarize their state]. Let me ask about what's keeping it from being production-ready..."</div>
+        </div>
+
+        <!-- Act II -->
+        <div class="act-card">
+            <div class="act-header">
+                <div class="act-number" style="background: linear-gradient(135deg, #11998e, #38ef7d);">II</div>
+                <div>
+                    <h3>Readiness Gap</h3>
+                    <div class="act-goal">Identify what's blocking them from going live / scaling</div>
+                </div>
+            </div>
+            <ul class="question-list">
+                <li class="q-mandatory">
+                    <div class="q-icon">M</div>
+                    <div class="q-text">
+                        "What's stopping you from being listed as a connector today?"<span class="q-label">Must Ask</span>
+                        <span class="q-purpose">Gets directly at the blockers. Could be security, stability, compliance, or just not having the resources. This is where you find the pain.</span>
+                    </div>
+                </li>
+                <li class="q-optional">
+                    <div class="q-icon">+</div>
+                    <div class="q-text">
+                        "What needs to be in place before you feel comfortable opening up your APIs to GenAI more broadly?"
+                        <span class="q-purpose">Expands from MCP to broader AI accessibility. Often reveals enterprise requirements (auth, compliance, observability).</span>
+                    </div>
+                </li>
+            </ul>
+            <div class="transition-tip"><strong>Transition:</strong> "So it sounds like [blocker] is the main thing. Let me dig into a specific scenario..."</div>
+        </div>
+
+        <!-- Act III -->
+        <div class="act-card">
+            <div class="act-header">
+                <div class="act-number" style="background: linear-gradient(135deg, #f093fb, #f5576c);">III</div>
+                <div>
+                    <h3>Forced Autonomy</h3>
+                    <div class="act-goal">Anchor the conversation to a real workflow where agents need to act independently</div>
+                </div>
+            </div>
+            <ul class="question-list">
+                <li class="q-optional">
+                    <div class="q-icon">+</div>
+                    <div class="q-text">
+                        "What's one workflow where you can't rely on a human in the loop and an external agent would need to act?"
+                        <span class="q-purpose">Grounds the conversation in a real use case. Everything that follows should reference this workflow.</span>
+                    </div>
+                </li>
+                <li class="q-mandatory">
+                    <div class="q-icon">M</div>
+                    <div class="q-text">
+                        "If that agent hallucinated or misfired in that workflow, what's the blast radius?"<span class="q-label">Must Ask</span>
+                        <span class="q-purpose">Makes the risk concrete. If the blast radius is high, the need for guardrails is urgent - that's Agen's sweet spot.</span>
+                    </div>
+                </li>
+            </ul>
+            <div class="transition-tip"><strong>Transition:</strong> "OK so the stakes are real. Let me ask about how you'd control that..."</div>
+        </div>
+
+        <!-- Act IV -->
+        <div class="act-card">
+            <div class="act-header">
+                <div class="act-number" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">IV</div>
+                <div>
+                    <h3>Control & Authority</h3>
+                    <div class="act-goal">Test their thinking on permissions, identity, and governance (light POV testing)</div>
+                </div>
+            </div>
+            <ul class="question-list">
+                <li class="q-mandatory">
+                    <div class="q-icon">M</div>
+                    <div class="q-text">
+                        "Once an agent can take action there, how are you thinking about controlling what it can act on and who it acts as?"<span class="q-label">Must Ask</span>
+                        <span class="q-purpose">Tests whether they've thought about identity-aware access control. If they haven't - that's the gap Agen fills.</span>
+                    </div>
+                </li>
+                <li class="q-optional">
+                    <div class="q-icon">+</div>
+                    <div class="q-text">
+                        "For that workflow, are you more concerned with what users allow agents to do, or who the user actually is?"
+                        <span class="q-purpose">Separates the authorization problem from the identity problem. Both matter - Agen handles both.</span>
+                    </div>
+                </li>
+            </ul>
+            <div class="transition-tip"><strong>Transition:</strong> "That makes sense. Now thinking about the platforms your customers are using..."</div>
+        </div>
+
+        <!-- Act V -->
+        <div class="act-card">
+            <div class="act-header">
+                <div class="act-number" style="background: linear-gradient(135deg, #f5af19, #f12711);">V</div>
+                <div>
+                    <h3>Platform & Data Risk</h3>
+                    <div class="act-goal">Understand which AI platforms matter and what data concerns exist</div>
+                </div>
+            </div>
+            <ul class="question-list">
+                <li class="q-optional">
+                    <div class="q-icon">+</div>
+                    <div class="q-text">
+                        "Which GenAI platforms are customers asking for in that workflow?"
+                        <span class="q-purpose">Maps the landscape - ChatGPT, Claude, Gemini, custom agents. Reveals how fragmented their integration challenge is.</span>
+                    </div>
+                </li>
+                <li class="q-mandatory">
+                    <div class="q-icon">M</div>
+                    <div class="q-text">
+                        "How are you thinking about customer data exposure when those platforms are involved?"<span class="q-label">Must Ask</span>
+                        <span class="q-purpose">Data exposure is often the CISO blocker. If they don't have an answer, Agen's data governance layer becomes critical.</span>
+                    </div>
+                </li>
+            </ul>
+            <div class="transition-tip"><strong>Transition:</strong> "Last question area - if something goes wrong..."</div>
+        </div>
+
+        <!-- Act VI -->
+        <div class="act-card">
+            <div class="act-header">
+                <div class="act-number" style="background: linear-gradient(135deg, #a8edea, #fed6e3); color: #1a1a2e;">VI</div>
+                <div>
+                    <h3>Observability & Accountability</h3>
+                    <div class="act-goal">Reveal gaps in tracing, logging, and incident response for agent actions</div>
+                </div>
+            </div>
+            <ul class="question-list">
+                <li class="q-mandatory">
+                    <div class="q-icon">M</div>
+                    <div class="q-text">
+                        "If an AI agent did something unexpected in that workflow today, how would you trace what happened?"<span class="q-label">Must Ask</span>
+                        <span class="q-purpose">Most teams have no answer here. This is the "aha" moment - they realize they have zero observability into agent actions.</span>
+                    </div>
+                </li>
+                <li class="q-optional">
+                    <div class="q-icon">+</div>
+                    <div class="q-text">
+                        "Zooming out - what seems harder, building the MCP or controlling it?"
+                        <span class="q-purpose">Great closing question. If they say "controlling it" - perfect Agen fit. If they say "building it" - Agen still helps with enterprise-grade MCP generation.</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Closing / Next Steps -->
+    <div class="closing-section">
+        <h2>Closing the Discovery Call</h2>
+        <p style="color: #b0b0c0; margin-bottom: 20px;">Summarize what you heard, then propose the right next step based on what you learned:</p>
+        <div class="outcomes-grid">
+            <div class="outcome-card outcome-hot">
+                <h4>Strong Fit - Book Demo</h4>
+                <p>They have an MCP or are building one, have real pain around security/control/observability, and there's customer demand. Propose a tailored demo: "Let me show you exactly how Agen solves [their specific blocker]."</p>
+            </div>
+            <div class="outcome-card outcome-warm">
+                <h4>Early Stage - Educate First</h4>
+                <p>They're interested but haven't started building. Share the "Ghost" narrative, send them resources, and propose a follow-up in 2-3 weeks after they've explored further.</p>
+            </div>
+            <div class="outcome-card outcome-cold">
+                <h4>No Fit - Graceful Exit</h4>
+                <p>They're not a B2B SaaS, have no API, or AI isn't on their radar. Thank them, leave the door open, and add them to nurture.</p>
+            </div>
+        </div>
+        <div class="transition-tip" style="margin-top: 20px;">
+            <strong>Always confirm:</strong> "Based on what you shared, I think a demo would be valuable. I'd focus on [specific area]. Who else from your team should join? Can we lock in [specific date/time]?"
+        </div>
+    </div>
+
+    <!-- Pro Tips -->
+    <div class="pro-tips">
+        <h2>Pro Tips</h2>
+        <div class="tips-grid">
+            <div class="tip-item"><strong>70/30 Rule</strong> - They should talk 70% of the time. Your job is to ask great questions and listen.</div>
+            <div class="tip-item"><strong>Reference their workflow</strong> - Once they give you a specific use case in Act III, keep referring back to it in every subsequent question.</div>
+            <div class="tip-item"><strong>Don't pitch yet</strong> - Discovery is for understanding, not selling. Save the product details for the demo.</div>
+            <div class="tip-item"><strong>Mirror their language</strong> - If they say "connector" instead of "MCP", use "connector". Match their vocabulary.</div>
+            <div class="tip-item"><strong>Use silence</strong> - After they answer, wait 2-3 seconds. They'll often add the most valuable insight in the pause.</div>
+            <div class="tip-item"><strong>Async discovery works too</strong> - If scheduling is hard, these questions can be sent over email or Slack. The structure still applies.</div>
+        </div>
+    </div>
+
+    <!-- Red Flags -->
+    <div class="red-flags">
+        <h2>Red Flags - Stop & Reassess</h2>
+        <ul>
+            <li>No API or developer platform - they can't expose anything to agents</li>
+            <li>Pure internal use case only - redirect to Agen for Work</li>
+            <li>"We'll build it ourselves" with no timeline pressure</li>
+            <li>No customer demand or competitive pressure for AI access</li>
+            <li>Can't identify a single workflow where agents would act</li>
+            <li>Security/compliance is not on their radar at all</li>
+        </ul>
+    </div>
+
+    <footer>
+        <p>Agen for SaaS | Discovery Call Guide | Updated February 2026</p>
+    </footer>
+</div>
+</body>
+</html>
