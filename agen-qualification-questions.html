@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<!-- GTM-META
+title: AgentLink Collaboration Gift - Form Flowchart
+category: internal
+tags: form, flowchart, agentlink, hubspot
+created: 2026-02-20
+description: Visual flowchart of the AgentLink collaboration gift form question flow and branching logic
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgentLink Collaboration Gift - Form Flowchart</title>
+<style>
+  :root { --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a; --text: #e4e4e7; --muted: #8b8b9e; --blue: #3b82f6; --green: #22c55e; --amber: #f59e0b; --purple: #a855f7; --red: #ef4444; --cyan: #06b6d4; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); padding: 40px 20px; line-height: 1.6; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  h1 { font-size: 2rem; text-align: center; margin-bottom: 8px; }
+  .subtitle { text-align: center; color: var(--muted); margin-bottom: 12px; }
+  .source-link { text-align: center; margin-bottom: 40px; }
+  .source-link a { color: var(--blue); font-size: 0.85rem; }
+
+  /* Flow nodes */
+  .flow-line { display: flex; flex-direction: column; align-items: center; gap: 0; }
+  .connector { width: 2px; height: 24px; background: var(--border); }
+  .arrow-down { width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 10px solid var(--border); margin-bottom: 4px; }
+
+  .node {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+  }
+  .node-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  .node h3 { font-size: 1.05rem; color: #fff; margin-bottom: 6px; }
+  .node p { font-size: 0.85rem; color: var(--muted); }
+
+  .node-contact .node-label { color: var(--blue); }
+  .node-contact { border-color: rgba(59,130,246,0.3); }
+  .node-branch .node-label { color: var(--amber); }
+  .node-branch { border-color: rgba(245,158,11,0.3); background: linear-gradient(135deg, rgba(245,158,11,0.05), var(--surface)); }
+  .node-end .node-label { color: var(--green); }
+  .node-end { border-color: rgba(34,197,94,0.3); }
+
+  /* Branch options */
+  .branch-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .branch-option {
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+  }
+  .branch-yes {
+    background: rgba(34,197,94,0.08);
+    border: 1px solid rgba(34,197,94,0.25);
+    color: var(--green);
+  }
+  .branch-dev {
+    background: rgba(59,130,246,0.08);
+    border: 1px solid rgba(59,130,246,0.25);
+    color: var(--blue);
+  }
+  .branch-planned {
+    background: rgba(245,158,11,0.08);
+    border: 1px solid rgba(245,158,11,0.25);
+    color: var(--amber);
+  }
+  .branch-no {
+    background: rgba(239,68,68,0.08);
+    border: 1px solid rgba(239,68,68,0.25);
+    color: var(--red);
+  }
+
+  /* Paths section */
+  .paths-header {
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .paths-header::before, .paths-header::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .path-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .path-card {
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 16px;
+    border: 1px solid var(--border);
+  }
+  .path-card h4 {
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .path-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .followup-list { list-style: none; }
+  .followup-list li {
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+  .followup-list .q-num {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    margin-top: 1px;
+  }
+  .q-text-main { color: #e0e0e0; }
+  .q-type {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .type-select { background: rgba(59,130,246,0.15); color: var(--blue); }
+  .type-checkbox { background: rgba(168,85,247,0.15); color: var(--purple); }
+
+  .options-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 6px;
+  }
+  .option-chip {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.05);
+    color: var(--muted);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .trigger-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+  .trigger-green { background: rgba(34,197,94,0.12); color: var(--green); }
+  .trigger-amber { background: rgba(245,158,11,0.12); color: var(--amber); }
+  .trigger-red { background: rgba(239,68,68,0.12); color: var(--red); }
+
+  footer { text-align: center; margin-top: 50px; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); padding-top: 20px; }
+
+  @media (max-width: 900px) {
+    .path-columns { grid-template-columns: 1fr; }
+    .branch-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>AgentLink Collaboration Form</h1>
+  <p class="subtitle">Question flow and branching logic</p>
+  <div class="source-link"><a href="https://frontegg.com/lp/agentlink-collaboration-gift" target="_blank">frontegg.com/lp/agentlink-collaboration-gift</a></div>
+
+  <div class="flow-line">
+
+    <!-- Step 1: Contact Info -->
+    <div class="node node-contact">
+      <div class="node-label">Step 1 - Contact Info</div>
+      <h3>Basic Information</h3>
+      <p>First name, Last name, Company name, Work email, Job title</p>
+      <p style="margin-top:6px;font-size:0.75rem;color:var(--blue);">All fields required</p>
+    </div>
+
+    <div class="connector"></div>
+    <div class="arrow-down"></div>
+
+    <!-- Step 2: The Branch Question -->
+    <div class="node node-branch">
+      <div class="node-label">Step 2 - Key Qualifier (Branch Point)</div>
+      <h3>Do you currently have an MCP server or agent gateway?</h3>
+      <p>The answer determines which 2 follow-up questions appear. Each path gets a unique pair of questions.</p>
+      <div class="branch-grid">
+        <div class="branch-option branch-yes">Yes, in production</div>
+        <div class="branch-option branch-dev">Yes, in development</div>
+        <div class="branch-option branch-planned">Not yet, but planned</div>
+        <div class="branch-option branch-no">No, not planned yet</div>
+      </div>
+    </div>
+
+    <div class="connector"></div>
+    <div class="arrow-down"></div>
+
+    <!-- Branch Paths -->
+    <div class="paths-header">3 distinct follow-up paths</div>
+
+    <div class="path-columns">
+
+      <!-- Path A: Yes (Production or Development) -->
+      <div class="path-card" style="border-color: rgba(34,197,94,0.25);">
+        <h4><div class="path-dot" style="background:var(--green);"></div><span style="color:var(--green);">Path A</span></h4>
+        <div class="trigger-label trigger-green">Triggers: "Yes, in production" OR "Yes, in development"</div>
+        <ul class="followup-list">
+          <li>
+            <div class="q-num" style="background:rgba(34,197,94,0.15);color:var(--green);">1</div>
+            <div>
+              <span class="q-text-main">Which capabilities does it support today?</span><span class="q-type type-checkbox">Multi-select</span>
+              <div class="options-row">
+                <span class="option-chip">Agent auth / identity</span>
+                <span class="option-chip">Tool/API permissions</span>
+                <span class="option-chip">Secrets management</span>
+                <span class="option-chip">Audit logs</span>
+                <span class="option-chip">Env separation</span>
+                <span class="option-chip">None yet</span>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="q-num" style="background:rgba(34,197,94,0.15);color:var(--green);">2</div>
+            <div>
+              <span class="q-text-main">What is your biggest challenge right now?</span><span class="q-type type-select">Select</span>
+              <div class="options-row">
+                <span class="option-chip">Permissions at scale</span>
+                <span class="option-chip">Security & compliance</span>
+                <span class="option-chip">Operational overhead</span>
+                <span class="option-chip">Visibility into activity</span>
+                <span class="option-chip">Still evaluating</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Path B: Not yet, but planned -->
+      <div class="path-card" style="border-color: rgba(245,158,11,0.25);">
+        <h4><div class="path-dot" style="background:var(--amber);"></div><span style="color:var(--amber);">Path B</span></h4>
+        <div class="trigger-label trigger-amber">Triggers: "Not yet, but planned"</div>
+        <ul class="followup-list">
+          <li>
+            <div class="q-num" style="background:rgba(245,158,11,0.15);color:var(--amber);">1</div>
+            <div>
+              <span class="q-text-main">What is driving the need to introduce MCP or agent infrastructure?</span><span class="q-type type-select">Select</span>
+              <div class="options-row">
+                <span class="option-chip">Scaling agent usage</span>
+                <span class="option-chip">Security / compliance</span>
+                <span class="option-chip">Customer-facing AI</span>
+                <span class="option-chip">Internal productivity</span>
+                <span class="option-chip">Still exploratory</span>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="q-num" style="background:rgba(245,158,11,0.15);color:var(--amber);">2</div>
+            <div>
+              <span class="q-text-main">When do you expect to introduce it?</span><span class="q-type type-select">Select</span>
+              <div class="options-row">
+                <span class="option-chip">Next 3 months</span>
+                <span class="option-chip">3-6 months</span>
+                <span class="option-chip">6-12 months</span>
+                <span class="option-chip">Timeline not defined</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Path C: No, not planned yet -->
+      <div class="path-card" style="border-color: rgba(239,68,68,0.25);">
+        <h4><div class="path-dot" style="background:var(--red);"></div><span style="color:var(--red);">Path C</span></h4>
+        <div class="trigger-label trigger-red">Triggers: "No, not planned yet"</div>
+        <ul class="followup-list">
+          <li>
+            <div class="q-num" style="background:rgba(239,68,68,0.15);color:var(--red);">1</div>
+            <div>
+              <span class="q-text-main">How are agents interacting with internal systems today?</span><span class="q-type type-select">Select</span>
+              <div class="options-row">
+                <span class="option-chip">Direct API access</span>
+                <span class="option-chip">Custom scripts / middleware</span>
+                <span class="option-chip">Not connected</span>
+                <span class="option-chip">Still experimenting</span>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="q-num" style="background:rgba(239,68,68,0.15);color:var(--red);">2</div>
+            <div>
+              <span class="q-text-main">What would you like to learn in a discovery call?</span><span class="q-type type-checkbox">Multi-select</span>
+              <div class="options-row">
+                <span class="option-chip">When MCP becomes necessary</span>
+                <span class="option-chip">Common agent architecture patterns</span>
+                <span class="option-chip">Security risks to be aware of</span>
+                <span class="option-chip">Whether this applies to our use case</span>
+                <span class="option-chip">Just getting oriented</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="connector"></div>
+    <div class="arrow-down"></div>
+
+    <!-- Step 4: Optional -->
+    <div class="node" style="max-width:500px;">
+      <div class="node-label" style="color:var(--muted);">Step 3 - Optional</div>
+      <h3>Comments</h3>
+      <p>Free-text field for anything else they'd like to share.</p>
+    </div>
+
+    <div class="connector"></div>
+    <div class="arrow-down"></div>
+
+    <!-- End -->
+    <div class="node node-end" style="max-width:500px;text-align:center;">
+      <div class="node-label">Submit</div>
+      <h3>Redirects to contact-sales-ty</h3>
+      <p>Contact is created/updated in HubSpot with all field values. Clearbit identification fires on submit.</p>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>Form ID: 7686bb55-66a9-405b-bd66-a394b94bf12b | Portal: 7615593</p>
+    <p style="margin-top:4px;">Branching logic from HubSpot dependentFieldFilters - each answer triggers exactly 2 follow-up questions.</p>
+  </footer>
+</div>
+</body>
+</html>
