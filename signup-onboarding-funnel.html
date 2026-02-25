@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <!-- GTM-META
-title: Signup to Onboarding Funnel - Agen & Frontegg
+title: Signup to Onboarding Funnel - Agen for SaaS, Agen for Work & Frontegg
 category: internal
-tags: funnel, tracking, onboarding, GTM, HubSpot, events
+tags: funnel, tracking, onboarding, GTM, HubSpot, events, agen-for-saas, agen-for-work
 created: 2026-02-17
-description: Visual funnel showing the signup-to-onboarding journey for both Agen and Frontegg products, with event tracking status (live, in testing, planned, TBD).
+updated: 2026-02-25
+description: Visual funnel showing the signup-to-onboarding journey for Agen for SaaS, Agen for Work, and Frontegg products, with event tracking status.
 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Signup to Onboarding Funnel - Agen & Frontegg</title>
+<title>Signup to Onboarding Funnel - Agen for SaaS, Agen for Work & Frontegg</title>
 <style>
   :root {
     --bg: #0a0e1a;
@@ -22,6 +23,9 @@ description: Visual funnel showing the signup-to-onboarding journey for both Age
     --agen-primary: #6366f1;
     --agen-glow: rgba(99, 102, 241, 0.15);
     --agen-light: #818cf8;
+    --agen-work-primary: #06b6d4;
+    --agen-work-glow: rgba(6, 182, 212, 0.15);
+    --agen-work-light: #22d3ee;
     --frontegg-primary: #f97316;
     --frontegg-glow: rgba(249, 115, 22, 0.15);
     --frontegg-light: #fb923c;
@@ -46,7 +50,7 @@ description: Visual funnel showing the signup-to-onboarding journey for both Age
     padding: 40px 24px 60px;
   }
 
-  .container { max-width: 1100px; margin: 0 auto; }
+  .container { max-width: 1400px; margin: 0 auto; }
 
   /* Header */
   .header {
@@ -136,9 +140,11 @@ description: Visual funnel showing the signup-to-onboarding journey for both Age
     font-size: 13px;
   }
   .source-chip.agen { border-color: rgba(99, 102, 241, 0.3); }
+  .source-chip.agen-work { border-color: rgba(6, 182, 212, 0.3); }
   .source-chip.frontegg { border-color: rgba(249, 115, 22, 0.3); }
   .source-chip .domain { font-weight: 600; }
   .source-chip.agen .domain { color: var(--agen-light); }
+  .source-chip.agen-work .domain { color: var(--agen-work-light); }
   .source-chip.frontegg .domain { color: var(--frontegg-light); }
 
   /* UTM detection */
@@ -207,26 +213,27 @@ description: Visual funnel showing the signup-to-onboarding journey for both Age
     content: '';
     position: absolute;
     top: 16px;
-    left: calc(25% + 12px);
-    right: calc(25% + 12px);
+    left: calc(16.67% + 8px);
+    right: calc(16.67% + 8px);
     height: 2px;
     background: var(--connector);
   }
-  .split-arm-left, .split-arm-right {
+  .split-arm-left, .split-arm-center, .split-arm-right {
     position: absolute;
     top: 16px;
     width: 2px;
     height: 24px;
     background: var(--connector);
   }
-  .split-arm-left { left: calc(25% + 12px); }
-  .split-arm-right { right: calc(25% + 12px); }
+  .split-arm-left { left: calc(16.67% + 8px); }
+  .split-arm-center { left: 50%; transform: translateX(-50%); }
+  .split-arm-right { right: calc(16.67% + 8px); }
 
-  /* Two lanes */
+  /* Three lanes */
   .lanes {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
     margin-top: 0;
   }
 
@@ -238,6 +245,10 @@ description: Visual funnel showing the signup-to-onboarding journey for both Age
   .lane.agen {
     background: linear-gradient(180deg, var(--agen-glow) 0%, transparent 40%);
     border: 1px solid rgba(99, 102, 241, 0.2);
+  }
+  .lane.agen-work {
+    background: linear-gradient(180deg, var(--agen-work-glow) 0%, transparent 40%);
+    border: 1px solid rgba(6, 182, 212, 0.2);
   }
   .lane.frontegg {
     background: linear-gradient(180deg, var(--frontegg-glow) 0%, transparent 40%);
@@ -256,6 +267,7 @@ description: Visual funnel showing the signup-to-onboarding journey for both Age
     margin-bottom: 2px;
   }
   .lane.agen .product-name { color: var(--agen-light); }
+  .lane.agen-work .product-name { color: var(--agen-work-light); }
   .lane.frontegg .product-name { color: var(--frontegg-light); }
   .lane-header .product-desc {
     font-size: 12px;
@@ -448,7 +460,7 @@ description: Visual funnel showing the signup-to-onboarding journey for both Age
   }
   .open-question strong { color: var(--tbd); }
 
-  @media (max-width: 768px) {
+  @media (max-width: 960px) {
     .lanes { grid-template-columns: 1fr; }
     .split-connector { display: none; }
     .entry-sources { flex-direction: column; align-items: center; gap: 8px; }
@@ -462,7 +474,7 @@ description: Visual funnel showing the signup-to-onboarding journey for both Age
   <!-- Header -->
   <div class="header">
     <h1>Signup to Onboarding Funnel</h1>
-    <p>Event tracking status across the Agen and Frontegg product journeys - current focus on Agen</p>
+    <p>Event tracking status across Agen for SaaS, Agen for Work, and Frontegg product journeys</p>
   </div>
 
   <!-- Legend -->
@@ -510,20 +522,21 @@ description: Visual funnel showing the signup-to-onboarding journey for both Age
     </div>
   </div>
 
-  <!-- Split into two lanes -->
+  <!-- Split into three lanes -->
   <div class="split-connector">
     <div class="split-arm-left"></div>
+    <div class="split-arm-center"></div>
     <div class="split-arm-right"></div>
   </div>
 
-  <!-- Two product lanes -->
+  <!-- Three product lanes -->
   <div class="lanes">
 
-    <!-- ==================== AGEN LANE ==================== -->
+    <!-- ==================== AGEN FOR SAAS LANE ==================== -->
     <div class="lane agen">
       <div class="lane-header">
-        <div class="product-name">Agen <span class="status-tag live" style="font-size:10px;vertical-align:middle;margin-left:6px;">CURRENT FOCUS</span></div>
-        <div class="product-desc">AI-Native User Infrastructure (Agent Identity)</div>
+        <div class="product-name">Agen for SaaS <span class="status-tag live" style="font-size:10px;vertical-align:middle;margin-left:6px;">CURRENT FOCUS</span></div>
+        <div class="product-desc">AI-Native User Infrastructure for SaaS Products</div>
       </div>
 
       <!-- Onboarding Events -->
@@ -671,6 +684,49 @@ description: Visual funnel showing the signup-to-onboarding journey for both Age
 
     </div>
 
+    <!-- ==================== AGEN FOR WORK LANE ==================== -->
+    <div class="lane agen-work">
+      <div class="lane-header">
+        <div class="product-name">Agen for Work</div>
+        <div class="product-desc">AI Agent Governance for Enterprise IT/Security</div>
+      </div>
+
+      <!-- Onboarding Events -->
+      <div class="lane-divider"><span>Onboarding</span></div>
+
+      <div class="event-step">
+        <div class="step-indicator live">1</div>
+        <div class="step-content">
+          <div class="step-name">
+            Onboarding Started
+            <span class="status-tag live">Live</span>
+          </div>
+          <div class="step-detail">User begins Agen for Work onboarding flow</div>
+          <div class="hs-prop">agen_work_onboarding_started = Yes</div>
+        </div>
+      </div>
+
+      <div class="lane-connector"><div class="dot"></div></div>
+
+      <div class="event-step">
+        <div class="step-indicator planned">2</div>
+        <div class="step-content">
+          <div class="step-name">
+            Onboarding Completed
+            <span class="status-tag planned">Planned</span>
+          </div>
+          <div class="step-detail">User completes Agen for Work setup and activation</div>
+          <div class="hs-prop">agen_work_onboarding_completed = Yes</div>
+        </div>
+      </div>
+
+      <div class="open-question">
+        <strong>Next:</strong> Define product activation and usage events for Agen for Work as the product matures.
+      </div>
+
+      <div style="flex: 1;"></div>
+    </div>
+
     <!-- ==================== FRONTEGG LANE ==================== -->
     <div class="lane frontegg">
       <div class="lane-header">
@@ -735,7 +791,7 @@ description: Visual funnel showing the signup-to-onboarding journey for both Age
   <!-- Summary Stats -->
   <div class="summary-row">
     <div class="summary-stat">
-      <div class="num live-c">2</div>
+      <div class="num live-c">3</div>
       <div class="lbl">Live</div>
     </div>
     <div class="summary-stat">
@@ -743,7 +799,7 @@ description: Visual funnel showing the signup-to-onboarding journey for both Age
       <div class="lbl">In Testing</div>
     </div>
     <div class="summary-stat">
-      <div class="num planned-c">10</div>
+      <div class="num planned-c">11</div>
       <div class="lbl">Planned</div>
     </div>
     <div class="summary-stat">
@@ -755,7 +811,7 @@ description: Visual funnel showing the signup-to-onboarding journey for both Age
   <!-- Footer -->
   <div class="footer">
     <p>Agen GTM Engine - Signup to Onboarding Event Tracking Funnel</p>
-    <p class="date">Updated February 17, 2026</p>
+    <p class="date">Updated February 25, 2026</p>
   </div>
 
 </div>
