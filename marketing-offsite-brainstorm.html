@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<!-- GTM-META
+title: Marketing Offsite - Product Brief Brainstorm
+date: 2026-03-10
+category: strategy
+tags: marketing, offsite, brainstorm, product-brief, problems, success-metrics, CIAM, agen
+description: Interactive product brief brainstorm from marketing offsite - problems identified, success metrics, audience questions, and solution space
+skill: manual
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketing Offsite - Product Brief Brainstorm</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #13131a;
+    --surface-2: #1a1a24;
+    --surface-3: #22222e;
+    --border: #2a2a3a;
+    --text: #e0e0e8;
+    --text-muted: #8888a0;
+    --text-dim: #5a5a70;
+    --blue: #6ea8fe;
+    --blue-bg: rgba(110, 168, 254, 0.12);
+    --blue-border: rgba(110, 168, 254, 0.25);
+    --green: #6ee7a0;
+    --green-bg: rgba(110, 231, 160, 0.12);
+    --green-border: rgba(110, 231, 160, 0.25);
+    --yellow: #fcd34d;
+    --yellow-bg: rgba(252, 211, 77, 0.12);
+    --yellow-border: rgba(252, 211, 77, 0.25);
+    --pink: #f0abfc;
+    --pink-bg: rgba(240, 171, 252, 0.12);
+    --pink-border: rgba(240, 171, 252, 0.25);
+    --accent-purple: #7c5cbf;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 40px 32px;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .header .badge {
+    display: inline-block;
+    background: rgba(124, 92, 191, 0.15);
+    border: 1px solid rgba(124, 92, 191, 0.3);
+    color: #a68de0;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+
+  .header h1 {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #e0e0e8 0%, #a68de0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .header p {
+    color: var(--text-muted);
+    font-size: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Process steps */
+  .process {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+
+  .step {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 24px;
+    min-width: 280px;
+  }
+
+  .step-num {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--accent-purple);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .step-text h3 { font-size: 14px; font-weight: 700; }
+  .step-text p { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+  .step-arrow {
+    color: var(--text-dim);
+    font-size: 20px;
+    align-self: center;
+  }
+
+  /* Section layout */
+  .sections {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .section.full-width {
+    grid-column: 1 / -1;
+  }
+
+  .section-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .section-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .section-header h2 { font-size: 18px; font-weight: 700; }
+
+  .section-count {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 10px;
+    letter-spacing: 0.3px;
+  }
+
+  .section-body {
+    padding: 20px 24px;
+  }
+
+  /* Prompts (guide questions) */
+  .prompts {
+    margin-bottom: 16px;
+  }
+
+  .prompt {
+    font-size: 13px;
+    color: var(--text-dim);
+    padding: 4px 0;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .prompt::before {
+    content: '?';
+    position: absolute;
+    left: 0;
+    color: var(--text-dim);
+    font-weight: 700;
+    font-size: 11px;
+    opacity: 0.6;
+  }
+
+  /* Sticky notes */
+  .stickies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .sticky {
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+    position: relative;
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: default;
+  }
+
+  .sticky:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  }
+
+  .sticky.blue {
+    background: var(--blue-bg);
+    border: 1px solid var(--blue-border);
+    color: var(--blue);
+  }
+
+  .sticky.green {
+    background: var(--green-bg);
+    border: 1px solid var(--green-border);
+    color: var(--green);
+  }
+
+  .sticky.yellow {
+    background: var(--yellow-bg);
+    border: 1px solid var(--yellow-border);
+    color: var(--yellow);
+  }
+
+  .sticky.pink {
+    background: var(--pink-bg);
+    border: 1px solid var(--pink-border);
+    color: var(--pink);
+  }
+
+  .sticky.large {
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 20px;
+  }
+
+  /* Problem severity */
+  .sticky.critical {
+    border-width: 2px;
+  }
+
+  /* Success metric cards */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+  }
+
+  .metric-card {
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .metric-card.ciam {
+    background: rgba(110, 168, 254, 0.08);
+    border: 1px solid rgba(110, 168, 254, 0.2);
+  }
+
+  .metric-card.agen {
+    background: rgba(110, 231, 160, 0.08);
+    border: 1px solid rgba(110, 231, 160, 0.2);
+  }
+
+  .metric-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .metric-card.ciam .metric-label { color: var(--blue); }
+  .metric-card.agen .metric-label { color: var(--green); }
+
+  .metric-value {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .metric-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  /* Problem categories */
+  .problem-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .problem-cat {
+    padding-bottom: 16px;
+  }
+
+  .problem-cat:not(:last-child) {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .problem-cat-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .problem-cat-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+  }
+
+  .cat-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Empty section state */
+  .empty-state {
+    text-align: center;
+    padding: 24px;
+    color: var(--text-dim);
+    font-size: 13px;
+    font-style: italic;
+  }
+
+  /* Tip card */
+  .tip-card {
+    background: linear-gradient(135deg, rgba(124, 92, 191, 0.08) 0%, rgba(110, 168, 254, 0.08) 100%);
+    border: 1px solid rgba(124, 92, 191, 0.2);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-top: 8px;
+  }
+
+  .tip-badge {
+    display: inline-block;
+    background: var(--accent-purple);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+  }
+
+  .tip-card h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .tip-card ol {
+    padding-left: 20px;
+    margin-bottom: 14px;
+  }
+
+  .tip-card li {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .tip-prompt {
+    background: rgba(124, 92, 191, 0.15);
+    border: 1px solid rgba(124, 92, 191, 0.3);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-style: italic;
+    color: #c4b5fd;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+
+  @media (max-width: 768px) {
+    body { padding: 20px 16px; }
+    .sections { grid-template-columns: 1fr; }
+    .process { flex-direction: column; align-items: center; }
+    .step-arrow { display: none; }
+    .header h1 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">Marketing Offsite</div>
+  <h1>Product Brief Brainstorm</h1>
+  <p>Brainstorm your initiative's core elements and synthesize them into a clear product brief</p>
+</div>
+
+<div class="process">
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-text">
+      <h3>Brainstorm your ideas</h3>
+      <p>Share problem, audience, success, solutions</p>
+    </div>
+  </div>
+  <div class="step-arrow">&#8594;</div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-text">
+      <h3>Generate Product Brief</h3>
+      <p>Turn notes into a structured brief</p>
+    </div>
+  </div>
+</div>
+
+<div class="sections">
+
+  <!-- PROBLEM -->
+  <div class="section full-width">
+    <div class="section-header">
+      <div class="section-header-left">
+        <div class="section-icon" style="background: var(--blue-bg);">
+          <span style="color: var(--blue);">!</span>
+        </div>
+        <h2>Problem</h2>
+      </div>
+      <span class="section-count" style="background: var(--blue-bg); color: var(--blue);">16 items</span>
+    </div>
+    <div class="section-body">
+      <div class="prompts">
+        <div class="prompt">What pain point are we addressing?</div>
+        <div class="prompt">What evidence proves this is a problem worth solving?</div>
+        <div class="prompt">How does this problem impact our business goals?</div>
+        <div class="prompt">Why is this a priority for us right now?</div>
+      </div>
+
+      <div class="problem-categories">
+        <div class="problem-cat">
+          <div class="problem-cat-header">
+            <span class="problem-cat-label">Pipeline & Revenue</span>
+            <div class="cat-line"></div>
+          </div>
+          <div class="stickies">
+            <div class="sticky blue large critical">CIAM pipe is declining</div>
+            <div class="sticky blue">Low CIAM upsell pipe</div>
+            <div class="sticky blue">No CIAM Malam pipe</div>
+            <div class="sticky blue large critical">80 logos stuck in Stage 0</div>
+            <div class="sticky blue">No SQOs for Agen.co from marketing</div>
+            <div class="sticky blue">Paid lead conversion</div>
+          </div>
+        </div>
+
+        <div class="problem-cat">
+          <div class="problem-cat-header">
+            <span class="problem-cat-label">Growth & Awareness</span>
+            <div class="cat-line"></div>
+          </div>
+          <div class="stickies">
+            <div class="sticky blue large critical">No virality</div>
+            <div class="sticky blue">GEO/SEO</div>
+            <div class="sticky blue">Companies not ready for Agen.co for SaaS</div>
+          </div>
+        </div>
+
+        <div class="problem-cat">
+          <div class="problem-cat-header">
+            <span class="problem-cat-label">Competitive & Market</span>
+            <div class="cat-line"></div>
+          </div>
+          <div class="stickies">
+            <div class="sticky blue">Ton of competition</div>
+            <div class="sticky blue">LLMs bringing things inhouse</div>
+          </div>
+        </div>
+
+        <div class="problem-cat">
+          <div class="problem-cat-header">
+            <span class="problem-cat-label">Internal & Resources</span>
+            <div class="cat-line"></div>
+          </div>
+          <div class="stickies">
+            <div class="sticky blue large critical">Sagi's time</div>
+            <div class="sticky blue">Unclear sales ownership</div>
+            <div class="sticky blue">Lack of technical resource locally</div>
+            <div class="sticky blue">Marketing process ownership and responsibilities</div>
+            <div class="sticky blue">Messaging</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUDIENCE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-header-left">
+        <div class="section-icon" style="background: var(--yellow-bg);">
+          <span style="color: var(--yellow);">&#9787;</span>
+        </div>
+        <h2>Audience</h2>
+      </div>
+      <span class="section-count" style="background: var(--yellow-bg); color: var(--yellow);">To define</span>
+    </div>
+    <div class="section-body">
+      <div class="prompts">
+        <div class="prompt">Who is the target persona?</div>
+        <div class="prompt">What are their jobs-to-be-done?</div>
+        <div class="prompt">What are their current workarounds or competing solutions?</div>
+        <div class="prompt">Who is out of scope?</div>
+      </div>
+      <div class="empty-state">Pending brainstorm - grab a sticky!</div>
+    </div>
+  </div>
+
+  <!-- SOLUTION -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-header-left">
+        <div class="section-icon" style="background: var(--pink-bg);">
+          <span style="color: var(--pink);">&#9733;</span>
+        </div>
+        <h2>Solution</h2>
+      </div>
+      <span class="section-count" style="background: var(--pink-bg); color: var(--pink);">To define</span>
+    </div>
+    <div class="section-body">
+      <div class="prompts">
+        <div class="prompt">How might we best solve the core user problem?</div>
+        <div class="prompt">What does the ideal user journey look like?</div>
+        <div class="prompt">What are the essential components of this solution?</div>
+        <div class="prompt">What are our biggest, riskiest assumptions to test?</div>
+      </div>
+      <div class="empty-state">Pending brainstorm - grab a sticky!</div>
+    </div>
+  </div>
+
+  <!-- SUCCESS METRICS -->
+  <div class="section full-width">
+    <div class="section-header">
+      <div class="section-header-left">
+        <div class="section-icon" style="background: var(--green-bg);">
+          <span style="color: var(--green);">&#9650;</span>
+        </div>
+        <h2>Success Metrics</h2>
+      </div>
+      <span class="section-count" style="background: var(--green-bg); color: var(--green);">6 targets</span>
+    </div>
+    <div class="section-body">
+      <div class="prompts">
+        <div class="prompt">How will we measure success?</div>
+        <div class="prompt">What key business outcomes will this drive?</div>
+        <div class="prompt">What will signal that we're on the right track?</div>
+        <div class="prompt">What must we watch to avoid negative impacts?</div>
+      </div>
+
+      <div class="metrics-grid">
+        <div class="metric-card ciam">
+          <div class="metric-label">CIAM Pipeline</div>
+          <div class="metric-value">3x</div>
+          <div class="metric-desc">Pipeline growth target</div>
+        </div>
+        <div class="metric-card ciam">
+          <div class="metric-label">CIAM ARR</div>
+          <div class="metric-value">$500K</div>
+          <div class="metric-desc">Per quarter</div>
+        </div>
+        <div class="metric-card ciam">
+          <div class="metric-label">CIAM Marketing</div>
+          <div class="metric-value">$800K</div>
+          <div class="metric-desc">Upsell $200K + Malam $500K</div>
+        </div>
+        <div class="metric-card agen">
+          <div class="metric-label">Agen.co Integrations</div>
+          <div class="metric-value">50</div>
+          <div class="metric-desc">Live integrations</div>
+        </div>
+        <div class="metric-card agen">
+          <div class="metric-label">Agen.co Logos</div>
+          <div class="metric-value">15</div>
+          <div class="metric-desc">Customer logos</div>
+        </div>
+        <div class="metric-card agen">
+          <div class="metric-label">Agen.co Partnerships</div>
+          <div class="metric-value">3</div>
+          <div class="metric-desc">Strategic partnerships</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- TIP -->
+<div class="tip-card">
+  <div class="tip-badge">Tip</div>
+  <h3>Need help thinking of solutions?</h3>
+  <ol>
+    <li>Populate the Problem, Audience and Success frames with your ideas</li>
+    <li>Select these frames</li>
+    <li>Open Sidekick and use the example prompt below</li>
+  </ol>
+  <div class="tip-prompt">Help create ideas for the solution that are tailored to the problem, audience and success provided.</div>
+</div>
+
+<div class="footer">
+  Marketing Offsite - Product Brief Brainstorm - March 2026
+</div>
+
+</body>
+</html>
