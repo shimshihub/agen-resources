@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <!-- GTM-META
-title: Marketing Offsite - Challenges & KPIs (Whiteboard)
+title: Marketing Offsite - Challenges, Current State & KPIs (Whiteboard)
 date: 2026-03-10
 category: strategy
-tags: marketing, offsite, brainstorm, challenges, KPIs, CIAM, agen, whiteboard
-description: Marketing offsite whiteboard capture - challenges organized by Internal (Direct/Indirect) and External, with KPI targets for CIAM and Agen.co
+tags: marketing, offsite, brainstorm, challenges, KPIs, CIAM, agen, whiteboard, current-state
+description: Marketing offsite whiteboard capture - challenges (Internal/External), current state across 6 marketing buckets, and KPI targets for CIAM and Agen.co
 skill: manual
 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marketing Offsite - Challenges & KPIs</title>
+<title>Marketing Offsite - Challenges, Current State & KPIs</title>
 <style>
   :root {
     --bg: #0a0a0f;
@@ -395,6 +395,165 @@ skill: manual
     height: 2px;
   }
 
+  /* Current State Section */
+  .current-state-header {
+    text-align: center;
+    margin: 40px 0 24px;
+  }
+
+  .current-state-header h2 {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  .current-state-header h2 .hl-yellow { color: #fbbf24; }
+
+  .current-state-header p {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-top: 4px;
+  }
+
+  .buckets-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .bucket {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .bucket-header {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .bucket-header h3 {
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .bucket-header .bucket-icon {
+    font-size: 15px;
+  }
+
+  .bucket-header .bucket-count {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 8px;
+    background: rgba(251, 191, 36, 0.12);
+    color: #fbbf24;
+  }
+
+  .bucket-body {
+    padding: 14px 16px;
+  }
+
+  .bucket-group {
+    margin-bottom: 12px;
+  }
+
+  .bucket-group:last-child { margin-bottom: 0; }
+
+  .bucket-group-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+
+  .sticky {
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.35;
+    background: rgba(251, 191, 36, 0.08);
+    border: 1px solid rgba(251, 191, 36, 0.2);
+    color: #fde68a;
+    margin-bottom: 5px;
+    transition: transform 0.12s;
+    cursor: default;
+  }
+
+  .sticky:hover {
+    transform: translateX(3px);
+  }
+
+  .sticky:last-child { margin-bottom: 0; }
+
+  .sticky.this-week {
+    background: rgba(45, 212, 191, 0.12);
+    border: 1.5px solid rgba(45, 212, 191, 0.4);
+    color: #5eead4;
+    position: relative;
+  }
+
+  .sticky.this-week::after {
+    content: 'THIS WEEK';
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    color: var(--teal);
+    opacity: 0.6;
+  }
+
+  .sticky .detail {
+    display: block;
+    font-size: 10px;
+    opacity: 0.65;
+    margin-top: 2px;
+    font-weight: 400;
+  }
+
+  .week-legend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+
+  .week-legend .swatch {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  .week-legend .swatch.default {
+    background: rgba(251, 191, 36, 0.2);
+    border: 1px solid rgba(251, 191, 36, 0.35);
+  }
+
+  .week-legend .swatch.active {
+    background: rgba(45, 212, 191, 0.2);
+    border: 1px solid rgba(45, 212, 191, 0.5);
+  }
+
   /* Footer */
   .footer {
     text-align: center;
@@ -405,11 +564,20 @@ skill: manual
     color: var(--text-dim);
   }
 
+  @media (max-width: 1200px) {
+    .buckets-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
   @media (max-width: 900px) {
     body { padding: 20px 16px; }
     .whiteboard { grid-template-columns: 1fr; }
     .internal-grid { grid-template-columns: 1fr; }
     .summary-bar { grid-template-columns: repeat(2, 1fr); }
+    .buckets-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 600px) {
+    .buckets-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -417,21 +585,21 @@ skill: manual
 
 <div class="header">
   <div class="badge">Whiteboard Capture</div>
-  <h1>Marketing <span class="hl">Challenges</span> & KPIs</h1>
+  <h1>Marketing <span class="hl">Challenges</span>, Current State & KPIs</h1>
   <p>Marketing offsite brainstorm - March 2026</p>
 </div>
 
 <div class="summary-bar">
   <div class="summary-stat">
-    <div class="num">17</div>
+    <div class="num">21</div>
     <div class="lbl">Total Challenges</div>
   </div>
   <div class="summary-stat">
-    <div class="num">8</div>
+    <div class="num">7</div>
     <div class="lbl">Internal Direct</div>
   </div>
   <div class="summary-stat">
-    <div class="num">6</div>
+    <div class="num">8</div>
     <div class="lbl">Internal Indirect</div>
   </div>
   <div class="summary-stat">
@@ -459,7 +627,7 @@ skill: manual
         <span class="icon" style="background:linear-gradient(135deg,var(--red-bg),var(--orange-bg));color:var(--red);">&#9888;</span>
         Internal Challenges
       </h2>
-      <span class="count-badge" style="background:var(--red-bg);color:var(--red);">14 items</span>
+      <span class="count-badge" style="background:var(--red-bg);color:var(--red);">18 items</span>
     </div>
     <div class="board-body">
       <div class="internal-grid">
@@ -476,6 +644,8 @@ skill: manual
               <span class="sub">Marketing-created pipeline</span>
             </div>
             <div class="challenge direct">Lack of tech resources locally</div>
+            <div class="challenge direct">No integrations without a personal relationship</div>
+            <div class="challenge direct">Integration data</div>
           </div>
         </div>
         <div>
@@ -492,6 +662,8 @@ skill: manual
             <div class="challenge indirect critical">Sagi's time</div>
             <div class="challenge indirect">Pricing</div>
             <div class="challenge indirect">Messaging</div>
+            <div class="challenge indirect">Budget approval</div>
+            <div class="challenge indirect">Messaging for Agen.co for Work</div>
           </div>
         </div>
       </div>
@@ -592,6 +764,170 @@ skill: manual
         </div>
       </div>
 
+    </div>
+  </div>
+
+</div>
+
+<!-- CURRENT STATE -->
+<div class="current-state-header">
+  <h2>Current <span class="hl-yellow">State</span></h2>
+  <p>What we're doing today across 6 marketing buckets</p>
+  <div class="week-legend">
+    <span><span class="swatch default"></span>Current activity</span>
+    <span><span class="swatch active"></span>Focus this week</span>
+  </div>
+</div>
+
+<div class="buckets-grid">
+
+  <!-- SOCIAL -->
+  <div class="bucket">
+    <div class="bucket-header">
+      <h3><span class="bucket-icon">&#128225;</span> Social</h3>
+      <span class="bucket-count">12</span>
+    </div>
+    <div class="bucket-body">
+      <div class="bucket-group">
+        <div class="bucket-group-label">Corporate</div>
+        <div class="sticky">1 meme / week</div>
+        <div class="sticky">1 repost / week</div>
+        <div class="sticky">Commenting</div>
+        <div class="sticky this-week">1 video news / week</div>
+        <div class="sticky this-week">1 product video / week</div>
+        <div class="sticky this-week">Channels</div>
+      </div>
+      <div class="bucket-group">
+        <div class="bucket-group-label">Personal</div>
+        <div class="sticky">Aviad</div>
+        <div class="sticky">Ron's team</div>
+        <div class="sticky">Sagi</div>
+        <div class="sticky">Review videos</div>
+        <div class="sticky">Day-in-the-life</div>
+        <div class="sticky">Long-form post</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIGITAL -->
+  <div class="bucket">
+    <div class="bucket-header">
+      <h3><span class="bucket-icon">&#128187;</span> Digital</h3>
+      <span class="bucket-count">13</span>
+    </div>
+    <div class="bucket-body">
+      <div class="bucket-group">
+        <div class="bucket-group-label">LinkedIn Ads - Agen.co</div>
+        <div class="sticky">SaaS: 1 campaign, 10 ads, Apple TV</div>
+        <div class="sticky">Work: 2 campaigns, gift card, Apple TV, 30 ads</div>
+      </div>
+      <div class="bucket-group">
+        <div class="bucket-group-label">PPC - CIAM</div>
+        <div class="sticky">Brand</div>
+        <div class="sticky">Competitors</div>
+        <div class="sticky">Agen.co</div>
+        <div class="sticky this-week">Ambiguous keywords</div>
+      </div>
+      <div class="bucket-group">
+        <div class="bucket-group-label">Email Marketing</div>
+        <div class="sticky">Nurture</div>
+        <div class="sticky">Onboarding</div>
+        <div class="sticky">CIAM release notes</div>
+        <div class="sticky this-week">CIAM onboarding</div>
+      </div>
+      <div class="bucket-group">
+        <div class="bucket-group-label">SEO</div>
+        <div class="sticky">CIAM learning center</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPS -->
+  <div class="bucket">
+    <div class="bucket-header">
+      <h3><span class="bucket-icon">&#9881;</span> Ops</h3>
+      <span class="bucket-count">14</span>
+    </div>
+    <div class="bucket-body">
+      <div class="bucket-group">
+        <div class="bucket-group-label">Tools</div>
+        <div class="sticky">GTM Spark</div>
+        <div class="sticky">Domain work</div>
+      </div>
+      <div class="bucket-group">
+        <div class="bucket-group-label">Prospecting</div>
+        <div class="sticky">Setting sales flow</div>
+        <div class="sticky">Personalizing messaging</div>
+      </div>
+      <div class="bucket-group">
+        <div class="bucket-group-label">Pipeline</div>
+        <div class="sticky">Deals</div>
+        <div class="sticky">Associating accounts</div>
+        <div class="sticky">Demo / discovery</div>
+        <div class="sticky">Attribution</div>
+        <div class="sticky this-week">Deal stages</div>
+        <div class="sticky">Status, analyzing calls, risks</div>
+      </div>
+      <div class="bucket-group">
+        <div class="bucket-group-label">Reporting</div>
+        <div class="sticky">Insights</div>
+        <div class="sticky this-week">Dashboards</div>
+      </div>
+      <div class="bucket-group">
+        <div class="bucket-group-label">Playbooks</div>
+        <div class="sticky this-week">Sales & marketing playbooks</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PMM -->
+  <div class="bucket">
+    <div class="bucket-header">
+      <h3><span class="bucket-icon">&#128218;</span> PMM</h3>
+      <span class="bucket-count">6</span>
+    </div>
+    <div class="bucket-body">
+      <div class="bucket-group">
+        <div class="sticky this-week">Messaging</div>
+        <div class="sticky">Comp intel</div>
+        <div class="sticky this-week">Blogs</div>
+        <div class="sticky this-week">Product videos</div>
+        <div class="sticky this-week">Livestreams</div>
+        <div class="sticky this-week">Product launches</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EVENTS -->
+  <div class="bucket">
+    <div class="bucket-header">
+      <h3><span class="bucket-icon">&#127915;</span> Events</h3>
+      <span class="bucket-count">5</span>
+    </div>
+    <div class="bucket-body">
+      <div class="bucket-group">
+        <div class="sticky this-week">HumanX</div>
+        <div class="sticky">LDX</div>
+        <div class="sticky">Identiverse</div>
+        <div class="sticky this-week">Ai4</div>
+        <div class="sticky">RSA</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BRAND -->
+  <div class="bucket">
+    <div class="bucket-header">
+      <h3><span class="bucket-icon">&#10024;</span> Brand</h3>
+      <span class="bucket-count">4</span>
+    </div>
+    <div class="bucket-body">
+      <div class="bucket-group">
+        <div class="sticky">Billboard</div>
+        <div class="sticky">Podcasts</div>
+        <div class="sticky this-week">Branding</div>
+        <div class="sticky this-week">Website</div>
+      </div>
     </div>
   </div>
 
