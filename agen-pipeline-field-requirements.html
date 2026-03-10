@@ -322,6 +322,19 @@ skill: hubspot-insights
     border-radius: 4px;
   }
 
+  .fields-table .field-type {
+    font-size: 11px;
+    color: var(--text-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .fields-table .field-type .type-icon {
+    font-size: 10px;
+    opacity: 0.7;
+  }
+
   .fields-table .req-badge {
     display: inline-block;
     font-size: 10px;
@@ -372,6 +385,47 @@ skill: hubspot-insights
     font-size: 13px;
     border-bottom: 1px solid rgba(42, 42, 58, 0.4);
     vertical-align: top;
+  }
+
+  .options-toggle {
+    font-size: 11px;
+    color: var(--accent-blue);
+    cursor: pointer;
+    user-select: none;
+    margin-top: 4px;
+  }
+
+  .options-toggle:hover { text-decoration: underline; }
+
+  .options-list {
+    display: none;
+    margin-top: 6px;
+    padding: 8px 10px;
+    background: var(--surface-3);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+
+  .options-list.visible { display: block; }
+
+  .option-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 2px 0;
+    font-size: 11px;
+    border-bottom: 1px solid rgba(42, 42, 58, 0.3);
+  }
+
+  .option-row:last-child { border-bottom: none; }
+
+  .option-label { color: var(--text); font-weight: 500; }
+
+  .option-value {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 10px;
+    color: var(--accent-teal);
+    opacity: 0.8;
   }
 
   .full-table tbody tr:hover { background: var(--surface-2); }
@@ -532,10 +586,12 @@ skill: hubspot-insights
   <table class="full-table" id="full-table">
     <thead>
       <tr>
-        <th style="width:25%">Stage</th>
-        <th style="width:28%">Field Label</th>
-        <th style="width:30%">API Name</th>
-        <th style="width:17%">Required?</th>
+        <th style="width:20%">Stage</th>
+        <th style="width:22%">Field Label</th>
+        <th style="width:22%">API Name</th>
+        <th style="width:12%">Type</th>
+        <th style="width:12%">Required?</th>
+        <th style="width:12%">Options</th>
       </tr>
     </thead>
     <tbody id="table-body"></tbody>
@@ -543,124 +599,199 @@ skill: hubspot-insights
 </div>
 
 <script>
+const TYPE_ICONS = {
+  'checkbox': '&#9745;', 'booleancheckbox': '&#9745;', 'select': '&#9662;',
+  'radio': '&#9673;', 'date': '&#128197;', 'text': 'Aa', 'textarea': '&#9776;',
+  'number': '#', 'html': '&lt;/&gt;'
+};
+const TYPE_LABELS = {
+  'checkbox': 'Multi-checkbox', 'booleancheckbox': 'Checkbox (Yes/No)', 'select': 'Dropdown',
+  'radio': 'Radio select', 'date': 'Date picker', 'text': 'Text field', 'textarea': 'Text area',
+  'number': 'Number', 'html': 'Rich text'
+};
+
 const STAGES = [
   {
     name: "Stage 0: Discovery", prob: "1%", type: "open", num: "0",
     transition: "No mandatory conditional fields - all optional at this stage.",
     fields: [
-      { label: "Deal Demo Status", api: "demo_status", req: false },
-      { label: "Demo Date", api: "demo_date", req: false },
-      { label: "Next step - Deal", api: "next_step___deal", req: false }
+      { label: "Deal Demo Status", api: "demo_status", req: false, fieldType: "checkbox", options: [
+        {l:"Demo scheduled",v:"Demo scheduled"},{l:"Demo completed",v:"Demo completed"},{l:"Demo rescheduled",v:"Demo rescheduled"},{l:"Demo canceled",v:"Demo Canceled"}
+      ]},
+      { label: "Demo Date", api: "demo_date", req: false, fieldType: "date", options: [] },
+      { label: "Next step - Deal", api: "next_step___deal", req: false, fieldType: "textarea", options: [] }
     ]
   },
   {
     name: "Stage 1: Sales Accepted Lead", prob: "10%", type: "open", num: "1",
     transition: "To enter Stage 1: fill <strong>Next Confirmed Action</strong>.",
     fields: [
-      { label: "Deal Demo Status", api: "demo_status", req: false },
-      { label: "Next Confirmed Action", api: "next_confirmed_action", req: true },
-      { label: "Sub-Product Interest", api: "subproduct_interest", req: false }
+      { label: "Deal Demo Status", api: "demo_status", req: false, fieldType: "checkbox", options: [
+        {l:"Demo scheduled",v:"Demo scheduled"},{l:"Demo completed",v:"Demo completed"},{l:"Demo rescheduled",v:"Demo rescheduled"},{l:"Demo canceled",v:"Demo Canceled"}
+      ]},
+      { label: "Next Confirmed Action", api: "next_confirmed_action", req: true, fieldType: "radio", options: [
+        {l:"Deep Dive demo scheduled",v:"Deep Dive demo scheduled"},{l:"POC Scheduled",v:"POC Scheduled"},{l:"Pricing discussion",v:"Pricing discussion"},{l:"Meeting with more stakeholders",v:"Meeting with more stakeholders"},{l:"No further engagement",v:"No further engagement"},{l:"TBD",v:"TBD"}
+      ]},
+      { label: "Sub-Product Interest", api: "subproduct_interest", req: false, fieldType: "checkbox", options: [
+        {l:"Agen.co SaaS",v:"Agen.co for Saas"},{l:"Agen.co Work",v:"Agen.co for Work"},{l:"Agen.co Consumers",v:"Agen.co for Consumers"}
+      ]}
     ]
   },
   {
     name: "Stage 2: Sales Qualified Opportunity", prob: "20%", type: "open", num: "2",
     transition: "To enter Stage 2: fill <strong>Next Confirmed Action</strong> and <strong>Sub-Product Interest</strong>.",
     fields: [
-      { label: "Close date", api: "closedate", req: false },
-      { label: "Next Confirmed Action", api: "next_confirmed_action", req: true },
-      { label: "Sub-Product Interest", api: "subproduct_interest", req: true }
+      { label: "Close date", api: "closedate", req: false, fieldType: "date", options: [] },
+      { label: "Next Confirmed Action", api: "next_confirmed_action", req: true, fieldType: "radio", options: [
+        {l:"Deep Dive demo scheduled",v:"Deep Dive demo scheduled"},{l:"POC Scheduled",v:"POC Scheduled"},{l:"Pricing discussion",v:"Pricing discussion"},{l:"Meeting with more stakeholders",v:"Meeting with more stakeholders"},{l:"No further engagement",v:"No further engagement"},{l:"TBD",v:"TBD"}
+      ]},
+      { label: "Sub-Product Interest", api: "subproduct_interest", req: true, fieldType: "checkbox", options: [
+        {l:"Agen.co SaaS",v:"Agen.co for Saas"},{l:"Agen.co Work",v:"Agen.co for Work"},{l:"Agen.co Consumers",v:"Agen.co for Consumers"}
+      ]}
     ]
   },
   {
     name: "Stage 3: Tech Evaluation", prob: "30%", type: "open", num: "3",
     transition: "To enter Stage 3: fill <strong>Tech Evaluation date</strong> and <strong>Sub-Product Interest</strong>.",
     fields: [
-      { label: "Tech Evaluation date", api: "tech_evaluation_meeting_booked", req: true },
-      { label: "Close date", api: "closedate", req: false },
-      { label: "Next Confirmed Action", api: "next_confirmed_action", req: false },
-      { label: "Sub-Product Interest", api: "subproduct_interest", req: true }
+      { label: "Tech Evaluation date", api: "tech_evaluation_meeting_booked", req: true, fieldType: "date", options: [] },
+      { label: "Close date", api: "closedate", req: false, fieldType: "date", options: [] },
+      { label: "Next Confirmed Action", api: "next_confirmed_action", req: false, fieldType: "radio", options: [
+        {l:"Deep Dive demo scheduled",v:"Deep Dive demo scheduled"},{l:"POC Scheduled",v:"POC Scheduled"},{l:"Pricing discussion",v:"Pricing discussion"},{l:"Meeting with more stakeholders",v:"Meeting with more stakeholders"},{l:"No further engagement",v:"No further engagement"},{l:"TBD",v:"TBD"}
+      ]},
+      { label: "Sub-Product Interest", api: "subproduct_interest", req: true, fieldType: "checkbox", options: [
+        {l:"Agen.co SaaS",v:"Agen.co for Saas"},{l:"Agen.co Work",v:"Agen.co for Work"},{l:"Agen.co Consumers",v:"Agen.co for Consumers"}
+      ]}
     ]
   },
   {
     name: "Stage 4: Obtained Tech Accepted", prob: "40%", type: "open", num: "4",
     transition: "To enter Stage 4: fill <strong>Guided POC</strong>, <strong>Create Slack Channel</strong>, and <strong>Sub-Product Interest</strong>.",
     fields: [
-      { label: "Guided POC", api: "guided_poc", req: true },
-      { label: "Create Slack Channel", api: "create_slack_channel", req: true },
-      { label: "Amount", api: "amount", req: false },
-      { label: "Close date", api: "closedate", req: false },
-      { label: "Next Confirmed Action", api: "next_confirmed_action", req: false },
-      { label: "Sub-Product Interest", api: "subproduct_interest", req: true }
+      { label: "Guided POC", api: "guided_poc", req: true, fieldType: "select", options: [
+        {l:"In progress",v:"In progress"},{l:"Completed",v:"Completed"},{l:"Not needed",v:"Not needed"}
+      ]},
+      { label: "Create Slack Channel", api: "create_slack_channel", req: true, fieldType: "booleancheckbox", options: [
+        {l:"Yes",v:"true"},{l:"No",v:"false"}
+      ]},
+      { label: "Amount", api: "amount", req: false, fieldType: "number", options: [] },
+      { label: "Close date", api: "closedate", req: false, fieldType: "date", options: [] },
+      { label: "Next Confirmed Action", api: "next_confirmed_action", req: false, fieldType: "radio", options: [
+        {l:"Deep Dive demo scheduled",v:"Deep Dive demo scheduled"},{l:"POC Scheduled",v:"POC Scheduled"},{l:"Pricing discussion",v:"Pricing discussion"},{l:"Meeting with more stakeholders",v:"Meeting with more stakeholders"},{l:"No further engagement",v:"No further engagement"},{l:"TBD",v:"TBD"}
+      ]},
+      { label: "Sub-Product Interest", api: "subproduct_interest", req: true, fieldType: "checkbox", options: [
+        {l:"Agen.co SaaS",v:"Agen.co for Saas"},{l:"Agen.co Work",v:"Agen.co for Work"},{l:"Agen.co Consumers",v:"Agen.co for Consumers"}
+      ]}
     ]
   },
   {
     name: "Stage 5: Vendor of Choice", prob: "50%", type: "open", num: "5",
     transition: "To enter Stage 5: fill <strong>Decision Makers Identified</strong> and <strong>Sub-Product Interest</strong>.",
     fields: [
-      { label: "Guided POC", api: "guided_poc", req: false },
-      { label: "Decision Makers Identified?", api: "did_you_label_the_associated_contacts_", req: true },
-      { label: "Amount", api: "amount", req: false },
-      { label: "Close date", api: "closedate", req: false },
-      { label: "Next Confirmed Action", api: "next_confirmed_action", req: false },
-      { label: "Sub-Product Interest", api: "subproduct_interest", req: true }
+      { label: "Guided POC", api: "guided_poc", req: false, fieldType: "select", options: [
+        {l:"In progress",v:"In progress"},{l:"Completed",v:"Completed"},{l:"Not needed",v:"Not needed"}
+      ]},
+      { label: "Decision Makers Identified?", api: "did_you_label_the_associated_contacts_", req: true, fieldType: "booleancheckbox", options: [
+        {l:"Yes",v:"true"},{l:"No",v:"false"}
+      ]},
+      { label: "Amount", api: "amount", req: false, fieldType: "number", options: [] },
+      { label: "Close date", api: "closedate", req: false, fieldType: "date", options: [] },
+      { label: "Next Confirmed Action", api: "next_confirmed_action", req: false, fieldType: "radio", options: [
+        {l:"Deep Dive demo scheduled",v:"Deep Dive demo scheduled"},{l:"POC Scheduled",v:"POC Scheduled"},{l:"Pricing discussion",v:"Pricing discussion"},{l:"Meeting with more stakeholders",v:"Meeting with more stakeholders"},{l:"No further engagement",v:"No further engagement"},{l:"TBD",v:"TBD"}
+      ]},
+      { label: "Sub-Product Interest", api: "subproduct_interest", req: true, fieldType: "checkbox", options: [
+        {l:"Agen.co SaaS",v:"Agen.co for Saas"},{l:"Agen.co Work",v:"Agen.co for Work"},{l:"Agen.co Consumers",v:"Agen.co for Consumers"}
+      ]}
     ]
   },
   {
     name: "Stage 6: Proposal", prob: "70%", type: "open", num: "6",
     transition: "To enter Stage 6: fill <strong>Proposal Meeting Date</strong> and <strong>Sub-Product Interest</strong>.",
     fields: [
-      { label: "Proposal Meeting Date", api: "proposal_meeting_date", req: true },
-      { label: "Guided POC", api: "guided_poc", req: false },
-      { label: "Amount", api: "amount", req: false },
-      { label: "Next Confirmed Action", api: "next_confirmed_action", req: false },
-      { label: "Sub-Product Interest", api: "subproduct_interest", req: true }
+      { label: "Proposal Meeting Date", api: "proposal_meeting_date", req: true, fieldType: "date", options: [] },
+      { label: "Guided POC", api: "guided_poc", req: false, fieldType: "select", options: [
+        {l:"In progress",v:"In progress"},{l:"Completed",v:"Completed"},{l:"Not needed",v:"Not needed"}
+      ]},
+      { label: "Amount", api: "amount", req: false, fieldType: "number", options: [] },
+      { label: "Next Confirmed Action", api: "next_confirmed_action", req: false, fieldType: "radio", options: [
+        {l:"Deep Dive demo scheduled",v:"Deep Dive demo scheduled"},{l:"POC Scheduled",v:"POC Scheduled"},{l:"Pricing discussion",v:"Pricing discussion"},{l:"Meeting with more stakeholders",v:"Meeting with more stakeholders"},{l:"No further engagement",v:"No further engagement"},{l:"TBD",v:"TBD"}
+      ]},
+      { label: "Sub-Product Interest", api: "subproduct_interest", req: true, fieldType: "checkbox", options: [
+        {l:"Agen.co SaaS",v:"Agen.co for Saas"},{l:"Agen.co Work",v:"Agen.co for Work"},{l:"Agen.co Consumers",v:"Agen.co for Consumers"}
+      ]}
     ]
   },
   {
     name: "Stage 7: Negotiate", prob: "90%", type: "open", num: "7",
     transition: "To enter Stage 7: fill <strong>Pricing Sheet Link</strong> and <strong>Sub-Product Interest</strong>.",
     fields: [
-      { label: "Pricing Sheet Link", api: "pricing_sheet_link", req: true },
-      { label: "Contract Start Date", api: "contract_start_date", req: false },
-      { label: "Contract Term", api: "contract_term", req: false },
-      { label: "Amount", api: "amount", req: false },
-      { label: "Next Confirmed Action", api: "next_confirmed_action", req: false },
-      { label: "Sub-Product Interest", api: "subproduct_interest", req: true }
+      { label: "Pricing Sheet Link", api: "pricing_sheet_link", req: true, fieldType: "text", options: [] },
+      { label: "Contract Start Date", api: "contract_start_date", req: false, fieldType: "date", options: [] },
+      { label: "Contract Term", api: "contract_term", req: false, fieldType: "number", options: [] },
+      { label: "Amount", api: "amount", req: false, fieldType: "number", options: [] },
+      { label: "Next Confirmed Action", api: "next_confirmed_action", req: false, fieldType: "radio", options: [
+        {l:"Deep Dive demo scheduled",v:"Deep Dive demo scheduled"},{l:"POC Scheduled",v:"POC Scheduled"},{l:"Pricing discussion",v:"Pricing discussion"},{l:"Meeting with more stakeholders",v:"Meeting with more stakeholders"},{l:"No further engagement",v:"No further engagement"},{l:"TBD",v:"TBD"}
+      ]},
+      { label: "Sub-Product Interest", api: "subproduct_interest", req: true, fieldType: "checkbox", options: [
+        {l:"Agen.co SaaS",v:"Agen.co for Saas"},{l:"Agen.co Work",v:"Agen.co for Work"},{l:"Agen.co Consumers",v:"Agen.co for Consumers"}
+      ]}
     ]
   },
   {
     name: "Stage 8: Closed Won", prob: "100%", type: "won", num: "W",
     transition: "To close won: fill <strong>Term Start Date</strong>, <strong>Term end date</strong>, <strong>Close won summary</strong>, <strong>Support region</strong>, and <strong>Sub-Product Interest</strong>.",
     fields: [
-      { label: "Term Start Date", api: "effective_date", req: true },
-      { label: "Term end date", api: "term_end_date", req: true },
-      { label: "Close won summary", api: "close_won_summary", req: true },
-      { label: "Support region (Deal)", api: "support_region__deal_", req: true },
-      { label: "Deal type", api: "dealtype", req: false },
-      { label: "Sub-Product Interest", api: "subproduct_interest", req: true },
-      { label: "Was Partnership Involved?", api: "was_partnership_involved_", req: false },
-      { label: "Partner", api: "partner", req: false }
+      { label: "Term Start Date", api: "effective_date", req: true, fieldType: "date", options: [] },
+      { label: "Term end date", api: "term_end_date", req: true, fieldType: "date", options: [] },
+      { label: "Close won summary", api: "close_won_summary", req: true, fieldType: "textarea", options: [] },
+      { label: "Support region (Deal)", api: "support_region__deal_", req: true, fieldType: "select", options: [
+        {l:"US",v:"North America"},{l:"International (not US)",v:"APAC/Israel"}
+      ]},
+      { label: "Deal type", api: "dealtype", req: false, fieldType: "radio", options: [
+        {l:"New Business",v:"newbusiness"},{l:"New Business (SAP)",v:"New Business (SAP)"},{l:"New Business (Partnership)",v:"New Business (Partnership)"},{l:"upsell Business",v:"Upsale Business"},{l:"Renewal Business",v:"Renewal  Business"},{l:"Customer Success",v:"Customer Success"}
+      ]},
+      { label: "Sub-Product Interest", api: "subproduct_interest", req: true, fieldType: "checkbox", options: [
+        {l:"Agen.co SaaS",v:"Agen.co for Saas"},{l:"Agen.co Work",v:"Agen.co for Work"},{l:"Agen.co Consumers",v:"Agen.co for Consumers"}
+      ]},
+      { label: "Was Partnership Involved?", api: "was_partnership_involved_", req: false, fieldType: "booleancheckbox", options: [
+        {l:"Yes",v:"true"},{l:"No",v:"false"}
+      ]},
+      { label: "Partner", api: "partner", req: false, fieldType: "select", options: [
+        {l:"Outbound Operators",v:"Outbound Operators"},{l:"Alice Shaff",v:"Alice Shaff"},{l:"AWS",v:"AWS"},{l:"Good Code",v:"Good Code"},{l:"Global Dots",v:"Global Dots"},{l:"MalamTeam",v:"MalamTeam"},{l:"Optiv",v:"Optiv"},{l:"SharpITS",v:"SharpITS"},{l:"UniCloud",v:"UniCloud"},{l:"Other",v:"Other"}
+      ]}
     ]
   },
   {
     name: "Stage 8B: Closed Lost", prob: "0%", type: "lost", num: "L",
     transition: "To close lost: fill <strong>Closed lost reason</strong> and <strong>Closed lost details</strong>.",
     fields: [
-      { label: "Closed lost reason updated", api: "closed_won_reason", req: true },
-      { label: "Competition", api: "competition", req: false },
-      { label: "Closed lost details", api: "close_lost_details", req: true }
+      { label: "Closed lost reason updated", api: "closed_won_reason", req: true, fieldType: "checkbox", options: [
+        {l:"Budget Lost",v:"Budget Lost"},{l:"Did not meet POC Criteria",v:"Did not meet POC Criteria"},{l:"Free plan is enough",v:"Free plan is enough"},{l:"Internal solution",v:"Internal solution"},{l:"Lost to Competitor",v:"Lost to Competitor"},{l:"Missing feature",v:"Missing Feature"},{l:"No budget",v:"No budget"},{l:"Competitor - Unknown reason",v:"Competitor - Unknown reason"},{l:"Not a priority",v:"Not a priority"},{l:"Not a fit",v:"No fit"},{l:"Not responsive",v:"Not responsive"},{l:"Not a real deal",v:"Not a real deal"},{l:"Competitor - Price too high",v:"Competitor - Price too high"},{l:"Competitor - Brand",v:"Competitor - Brand"},{l:"Competitor retainment through pricing",v:"Competitor retainment through pricing"},{l:"Competitor - Pricing model",v:"Competitor - pricing model"},{l:"Competitor - Integration issues",v:"Competitor - Integration issues"},{l:"Price",v:"Price"},{l:"Price too high",v:"Price too high"},{l:"Pricing model",v:"Pricing model"},{l:"Pricing - Starter plan",v:"Pricing - Starter plan"},{l:"Product - Lack of BYODB",v:"product - lack of BYODB"},{l:"Product mismatch",v:"Product mismatch"},{l:"Product - Missing stack",v:"Product - Missing Stack"},{l:"Product - Missing SDK",v:"Product - missing SDK"},{l:"Product - Missing deployment region",v:"Product - Missing Deployment region"},{l:"Product - Too complex to migrate",v:"Product - too complex to migrate"},{l:"Project postponed",v:"Project postponed"},{l:"Other",v:"Other"}
+      ]},
+      { label: "Competition", api: "competition", req: false, fieldType: "checkbox", options: [
+        {l:"Auth0/Okta",v:"Auth0/Okta"},{l:"Auth Supabase",v:"Auth Supabase"},{l:"Auth Planetscale",v:"Auth Planetscale"},{l:"Azure",v:"Azure"},{l:"Azure B2C",v:"Azure B2C"},{l:"Azure AD",v:"Azure AD"},{l:"Auth.js",v:"Auth.js"},{l:"Clerk",v:"Clerk"},{l:"Cognito",v:"Cognito"},{l:"Descope",v:"Descope"},{l:"Firebase",v:"Firebase"},{l:"Fusionauth",v:"Fusionauth"},{l:"Keycloak",v:"Keycloak"},{l:"In house Development",v:"In house Development"},{l:"Kinde",v:"Kinde"},{l:"Ping",v:"Ping"},{l:"Okta",v:"Okta"},{l:"Redmine",v:"Redmine"},{l:"Stytch",v:"Stytch"},{l:"WorkOS",v:"WorkOS"},{l:"ORY",v:"ORY"},{l:"Supertokens",v:"Supertokens"},{l:"Stigg",v:"Stigg"},{l:"DIY",v:"DIY"},{l:"No Solution yet",v:"No Solution yet"}
+      ]},
+      { label: "Closed lost details", api: "close_lost_details", req: true, fieldType: "html", options: [] }
     ]
   },
   {
     name: "Opportunity On Hold", prob: "15%", type: "hold", num: "H",
     transition: "To put on hold: fill <strong>Deal On Hold Reason</strong>.",
     fields: [
-      { label: "Sponsor Letter", api: "sponsor_letter", req: false },
-      { label: "BANT", api: "bant", req: false },
-      { label: "Current Auth Solution", api: "current_auth_solution", req: false },
-      { label: "Use cases", api: "use_cases", req: false },
-      { label: "Amount", api: "amount", req: false },
-      { label: "Deal On Hold Reason", api: "deal_on_hold_reason", req: true }
+      { label: "Sponsor Letter", api: "sponsor_letter", req: false, fieldType: "booleancheckbox", options: [
+        {l:"Yes",v:"true"},{l:"No",v:"false"}
+      ]},
+      { label: "BANT", api: "bant", req: false, fieldType: "booleancheckbox", options: [
+        {l:"Yes",v:"true"},{l:"No",v:"false"}
+      ]},
+      { label: "Current Auth Solution", api: "current_auth_solution", req: false, fieldType: "select", options: [
+        {l:"Homegrown",v:"Homegrown"},{l:"Auth0/Okta",v:"Auth0"},{l:"Auth Supabase",v:"Auth Supabase"},{l:"Auth Planetscale",v:"Auth Planetscale"},{l:"Auth.js",v:"Auth.js"},{l:"Azure",v:"Azure"},{l:"Azure B2C",v:"Azure B2C"},{l:"Azure AD",v:"Azure AD"},{l:"Cognito",v:"Cognito"},{l:"Clerk",v:"Clerk"},{l:"Descope",v:"Descope"},{l:"Firebase",v:"Firebase"},{l:"Greenfield (New App)",v:"Greenfield (New App)"},{l:"FusionAuth",v:"FusionAuth"},{l:"Okta CIAM",v:"Okta CIAM"},{l:"Other",v:"Other"},{l:"Stytch",v:"Stych"},{l:"Super token option",v:"Super token option"},{l:"Keycloak",v:"Keycloak"},{l:"Kinde",v:"Kinde"},{l:"Ping",v:"Ping"},{l:"No Solution yet",v:"No Solution yet"},{l:"Redmine",v:"Redmine"},{l:"WorkOS",v:"WorkOS"}
+      ]},
+      { label: "Use cases", api: "use_cases", req: false, fieldType: "checkbox", options: [
+        {l:"ABAC",v:"ABAC"},{l:"Entitlements",v:"Entitlements"},{l:"Impersonation",v:"Impersonation"},{l:"MSP",v:"MSP"},{l:"Security Center",v:"Security Center"},{l:"SCIM (User Provisioning)",v:"SCIM (User Provisioning)"},{l:"Tenant level Audit Logs (Admin Portal)",v:"Tenant level Audit Logs (Admin Portal)"},{l:"Tenant Level Custom Login",v:"Tenant Level Custom Login"},{l:"Tenant Level Security Settings (Admin Portal)",v:"Tenant Level Security Settings (Admin Portal)"}
+      ]},
+      { label: "Amount", api: "amount", req: false, fieldType: "number", options: [] },
+      { label: "Deal On Hold Reason", api: "deal_on_hold_reason", req: true, fieldType: "textarea", options: [] }
     ]
   }
 ];
@@ -684,13 +815,23 @@ function renderFlow() {
 
     const countClass = reqFields.length > 0 ? 'has-req' : optFields.length > 0 ? 'all-opt' : 'none';
 
-    const fieldsHTML = stage.fields.map(f => `
+    const fieldsHTML = stage.fields.map((f, fi) => {
+      const icon = TYPE_ICONS[f.fieldType] || '?';
+      const typeLabel = TYPE_LABELS[f.fieldType] || f.fieldType;
+      const optId = `opt-flow-${i}-${fi}`;
+      const hasOpts = f.options && f.options.length > 0;
+      const optsHTML = hasOpts ? `
+        <div class="options-toggle" onclick="event.stopPropagation();document.getElementById('${optId}').classList.toggle('visible')">&#9662; ${f.options.length} options</div>
+        <div class="options-list" id="${optId}">${f.options.map(o => `<div class="option-row"><span class="option-label">${o.l}</span><span class="option-value">${o.v}</span></div>`).join('')}</div>
+      ` : '';
+      return `
       <tr>
-        <td class="field-label">${f.label}</td>
+        <td class="field-label">${f.label}${optsHTML}</td>
         <td><span class="api-name">${f.api}</span></td>
+        <td><span class="field-type"><span class="type-icon">${icon}</span> ${typeLabel}</span></td>
         <td><span class="req-badge ${f.req ? 'required' : 'optional'}">${f.req ? 'Required' : 'Optional'}</span></td>
       </tr>
-    `).join('');
+    `}).join('');
 
     const card = `
       <div class="stage-card" onclick="this.classList.toggle('expanded')">
@@ -710,7 +851,7 @@ function renderFlow() {
         <div class="stage-body">
           <div class="transition-note"><strong>Transition rule:</strong> ${stage.transition}</div>
           <table class="fields-table">
-            <thead><tr><th>Field</th><th>API Name</th><th>Status</th></tr></thead>
+            <thead><tr><th>Field</th><th>API Name</th><th>Type</th><th>Status</th></tr></thead>
             <tbody>${fieldsHTML}</tbody>
           </table>
         </div>
@@ -729,15 +870,22 @@ function renderTable() {
   const tbody = document.getElementById('table-body');
   let html = '';
 
-  STAGES.forEach(stage => {
-    html += `<tr class="stage-separator"><td colspan="4">${stage.num === 'W' ? '&#10004;' : stage.num === 'L' ? '&#10008;' : stage.num === 'H' ? '&#9208;' : '#' + stage.num} ${stage.name} (${stage.prob})</td></tr>`;
-    stage.fields.forEach(f => {
+  STAGES.forEach((stage, si) => {
+    html += `<tr class="stage-separator"><td colspan="6">${stage.num === 'W' ? '&#10004;' : stage.num === 'L' ? '&#10008;' : stage.num === 'H' ? '&#9208;' : '#' + stage.num} ${stage.name} (${stage.prob})</td></tr>`;
+    stage.fields.forEach((f, fi) => {
+      const icon = TYPE_ICONS[f.fieldType] || '?';
+      const typeLabel = TYPE_LABELS[f.fieldType] || f.fieldType;
+      const optId = `opt-tbl-${si}-${fi}`;
+      const hasOpts = f.options && f.options.length > 0;
+      const optsCell = hasOpts ? `<span class="options-toggle" onclick="document.getElementById('${optId}').classList.toggle('visible')">&#9662; ${f.options.length} values</span><div class="options-list" id="${optId}">${f.options.map(o => `<div class="option-row"><span class="option-label">${o.l}</span><span class="option-value">${o.v}</span></div>`).join('')}</div>` : '<span style="color:var(--text-dim);font-size:11px">-</span>';
       html += `
         <tr>
           <td></td>
           <td>${f.label}</td>
           <td class="api-cell">${f.api}</td>
+          <td><span class="field-type"><span class="type-icon">${icon}</span> ${typeLabel}</span></td>
           <td><span class="req-badge ${f.req ? 'required' : 'optional'}">${f.req ? 'Required' : 'Optional'}</span></td>
+          <td>${optsCell}</td>
         </tr>
       `;
     });
