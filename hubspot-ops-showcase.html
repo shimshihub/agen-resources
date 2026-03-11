@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<!-- GTM-META
+title: HubSpot Ops Showcase - AI-Powered CRM Operations
+date: 2026-03-11
+category: hubspot
+tags: hubspot, showcase, claude-code, n8n, operations, workflows, automation
+description: Showcase of HubSpot operations accomplished using Claude Code, n8n, and AI-powered workflows - from workflow naming to pipeline design
+skill: null
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HubSpot Ops Showcase - AI-Powered CRM Operations</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.7; }
+
+  .hero { padding: 60px 20px 40px; text-align: center; background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%); border-bottom: 1px solid #334155; }
+  .hero h1 { font-size: 36px; font-weight: 800; color: #f8fafc; margin-bottom: 8px; }
+  .hero h1 span { color: #f97316; }
+  .hero .subtitle { color: #94a3b8; font-size: 18px; margin-bottom: 24px; }
+  .hero .stats-row { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-top: 24px; }
+  .hero .stat { text-align: center; }
+  .hero .stat .num { font-size: 36px; font-weight: 800; color: #f97316; display: block; }
+  .hero .stat .label { font-size: 13px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
+
+  .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+
+  .intro { max-width: 800px; margin: 0 auto 48px; text-align: center; }
+  .intro p { color: #94a3b8; font-size: 16px; line-height: 1.8; }
+
+  .tools-bar { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
+  .tool-badge { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; border: 1px solid #334155; background: #1e293b; }
+  .tool-badge.hubspot { color: #f97316; border-color: rgba(249,115,22,0.3); }
+  .tool-badge.claude { color: #c084fc; border-color: rgba(192,132,252,0.3); }
+  .tool-badge.n8n { color: #f87171; border-color: rgba(248,113,113,0.3); }
+  .tool-badge.notion { color: #e2e8f0; border-color: rgba(226,232,240,0.3); }
+  .tool-badge.slack { color: #4ade80; border-color: rgba(74,222,128,0.3); }
+  .tool-badge .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .tool-badge.hubspot .dot { background: #f97316; }
+  .tool-badge.claude .dot { background: #c084fc; }
+  .tool-badge.n8n .dot { background: #f87171; }
+  .tool-badge.notion .dot { background: #e2e8f0; }
+  .tool-badge.slack .dot { background: #4ade80; }
+
+  section { margin-bottom: 56px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #334155; }
+  .section-header .icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .section-header h2 { font-size: 22px; color: #f8fafc; }
+  .section-header .count { background: rgba(249,115,22,0.15); color: #f97316; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 12px; margin-left: auto; }
+
+  .capability { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 24px; margin-bottom: 20px; border-left: 4px solid #f97316; }
+  .capability h4 { color: #f8fafc; font-size: 16px; margin-bottom: 8px; }
+  .capability .what { color: #cbd5e1; font-size: 14px; margin-bottom: 12px; line-height: 1.7; }
+  .capability .result { background: rgba(249,115,22,0.06); border-radius: 8px; padding: 12px 16px; margin-bottom: 12px; }
+  .capability .result-label { color: #f97316; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .capability .result p { color: #94a3b8; font-size: 13px; }
+  .capability .tools-used { display: flex; gap: 6px; flex-wrap: wrap; }
+  .capability .tool-tag { font-size: 11px; padding: 2px 8px; border-radius: 10px; }
+  .capability .tool-tag.hs { background: rgba(249,115,22,0.1); color: #fb923c; }
+  .capability .tool-tag.cc { background: rgba(192,132,252,0.1); color: #c084fc; }
+  .capability .tool-tag.n8 { background: rgba(248,113,113,0.1); color: #f87171; }
+  .capability .tool-tag.sl { background: rgba(74,222,128,0.1); color: #4ade80; }
+  .capability .tool-tag.nt { background: rgba(226,232,240,0.1); color: #e2e8f0; }
+  .capability .tool-tag.py { background: rgba(59,130,246,0.1); color: #60a5fa; }
+
+  .impact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .impact-card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 20px; border-left: 4px solid #f97316; }
+  .impact-card h4 { color: #f8fafc; font-size: 15px; margin-bottom: 8px; }
+  .impact-card p { color: #94a3b8; font-size: 13px; }
+  .impact-card .metric { color: #f97316; font-size: 24px; font-weight: 800; display: block; margin-bottom: 4px; }
+
+  .workflow-flow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 16px 0; padding: 16px; background: #0f172a; border-radius: 8px; border: 1px solid #334155; }
+  .flow-node { background: #1e293b; border: 1px solid #475569; border-radius: 6px; padding: 8px 14px; font-size: 13px; text-align: center; color: #e2e8f0; }
+  .flow-node.hs { border-color: #f97316; color: #fb923c; }
+  .flow-node.cc { border-color: #c084fc; color: #c084fc; }
+  .flow-node.n8 { border-color: #f87171; color: #f87171; }
+  .flow-node.sl { border-color: #4ade80; color: #4ade80; }
+  .flow-arrow { color: #475569; font-size: 16px; }
+
+  .quote { background: rgba(249,115,22,0.05); border-left: 3px solid #f97316; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+  .quote p { color: #cbd5e1; font-size: 14px; font-style: italic; }
+
+  .how-section { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 24px; margin-top: 40px; }
+  .how-section h3 { color: #f8fafc; font-size: 18px; margin-bottom: 16px; }
+  .how-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+  .how-item { text-align: center; padding: 16px; }
+  .how-item .how-icon { font-size: 28px; margin-bottom: 8px; display: block; }
+  .how-item h5 { color: #e2e8f0; font-size: 14px; margin-bottom: 4px; }
+  .how-item p { color: #64748b; font-size: 12px; }
+
+  footer { text-align: center; padding: 32px 20px; color: #475569; font-size: 13px; border-top: 1px solid #1e293b; }
+  footer span { color: #94a3b8; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>AI-Powered <span>HubSpot</span> Ops</h1>
+  <div class="subtitle">What you can do with HubSpot + Claude Code + workflow automation in 30 days</div>
+  <div class="stats-row">
+    <div class="stat"><span class="num">555</span><span class="label">Workflows Audited</span></div>
+    <div class="stat"><span class="num">182</span><span class="label">Batch Renamed</span></div>
+    <div class="stat"><span class="num">30+</span><span class="label">Custom Properties</span></div>
+    <div class="stat"><span class="num">21</span><span class="label">Reports Generated</span></div>
+    <div class="stat"><span class="num">4</span><span class="label">Automations Built</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="intro">
+    <p>This is a showcase of CRM operations capabilities - what becomes possible when you connect an AI coding assistant (Claude Code) directly to the HubSpot API, workflow automation tools (n8n), and team communication (Slack). Every item below was done programmatically, not through the HubSpot UI.</p>
+  </div>
+
+  <div class="tools-bar">
+    <span class="tool-badge hubspot"><span class="dot"></span> HubSpot API v3/v4</span>
+    <span class="tool-badge claude"><span class="dot"></span> Claude Code (CLI)</span>
+    <span class="tool-badge n8n"><span class="dot"></span> n8n Workflows</span>
+    <span class="tool-badge notion"><span class="dot"></span> Notion (Task Mgmt)</span>
+    <span class="tool-badge slack"><span class="dot"></span> Slack (Alerts)</span>
+  </div>
+
+  <!-- SECTION 1: WORKFLOW AUDIT & BATCH OPERATIONS -->
+  <section>
+    <div class="section-header">
+      <div class="icon" style="background: rgba(249,115,22,0.1);">&#9881;</div>
+      <h2>Workflow Audit & Batch Operations</h2>
+      <span class="count">555 workflows</span>
+    </div>
+
+    <div class="capability">
+      <h4>Full Workflow Inventory & Naming Audit</h4>
+      <div class="what">Pulled every workflow from the HubSpot instance via the Automation v4 API (555 total, 344 active). Analyzed each workflow's name, trigger type, and function. Identified inconsistent naming patterns across teams and proposed a 3-prefix naming convention: LFC (lifecycle), CMP (campaigns), and SYNC (property sync).</div>
+      <div class="result">
+        <div class="result-label">Result</div>
+        <p>Complete inventory of all 555 workflows with categorization report. Proposed standardized naming convention adopted by the team.</p>
+      </div>
+      <div class="tools-used">
+        <span class="tool-tag hs">HubSpot Automation v4 API</span>
+        <span class="tool-tag cc">Claude Code</span>
+        <span class="tool-tag py">Python (pagination + JSON parsing)</span>
+      </div>
+    </div>
+
+    <div class="capability">
+      <h4>Batch Rename 182 Workflows via API</h4>
+      <div class="what">After the audit, batch-renamed 182 workflows to match the new convention. Each rename required reading the full workflow object first (GET), modifying only the name field, then writing it back (PUT) - because HubSpot's v4 PUT API treats omitted fields as deletions. Backed up every workflow's revision history before making changes.</div>
+      <div class="result">
+        <div class="result-label">Result</div>
+        <p>182 workflows renamed in a single session. All workflows backed up with revision snapshots for rollback safety.</p>
+      </div>
+      <div class="tools-used">
+        <span class="tool-tag hs">HubSpot Automation v4 API</span>
+        <span class="tool-tag cc">Claude Code</span>
+        <span class="tool-tag py">Python (batch script)</span>
+      </div>
+    </div>
+
+    <div class="capability">
+      <h4>Disaster Recovery from API Incident</h4>
+      <div class="what">During the batch rename, discovered that HubSpot's v4 PUT endpoint destroys workflow actions if you send a partial payload (a behavior not clearly documented). 59 workflows lost their internal actions. Wrote a recovery script that pulled each workflow's previous revision from the revision history API and restored them.</div>
+      <div class="result">
+        <div class="result-label">Result</div>
+        <p>All 59 affected workflows fully restored from revision history. Documented the API behavior to prevent recurrence.</p>
+      </div>
+      <div class="tools-used">
+        <span class="tool-tag hs">HubSpot v4 Revisions API</span>
+        <span class="tool-tag cc">Claude Code</span>
+        <span class="tool-tag py">Python (recovery script)</span>
+      </div>
+    </div>
+
+    <div class="quote">
+      <p>Key learning: HubSpot's v4 PUT endpoint treats omitted fields as "delete." Always GET the full object first, modify only what you need, and PUT the entire object back. This was discovered in production and recovered from programmatically.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 2: PIPELINE DESIGN -->
+  <section>
+    <div class="section-header">
+      <div class="icon" style="background: rgba(59,130,246,0.1);">&#9654;</div>
+      <h2>Pipeline Architecture & Deal Stage Design</h2>
+      <span class="count">6 deliverables</span>
+    </div>
+
+    <div class="capability">
+      <h4>Pipeline Consolidation - 18 Stages to 9</h4>
+      <div class="what">Reviewed the sales team's draft pipeline (18 stages) and proposed consolidating to 9 actionable deal stages with clear ownership, entry/exit criteria, and transition rules. Created interactive visual flowcharts showing stage transitions, conditional logic, and "Closed Lost" exit points at every stage.</div>
+      <div class="result">
+        <div class="result-label">Result</div>
+        <p>Consolidated pipeline design with visual flowcharts (2 versions), entry/exit criteria documentation, and conditional property mapping for each stage.</p>
+      </div>
+      <div class="tools-used">
+        <span class="tool-tag cc">Claude Code</span>
+        <span class="tool-tag hs">HubSpot Deal Properties API</span>
+      </div>
+    </div>
+
+    <div class="capability">
+      <h4>Conditional Stage Properties - API-Ready Spec</h4>
+      <div class="what">Mapped every deal property required at each pipeline stage - which fields are required vs. optional, what values trigger stage transitions, and the exact HubSpot API property names. This makes it possible to programmatically validate deal progression and build automation around stage requirements.</div>
+      <div class="result">
+        <div class="result-label">Result</div>
+        <p>Complete property-to-stage mapping document with API names, ready for workflow automation or custom integration.</p>
+      </div>
+      <div class="tools-used">
+        <span class="tool-tag hs">HubSpot Properties API</span>
+        <span class="tool-tag cc">Claude Code</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: FORMS & LEAD ROUTING -->
+  <section>
+    <div class="section-header">
+      <div class="icon" style="background: rgba(168,85,247,0.1);">&#128221;</div>
+      <h2>Forms, Lead Routing & Attribution</h2>
+      <span class="count">5 deliverables</span>
+    </div>
+
+    <div class="workflow-flow">
+      <div class="flow-node hs">Form Submit</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-node hs">Workflow Trigger</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-node hs">Brand Detection</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-node hs">Attribution + Lists</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-node sl">Slack Alert</div>
+    </div>
+
+    <div class="capability">
+      <h4>Form-to-CRM Pipeline Mapping</h4>
+      <div class="what">Mapped the entire journey from form submission to CRM - how forms trigger workflows, which workflows handle lead routing based on form source (website, LinkedIn Lead Gen, partner forms), how leads get attributed, and where Slack alerts fire. Identified overlapping workflows and proposed a unified routing architecture.</div>
+      <div class="result">
+        <div class="result-label">Result</div>
+        <p>Master form handling flowchart, qualification form specs with API property names, and a lead routing consolidation proposal reducing workflow duplication.</p>
+      </div>
+      <div class="tools-used">
+        <span class="tool-tag hs">HubSpot Forms API</span>
+        <span class="tool-tag hs">HubSpot Workflows</span>
+        <span class="tool-tag cc">Claude Code</span>
+      </div>
+    </div>
+
+    <div class="capability">
+      <h4>Multi-Brand Lead Routing</h4>
+      <div class="what">Designed routing logic for organizations with multiple products or brands - detecting which product a lead is interested in based on page URL, form fields, and UTM parameters, then routing to the correct team with appropriate tagging and list membership.</div>
+      <div class="result">
+        <div class="result-label">Result</div>
+        <p>Brand routing flowchart with detection logic, static list assignments, and team notification rules.</p>
+      </div>
+      <div class="tools-used">
+        <span class="tool-tag hs">HubSpot Workflows</span>
+        <span class="tool-tag cc">Claude Code</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: DATA HYGIENE & PROPERTIES -->
+  <section>
+    <div class="section-header">
+      <div class="icon" style="background: rgba(34,197,94,0.1);">&#128202;</div>
+      <h2>Data Hygiene & Custom Properties</h2>
+      <span class="count">30+ properties</span>
+    </div>
+
+    <div class="impact-grid">
+      <div class="impact-card">
+        <span class="metric">53</span>
+        <h4>Property Sync Workflows</h4>
+        <p>Identified and documented workflows that keep data consistent between Contacts, Companies, and Deals (owner, region, revenue, etc.)</p>
+      </div>
+      <div class="impact-card">
+        <span class="metric">10+</span>
+        <h4>Call Analysis Properties</h4>
+        <p>Created custom properties to store AI-generated call analysis: qualification status, buyer persona, deal strength score, maturity stage</p>
+      </div>
+      <div class="impact-card">
+        <span class="metric">10+</span>
+        <h4>Product Usage Properties</h4>
+        <p>Properties that sync product usage data into CRM: account status, active users, feature adoption, last activity date</p>
+      </div>
+    </div>
+
+    <div class="capability">
+      <h4>Deal Property Audit & Cleanup</h4>
+      <div class="what">Pulled all custom deal properties via the Properties API, identified redundant and unused ones, and recommended which to keep, rename, or deprecate. Cross-referenced property usage against workflows to ensure nothing was actively used before recommending removal.</div>
+      <div class="result">
+        <div class="result-label">Result</div>
+        <p>Clean property inventory with usage analysis and standardization recommendations.</p>
+      </div>
+      <div class="tools-used">
+        <span class="tool-tag hs">HubSpot Properties API</span>
+        <span class="tool-tag cc">Claude Code</span>
+      </div>
+    </div>
+
+    <div class="capability">
+      <h4>Property Schema Migration</h4>
+      <div class="what">Migrated a churn reason property from V1 to V2 schema across all existing renewal deals. Analyzed historical data, mapped old values to new categories, and batch-updated records via the CRM API.</div>
+      <div class="result">
+        <div class="result-label">Result</div>
+        <p>All historical records migrated to the new schema with a full analysis report of churn patterns.</p>
+      </div>
+      <div class="tools-used">
+        <span class="tool-tag hs">HubSpot CRM API (batch update)</span>
+        <span class="tool-tag cc">Claude Code</span>
+        <span class="tool-tag py">Python</span>
+      </div>
+    </div>
+
+    <div class="capability">
+      <h4>Multi-Product Customer Tagging</h4>
+      <div class="what">Designed a property structure for identifying which product(s) each customer uses - including a backfill strategy for existing records. This enables reporting by product line, cross-sell identification, and accurate customer segmentation.</div>
+      <div class="result">
+        <div class="result-label">Result</div>
+        <p>Property specs, backfill script design, and multi-product customer identification plan.</p>
+      </div>
+      <div class="tools-used">
+        <span class="tool-tag hs">HubSpot Properties API</span>
+        <span class="tool-tag cc">Claude Code</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: WORKFLOW AUTOMATION (n8n) -->
+  <section>
+    <div class="section-header">
+      <div class="icon" style="background: rgba(248,113,113,0.1);">&#9889;</div>
+      <h2>Cross-Platform Automation (n8n)</h2>
+      <span class="count">4 workflows</span>
+    </div>
+
+    <p style="color: #94a3b8; margin-bottom: 20px;">Built n8n workflows that connect HubSpot to other tools - automating operations that would otherwise require manual copy-paste between systems.</p>
+
+    <div class="impact-grid">
+      <div class="impact-card" style="border-left-color: #f87171;">
+        <h4>AI-Powered Call Analysis</h4>
+        <p>Takes a sales call recording, runs it through AI analysis, and writes the results back to the HubSpot deal - qualification status, buyer persona, deal strength score (1-10), and a full summary.</p>
+        <div class="tools-used" style="margin-top: 8px;">
+          <span class="tool-tag n8">n8n</span>
+          <span class="tool-tag hs">HubSpot API</span>
+          <span class="tool-tag cc">AI Analysis</span>
+        </div>
+      </div>
+      <div class="impact-card" style="border-left-color: #f87171;">
+        <h4>AI Contact Cleanup</h4>
+        <p>Reviews contacts using AI criteria: bounced emails, no activity in 12+ months, no associated deals, likely left company. Flags them in a static list for human review - never auto-deletes.</p>
+        <div class="tools-used" style="margin-top: 8px;">
+          <span class="tool-tag n8">n8n</span>
+          <span class="tool-tag hs">HubSpot API</span>
+        </div>
+      </div>
+      <div class="impact-card" style="border-left-color: #f87171;">
+        <h4>CRM-to-Task Board Webhook</h4>
+        <p>A webhook that creates tasks in Notion's sprint board from any context - Slack, command line, or any HTTP client. Automatically assigns sprint, owner, and project based on input.</p>
+        <div class="tools-used" style="margin-top: 8px;">
+          <span class="tool-tag n8">n8n</span>
+          <span class="tool-tag nt">Notion API</span>
+        </div>
+      </div>
+      <div class="impact-card" style="border-left-color: #f87171;">
+        <h4>Daily Sprint Reminder</h4>
+        <p>Every morning at 7 AM, queries Notion for the current sprint's tasks and sends a Slack DM with today's priorities. Dynamically detects which sprint is active.</p>
+        <div class="tools-used" style="margin-top: 8px;">
+          <span class="tool-tag n8">n8n</span>
+          <span class="tool-tag sl">Slack API</span>
+          <span class="tool-tag nt">Notion API</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="workflow-flow">
+      <div class="flow-node cc">Claude Code</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-node hs">HubSpot API</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-node n8">n8n Webhook</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-node sl">Slack / Notion</div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: ONBOARDING & EMAIL -->
+  <section>
+    <div class="section-header">
+      <div class="icon" style="background: rgba(236,72,153,0.1);">&#9993;</div>
+      <h2>Email Sequence & Onboarding Audit</h2>
+      <span class="count">3 deliverables</span>
+    </div>
+
+    <div class="capability">
+      <h4>Onboarding Email Flow Mapping</h4>
+      <div class="what">Pulled all onboarding email workflows from HubSpot and mapped the entire sequence - which emails send when, what triggers them, what delays exist between steps, and where users drop off. Identified gaps in the nurture sequence and recommended additional touchpoints.</div>
+      <div class="result">
+        <div class="result-label">Result</div>
+        <p>Visual email flowchart with timing, trigger conditions, and gap analysis with recommendations.</p>
+      </div>
+      <div class="tools-used">
+        <span class="tool-tag hs">HubSpot Workflows</span>
+        <span class="tool-tag hs">HubSpot Marketing Email API</span>
+        <span class="tool-tag cc">Claude Code</span>
+      </div>
+    </div>
+
+    <div class="capability">
+      <h4>Signup-to-Onboarding Funnel Analysis</h4>
+      <div class="what">Built a visual funnel showing every step from signup to active usage, including which events are tracked, which aren't, and where data gaps exist. Cross-referenced HubSpot tracking events with product analytics to identify where the funnel breaks.</div>
+      <div class="result">
+        <div class="result-label">Result</div>
+        <p>Interactive funnel visualization with event tracking status at each step and a checklist of missing instrumentation.</p>
+      </div>
+      <div class="tools-used">
+        <span class="tool-tag hs">HubSpot Events</span>
+        <span class="tool-tag cc">Claude Code</span>
+      </div>
+    </div>
+
+    <div class="capability">
+      <h4>Email Nurture Content Review</h4>
+      <div class="what">Reviewed multiple email sequences (onboarding, nurture, re-engagement) - analyzing subject lines, send timing, content structure, and conversion paths. Provided recommendations on timing adjustments, content improvements, and A/B test opportunities.</div>
+      <div class="result">
+        <div class="result-label">Result</div>
+        <p>Comprehensive email review with timing, content, and conversion recommendations for each sequence.</p>
+      </div>
+      <div class="tools-used">
+        <span class="tool-tag hs">HubSpot Marketing Email API</span>
+        <span class="tool-tag cc">Claude Code</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7: LIVE CRM QUERIES -->
+  <section>
+    <div class="section-header">
+      <div class="icon" style="background: rgba(245,158,11,0.1);">&#128270;</div>
+      <h2>Natural Language CRM Queries</h2>
+    </div>
+
+    <p style="color: #94a3b8; margin-bottom: 20px;">Built reusable Claude Code skills (saved prompts) that query the HubSpot API on demand using natural language - like having a CRM analyst available in the terminal.</p>
+
+    <div class="impact-grid">
+      <div class="impact-card">
+        <h4>Pipeline Health Check</h4>
+        <p>Ask "how's the pipeline?" and get: deal count by stage, total value, average deal size, stale deals, deals closing this month, and deals with no close date.</p>
+      </div>
+      <div class="impact-card">
+        <h4>Deal/Contact Search</h4>
+        <p>Search deals or contacts by name, email, company, or any property. Returns formatted results with direct HubSpot links.</p>
+      </div>
+      <div class="impact-card">
+        <h4>Pipeline Meeting Prep</h4>
+        <p>Automated pre-meeting report: pulls all open deals, flags at-risk items, highlights what changed since last review, and generates a meeting-ready summary.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <div class="how-section">
+    <h3>How It Works</h3>
+    <div class="how-grid">
+      <div class="how-item">
+        <span class="how-icon">&#128187;</span>
+        <h5>Claude Code (CLI)</h5>
+        <p>AI coding assistant that reads/writes HubSpot API calls, generates reports, and builds automation</p>
+      </div>
+      <div class="how-item">
+        <span class="how-icon">&#127793;</span>
+        <h5>HubSpot API v3/v4</h5>
+        <p>Direct API access for CRM data, workflows, properties, email, and automation management</p>
+      </div>
+      <div class="how-item">
+        <span class="how-icon">&#9889;</span>
+        <h5>n8n</h5>
+        <p>Workflow automation platform connecting HubSpot to Slack, Notion, and AI services via webhooks</p>
+      </div>
+      <div class="how-item">
+        <span class="how-icon">&#128200;</span>
+        <h5>HTML Reports</h5>
+        <p>Every analysis generates an interactive HTML file - shareable, searchable, and always up to date</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Built with <span>Claude Code</span> + <span>HubSpot API</span> + <span>n8n</span> - 2026
+</footer>
+
+</body>
+</html>
