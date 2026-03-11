@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<!-- GTM-META
+title: Competitive Intelligence - Messaging & Positioning Analysis
+date: 2026-03-11
+category: analysis
+tags: competitors, messaging, positioning, market-intel, ai-agents, mcp, security, identity
+description: Homepage messaging and positioning analysis of 23 competitors across MCP infrastructure, identity, security, and agent governance categories
+skill: null
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Competitive Intelligence - Messaging & Positioning (Mar 2026)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.7; }
+
+  .hero { padding: 48px 20px 32px; text-align: center; background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%); border-bottom: 1px solid #334155; }
+  .hero h1 { font-size: 32px; font-weight: 800; color: #f8fafc; margin-bottom: 6px; }
+  .hero .subtitle { color: #94a3b8; font-size: 16px; margin-bottom: 20px; }
+  .hero .stats-row { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; }
+  .hero .stat { text-align: center; }
+  .hero .stat .num { font-size: 32px; font-weight: 800; display: block; }
+  .hero .stat .label { font-size: 12px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 20px; }
+
+  /* Category colors */
+  .cat-infra { --cat: #f97316; }
+  .cat-identity { --cat: #8b5cf6; }
+  .cat-security { --cat: #ef4444; }
+  .cat-governance { --cat: #3b82f6; }
+  .cat-devtools { --cat: #22c55e; }
+  .cat-platform { --cat: #ec4899; }
+
+  .category-section { margin-bottom: 48px; }
+  .category-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #334155; }
+  .category-header .cat-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--cat); flex-shrink: 0; }
+  .category-header h2 { font-size: 22px; color: #f8fafc; }
+  .category-header .count { background: rgba(255,255,255,0.08); color: #94a3b8; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 12px; margin-left: auto; }
+
+  .competitor { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 24px; margin-bottom: 16px; border-left: 4px solid var(--cat); }
+  .competitor-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; gap: 12px; }
+  .competitor h3 { font-size: 18px; color: #f8fafc; }
+  .competitor .url { color: #64748b; font-size: 12px; }
+  .threat-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 12px; white-space: nowrap; flex-shrink: 0; }
+  .threat-high { background: rgba(239,68,68,0.15); color: #f87171; }
+  .threat-medium { background: rgba(245,158,11,0.15); color: #fbbf24; }
+  .threat-low { background: rgba(74,222,128,0.15); color: #4ade80; }
+  .threat-watch { background: rgba(148,163,184,0.15); color: #94a3b8; }
+
+  .tagline { background: rgba(255,255,255,0.04); border-left: 3px solid var(--cat); padding: 10px 16px; margin-bottom: 14px; border-radius: 0 6px 6px 0; }
+  .tagline p { color: #cbd5e1; font-size: 14px; font-style: italic; }
+
+  .positioning { color: #94a3b8; font-size: 14px; margin-bottom: 14px; }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  @media (max-width: 700px) { .meta-grid { grid-template-columns: 1fr; } }
+  .meta-box { background: rgba(0,0,0,0.2); border-radius: 8px; padding: 12px; }
+  .meta-box h5 { color: #94a3b8; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .meta-box ul { list-style: none; padding: 0; }
+  .meta-box li { color: #cbd5e1; font-size: 13px; padding: 2px 0; padding-left: 14px; position: relative; }
+  .meta-box li::before { content: ''; position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background: var(--cat); opacity: 0.6; }
+
+  .agen-relevance { background: rgba(249,115,22,0.05); border: 1px solid rgba(249,115,22,0.15); border-radius: 8px; padding: 12px 16px; }
+  .agen-relevance h5 { color: #f97316; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .agen-relevance p { color: #94a3b8; font-size: 13px; }
+
+  /* Takeaways */
+  .takeaways { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 28px; margin-top: 40px; }
+  .takeaways h2 { font-size: 22px; color: #f8fafc; margin-bottom: 16px; }
+  .takeaway-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+  .takeaway { background: rgba(0,0,0,0.2); border-radius: 8px; padding: 16px; border-left: 3px solid #f97316; }
+  .takeaway h4 { color: #f8fafc; font-size: 14px; margin-bottom: 6px; }
+  .takeaway p { color: #94a3b8; font-size: 13px; }
+
+  /* Filter bar */
+  .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+  .filter-btn { padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; border: 1px solid #334155; background: #1e293b; color: #94a3b8; cursor: pointer; transition: all 0.2s; }
+  .filter-btn:hover, .filter-btn.active { background: rgba(249,115,22,0.1); color: #fb923c; border-color: rgba(249,115,22,0.3); }
+
+  footer { text-align: center; padding: 28px 20px; color: #475569; font-size: 13px; border-top: 1px solid #1e293b; margin-top: 40px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Competitive Messaging & Positioning</h1>
+  <div class="subtitle">Homepage analysis of 23 companies in the AI agent ecosystem - March 2026</div>
+  <div class="stats-row">
+    <div class="stat"><span class="num" style="color:#f97316;">23</span><span class="label">Companies</span></div>
+    <div class="stat"><span class="num" style="color:#8b5cf6;">6</span><span class="label">Categories</span></div>
+    <div class="stat"><span class="num" style="color:#ef4444;">5</span><span class="label">High Threat</span></div>
+    <div class="stat"><span class="num" style="color:#22c55e;">3</span><span class="label">New Entrants</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterAll()">All (23)</button>
+    <button class="filter-btn" onclick="filterCat('infra')" style="color:#f97316;">MCP Infrastructure</button>
+    <button class="filter-btn" onclick="filterCat('identity')" style="color:#8b5cf6;">Identity & Auth</button>
+    <button class="filter-btn" onclick="filterCat('security')" style="color:#ef4444;">Agent Security</button>
+    <button class="filter-btn" onclick="filterCat('governance')" style="color:#3b82f6;">Governance & Control</button>
+    <button class="filter-btn" onclick="filterCat('devtools')" style="color:#22c55e;">Dev Tools & Generation</button>
+    <button class="filter-btn" onclick="filterCat('platform')" style="color:#ec4899;">Enterprise Platforms</button>
+  </div>
+
+  <!-- ==================== MCP INFRASTRUCTURE ==================== -->
+  <div class="category-section cat-infra" data-cat="infra">
+    <div class="category-header">
+      <div class="cat-dot"></div>
+      <h2>MCP Infrastructure & Gateways</h2>
+      <span class="count">5 companies</span>
+    </div>
+
+    <!-- Kong -->
+    <div class="competitor">
+      <div class="competitor-header">
+        <div><h3>Kong</h3><span class="url">konghq.com</span></div>
+        <span class="threat-badge threat-high">High Threat</span>
+      </div>
+      <div class="tagline"><p>"Unleash AI connectivity. Fuel innovation."</p></div>
+      <div class="positioning">Unified platform for API management and AI infrastructure - build, run, discover, govern, and monetize all API and AI connectivity. Expanding from API gateway leader into AI/MCP gateway territory with Context Mesh, MCP Gateway, and MCP Registry products.</div>
+      <div class="meta-grid">
+        <div class="meta-box">
+          <h5>Target Audience</h5>
+          <ul>
+            <li>Platform teams on Kubernetes</li>
+            <li>AI teams needing governance + cost control</li>
+            <li>Executives focused on AI monetization</li>
+          </ul>
+        </div>
+        <div class="meta-box">
+          <h5>Key Messaging</h5>
+          <ul>
+            <li>"95% of AI initiatives go nowhere" - fragmentation crisis</li>
+            <li>Unified connectivity for APIs, LLMs, MCP, events</li>
+            <li>400B+ API calls daily, 700+ enterprise customers</li>
+            <li>Shadow AI breach cost: $4.63M average</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agen-relevance">
+        <h5>Agen Relevance</h5>
+        <p>Direct competitor in MCP gateway. Kong approaches from API infrastructure expanding into AI/MCP. Lacks per-tenant entitlements and customer-level tool scoping. Real threat when buyer already runs Kong and wants MCP as an API gateway feature.</p>
+      </div>
+    </div>
+
+    <!-- Prefect Horizon -->
+    <div class="competitor">
+      <div class="competitor-header">
+        <div><h3>Prefect (Horizon)</h3><span class="url">prefect.io</span></div>
+        <span class="threat-badge threat-high">High Threat</span>
+      </div>
+      <div class="tagline"><p>"The context layer your agents are missing." / "MCP gave agents a way to connect to your systems. Horizon gives you a way to control it."</p></div>
+      <div class="positioning">Enterprise platform for deploying, governing, and observing MCP servers. Built on FastMCP (claims 70% of production MCP servers). Adds governance and operations layer: Deploy, Registry, Gateway, Agents.</div>
+      <div class="meta-grid">
+        <div class="meta-box">
+          <h5>Target Audience</h5>
+          <ul>
+            <li>Engineering and platform teams</li>
+            <li>Organizations going from experimental to production MCP</li>
+          </ul>
+        </div>
+        <div class="meta-box">
+          <h5>Key Messaging</h5>
+          <ul>
+            <li>"The bottleneck isn't intelligence - it's context"</li>
+            <li>Current state is "vibe governance" - insufficient</li>
+            <li>Open-source credibility (FastMCP, 1M+ daily downloads)</li>
+            <li>OAuth 2.1, RBAC, audit logs, zero-downtime</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agen-relevance">
+        <h5>Agen Relevance</h5>
+        <p>Closest competitor in MCP governance messaging. Horizon's Gateway (RBAC, audit) and Registry overlap with Agen's core. Comes from workflow orchestration/data engineering - lacks CIAM heritage and per-tenant customer-level identity scoping.</p>
+      </div>
+    </div>
+
+    <!-- Workato -->
+    <div class="competitor">
+      <div class="competitor-header">
+        <div><h3>Workato</h3><span class="url">workato.com</span></div>
+        <span class="threat-badge threat-medium">Medium Threat</span>
+      </div>
+      <div class="tagline"><p>"Light up your AI with Workato Enterprise MCP"</p></div>
+      <div class="positioning">Enterprise iPaaS platform pivoted heavily toward MCP - build, govern, and scale MCP servers with 1,400+ pre-built app connectors providing the context layer for AI agents. Pre-built "Genies" (department-specific agents).</div>
+      <div class="meta-grid">
+        <div class="meta-box">
+          <h5>Target Audience</h5>
+          <ul>
+            <li>Enterprise ops teams (marketing, sales, HR, IT)</li>
+            <li>Organizations wanting autonomous KPI-driven agents</li>
+          </ul>
+        </div>
+        <div class="meta-box">
+          <h5>Key Messaging</h5>
+          <ul>
+            <li>Unified platform for integration + automation + AI</li>
+            <li>Enterprise governance: auth, audit, rollback</li>
+            <li>1,400+ connectors for real business actions</li>
+            <li>Gartner Magic Quadrant Leader</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agen-relevance">
+        <h5>Agen Relevance</h5>
+        <p>Workato connects agents to OTHER apps (like Composio/Zapier). Agen helps SaaS vendors expose THEIR OWN product. Different use case, but "Enterprise MCP" governance messaging could create buyer confusion.</p>
+      </div>
+    </div>
+
+    <!-- IBM ContextForge -->
+    <div class="competitor">
+      <div class="competitor-header">
+        <div><h3>IBM ContextForge</h3><span class="url">ibm.github.io/mcp-context-forge</span></div>
+        <span class="threat-badge threat-watch">Watch</span>
+      </div>
+      <div class="tagline"><p>"An open source registry and proxy that federates MCP, A2A, and REST/gRPC APIs with centralized governance, discovery, and observability."</p></div>
+      <div class="positioning">Open-source AI gateway unifying MCP servers, A2A servers, and REST/gRPC APIs behind a single endpoint with centralized management. Early beta, community-driven.</div>
+      <div class="meta-grid">
+        <div class="meta-box">
+          <h5>Target Audience</h5>
+          <ul>
+            <li>AI/ML engineers with multi-source tool ecosystems</li>
+            <li>Enterprise platform teams</li>
+            <li>DevOps managing AI infrastructure</li>
+          </ul>
+        </div>
+        <div class="meta-box">
+          <h5>Key Messaging</h5>
+          <ul>
+            <li>Unified interface for MCP + A2A + REST/gRPC</li>
+            <li>40+ plugins for extensibility</li>
+            <li>OpenTelemetry-native tracing</li>
+            <li>Open-source, community-driven</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agen-relevance">
+        <h5>Agen Relevance</h5>
+        <p>Open-source, self-hosted, developer-operated. Early beta, not production-ready. No concept of multi-tenant SaaS entitlements or customer-level scoping. Watch for IBM enterprise distribution power.</p>
+      </div>
+    </div>
+
+    <!-- Microsoft MCP Gateway -->
+    <div class="competitor">
+      <div class="competitor-header">
+        <div><h3>Microsoft (MCP Gateway)</h3><span class="url">Azure Foundry / API Management</span></div>
+        <span class="threat-badge threat-high">High Threat</span>
+      </div>
+      <div class="tagline"><p>"Govern MCP Tools by Using an AI Gateway"</p></div>
+      <div class="positioning">Not standalone - a capability within Azure Foundry routing MCP traffic through Azure API Management for governance. Authentication via Entra ID, rate limiting, IP restrictions, audit logging. Currently in preview.</div>
+      <div class="meta-grid">
+        <div class="meta-box">
+          <h5>Target Audience</h5>
+          <ul>
+            <li>Azure-native enterprises</li>
+            <li>Teams already on Azure API Management</li>
+          </ul>
+        </div>
+        <div class="meta-box">
+          <h5>Key Messaging</h5>
+          <ul>
+            <li>Secure routing through governed entry point</li>
+            <li>Entra ID integration for access control</li>
+            <li>Unified policies (throttling, IP, routing)</li>
+            <li>Public and private tool catalogs</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agen-relevance">
+        <h5>Agen Relevance</h5>
+        <p>Classic bundling threat. Azure-native enterprises may see MCP governance as "free" within existing stack. Lacks per-tenant tool scoping and agent analytics. Currently preview with notable limitations (no managed OAuth, no tool-level tracing).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== IDENTITY & AUTH ==================== -->
+  <div class="category-section cat-identity" data-cat="identity">
+    <div class="category-header">
+      <div class="cat-dot"></div>
+      <h2>Identity & Authorization</h2>
+      <span class="count">4 companies</span>
+    </div>
+
+    <!-- Okta -->
+    <div class="competitor">
+      <div class="competitor-header">
+        <div><h3>Okta</h3><span class="url">okta.com</span></div>
+        <span class="threat-badge threat-high">High Threat</span>
+      </div>
+      <div class="tagline"><p>"Okta secures AI - And every other identity, from machine to human."</p></div>
+      <div class="positioning">Identity security platform now explicitly extending to AI agent identities. Claims to unify workforce, customer, and AI agent identities into one fabric. Leading with AI agent security messaging on homepage.</div>
+      <div class="meta-grid">
+        <div class="meta-box">
+          <h5>Target Audience</h5>
+          <ul>
+            <li>Enterprise security and IT leaders</li>
+            <li>Organizations managing multi-identity environments</li>
+            <li>Fortune 100 companies</li>
+          </ul>
+        </div>
+        <div class="meta-box">
+          <h5>Key Messaging</h5>
+          <ul>
+            <li>"To get AI agent security right, get identity right"</li>
+            <li>Unified identity fabric: humans + machines + agents</li>
+            <li>End-to-end visibility with proactive remediation</li>
+            <li>480,000+ users, 1,500+ app integrations</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agen-relevance">
+        <h5>Agen Relevance</h5>
+        <p>Homepage now leads with AI agent security - confirms they see this as primary growth vector. Threat: extending existing enterprise identity footprint to "just add" agent identity. Agen differentiates with MCP lifecycle, per-tenant tool exposure, agent analytics, and Liquid UI beyond just the auth handshake.</p>
+      </div>
+    </div>
+
+    <!-- Scalekit -->
+    <div class="competitor">
+      <div class="competitor-header">
+        <div><h3>Scalekit</h3><span class="url">scalekit.com</span></div>
+        <span class="threat-badge threat-medium">Medium Threat</span>
+      </div>
+      <div class="tagline"><p>"The Auth Stack for AI applications"</p></div>
+      <div class="positioning">Modular authentication infrastructure purpose-built for AI applications. Covers SaaS apps, MCP servers, human users, AI agents, and organizations. Pick-and-choose modules - no rip-and-replace. Includes MCP Auth and Agent Auth via OAuth.</div>
+      <div class="meta-grid">
+        <div class="meta-box">
+          <h5>Target Audience</h5>
+          <ul>
+            <li>AI application developers</li>
+            <li>B2B SaaS companies</li>
+            <li>CTOs building products with human + agent auth</li>
+          </ul>
+        </div>
+        <div class="meta-box">
+          <h5>Key Messaging</h5>
+          <ul>
+            <li>No migration - add modules alongside existing auth</li>
+            <li>AI-native: MCP Auth + Agent Auth via OAuth</li>
+            <li>SOC 2, ISO 27001, GDPR/CCPA, 99.99% uptime</li>
+            <li>Under 30 minutes implementation</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agen-relevance">
+        <h5>Agen Relevance</h5>
+        <p><strong>NEW ENTRANT - should be added to competitive landscape.</strong> Directly competes in "auth for AI agents" (similar to Auth0/WorkOS positioning). Auth-only - no MCP lifecycle, per-tenant tool exposure, or analytics. But modular approach and developer-friendly pitch could attract early-stage SaaS companies.</p>
+      </div>
+    </div>
+
+    <!-- Teleport -->
+    <div class="competitor">
+      <div class="competitor-header">
+        <div><h3>Teleport</h3><span class="url">goteleport.com</span></div>
+        <span class="threat-badge threat-low">Low Threat</span>
+      </div>
+      <div class="tagline"><p>"Unified Identity Securing Classic & AI Infrastructure"</p></div>
+      <div class="positioning">Infrastructure identity platform replacing legacy access with cryptographic, zero-trust identity. Recently expanded into AI agent identity and MCP security with an "Agentic AI Framework."</div>
+      <div class="meta-grid">
+        <div class="meta-box">
+          <h5>Target Audience</h5>
+          <ul>
+            <li>DevOps / infrastructure teams</li>
+            <li>Security teams needing zero-trust access</li>
+          </ul>
+        </div>
+        <div class="meta-box">
+          <h5>Key Messaging</h5>
+          <ul>
+            <li>Unified identity spanning infra + AI systems</li>
+            <li>Cryptographic identity (no passwords/keys)</li>
+            <li>Machine and workload identity + human users</li>
+            <li>MCP security for AI-data interactions</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agen-relevance">
+        <h5>Agen Relevance</h5>
+        <p>Different layer - Teleport secures agent access to servers/databases/infrastructure. Agen secures agent access to SaaS product capabilities. Overlap only if buyer conflates infrastructure access with application-level access.</p>
+      </div>
+    </div>
+
+    <!-- Strata Identity -->
+    <div class="competitor">
+      <div class="competitor-header">
+        <div><h3>Strata Identity (Maverics)</h3><span class="url">strata.io</span></div>
+        <span class="threat-badge threat-low">Low Threat</span>
+      </div>
+      <div class="tagline"><p>"Identity software built to end fragmentation and unify access"</p></div>
+      <div class="positioning">Identity orchestration platform (Maverics) unifying auth across multiple IDPs without code changes. Recently expanded into AI agent identity governance with just-in-time provisioning and runtime enforcement.</div>
+      <div class="meta-grid">
+        <div class="meta-box">
+          <h5>Target Audience</h5>
+          <ul>
+            <li>Enterprises with multi-vendor identity environments</li>
+            <li>Security teams governing AI agent identity</li>
+          </ul>
+        </div>
+        <div class="meta-box">
+          <h5>Key Messaging</h5>
+          <ul>
+            <li>Vendor-agnostic identity orchestration</li>
+            <li>Identity orchestration for AI agents</li>
+            <li>No-code application modernization</li>
+            <li>IDP resilience with automated failover</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agen-relevance">
+        <h5>Agen Relevance</h5>
+        <p>Approaches from identity orchestration angle - helps enterprises unify fragmented identity and extend to AI agents. Could be complementary for enterprises that already use Strata for identity. Not directly competitive for SaaS vendor use case.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== AGENT SECURITY ==================== -->
+  <div class="category-section cat-security" data-cat="security">
+    <div class="category-header">
+      <div class="cat-dot"></div>
+      <h2>Agent Security</h2>
+      <span class="count">6 companies</span>
+    </div>
+
+    <!-- Noma Security -->
+    <div class="competitor">
+      <div class="competitor-header">
+        <div><h3>Noma Security</h3><span class="url">noma.security</span></div>
+        <span class="threat-badge threat-high">High Threat</span>
+      </div>
+      <div class="tagline"><p>"Secure your AI, Everywhere"</p></div>
+      <div class="positioning">Comprehensive AI security platform covering the entire AI lifecycle - discovery of AI models/agents/MCP servers, vulnerability testing, and real-time runtime protection. $132M in funding - most well-funded dedicated AI security player.</div>
+      <div class="meta-grid">
+        <div class="meta-box">
+          <h5>Target Audience</h5>
+          <ul>
+            <li>Fortune 500 enterprise security teams</li>
+            <li>Finance, life sciences, retail, technology</li>
+          </ul>
+        </div>
+        <div class="meta-box">
+          <h5>Key Messaging</h5>
+          <ul>
+            <li>AI-specific risk (prompt injection, model poisoning)</li>
+            <li>Discovery across full AI landscape including MCP servers</li>
+            <li>End-to-end lifecycle security (build, deploy, run)</li>
+            <li>$132M funding, AWS Security Hub integration</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agen-relevance">
+        <h5>Agen Relevance</h5>
+        <p>Most well-funded AI security player. Broader than just agents (covers LLMs, RAG, AI apps holistically). Purely security-focused - doesn't help SaaS vendors expose products. Concern for Guardians persona as they offer deep AI-specific security testing Agen doesn't.</p>
+      </div>
+    </div>
+
+    <!-- Zenity -->
+    <div class="competitor">
+      <div class="competitor-header">
+        <div><h3>Zenity</h3><span class="url">zenity.io</span></div>
+        <span class="threat-badge threat-medium">Medium Threat</span>
+      </div>
+      <div class="tagline"><p>"Secure AI Agents Everywhere"</p></div>
+      <div class="positioning">Enterprise AI agent security platform providing unified observability, governance, and threat protection across all agent platforms (AWS, Azure, Google, Salesforce, ServiceNow). Claims 80-90% risk reduction and 180-280% adoption increases.</div>
+      <div class="meta-grid">
+        <div class="meta-box">
+          <h5>Target Audience</h5>
+          <ul>
+            <li>CISOs and enterprise security teams</li>
+            <li>Organizations deploying agents across SaaS + cloud</li>
+          </ul>
+        </div>
+        <div class="meta-box">
+          <h5>Key Messaging</h5>
+          <ul>
+            <li>Unified control across all agent platforms</li>
+            <li>Preemptive guardrails before agents run</li>
+            <li>Intent-based detection (full execution paths)</li>
+            <li>Business enablement - "adopt with confidence"</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agen-relevance">
+        <h5>Agen Relevance</h5>
+        <p>Direct competitor in Guardians/CISO space. Zenity secures agents after they exist (security overlay). Agen enables agent access with built-in governance. Claims strong enterprise traction with quantified results.</p>
+      </div>
+    </div>
+
+    <!-- CrowdStrike -->
+    <div class="competitor">
+      <div class="competitor-header">
+        <div><h3>CrowdStrike</h3><span class="url">crowdstrike.com</span></div>
+        <span class="threat-badge threat-medium">Medium Threat</span>
+      </div>
+      <div class="tagline"><p>"The Agentic Security Platform. Unified and built to secure the AI revolution."</p></div>
+      <div class="positioning">AI-native cybersecurity platform rebranded as the "Agentic Security Platform" - protecting endpoints, cloud, identity, and SaaS through unified Falcon platform. Now explicitly covers AI and non-human identities. 6x Gartner MQ Leader.</div>
+      <div class="meta-grid">
+        <div class="meta-box">
+          <h5>Target Audience</h5>
+          <ul>
+            <li>Enterprise CISOs and security teams</li>
+            <li>Organizations managing endpoints, cloud, identity</li>
+          </ul>
+        </div>
+        <div class="meta-box">
+          <h5>Key Messaging</h5>
+          <ul>
+            <li>"Agentic Security Platform" - full rebrand</li>
+            <li>Protection across human, non-human, AI, SaaS identities</li>
+            <li>Unified platform consolidating all security</li>
+            <li>Tiered pricing from $7.99/device/month</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agen-relevance">
+        <h5>Agen Relevance</h5>
+        <p>"Agentic Security Platform" rebrand is significant - claiming broad positioning. For Agen for Work, CrowdStrike could bundle agent governance into existing Falcon agreements. Less relevant for Agen for SaaS since they don't help vendors expose products.</p>
+      </div>
+    </div>
+
+    <!-- Prompt Security -->
+    <div class="competitor">
+      <div class="competitor-header">
+        <div><h3>Prompt Security</h3><span class="url">prompt.security</span></div>
+        <span class="threat-badge threat-low">Low Threat</span>
+      </div>
+      <div class="tagline"><p>"The Platform for AI Security" / "SECURE YOUR AI. EVERYWHERE IT MATTERS."</p></div>
+      <div class="positioning">Enterprise AI security platform securing all layers - employee AI tools (shadow AI), homegrown AI apps, developer code assistants, and agentic AI systems with real-time governance. OWASP credentials and AI red teaming.</div>
+      <div class="meta-grid">
+        <div class="meta-box">
+          <h5>Target Audience</h5>
+          <ul>
+            <li>CISOs managing organizational AI risk</li>
+            <li>Enterprises with GenAI across all workloads</li>
+          </ul>
+        </div>
+        <div class="meta-box">
+          <h5>Key Messaging</h5>
+          <ul>
+            <li>Four-layer protection: employees, apps, devs, agents</li>
+            <li>Shadow AI prevention</li>
+            <li>LLM-agnostic, cloud or self-hosted</li>
+            <li>Real-time governance for agentic AI</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agen-relevance">
+        <h5>Agen Relevance</h5>
+        <p>Competes in Guardians space with DLP and AI security scanning. Broader than Agen (employee AI, code assistants) but shallower on agent-specific infrastructure. Not a threat for SaaS vendor use case.</p>
+      </div>
+    </div>
+
+    <!-- Eve Security -->
+    <div class="competitor">
+      <div class="competitor-header">
+        <div><h3>Eve Security</h3><span class="url">eve.security</span></div>
+        <span class="threat-badge threat-watch">Watch</span>
+      </div>
+      <div class="tagline"><p>"Adopt AI. Stay Secure."</p></div>
+      <div class="positioning">Agentic AI security company building solutions purpose-built for autonomous AI agents. Positions as enabler of safe AI adoption, not a blocker. Agent-specific threat models for unique vulnerabilities of autonomous agents.</div>
+      <div class="meta-grid">
+        <div class="meta-box">
+          <h5>Target Audience</h5>
+          <ul>
+            <li>Organizations deploying AI agents at scale</li>
+          </ul>
+        </div>
+        <div class="meta-box">
+          <h5>Key Messaging</h5>
+          <ul>
+            <li>AI-first security - built for agents, not retrofitted</li>
+            <li>Enabler, not blocker</li>
+            <li>Agent-specific threat models</li>
+            <li>Integration-ready within existing ecosystems</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agen-relevance">
+        <h5>Agen Relevance</h5>
+        <p>Newer entrant, broad messaging without deep specificity yet. Sits alongside Zenity, Lasso, Operant. Secures agents but doesn't help SaaS vendors expose products.</p>
+      </div>
+    </div>
+
+    <!-- Peta -->
+    <div class="competitor">
+      <div class="competitor-header">
+        <div><h3>Peta</h3><span class="url">peta.io</span></div>
+        <span class="threat-badge threat-medium">Medium Threat</span>
+      </div>
+      <div class="tagline"><p>"The Control Plane for MCP" / "1Password for AI Agents"</p></div>
+      <div class="positioning">Zero-trust MCP gateway and credential vault between AI agents and tools/APIs. Agents never see raw credentials - only scoped short-lived tokens. Human-in-the-loop approvals for high-risk actions. Three components: Core, Console, Desk.</div>
+      <div class="meta-grid">
+        <div class="meta-box">
+          <h5>Target Audience</h5>
+          <ul>
+            <li>Teams building agentic workflows (LangChain, CrewAI, n8n)</li>
+            <li>Organizations needing MCP governance + compliance</li>
+          </ul>
+        </div>
+        <div class="meta-box">
+          <h5>Key Messaging</h5>
+          <ul>
+            <li>Zero secret exposure - scoped short-lived tokens</li>
+            <li>10x faster MCP deployment (30-min setup)</li>
+            <li>Full audit trail, SIEM-ready logs</li>
+            <li>Human-in-the-loop approvals</li>
+            <li>80% of use cases with 20% of complexity</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agen-relevance">
+        <h5>Agen Relevance</h5>
+        <p><strong>NEW ENTRANT - clean competitive narrative.</strong> Narrowly focused on securing the MCP runtime layer (vault + policy + audit). Doesn't help SaaS vendors expose products. Could be complementary or competitive in "MCP governance" sub-category. "1Password for AI Agents" is a memorable positioning.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== GOVERNANCE & CONTROL ==================== -->
+  <div class="category-section cat-governance" data-cat="governance">
+    <div class="category-header">
+      <div class="cat-dot"></div>
+      <h2>Governance & Control Planes</h2>
+      <span class="count">4 companies</span>
+    </div>
+
+    <!-- Runlayer -->
+    <div class="competitor">
+      <div class="competitor-header">
+        <div><h3>Runlayer</h3><span class="url">runlayer.com</span></div>
+        <span class="threat-badge threat-medium">Medium Threat</span>
+      </div>
+      <div class="tagline"><p>"One platform to run faster, safely."</p></div>
+      <div class="positioning">Enterprise AI "Command and Control Plane" for MCPs, Skills, and Agents. Centralizes discovery, security, governance, and observability. Connects to 18,000+ MCP servers. MCP-specific threat detection (tool poisoning, shadowing, fake MCPs).</div>
+      <div class="meta-grid">
+        <div class="meta-box">
+          <h5>Target Audience</h5>
+          <ul>
+            <li>Enterprise security/IT managing AI tool sprawl</li>
+            <li>Engineering leaders enabling safe AI adoption</li>
+          </ul>
+        </div>
+        <div class="meta-box">
+          <h5>Key Messaging</h5>
+          <ul>
+            <li>Security-first: every MCP server verified</li>
+            <li>Fine-grained permissions, SSO/SCIM, SOC 2/HIPAA</li>
+            <li>18,000+ MCP servers with centralized discovery</li>
+            <li>Works with Cursor, VS Code, Claude, ChatGPT</li>
+            <li>MCP-specific threats: poisoning, shadowing, injection</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agen-relevance">
+        <h5>Agen Relevance</h5>
+        <p><strong>NEW ENTRANT - competes with Agen for Work.</strong> Enterprise MCP control plane with strong security angle. Similar to Barndoor AI's "control plane for agentic AI workforces." Heavier on MCP-specific security threats.</p>
+      </div>
+    </div>
+
+    <!-- Fiddler AI -->
+    <div class="competitor">
+      <div class="competitor-header">
+        <div><h3>Fiddler AI</h3><span class="url">fiddler.ai</span></div>
+        <span class="threat-badge threat-low">Low Threat</span>
+      </div>
+      <div class="tagline"><p>"All Enterprise Agents Need the AI Control Plane" / "Build Trust Into AI"</p></div>
+      <div class="positioning">AI observability and security platform providing visibility, guardrails, and governance for enterprise AI agents. "Fastest guardrails in the industry" via proprietary Trust Models. Monitors full execution context and decision lineage.</div>
+      <div class="meta-grid">
+        <div class="meta-box">
+          <h5>Target Audience</h5>
+          <ul>
+            <li>Enterprise AI teams (Fortune 500)</li>
+            <li>Organizations deploying agents needing governance</li>
+          </ul>
+        </div>
+        <div class="meta-box">
+          <h5>Key Messaging</h5>
+          <ul>
+            <li>Complete visibility across "agentic hierarchy"</li>
+            <li>Risk mitigation through guardrails + governance</li>
+            <li>Fastest guardrails via proprietary Trust Models</li>
+            <li>Bridge from development to production</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agen-relevance">
+        <h5>Agen Relevance</h5>
+        <p>Agent observability and governance - similar to Zenity/Operant. Monitors/secures agents after they exist. "AI Control Plane" framing overlaps with Agen for Work governance narrative. Not a threat for SaaS vendor use case.</p>
+      </div>
+    </div>
+
+    <!-- Airia -->
+    <div class="competitor">
+      <div class="competitor-header">
+        <div><h3>Airia</h3><span class="url">airia.com</span></div>
+        <span class="threat-badge threat-low">Low Threat</span>
+      </div>
+      <div class="tagline"><p>"Enterprise AI Platform for Secure & Scalable Solutions"</p></div>
+      <div class="positioning">Unified enterprise AI platform combining orchestration, security, and governance for building, deploying, and managing AI agents at scale. Both business and technical teams can design and launch agents without specialized expertise.</div>
+      <div class="meta-grid">
+        <div class="meta-box">
+          <h5>Target Audience</h5>
+          <ul>
+            <li>Enterprise organizations scaling AI adoption</li>
+            <li>Business + technical teams building agents</li>
+          </ul>
+        </div>
+        <div class="meta-box">
+          <h5>Key Messaging</h5>
+          <ul>
+            <li>Replace fragmented AI tools with one platform</li>
+            <li>Built-in security and behavior controls</li>
+            <li>Visibility, accountability, policy enforcement</li>
+            <li>Concept to production simplified</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agen-relevance">
+        <h5>Agen Relevance</h5>
+        <p>Helps enterprises BUILD and manage their own agents. Agen helps SaaS vendors EXPOSE products to external agents. Broader "orchestration + security + governance" positioning but different use case.</p>
+      </div>
+    </div>
+
+    <!-- Obot -->
+    <div class="competitor">
+      <div class="competitor-header">
+        <div><h3>Obot</h3><span class="url">obot.ai</span></div>
+        <span class="threat-badge threat-watch">Watch</span>
+      </div>
+      <div class="tagline"><p>"Obot MCP Gateway" (open-source MCP platform)</p></div>
+      <div class="positioning">Open-source platform for MCP infrastructure - hosting, discovery registry, security gateway, and built-in AI chat agent. Self-hosted for full data control. Formerly known as Otto8.</div>
+      <div class="meta-grid">
+        <div class="meta-box">
+          <h5>Target Audience</h5>
+          <ul>
+            <li>Organizations wanting self-hosted MCP</li>
+            <li>DevOps teams needing data control</li>
+          </ul>
+        </div>
+        <div class="meta-box">
+          <h5>Key Messaging</h5>
+          <ul>
+            <li>Open-source MCP platform</li>
+            <li>Self-hosted for full data control</li>
+            <li>OAuth 2.1, encryption, audit logging</li>
+            <li>Works with ChatGPT, Claude, Copilot, n8n</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agen-relevance">
+        <h5>Agen Relevance</h5>
+        <p>Open-source alternative for buyers wanting self-hosted MCP. Agen's advantage: managed platform with deeper identity integration and per-tenant scoping. More of an internal MCP management tool than an external SaaS enablement platform.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== DEV TOOLS ==================== -->
+  <div class="category-section cat-devtools" data-cat="devtools">
+    <div class="category-header">
+      <div class="cat-dot"></div>
+      <h2>Dev Tools & Generation</h2>
+      <span class="count">2 companies</span>
+    </div>
+
+    <!-- Speakeasy -->
+    <div class="competitor">
+      <div class="competitor-header">
+        <div><h3>Speakeasy</h3><span class="url">speakeasy.com</span></div>
+        <span class="threat-badge threat-low">Low Threat</span>
+      </div>
+      <div class="tagline"><p>"Vibe code the app. Engineer the platform."</p></div>
+      <div class="positioning">Platform for generating production-ready SDKs, Terraform providers, CLI tools, and MCP servers from OpenAPI specs. Shifted messaging from pure SDK generation to "engineer the platform" with managed MCP hosting.</div>
+      <div class="meta-grid">
+        <div class="meta-box">
+          <h5>Target Audience</h5>
+          <ul>
+            <li>API platform teams</li>
+            <li>Enterprises enabling AI agents with tool access</li>
+          </ul>
+        </div>
+        <div class="meta-box">
+          <h5>Key Messaging</h5>
+          <ul>
+            <li>Developer experience ("Sublime DX")</li>
+            <li>MCP server generation from OpenAPI specs</li>
+            <li>Launch SDKs and MCP servers in days</li>
+            <li>7+ language support, type-safe patterns</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agen-relevance">
+        <h5>Agen Relevance</h5>
+        <p>Generates MCP server code but leaves identity, per-tenant scoping, and operations to the buyer. Could be an upstream tool whose output feeds into Agen. Threat when buyer has strong platform engineering and wants to own their MCP code.</p>
+      </div>
+    </div>
+
+    <!-- Runloop -->
+    <div class="competitor">
+      <div class="competitor-header">
+        <div><h3>Runloop</h3><span class="url">runloop.ai</span></div>
+        <span class="threat-badge threat-watch">Watch</span>
+      </div>
+      <div class="tagline"><p>"Your AI Agent Accelerator"</p></div>
+      <div class="positioning">Cloud infrastructure providing secure sandbox environments ("Devboxes") for AI coding agents to build, test, and deploy code. Managed developer laptops for AI agents with 2x faster vCPUs and 100ms execution.</div>
+      <div class="meta-grid">
+        <div class="meta-box">
+          <h5>Target Audience</h5>
+          <ul>
+            <li>AI-first dev teams building coding agents</li>
+            <li>Startups developing AI developer tools</li>
+          </ul>
+        </div>
+        <div class="meta-box">
+          <h5>Key Messaging</h5>
+          <ul>
+            <li>Secure sandbox infrastructure, SOC2/HIPAA/GDPR</li>
+            <li>10,000+ parallel sandboxes</li>
+            <li>Purpose-built for long-running stateful workflows</li>
+            <li>Benchmarking and evaluation tools</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agen-relevance">
+        <h5>Agen Relevance</h5>
+        <p>Minimal direct overlap. Infrastructure for running coding agents, not for exposing SaaS products. Could be complementary - Agen governs what agents access, Runloop provides where agents execute.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== ENTERPRISE PLATFORMS ==================== -->
+  <div class="category-section cat-platform" data-cat="platform">
+    <div class="category-header">
+      <div class="cat-dot"></div>
+      <h2>Enterprise Platforms & SaaS Discovery</h2>
+      <span class="count">2 companies</span>
+    </div>
+
+    <!-- Glean -->
+    <div class="competitor">
+      <div class="competitor-header">
+        <div><h3>Glean</h3><span class="url">glean.com</span></div>
+        <span class="threat-badge threat-watch">Watch</span>
+      </div>
+      <div class="tagline"><p>"Work AI that works for all"</p></div>
+      <div class="positioning">Enterprise AI platform combining search, AI assistant, and agents - all grounded in company knowledge across 100+ connected apps. Claims 110 hours saved per user annually and 93% adoption rates.</div>
+      <div class="meta-grid">
+        <div class="meta-box">
+          <h5>Target Audience</h5>
+          <ul>
+            <li>Entire enterprise workforce</li>
+            <li>CIOs/IT looking for broad AI productivity</li>
+          </ul>
+        </div>
+        <div class="meta-box">
+          <h5>Key Messaging</h5>
+          <ul>
+            <li>Context-driven intelligence from company data</li>
+            <li>Work where you already are (Slack, Teams, etc.)</li>
+            <li>Measurable ROI: 110hrs/user/year, 6-month payback</li>
+            <li>"Glean Protect" - permissions enforcement for AI</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agen-relevance">
+        <h5>Agen Relevance</h5>
+        <p>Limited direct overlap. Enterprise knowledge/productivity platform, not infrastructure for SaaS vendors. "Glean Protect" touches the "Agen for Work" governance narrative. Represents what enterprises are adopting internally - the kind of usage Guardians need to govern.</p>
+      </div>
+    </div>
+
+    <!-- Nudge Security -->
+    <div class="competitor">
+      <div class="competitor-header">
+        <div><h3>Nudge Security</h3><span class="url">nudgesecurity.com</span></div>
+        <span class="threat-badge threat-low">Low Threat</span>
+      </div>
+      <div class="tagline"><p>"Secure and govern every SaaS & AI app."</p></div>
+      <div class="positioning">SaaS and AI security platform discovering shadow IT and unauthorized apps. Deploys in 5 minutes, discovers all SaaS apps on day one. Human-centric with "just-in-time guardrails" (nudges, not blocks).</div>
+      <div class="meta-grid">
+        <div class="meta-box">
+          <h5>Target Audience</h5>
+          <ul>
+            <li>Security teams managing SaaS attack surface</li>
+            <li>IT overseeing app sprawl</li>
+          </ul>
+        </div>
+        <div class="meta-box">
+          <h5>Key Messaging</h5>
+          <ul>
+            <li>Deploy in 5 minutes, discover all SaaS</li>
+            <li>Complete visibility into historical SaaS inventory</li>
+            <li>Human-centric "nudges, not blocks"</li>
+            <li>Cost reduction via SaaS spend optimization</li>
+          </ul>
+        </div>
+      </div>
+      <div class="agen-relevance">
+        <h5>Agen Relevance</h5>
+        <p>Adjacent, not competitive. Discovers shadow SaaS/AI adoption but doesn't govern agent-to-app connections. Could be a precursor tool that identifies the problem Agen solves.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== KEY TAKEAWAYS ==================== -->
+  <div class="takeaways">
+    <h2>Key Takeaways</h2>
+    <div class="takeaway-grid">
+      <div class="takeaway">
+        <h4>The "Agentic" Land Grab</h4>
+        <p>CrowdStrike rebranded to "Agentic Security Platform," Okta leads homepage with AI agent identity, Workato pivoted to "Enterprise MCP," Prefect launched Horizon. Every major platform is rushing to claim a piece of the agent stack.</p>
+      </div>
+      <div class="takeaway">
+        <h4>3 New Entrants to Track</h4>
+        <p><strong>Scalekit</strong> ("Auth Stack for AI") - add to Identity & Auth. <strong>Runlayer</strong> (MCP Control Plane) - competes with Agen for Work. <strong>Peta</strong> ("1Password for AI Agents") - clean MCP governance narrative.</p>
+      </div>
+      <div class="takeaway">
+        <h4>Nobody Owns the SaaS Vendor Use Case</h4>
+        <p>None of these 23 companies specifically help SaaS vendors expose their own product to external agents with per-tenant, customer-level identity and entitlements. Security players govern agents that exist. Gateway players route MCP traffic. Agen sits uniquely at enablement + governance + identity.</p>
+      </div>
+      <div class="takeaway">
+        <h4>Bundling Threats Are Real</h4>
+        <p>Microsoft (Azure APIM), CrowdStrike (Falcon), and Okta (Entra) can all bundle basic MCP governance into existing enterprise agreements. "Free" is hard to compete with even when the functionality is thinner.</p>
+      </div>
+      <div class="takeaway">
+        <h4>Market Clustering Into Lanes</h4>
+        <p><strong>Security overlays:</strong> Zenity, Noma, Prompt, Eve, Fiddler. <strong>MCP gateways:</strong> Kong, Prefect, IBM, Microsoft, Workato. <strong>Identity:</strong> Okta, Scalekit, Teleport, Strata. <strong>Control planes:</strong> Runlayer, Airia, Obot, Peta.</p>
+      </div>
+      <div class="takeaway">
+        <h4>Messaging Convergence</h4>
+        <p>Multiple companies use nearly identical taglines: "Secure AI Everywhere" (Zenity, Noma, Prompt), "Control Plane for AI/MCP" (Fiddler, Peta, Runlayer). Differentiation is becoming harder to communicate. Agen's identity-aware, per-tenant SaaS exposure story remains distinct.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Competitive Intelligence - March 2026 - Generated with Claude Code
+</footer>
+
+<script>
+function filterAll() {
+  document.querySelectorAll('.category-section').forEach(s => s.style.display = '');
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.filter-btn').classList.add('active');
+}
+function filterCat(cat) {
+  document.querySelectorAll('.category-section').forEach(s => {
+    s.style.display = s.dataset.cat === cat ? '' : 'none';
+  });
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>
