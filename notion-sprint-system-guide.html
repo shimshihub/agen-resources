@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<!-- GTM-META
+title: Notion Sprint System - Setup Guide
+date: 2026-03-11
+category: reference
+tags: notion, sprints, project-management, setup-guide, task-management
+description: Non-technical guide for building a sprint-based task management system in Notion - databases, views, and workflow
+skill: null
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notion Sprint System - Setup Guide</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.7; padding: 40px 20px; }
+  .container { max-width: 900px; margin: 0 auto; }
+
+  header { text-align: center; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid #334155; }
+  header h1 { font-size: 32px; font-weight: 700; color: #f8fafc; margin-bottom: 8px; }
+  header .subtitle { color: #94a3b8; font-size: 16px; }
+
+  .toc { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 24px 32px; margin-bottom: 40px; }
+  .toc h3 { color: #60a5fa; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+  .toc ol { padding-left: 20px; }
+  .toc li { margin-bottom: 6px; }
+  .toc a { color: #93c5fd; text-decoration: none; font-size: 15px; }
+  .toc a:hover { text-decoration: underline; }
+
+  section { margin-bottom: 48px; }
+  h2 { font-size: 24px; color: #f8fafc; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #334155; display: flex; align-items: center; gap: 10px; }
+  h2 .num { background: #3b82f6; color: white; width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; flex-shrink: 0; }
+  h3 { font-size: 18px; color: #93c5fd; margin: 20px 0 10px; }
+  h4 { font-size: 15px; color: #fbbf24; margin: 16px 0 8px; }
+
+  p { margin-bottom: 14px; color: #cbd5e1; }
+
+  .card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+  .card.highlight { border-left: 4px solid #3b82f6; }
+  .card.warning { border-left: 4px solid #f59e0b; }
+  .card.success { border-left: 4px solid #22c55e; }
+
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  th { background: #1e293b; color: #93c5fd; text-align: left; padding: 10px 14px; border: 1px solid #334155; font-weight: 600; }
+  td { padding: 10px 14px; border: 1px solid #334155; color: #cbd5e1; }
+  tr:hover td { background: rgba(59, 130, 246, 0.05); }
+
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+  .badge.blue { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+  .badge.purple { background: rgba(168, 85, 247, 0.15); color: #c084fc; }
+  .badge.brown { background: rgba(180, 120, 60, 0.15); color: #d4a574; }
+  .badge.gray { background: rgba(148, 163, 184, 0.15); color: #94a3b8; }
+  .badge.green { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
+  .badge.amber { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+  .badge.red { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+
+  .flow { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 16px 0; }
+  .flow-step { background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 10px 16px; font-size: 14px; text-align: center; min-width: 120px; }
+  .flow-arrow { color: #475569; font-size: 20px; }
+
+  .diagram { background: #0f172a; border: 1px solid #334155; border-radius: 12px; padding: 24px; margin: 16px 0; }
+  .db-box { background: #1e293b; border: 2px solid #3b82f6; border-radius: 10px; padding: 16px; margin: 12px 0; }
+  .db-box h4 { color: #60a5fa; margin-top: 0; }
+  .relation-line { color: #475569; text-align: center; font-size: 14px; padding: 4px 0; }
+
+  ul, ol { padding-left: 24px; margin-bottom: 14px; }
+  li { margin-bottom: 6px; color: #cbd5e1; }
+  li strong { color: #e2e8f0; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  .tip { background: rgba(34, 197, 94, 0.08); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 8px; padding: 14px 18px; margin: 14px 0; font-size: 14px; }
+  .tip::before { content: 'Tip: '; color: #4ade80; font-weight: 600; }
+
+  .warning-box { background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 8px; padding: 14px 18px; margin: 14px 0; font-size: 14px; }
+  .warning-box::before { content: 'Important: '; color: #fbbf24; font-weight: 600; }
+
+  .concept { background: rgba(59, 130, 246, 0.06); border: 1px solid rgba(59, 130, 246, 0.15); border-radius: 8px; padding: 14px 18px; margin: 14px 0; font-size: 14px; }
+  .concept::before { content: 'What is this? '; color: #60a5fa; font-weight: 600; }
+
+  footer { text-align: center; color: #475569; font-size: 13px; margin-top: 48px; padding-top: 24px; border-top: 1px solid #1e293b; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>Notion Sprint System</h1>
+  <div class="subtitle">A simple framework for organizing team work into focused 2-week cycles</div>
+</header>
+
+<nav class="toc">
+  <h3>What's Inside</h3>
+  <ol>
+    <li><a href="#concept">What Is a Sprint System?</a></li>
+    <li><a href="#databases">The 3 Databases You Need</a></li>
+    <li><a href="#task-anatomy">Anatomy of a Task</a></li>
+    <li><a href="#sprint-lifecycle">How Sprints Work (The Rotation)</a></li>
+    <li><a href="#daily-workflow">Day-to-Day Workflow</a></li>
+    <li><a href="#views">Views to Set Up</a></li>
+    <li><a href="#setup">Setup Checklist (30 min)</a></li>
+  </ol>
+</nav>
+
+<!-- 1. CONCEPT -->
+<section id="concept">
+  <h2><span class="num">1</span> What Is a Sprint System?</h2>
+
+  <p>A sprint is a fixed time period (we use 2 weeks) where you commit to a set of tasks. Instead of an endless to-do list, you work in focused cycles:</p>
+
+  <div class="card highlight">
+    <ul>
+      <li><strong>Every 2 weeks, you start a new sprint</strong> - Pick the most important tasks and commit to them</li>
+      <li><strong>During the sprint, you focus</strong> - Work through your tasks, move them from Backlog to In Progress to Done</li>
+      <li><strong>At the end, you rotate</strong> - Review what got done, carry over what didn't, and plan the next cycle</li>
+    </ul>
+  </div>
+
+  <p>The system is built entirely in Notion using 3 linked databases. No extra tools needed - just Notion.</p>
+
+  <h3>Why This Works</h3>
+  <div class="grid-2">
+    <div class="card">
+      <h4>Without Sprints</h4>
+      <ul style="font-size: 14px;">
+        <li>Never-ending task list that keeps growing</li>
+        <li>Hard to know what to focus on today</li>
+        <li>No sense of progress or completion</li>
+        <li>Tasks pile up without accountability</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left: 4px solid #22c55e;">
+      <h4>With Sprints</h4>
+      <ul style="font-size: 14px;">
+        <li>Clear set of tasks for this 2-week cycle</li>
+        <li>Visual board shows exactly what's in progress</li>
+        <li>Regular "done" moments every 2 weeks</li>
+        <li>Forced prioritization - can't do everything at once</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 2. DATABASES -->
+<section id="databases">
+  <h2><span class="num">2</span> The 3 Databases You Need</h2>
+
+  <p>The system uses 3 Notion databases that link to each other. Think of them as 3 spreadsheets that talk to each other.</p>
+
+  <div class="card">
+    <h4>How They Connect</h4>
+    <div class="flow">
+      <div class="flow-step" style="border-color: #3b82f6; border-width: 2px;">Sprints</div>
+      <div class="flow-arrow">&larr; linked to &rarr;</div>
+      <div class="flow-step" style="border-color: #22c55e; border-width: 2px;">Tasks</div>
+      <div class="flow-arrow">&larr; linked to &rarr;</div>
+      <div class="flow-step" style="border-color: #a855f7; border-width: 2px;">Projects</div>
+    </div>
+    <p style="font-size: 14px; color: #94a3b8; margin-top: 8px;">Tasks is the main database you use daily. Sprints and Projects are smaller supporting databases.</p>
+  </div>
+
+  <!-- Sprints DB -->
+  <div class="db-box">
+    <h4>Database 1: Sprints</h4>
+    <p style="font-size: 14px; color: #94a3b8;">Each row is one sprint. Very simple - just a name and a status.</p>
+    <table>
+      <tr><th>Column</th><th>Type in Notion</th><th>Example</th></tr>
+      <tr><td><strong>Sprint name</strong></td><td>Title</td><td>"Sprint 7"</td></tr>
+      <tr><td><strong>Sprint status</strong></td><td>Status</td><td>Current / Next / Last / Past</td></tr>
+    </table>
+
+    <h4>The 4 Sprint Statuses</h4>
+    <table>
+      <tr><th>Status</th><th>Meaning</th></tr>
+      <tr><td><span class="badge blue">Current</span></td><td>The sprint your team is working on right now</td></tr>
+      <tr><td><span class="badge purple">Next</span></td><td>The upcoming sprint - use this to plan ahead</td></tr>
+      <tr><td><span class="badge brown">Last</span></td><td>The sprint that just ended - kept for quick reference</td></tr>
+      <tr><td><span class="badge gray">Past</span></td><td>All older sprints - archived but still accessible</td></tr>
+    </table>
+
+    <div class="tip">At any time, you should have exactly one <span class="badge blue">Current</span> sprint and one <span class="badge purple">Next</span> sprint. Everything else is either <span class="badge brown">Last</span> (one) or <span class="badge gray">Past</span> (many).</div>
+  </div>
+
+  <div class="relation-line">&darr; linked via a Relation column &darr;</div>
+
+  <!-- Tasks DB -->
+  <div class="db-box" style="border-color: #22c55e;">
+    <h4>Database 2: Tasks (Your Main Database)</h4>
+    <p style="font-size: 14px; color: #94a3b8;">This is where all the actual work lives. Each row is one task. You'll interact with this database every day.</p>
+    <table>
+      <tr><th>Column</th><th>Type in Notion</th><th>What It Does</th></tr>
+      <tr><td><strong>Task name</strong></td><td>Title</td><td>What needs to be done</td></tr>
+      <tr><td><strong>Status</strong></td><td>Status</td><td>Where the task is in the workflow</td></tr>
+      <tr><td><strong>Priority</strong></td><td>Select</td><td>How urgent/important it is</td></tr>
+      <tr><td><strong>Sprint</strong></td><td>Relation (to Sprints)</td><td>Which sprint this task belongs to</td></tr>
+      <tr><td><strong>Project</strong></td><td>Relation (to Projects)</td><td>Which larger initiative this supports (optional)</td></tr>
+      <tr><td><strong>Assignee</strong></td><td>People</td><td>Who's responsible for this task</td></tr>
+    </table>
+  </div>
+
+  <div class="relation-line">&darr; linked via a Relation column &darr;</div>
+
+  <!-- Projects DB -->
+  <div class="db-box" style="border-color: #a855f7;">
+    <h4>Database 3: Projects (Optional but Recommended)</h4>
+    <p style="font-size: 14px; color: #94a3b8;">Projects are bigger initiatives that span multiple sprints. For example, "Website Redesign" might have tasks across Sprint 3, 4, and 5.</p>
+    <table>
+      <tr><th>Column</th><th>Type in Notion</th><th>Example</th></tr>
+      <tr><td><strong>Project name</strong></td><td>Title</td><td>"HubSpot Ops", "Website Redesign", "Q1 Campaign"</td></tr>
+    </table>
+    <p style="font-size: 14px; color: #94a3b8;">Start simple with just the name. You can always add more columns later (owner, deadline, description, etc.).</p>
+  </div>
+
+  <div class="concept">A <strong>Relation</strong> in Notion is how you connect databases together. When you add a "Sprint" Relation column to your Tasks database, each task gets a dropdown that lets you pick which sprint it belongs to. This is the magic that makes filtering and views work.</div>
+</section>
+
+<!-- 3. TASK ANATOMY -->
+<section id="task-anatomy">
+  <h2><span class="num">3</span> Anatomy of a Task</h2>
+
+  <p>Every task has 4 key properties that define it. Here's how to think about each one:</p>
+
+  <h3>Task Status - The Workflow</h3>
+  <p>A task moves through these stages from left to right:</p>
+
+  <div class="diagram">
+    <div class="flow" style="justify-content: center;">
+      <div class="flow-step" style="border-color: #94a3b8;"><span class="badge gray">Backlog</span></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step" style="border-color: #60a5fa;"><span class="badge blue">In Progress</span></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step" style="border-color: #4ade80;"><span class="badge green">Done</span></div>
+    </div>
+    <div class="flow" style="justify-content: center; margin-top: 12px;">
+      <div class="flow-step" style="border-color: #fbbf24; font-size: 13px;"><span class="badge amber">Pending</span><br><span style="font-size: 11px; color: #94a3b8;">waiting on someone</span></div>
+      <div class="flow-step" style="border-color: #f87171; font-size: 13px;"><span class="badge red">Blocked</span><br><span style="font-size: 11px; color: #94a3b8;">can't proceed</span></div>
+    </div>
+  </div>
+
+  <table>
+    <tr><th>Status</th><th>When to Use</th><th>Example</th></tr>
+    <tr><td><span class="badge gray">Backlog</span></td><td>Task is planned for this sprint but hasn't started yet</td><td>Task was just created or planned for this cycle</td></tr>
+    <tr><td><span class="badge blue">In Progress</span></td><td>Someone is actively working on it right now</td><td>"I'm writing this email today"</td></tr>
+    <tr><td><span class="badge amber">Pending</span></td><td>You did your part, waiting on someone else</td><td>"Sent to legal for review, waiting for approval"</td></tr>
+    <tr><td><span class="badge red">Blocked</span></td><td>Can't move forward due to a dependency or issue</td><td>"Need access credentials from IT before I can continue"</td></tr>
+    <tr><td><span class="badge green">Done</span></td><td>Task is complete</td><td>"Email campaign is live"</td></tr>
+  </table>
+
+  <div class="warning-box">When creating this in Notion, use the <strong>Status</strong> property type (not Select). The Status type has built-in grouping that powers the Kanban board view. You'll assign each status to a group: "Not started" (Backlog), "In progress" (In Progress, Pending, Blocked), or "Complete" (Done).</div>
+
+  <h3>Priority Levels</h3>
+  <table>
+    <tr><th>Priority</th><th>Meaning</th><th>When to Use</th></tr>
+    <tr><td><span class="badge red">High</span></td><td>Must get done this sprint</td><td>Deadline-driven, blocking others, or high business impact</td></tr>
+    <tr><td><span class="badge amber">Medium</span></td><td>Should get done this sprint</td><td>Important but won't cause immediate problems if delayed</td></tr>
+    <tr><td><span class="badge gray">Low</span></td><td>Nice to have</td><td>Do it if there's time, otherwise it moves to next sprint</td></tr>
+  </table>
+
+  <h3>Sprint Assignment</h3>
+  <p>Every task should be assigned to a sprint. This is what separates a sprint system from a regular to-do list:</p>
+  <ul>
+    <li><strong>Current sprint tasks</strong> - What you're working on right now</li>
+    <li><strong>Next sprint tasks</strong> - What you're planning for the next cycle (use this for ideas and upcoming work)</li>
+    <li>If a task doesn't have a sprint, it's essentially floating - try to avoid this</li>
+  </ul>
+
+  <h3>Assignee</h3>
+  <p>Every task should have an owner. Even if multiple people contribute, one person should be responsible for making sure it gets done. Use the Notion People property to tag team members.</p>
+</section>
+
+<!-- 4. SPRINT LIFECYCLE -->
+<section id="sprint-lifecycle">
+  <h2><span class="num">4</span> How Sprints Work (The Rotation)</h2>
+
+  <p>Every 2 weeks (or whatever cadence you choose), you "rotate" your sprints. This is the heartbeat of the system.</p>
+
+  <h3>The Rotation - Visual</h3>
+
+  <div class="diagram">
+    <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;">
+      <div style="text-align: center;">
+        <div style="font-size: 12px; color: #94a3b8; margin-bottom: 8px;">BEFORE ROTATION</div>
+        <div class="flow" style="flex-direction: column; gap: 8px;">
+          <div class="flow-step" style="border-color: #94a3b8;"><span class="badge gray">Past</span> Sprint 5</div>
+          <div class="flow-step" style="border-color: #d4a574;"><span class="badge brown">Last</span> Sprint 6</div>
+          <div class="flow-step" style="border-color: #60a5fa;"><span class="badge blue">Current</span> Sprint 7</div>
+          <div class="flow-step" style="border-color: #c084fc;"><span class="badge purple">Next</span> Sprint 8</div>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; color: #475569; font-size: 32px; padding: 0 20px;">&#10132;</div>
+      <div style="text-align: center;">
+        <div style="font-size: 12px; color: #94a3b8; margin-bottom: 8px;">AFTER ROTATION</div>
+        <div class="flow" style="flex-direction: column; gap: 8px;">
+          <div class="flow-step" style="border-color: #94a3b8;"><span class="badge gray">Past</span> Sprint 5, 6</div>
+          <div class="flow-step" style="border-color: #d4a574;"><span class="badge brown">Last</span> Sprint 7</div>
+          <div class="flow-step" style="border-color: #60a5fa;"><span class="badge blue">Current</span> Sprint 8</div>
+          <div class="flow-step" style="border-color: #c084fc;"><span class="badge purple">Next</span> Sprint 9 (new!)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Rotation Steps (takes ~2 minutes)</h3>
+
+  <div class="card highlight">
+    <p>Open your Sprints database and change these status dropdowns:</p>
+    <ol>
+      <li><strong>The "Last" sprint</strong> - Change its status from <span class="badge brown">Last</span> to <span class="badge gray">Past</span></li>
+      <li><strong>The "Current" sprint</strong> - Change its status from <span class="badge blue">Current</span> to <span class="badge brown">Last</span></li>
+      <li><strong>The "Next" sprint</strong> - Change its status from <span class="badge purple">Next</span> to <span class="badge blue">Current</span></li>
+      <li><strong>Create a new row</strong> - Add a new sprint (e.g., "Sprint 9") and set it to <span class="badge purple">Next</span></li>
+    </ol>
+  </div>
+
+  <h3>What to Do with Unfinished Tasks</h3>
+
+  <div class="card warning">
+    <p>At the start of each new sprint, quickly review tasks that didn't get completed. For each one, decide:</p>
+    <ul>
+      <li><strong>Still important?</strong> Change the task's Sprint from the old sprint to the new Current sprint</li>
+      <li><strong>Can wait?</strong> Move it to the Next sprint</li>
+      <li><strong>No longer relevant?</strong> Mark it as Done or just leave it in the old sprint</li>
+    </ul>
+    <p style="font-size: 14px; color: #94a3b8; margin-top: 8px;">This review takes about 5 minutes and keeps your board clean. Don't overthink it.</p>
+  </div>
+
+  <h3>Sprint Planning</h3>
+  <div class="card">
+    <p>Throughout the current sprint, add tasks to the <span class="badge purple">Next</span> sprint as ideas come up. Then, when you rotate:</p>
+    <ol>
+      <li>Look at what's in the new Current sprint's Backlog</li>
+      <li>Prioritize - set High/Medium/Low on each task</li>
+      <li>Assign owners to unassigned tasks</li>
+      <li>Check if the workload is realistic for 2 weeks - if there's too much, move lower-priority items to Next</li>
+    </ol>
+  </div>
+</section>
+
+<!-- 5. DAILY WORKFLOW -->
+<section id="daily-workflow">
+  <h2><span class="num">5</span> Day-to-Day Workflow</h2>
+
+  <p>Here's how to actually use the system on a daily basis:</p>
+
+  <div class="card">
+    <h4>Morning (2 min)</h4>
+    <ol>
+      <li>Open your Tasks database - it should default to the Current Sprint Board view</li>
+      <li>Look at what's <span class="badge blue">In Progress</span> - is this still what you're working on?</li>
+      <li>If you finished something, drag it to <span class="badge green">Done</span></li>
+      <li>If you're starting something new, drag it from <span class="badge gray">Backlog</span> to <span class="badge blue">In Progress</span></li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h4>During the Day</h4>
+    <ul>
+      <li><strong>New task comes up?</strong> Add it to the Tasks database, assign it to the current (or next) sprint</li>
+      <li><strong>Stuck on something?</strong> Move the task to <span class="badge red">Blocked</span> and note why in the task page</li>
+      <li><strong>Waiting on someone?</strong> Move to <span class="badge amber">Pending</span></li>
+      <li><strong>Finished a task?</strong> Drag to <span class="badge green">Done</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h4>End of Sprint (every 2 weeks, ~15 min)</h4>
+    <ol>
+      <li>Quick review: What got done? What didn't? Why?</li>
+      <li>Run the sprint rotation (change the 4 status dropdowns)</li>
+      <li>Review unfinished tasks - carry over or deprioritize</li>
+      <li>Plan the new sprint - prioritize and assign tasks</li>
+    </ol>
+  </div>
+
+  <div class="tip">The Kanban board makes this visual and satisfying. Dragging a task card to the "Done" column is a small but real motivator. The board also makes it easy to spot problems - too many tasks in "Blocked"? Something needs attention.</div>
+</section>
+
+<!-- 6. VIEWS -->
+<section id="views">
+  <h2><span class="num">6</span> Views to Set Up</h2>
+
+  <p>Notion lets you create multiple "views" of the same database. Each view shows the data differently. Set up these 4 views on your Tasks database:</p>
+
+  <div class="grid-2">
+    <div class="card" style="border-left: 4px solid #3b82f6;">
+      <h4>1. Current Sprint Board</h4>
+      <p style="font-size: 14px; color: #94a3b8; margin-bottom: 10px;">Your daily driver - this is the one you'll use most.</p>
+      <ul style="font-size: 14px;">
+        <li><strong>Layout:</strong> Board</li>
+        <li><strong>Group by:</strong> Status</li>
+        <li><strong>Filter:</strong> Sprint = [your Current sprint]</li>
+        <li><strong>Sort:</strong> Priority (High first)</li>
+      </ul>
+      <p style="font-size: 13px; color: #94a3b8; margin-top: 8px;">Drag task cards between columns to update their status.</p>
+    </div>
+
+    <div class="card" style="border-left: 4px solid #22c55e;">
+      <h4>2. My Tasks</h4>
+      <p style="font-size: 14px; color: #94a3b8; margin-bottom: 10px;">Personal view of everything on your plate.</p>
+      <ul style="font-size: 14px;">
+        <li><strong>Layout:</strong> Table</li>
+        <li><strong>Filter:</strong> Assignee = Me AND Status is not Done</li>
+        <li><strong>Sort:</strong> Sprint (Current first), then Priority</li>
+      </ul>
+      <p style="font-size: 13px; color: #94a3b8; margin-top: 8px;">Shows all your open tasks across all sprints.</p>
+    </div>
+
+    <div class="card" style="border-left: 4px solid #a855f7;">
+      <h4>3. Next Sprint Planning</h4>
+      <p style="font-size: 14px; color: #94a3b8; margin-bottom: 10px;">Plan ahead for the upcoming sprint.</p>
+      <ul style="font-size: 14px;">
+        <li><strong>Layout:</strong> Table</li>
+        <li><strong>Filter:</strong> Sprint = [your Next sprint]</li>
+        <li><strong>Sort:</strong> Priority, then Project</li>
+      </ul>
+      <p style="font-size: 13px; color: #94a3b8; margin-top: 8px;">Add tasks here throughout the current sprint as ideas come up.</p>
+    </div>
+
+    <div class="card" style="border-left: 4px solid #fbbf24;">
+      <h4>4. By Project</h4>
+      <p style="font-size: 14px; color: #94a3b8; margin-bottom: 10px;">See all open work grouped by project.</p>
+      <ul style="font-size: 14px;">
+        <li><strong>Layout:</strong> Board</li>
+        <li><strong>Group by:</strong> Project</li>
+        <li><strong>Filter:</strong> Status is not Done</li>
+        <li><strong>Sort:</strong> Sprint, then Priority</li>
+      </ul>
+      <p style="font-size: 13px; color: #94a3b8; margin-top: 8px;">Great for understanding workload per initiative.</p>
+    </div>
+  </div>
+
+  <div class="tip">Set the Current Sprint Board as your default view so it's always what you see first when opening the database.</div>
+
+  <div class="concept">A <strong>View</strong> in Notion is like a saved filter/layout on a spreadsheet. The underlying data is the same - you're just looking at it differently. You can switch between views using the tabs at the top of any Notion database.</div>
+</section>
+
+<!-- 7. SETUP -->
+<section id="setup">
+  <h2><span class="num">7</span> Setup Checklist</h2>
+
+  <p>Follow these steps in order. The whole setup takes about 30 minutes.</p>
+
+  <div class="card success">
+    <h4>Step 1: Create the Sprints Database (3 min)</h4>
+    <ol>
+      <li>Create a new full-page database in Notion</li>
+      <li>Name it "Sprints"</li>
+      <li>Rename the default "Name" column to "Sprint name"</li>
+      <li>Add a new <strong>Status</strong> property called "Sprint status"</li>
+      <li>Configure the status options: Current (blue), Next (purple), Last (brown), Past (gray)</li>
+      <li>Add your first two rows:
+        <ul>
+          <li>"Sprint 1" with status = <span class="badge blue">Current</span></li>
+          <li>"Sprint 2" with status = <span class="badge purple">Next</span></li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <div class="card success">
+    <h4>Step 2: Create the Projects Database (2 min)</h4>
+    <ol>
+      <li>Create another full-page database called "Projects"</li>
+      <li>Rename the default "Name" column to "Project name"</li>
+      <li>Add a couple starter projects (e.g., "General", "Website", "Marketing")</li>
+    </ol>
+  </div>
+
+  <div class="card success">
+    <h4>Step 3: Create the Tasks Database (10 min)</h4>
+    <ol>
+      <li>Create a full-page database called "Tasks" (or "Marketing Tasks", etc.)</li>
+      <li>Rename the default "Name" column to "Task name"</li>
+      <li>Add a <strong>Status</strong> property called "Status" with these values:
+        <ul>
+          <li>Group "Not started": Backlog</li>
+          <li>Group "In progress": In Progress, Pending, Blocked</li>
+          <li>Group "Complete": Done</li>
+        </ul>
+      </li>
+      <li>Add a <strong>Select</strong> property called "Priority" with options: High, Medium, Low</li>
+      <li>Add a <strong>People</strong> property called "Assignee"</li>
+      <li>Add a <strong>Relation</strong> property called "Sprint" - link it to the Sprints database, enable two-way relation, limit to 1</li>
+      <li>Add a <strong>Relation</strong> property called "Project" - link it to the Projects database, enable two-way relation, limit to 1</li>
+    </ol>
+  </div>
+
+  <div class="card success">
+    <h4>Step 4: Create Your Views (10 min)</h4>
+    <ol>
+      <li>On the Tasks database, create a Board view called "Current Sprint Board"
+        <ul><li>Group by: Status | Filter: Sprint contains "Sprint 1" | Sort: Priority</li></ul>
+      </li>
+      <li>Create a Table view called "My Tasks"
+        <ul><li>Filter: Assignee is Me AND Status is not Done</li></ul>
+      </li>
+      <li>Create a Table view called "Next Sprint"
+        <ul><li>Filter: Sprint contains "Sprint 2"</li></ul>
+      </li>
+      <li>Set "Current Sprint Board" as the default view</li>
+    </ol>
+  </div>
+
+  <div class="card success">
+    <h4>Step 5: Add Your First Tasks (5 min)</h4>
+    <ol>
+      <li>Add 5-10 tasks you need to work on this cycle</li>
+      <li>Assign each to Sprint 1, set a priority, and assign an owner</li>
+      <li>Switch to the Current Sprint Board view - you should see your tasks in the Backlog column</li>
+      <li>Drag one task to "In Progress" to test it out</li>
+    </ol>
+  </div>
+
+  <div class="warning-box">When you rotate sprints for the first time, remember to update the Sprint filter on your "Current Sprint Board" view to point to the new current sprint. After a few rotations, you might find it easier to filter by "Sprint status is Current" instead of a specific sprint name (this way the filter never needs updating).</div>
+</section>
+
+<footer>
+  Notion Sprint System Guide - 2026
+</footer>
+
+</div>
+</body>
+</html>
