@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <!-- GTM-META
-title: Competitive Intelligence - Messaging & Positioning Analysis
+title: Competitive Intelligence - Messaging & Positioning Analysis (Agen for Work)
 date: 2026-03-11
 category: analysis
-tags: competitors, messaging, positioning, market-intel, ai-agents, mcp, security, identity
-description: Homepage messaging and positioning analysis of 23 competitors across MCP infrastructure, identity, security, and agent governance categories
+tags: competitors, messaging, positioning, market-intel, ai-agents, mcp, security, identity, agen-for-work, governance
+description: Homepage messaging and positioning analysis of 23 competitors evaluated against Agen for Work's three pillars - Governed Access, Total Visibility, and Scale
 skill: null
 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Competitive Intelligence - Messaging & Positioning (Mar 2026)</title>
+<title>Competitive Intelligence - Agen for Work Positioning (Mar 2026)</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.7; }
 
   .hero { padding: 48px 20px 32px; text-align: center; background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%); border-bottom: 1px solid #334155; }
   .hero h1 { font-size: 32px; font-weight: 800; color: #f8fafc; margin-bottom: 6px; }
-  .hero .subtitle { color: #94a3b8; font-size: 16px; margin-bottom: 20px; }
+  .hero .subtitle { color: #94a3b8; font-size: 16px; margin-bottom: 12px; }
+  .hero .work-pitch { color: #cbd5e1; font-size: 14px; max-width: 700px; margin: 0 auto 20px; line-height: 1.6; padding: 12px 20px; background: rgba(249,115,22,0.06); border: 1px solid rgba(249,115,22,0.15); border-radius: 8px; }
+  .hero .pillars { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+  .hero .pillar { background: rgba(255,255,255,0.05); border: 1px solid #334155; border-radius: 8px; padding: 10px 16px; text-align: center; min-width: 180px; }
+  .hero .pillar .pillar-icon { font-size: 20px; display: block; margin-bottom: 4px; }
+  .hero .pillar .pillar-name { font-size: 13px; font-weight: 700; color: #f8fafc; }
+  .hero .pillar .pillar-sub { font-size: 11px; color: #94a3b8; }
   .hero .stats-row { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; }
   .hero .stat { text-align: center; }
   .hero .stat .num { font-size: 32px; font-weight: 800; display: block; }
@@ -66,6 +72,12 @@ skill: null
   .agen-relevance { background: rgba(249,115,22,0.05); border: 1px solid rgba(249,115,22,0.15); border-radius: 8px; padding: 12px 16px; }
   .agen-relevance h5 { color: #f97316; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
   .agen-relevance p { color: #94a3b8; font-size: 13px; }
+  .agen-relevance .pillar-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .agen-relevance .pillar-tag { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .pillar-tag.governed { background: rgba(139,92,246,0.15); color: #a78bfa; }
+  .pillar-tag.visibility { background: rgba(59,130,246,0.15); color: #60a5fa; }
+  .pillar-tag.scale { background: rgba(34,197,94,0.15); color: #4ade80; }
+  .pillar-tag.none { background: rgba(148,163,184,0.1); color: #64748b; }
 
   /* Takeaways */
   .takeaways { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 28px; margin-top: 40px; }
@@ -87,11 +99,31 @@ skill: null
 
 <div class="hero">
   <h1>Competitive Messaging & Positioning</h1>
-  <div class="subtitle">Homepage analysis of 23 companies in the AI agent ecosystem - March 2026</div>
+  <div class="subtitle">23 competitors evaluated through the Agen for Work lens - March 2026</div>
+  <div class="work-pitch">
+    <strong>Agen for Work:</strong> The corporate bottleneck to AI agent productivity isn't the AI - it's trust. Employees want autonomous agents to automate workflows, but Security teams block them because agents lack guardrails. Agen provides the identity and access infrastructure to safely connect AI agents to your internal tools.
+  </div>
+  <div class="pillars">
+    <div class="pillar">
+      <span class="pillar-icon">P1</span>
+      <span class="pillar-name">Governed Access</span>
+      <span class="pillar-sub">Permission, Scope, Approvals</span>
+    </div>
+    <div class="pillar">
+      <span class="pillar-icon">P2</span>
+      <span class="pillar-name">Total Visibility</span>
+      <span class="pillar-sub">Observe, Audit, Discover</span>
+    </div>
+    <div class="pillar">
+      <span class="pillar-icon">P3</span>
+      <span class="pillar-name">Scale</span>
+      <span class="pillar-sub">Reliability, Cost, Privacy</span>
+    </div>
+  </div>
   <div class="stats-row">
     <div class="stat"><span class="num" style="color:#f97316;">23</span><span class="label">Companies</span></div>
     <div class="stat"><span class="num" style="color:#8b5cf6;">6</span><span class="label">Categories</span></div>
-    <div class="stat"><span class="num" style="color:#ef4444;">5</span><span class="label">High Threat</span></div>
+    <div class="stat"><span class="num" style="color:#ef4444;">7</span><span class="label">High Threat</span></div>
     <div class="stat"><span class="num" style="color:#22c55e;">3</span><span class="label">New Entrants</span></div>
   </div>
 </div>
@@ -120,7 +152,7 @@ skill: null
     <div class="competitor">
       <div class="competitor-header">
         <div><h3>Kong</h3><span class="url">konghq.com</span></div>
-        <span class="threat-badge threat-high">High Threat</span>
+        <span class="threat-badge threat-medium">Medium Threat</span>
       </div>
       <div class="tagline"><p>"Unleash AI connectivity. Fuel innovation."</p></div>
       <div class="positioning">Unified platform for API management and AI infrastructure - build, run, discover, govern, and monetize all API and AI connectivity. Expanding from API gateway leader into AI/MCP gateway territory with Context Mesh, MCP Gateway, and MCP Registry products.</div>
@@ -144,8 +176,12 @@ skill: null
         </div>
       </div>
       <div class="agen-relevance">
-        <h5>Agen Relevance</h5>
-        <p>Direct competitor in MCP gateway. Kong approaches from API infrastructure expanding into AI/MCP. Lacks per-tenant entitlements and customer-level tool scoping. Real threat when buyer already runs Kong and wants MCP as an API gateway feature.</p>
+        <h5>Agen for Work Relevance</h5>
+        <p><strong>Pillar overlap: Partial P1, Partial P2.</strong> Kong's MCP Gateway provides routing and basic policy enforcement, and their observability covers API-level traffic. But Kong lacks identity-based employee permissions, approval workflows for agent access requests, and agent behavioral discovery. No cost optimization or multi-geo privacy controls. Kong approaches from infrastructure plumbing - not employee-to-agent trust.</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag governed">Partial P1 - Governed</span>
+          <span class="pillar-tag visibility">Partial P2 - Visibility</span>
+        </div>
       </div>
     </div>
 
@@ -176,8 +212,13 @@ skill: null
         </div>
       </div>
       <div class="agen-relevance">
-        <h5>Agen Relevance</h5>
-        <p>Closest competitor in MCP governance messaging. Horizon's Gateway (RBAC, audit) and Registry overlap with Agen's core. Comes from workflow orchestration/data engineering - lacks CIAM heritage and per-tenant customer-level identity scoping.</p>
+        <h5>Agen for Work Relevance</h5>
+        <p><strong>Pillar overlap: Strong P1, Partial P2, Partial P3.</strong> Horizon's Gateway covers RBAC and audit - directly competing on Governed Access. Their observability tracks MCP server health and usage. Zero-downtime deployment touches Scale. The gap: no employee-level identity binding (who requested what agent access), no approval workflows, no cost optimization per team/department, and no behavioral anomaly detection. Horizon governs MCP servers, not the employee-to-agent trust chain.</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag governed">Strong P1 - Governed</span>
+          <span class="pillar-tag visibility">Partial P2 - Visibility</span>
+          <span class="pillar-tag scale">Partial P3 - Scale</span>
+        </div>
       </div>
     </div>
 
@@ -185,7 +226,7 @@ skill: null
     <div class="competitor">
       <div class="competitor-header">
         <div><h3>Workato</h3><span class="url">workato.com</span></div>
-        <span class="threat-badge threat-medium">Medium Threat</span>
+        <span class="threat-badge threat-high">High Threat</span>
       </div>
       <div class="tagline"><p>"Light up your AI with Workato Enterprise MCP"</p></div>
       <div class="positioning">Enterprise iPaaS platform pivoted heavily toward MCP - build, govern, and scale MCP servers with 1,400+ pre-built app connectors providing the context layer for AI agents. Pre-built "Genies" (department-specific agents).</div>
@@ -208,8 +249,13 @@ skill: null
         </div>
       </div>
       <div class="agen-relevance">
-        <h5>Agen Relevance</h5>
-        <p>Workato connects agents to OTHER apps (like Composio/Zapier). Agen helps SaaS vendors expose THEIR OWN product. Different use case, but "Enterprise MCP" governance messaging could create buyer confusion.</p>
+        <h5>Agen for Work Relevance</h5>
+        <p><strong>Pillar overlap: Partial P1, Partial P2, Strong P3.</strong> Elevated to High Threat for Work. Workato's 1,400+ connectors directly solve the "connect agents to internal tools" problem. Their enterprise governance (auth, audit, rollback) touches P1 and P2. As a Gartner MQ Leader with enterprise scale, P3 is strong. The gap: Workato bundles agent governance into their iPaaS - it's not a standalone identity-aware control plane. No employee-level agent permissions, no behavioral discovery of shadow agent usage, no CISO-grade approval workflows. If the buyer already uses Workato for automation, they may see agent governance as "included."</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag governed">Partial P1 - Governed</span>
+          <span class="pillar-tag visibility">Partial P2 - Visibility</span>
+          <span class="pillar-tag scale">Strong P3 - Scale</span>
+        </div>
       </div>
     </div>
 
@@ -241,8 +287,11 @@ skill: null
         </div>
       </div>
       <div class="agen-relevance">
-        <h5>Agen Relevance</h5>
-        <p>Open-source, self-hosted, developer-operated. Early beta, not production-ready. No concept of multi-tenant SaaS entitlements or customer-level scoping. Watch for IBM enterprise distribution power.</p>
+        <h5>Agen for Work Relevance</h5>
+        <p><strong>Pillar overlap: Minimal P2 only.</strong> OpenTelemetry tracing gives basic observability, but ContextForge has no identity-based permissions, no approval workflows, no compliance logs, no cost controls. Open-source and early beta - requires heavy internal engineering to operate. Watch for IBM enterprise distribution bundling this into Watson/Cloud Pak agreements.</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag visibility">Minimal P2 - Visibility</span>
+        </div>
       </div>
     </div>
 
@@ -273,8 +322,13 @@ skill: null
         </div>
       </div>
       <div class="agen-relevance">
-        <h5>Agen Relevance</h5>
-        <p>Classic bundling threat. Azure-native enterprises may see MCP governance as "free" within existing stack. Lacks per-tenant tool scoping and agent analytics. Currently preview with notable limitations (no managed OAuth, no tool-level tracing).</p>
+        <h5>Agen for Work Relevance</h5>
+        <p><strong>Pillar overlap: Strong P1 (via Entra), Partial P2, Strong P3.</strong> The ultimate bundling threat for Work. Entra ID is already the employee identity layer for most enterprises - adding agent governance on top is a natural extension. Audit logging covers P2 basics. Azure's infrastructure handles Scale. The gap: currently preview with notable limitations (no managed OAuth, no tool-level tracing). No agent behavioral discovery, no approval workflows beyond Entra's existing PIM. No cost optimization per agent/team. But "free with Azure" is extremely hard to compete against for enterprises already on Microsoft.</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag governed">Strong P1 - Governed</span>
+          <span class="pillar-tag visibility">Partial P2 - Visibility</span>
+          <span class="pillar-tag scale">Strong P3 - Scale</span>
+        </div>
       </div>
     </div>
   </div>
@@ -315,8 +369,12 @@ skill: null
         </div>
       </div>
       <div class="agen-relevance">
-        <h5>Agen Relevance</h5>
-        <p>Homepage now leads with AI agent security - confirms they see this as primary growth vector. Threat: extending existing enterprise identity footprint to "just add" agent identity. Agen differentiates with MCP lifecycle, per-tenant tool exposure, agent analytics, and Liquid UI beyond just the auth handshake.</p>
+        <h5>Agen for Work Relevance</h5>
+        <p><strong>Pillar overlap: Strong P1, Partial P2.</strong> Okta's existing workforce identity is already P1's foundation in most enterprises - extending it to agents is a direct threat to Agen for Work's Governed Access pillar. Their "proactive remediation" messaging touches P2. The gap: Okta doesn't provide MCP-specific governance, agent behavioral analytics, approval workflows for agent-to-tool connections, or cost optimization. But their installed base means CISOs may default to "just extend Okta" rather than adopting a new platform. The strongest incumbent threat for Work.</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag governed">Strong P1 - Governed</span>
+          <span class="pillar-tag visibility">Partial P2 - Visibility</span>
+        </div>
       </div>
     </div>
 
@@ -324,7 +382,7 @@ skill: null
     <div class="competitor">
       <div class="competitor-header">
         <div><h3>Scalekit</h3><span class="url">scalekit.com</span></div>
-        <span class="threat-badge threat-medium">Medium Threat</span>
+        <span class="threat-badge threat-low">Low Threat</span>
       </div>
       <div class="tagline"><p>"The Auth Stack for AI applications"</p></div>
       <div class="positioning">Modular authentication infrastructure purpose-built for AI applications. Covers SaaS apps, MCP servers, human users, AI agents, and organizations. Pick-and-choose modules - no rip-and-replace. Includes MCP Auth and Agent Auth via OAuth.</div>
@@ -348,8 +406,11 @@ skill: null
         </div>
       </div>
       <div class="agen-relevance">
-        <h5>Agen Relevance</h5>
-        <p><strong>NEW ENTRANT - should be added to competitive landscape.</strong> Directly competes in "auth for AI agents" (similar to Auth0/WorkOS positioning). Auth-only - no MCP lifecycle, per-tenant tool exposure, or analytics. But modular approach and developer-friendly pitch could attract early-stage SaaS companies.</p>
+        <h5>Agen for Work Relevance</h5>
+        <p><strong>Pillar overlap: Partial P1 only.</strong> Reduced threat for Work. Scalekit is auth infrastructure for SaaS builders, not enterprise IT/security teams. Their MCP Auth module handles the authentication handshake but has no concept of employee-level governance, approval workflows, behavioral discovery, or cost optimization. Enterprises don't adopt Scalekit - SaaS vendors embed it. Minimal Work relevance.</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag governed">Partial P1 - Governed</span>
+        </div>
       </div>
     </div>
 
@@ -357,7 +418,7 @@ skill: null
     <div class="competitor">
       <div class="competitor-header">
         <div><h3>Teleport</h3><span class="url">goteleport.com</span></div>
-        <span class="threat-badge threat-low">Low Threat</span>
+        <span class="threat-badge threat-medium">Medium Threat</span>
       </div>
       <div class="tagline"><p>"Unified Identity Securing Classic & AI Infrastructure"</p></div>
       <div class="positioning">Infrastructure identity platform replacing legacy access with cryptographic, zero-trust identity. Recently expanded into AI agent identity and MCP security with an "Agentic AI Framework."</div>
@@ -380,8 +441,12 @@ skill: null
         </div>
       </div>
       <div class="agen-relevance">
-        <h5>Agen Relevance</h5>
-        <p>Different layer - Teleport secures agent access to servers/databases/infrastructure. Agen secures agent access to SaaS product capabilities. Overlap only if buyer conflates infrastructure access with application-level access.</p>
+        <h5>Agen for Work Relevance</h5>
+        <p><strong>Pillar overlap: Strong P1, Partial P2.</strong> Elevated to Medium for Work. Teleport's zero-trust identity model maps well to the "governed agent access" narrative. Cryptographic identity for agents (no secrets to leak) is compelling for CISOs. Audit logging covers basic P2. The gap: Teleport governs access to infrastructure (servers, databases, K8s), not business applications (Salesforce, Jira, HubSpot). No agent behavioral discovery, no approval workflows for tool access, no cost optimization. Threat if buyer conflates infrastructure access governance with application-level agent governance.</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag governed">Strong P1 - Governed</span>
+          <span class="pillar-tag visibility">Partial P2 - Visibility</span>
+        </div>
       </div>
     </div>
 
@@ -412,8 +477,11 @@ skill: null
         </div>
       </div>
       <div class="agen-relevance">
-        <h5>Agen Relevance</h5>
-        <p>Approaches from identity orchestration angle - helps enterprises unify fragmented identity and extend to AI agents. Could be complementary for enterprises that already use Strata for identity. Not directly competitive for SaaS vendor use case.</p>
+        <h5>Agen for Work Relevance</h5>
+        <p><strong>Pillar overlap: Partial P1 only.</strong> Strata helps enterprises unify fragmented identity providers and extend to AI agents - touching only the permission layer of P1. No agent observability, no behavioral analytics, no approval workflows, no cost controls. Could be complementary - Strata orchestrates the identity layer while Agen governs what agents do with that identity. Low threat unless they deepen their agent governance features.</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag governed">Partial P1 - Governed</span>
+        </div>
       </div>
     </div>
   </div>
@@ -453,8 +521,12 @@ skill: null
         </div>
       </div>
       <div class="agen-relevance">
-        <h5>Agen Relevance</h5>
-        <p>Most well-funded AI security player. Broader than just agents (covers LLMs, RAG, AI apps holistically). Purely security-focused - doesn't help SaaS vendors expose products. Concern for Guardians persona as they offer deep AI-specific security testing Agen doesn't.</p>
+        <h5>Agen for Work Relevance</h5>
+        <p><strong>Pillar overlap: Strong P2, Partial P1.</strong> Noma's AI discovery and runtime protection directly compete on Total Visibility - they find every agent, MCP server, and AI model across the enterprise. Their policy enforcement touches P1. The gap: no identity-based agent permissions tied to employee roles, no approval workflows, no cost optimization. Noma secures AI holistically (LLMs, RAG, models) not specifically agent-to-tool connections. But $132M in funding and Fortune 500 traction make them a real competitor in the CISO conversation. They solve the "observe" part of P2 deeply; Agen must own "govern + connect."</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag visibility">Strong P2 - Visibility</span>
+          <span class="pillar-tag governed">Partial P1 - Governed</span>
+        </div>
       </div>
     </div>
 
@@ -462,7 +534,7 @@ skill: null
     <div class="competitor">
       <div class="competitor-header">
         <div><h3>Zenity</h3><span class="url">zenity.io</span></div>
-        <span class="threat-badge threat-medium">Medium Threat</span>
+        <span class="threat-badge threat-high">High Threat</span>
       </div>
       <div class="tagline"><p>"Secure AI Agents Everywhere"</p></div>
       <div class="positioning">Enterprise AI agent security platform providing unified observability, governance, and threat protection across all agent platforms (AWS, Azure, Google, Salesforce, ServiceNow). Claims 80-90% risk reduction and 180-280% adoption increases.</div>
@@ -485,8 +557,13 @@ skill: null
         </div>
       </div>
       <div class="agen-relevance">
-        <h5>Agen Relevance</h5>
-        <p>Direct competitor in Guardians/CISO space. Zenity secures agents after they exist (security overlay). Agen enables agent access with built-in governance. Claims strong enterprise traction with quantified results.</p>
+        <h5>Agen for Work Relevance</h5>
+        <p><strong>Pillar overlap: Strong P1, Strong P2, Partial P3.</strong> Elevated to High Threat - Zenity is the closest direct competitor for Agen for Work. Their "preemptive guardrails" = Governed Access. "Intent-based detection" and "unified observability" = Total Visibility. Cross-platform coverage (AWS, Azure, Google, Salesforce, ServiceNow) demonstrates Scale. The gap: Zenity approaches from security/compliance, not identity infrastructure. No deep employee-to-agent identity binding, no approval workflows for new agent connections, and no cost optimization. But their "adopt with confidence" enablement message is nearly identical to Agen's trust narrative. Claims of 80-90% risk reduction and 180-280% adoption increases are the kind of quantified outcomes Agen needs to match.</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag governed">Strong P1 - Governed</span>
+          <span class="pillar-tag visibility">Strong P2 - Visibility</span>
+          <span class="pillar-tag scale">Partial P3 - Scale</span>
+        </div>
       </div>
     </div>
 
@@ -494,7 +571,7 @@ skill: null
     <div class="competitor">
       <div class="competitor-header">
         <div><h3>CrowdStrike</h3><span class="url">crowdstrike.com</span></div>
-        <span class="threat-badge threat-medium">Medium Threat</span>
+        <span class="threat-badge threat-high">High Threat</span>
       </div>
       <div class="tagline"><p>"The Agentic Security Platform. Unified and built to secure the AI revolution."</p></div>
       <div class="positioning">AI-native cybersecurity platform rebranded as the "Agentic Security Platform" - protecting endpoints, cloud, identity, and SaaS through unified Falcon platform. Now explicitly covers AI and non-human identities. 6x Gartner MQ Leader.</div>
@@ -517,8 +594,13 @@ skill: null
         </div>
       </div>
       <div class="agen-relevance">
-        <h5>Agen Relevance</h5>
-        <p>"Agentic Security Platform" rebrand is significant - claiming broad positioning. For Agen for Work, CrowdStrike could bundle agent governance into existing Falcon agreements. Less relevant for Agen for SaaS since they don't help vendors expose products.</p>
+        <h5>Agen for Work Relevance</h5>
+        <p><strong>Pillar overlap: Partial P1, Strong P2, Strong P3.</strong> Elevated to High Threat for Work. CrowdStrike's "Agentic Security Platform" rebrand targets exactly the CISO buyer Agen for Work needs to win. Their Falcon platform already handles non-human identities (P1), provides deep security observability (P2), and runs at massive enterprise scale (P3). The gap: CrowdStrike approaches agent governance as a security/threat detection problem, not an identity-and-access enablement problem. No approval workflows, no agent-to-tool connection management, no cost optimization. But the bundling threat is severe - CISOs already pay for Falcon and may accept "good enough" agent governance bundled in rather than buying a dedicated platform.</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag governed">Partial P1 - Governed</span>
+          <span class="pillar-tag visibility">Strong P2 - Visibility</span>
+          <span class="pillar-tag scale">Strong P3 - Scale</span>
+        </div>
       </div>
     </div>
 
@@ -526,7 +608,7 @@ skill: null
     <div class="competitor">
       <div class="competitor-header">
         <div><h3>Prompt Security</h3><span class="url">prompt.security</span></div>
-        <span class="threat-badge threat-low">Low Threat</span>
+        <span class="threat-badge threat-medium">Medium Threat</span>
       </div>
       <div class="tagline"><p>"The Platform for AI Security" / "SECURE YOUR AI. EVERYWHERE IT MATTERS."</p></div>
       <div class="positioning">Enterprise AI security platform securing all layers - employee AI tools (shadow AI), homegrown AI apps, developer code assistants, and agentic AI systems with real-time governance. OWASP credentials and AI red teaming.</div>
@@ -549,8 +631,12 @@ skill: null
         </div>
       </div>
       <div class="agen-relevance">
-        <h5>Agen Relevance</h5>
-        <p>Competes in Guardians space with DLP and AI security scanning. Broader than Agen (employee AI, code assistants) but shallower on agent-specific infrastructure. Not a threat for SaaS vendor use case.</p>
+        <h5>Agen for Work Relevance</h5>
+        <p><strong>Pillar overlap: Strong P2, Partial P1.</strong> Elevated to Medium for Work. Prompt Security's "shadow AI prevention" and four-layer protection (employees, apps, devs, agents) directly address the Work use case of governing employee AI usage. Their DLP and real-time governance touch P1. The gap: Prompt Security focuses on data protection and prompt safety, not agent-to-tool identity and permissions. No approval workflows, no agent behavioral discovery beyond security events, no cost optimization. Competes in the CISO conversation on the "what data is leaking" angle rather than the "who can use which agents" angle.</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag visibility">Strong P2 - Visibility</span>
+          <span class="pillar-tag governed">Partial P1 - Governed</span>
+        </div>
       </div>
     </div>
 
@@ -580,8 +666,11 @@ skill: null
         </div>
       </div>
       <div class="agen-relevance">
-        <h5>Agen Relevance</h5>
-        <p>Newer entrant, broad messaging without deep specificity yet. Sits alongside Zenity, Lasso, Operant. Secures agents but doesn't help SaaS vendors expose products.</p>
+        <h5>Agen for Work Relevance</h5>
+        <p><strong>Pillar overlap: Partial P2 only.</strong> Eve's "enabler, not blocker" language mirrors Agen for Work's trust-unblocking narrative, but the product appears focused on agent-level security scanning, not enterprise governance. No visible identity-based permissions, no approval workflows, no cost optimization, no compliance logs. Too early to assess deeply - broad messaging without product specificity. Watch for narrowing into the Work governance space.</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag visibility">Partial P2 - Visibility</span>
+        </div>
       </div>
     </div>
 
@@ -589,7 +678,7 @@ skill: null
     <div class="competitor">
       <div class="competitor-header">
         <div><h3>Peta</h3><span class="url">peta.io</span></div>
-        <span class="threat-badge threat-medium">Medium Threat</span>
+        <span class="threat-badge threat-high">High Threat</span>
       </div>
       <div class="tagline"><p>"The Control Plane for MCP" / "1Password for AI Agents"</p></div>
       <div class="positioning">Zero-trust MCP gateway and credential vault between AI agents and tools/APIs. Agents never see raw credentials - only scoped short-lived tokens. Human-in-the-loop approvals for high-risk actions. Three components: Core, Console, Desk.</div>
@@ -613,8 +702,13 @@ skill: null
         </div>
       </div>
       <div class="agen-relevance">
-        <h5>Agen Relevance</h5>
-        <p><strong>NEW ENTRANT - clean competitive narrative.</strong> Narrowly focused on securing the MCP runtime layer (vault + policy + audit). Doesn't help SaaS vendors expose products. Could be complementary or competitive in "MCP governance" sub-category. "1Password for AI Agents" is a memorable positioning.</p>
+        <h5>Agen for Work Relevance</h5>
+        <p><strong>Pillar overlap: Strong P1, Strong P2, Partial P3.</strong> Elevated to High Threat for Work. Peta's human-in-the-loop approvals directly compete on Governed Access. Their audit trail + SIEM integration covers Total Visibility. Scoped short-lived tokens and zero-secret exposure are exactly what CISOs want. "1Password for AI Agents" is an instantly understood positioning for the Work buyer. The gap: no employee identity binding (uses agent-level tokens, not employee IAM), no behavioral discovery of shadow agents, no cost optimization, no multi-geo privacy. But the simplicity pitch ("80% of use cases with 20% of complexity") is dangerous - it lowers the bar for adoption before Agen can demonstrate full-stack value.</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag governed">Strong P1 - Governed</span>
+          <span class="pillar-tag visibility">Strong P2 - Visibility</span>
+          <span class="pillar-tag scale">Partial P3 - Scale</span>
+        </div>
       </div>
     </div>
   </div>
@@ -631,7 +725,7 @@ skill: null
     <div class="competitor">
       <div class="competitor-header">
         <div><h3>Runlayer</h3><span class="url">runlayer.com</span></div>
-        <span class="threat-badge threat-medium">Medium Threat</span>
+        <span class="threat-badge threat-high">High Threat</span>
       </div>
       <div class="tagline"><p>"One platform to run faster, safely."</p></div>
       <div class="positioning">Enterprise AI "Command and Control Plane" for MCPs, Skills, and Agents. Centralizes discovery, security, governance, and observability. Connects to 18,000+ MCP servers. MCP-specific threat detection (tool poisoning, shadowing, fake MCPs).</div>
@@ -655,8 +749,13 @@ skill: null
         </div>
       </div>
       <div class="agen-relevance">
-        <h5>Agen Relevance</h5>
-        <p><strong>NEW ENTRANT - competes with Agen for Work.</strong> Enterprise MCP control plane with strong security angle. Similar to Barndoor AI's "control plane for agentic AI workforces." Heavier on MCP-specific security threats.</p>
+        <h5>Agen for Work Relevance</h5>
+        <p><strong>Pillar overlap: Strong P1, Strong P2, Partial P3.</strong> Elevated to High Threat - Runlayer is purpose-built for the Work use case. Fine-grained permissions + SSO/SCIM = Governed Access. Centralized discovery + MCP-specific threat detection = Total Visibility. SOC 2/HIPAA compliance + 18,000+ server catalog = Scale. The gap: Runlayer focuses on developer tools (Cursor, VS Code, Claude) - not business applications (Salesforce, Jira, HubSpot). No employee-level approval workflows for non-engineering users. No cost optimization per team. But for organizations where the first Work use case is "govern developer AI tool usage," Runlayer is a direct competitor with strong product-market fit.</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag governed">Strong P1 - Governed</span>
+          <span class="pillar-tag visibility">Strong P2 - Visibility</span>
+          <span class="pillar-tag scale">Partial P3 - Scale</span>
+        </div>
       </div>
     </div>
 
@@ -664,7 +763,7 @@ skill: null
     <div class="competitor">
       <div class="competitor-header">
         <div><h3>Fiddler AI</h3><span class="url">fiddler.ai</span></div>
-        <span class="threat-badge threat-low">Low Threat</span>
+        <span class="threat-badge threat-medium">Medium Threat</span>
       </div>
       <div class="tagline"><p>"All Enterprise Agents Need the AI Control Plane" / "Build Trust Into AI"</p></div>
       <div class="positioning">AI observability and security platform providing visibility, guardrails, and governance for enterprise AI agents. "Fastest guardrails in the industry" via proprietary Trust Models. Monitors full execution context and decision lineage.</div>
@@ -687,8 +786,12 @@ skill: null
         </div>
       </div>
       <div class="agen-relevance">
-        <h5>Agen Relevance</h5>
-        <p>Agent observability and governance - similar to Zenity/Operant. Monitors/secures agents after they exist. "AI Control Plane" framing overlaps with Agen for Work governance narrative. Not a threat for SaaS vendor use case.</p>
+        <h5>Agen for Work Relevance</h5>
+        <p><strong>Pillar overlap: Partial P1, Strong P2.</strong> Elevated to Medium for Work. "Build Trust Into AI" directly mirrors Agen's trust narrative. Fiddler's guardrails and Trust Models compete on Governed Access. Their "complete visibility across agentic hierarchy" is strong P2. The gap: Fiddler comes from ML observability, not identity infrastructure. No employee identity binding, no approval workflows, no MCP-specific governance, no cost optimization. Strongest on the observability/monitoring angle - a P2 specialist that could be positioned as complementary, but their "AI Control Plane" framing makes them a competitor in messaging.</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag governed">Partial P1 - Governed</span>
+          <span class="pillar-tag visibility">Strong P2 - Visibility</span>
+        </div>
       </div>
     </div>
 
@@ -696,7 +799,7 @@ skill: null
     <div class="competitor">
       <div class="competitor-header">
         <div><h3>Airia</h3><span class="url">airia.com</span></div>
-        <span class="threat-badge threat-low">Low Threat</span>
+        <span class="threat-badge threat-medium">Medium Threat</span>
       </div>
       <div class="tagline"><p>"Enterprise AI Platform for Secure & Scalable Solutions"</p></div>
       <div class="positioning">Unified enterprise AI platform combining orchestration, security, and governance for building, deploying, and managing AI agents at scale. Both business and technical teams can design and launch agents without specialized expertise.</div>
@@ -719,8 +822,13 @@ skill: null
         </div>
       </div>
       <div class="agen-relevance">
-        <h5>Agen Relevance</h5>
-        <p>Helps enterprises BUILD and manage their own agents. Agen helps SaaS vendors EXPOSE products to external agents. Broader "orchestration + security + governance" positioning but different use case.</p>
+        <h5>Agen for Work Relevance</h5>
+        <p><strong>Pillar overlap: Partial P1, Partial P2, Partial P3.</strong> Elevated to Medium for Work. Airia's "visibility, accountability, policy enforcement" maps loosely across all three pillars. Their unified platform pitch ("replace fragmented AI tools") addresses the sprawl problem Work solves. The gap: Airia helps enterprises BUILD agents, not govern how employees USE agents from external platforms (ChatGPT, Claude). No MCP-specific governance, no agent-to-business-app connection management, no approval workflows. Competes on the "enterprise AI governance" narrative broadly but not on the specific "agents accessing your internal tools" use case.</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag governed">Partial P1 - Governed</span>
+          <span class="pillar-tag visibility">Partial P2 - Visibility</span>
+          <span class="pillar-tag scale">Partial P3 - Scale</span>
+        </div>
       </div>
     </div>
 
@@ -728,7 +836,7 @@ skill: null
     <div class="competitor">
       <div class="competitor-header">
         <div><h3>Obot</h3><span class="url">obot.ai</span></div>
-        <span class="threat-badge threat-watch">Watch</span>
+        <span class="threat-badge threat-low">Low Threat</span>
       </div>
       <div class="tagline"><p>"Obot MCP Gateway" (open-source MCP platform)</p></div>
       <div class="positioning">Open-source platform for MCP infrastructure - hosting, discovery registry, security gateway, and built-in AI chat agent. Self-hosted for full data control. Formerly known as Otto8.</div>
@@ -751,8 +859,12 @@ skill: null
         </div>
       </div>
       <div class="agen-relevance">
-        <h5>Agen Relevance</h5>
-        <p>Open-source alternative for buyers wanting self-hosted MCP. Agen's advantage: managed platform with deeper identity integration and per-tenant scoping. More of an internal MCP management tool than an external SaaS enablement platform.</p>
+        <h5>Agen for Work Relevance</h5>
+        <p><strong>Pillar overlap: Partial P1, Minimal P2, Partial P3.</strong> Self-hosted data control is relevant for P3 (multi-geo privacy). Basic OAuth + audit logging touches P1 and P2. The gap: open-source means no managed governance, no approval workflows, no behavioral discovery, no cost optimization. Requires significant internal engineering to operate. Appeals to organizations with strong DevOps teams who prefer self-hosting over SaaS - a niche within the Work market.</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag governed">Partial P1 - Governed</span>
+          <span class="pillar-tag scale">Partial P3 - Scale</span>
+        </div>
       </div>
     </div>
   </div>
@@ -769,7 +881,7 @@ skill: null
     <div class="competitor">
       <div class="competitor-header">
         <div><h3>Speakeasy</h3><span class="url">speakeasy.com</span></div>
-        <span class="threat-badge threat-low">Low Threat</span>
+        <span class="threat-badge threat-watch">Watch</span>
       </div>
       <div class="tagline"><p>"Vibe code the app. Engineer the platform."</p></div>
       <div class="positioning">Platform for generating production-ready SDKs, Terraform providers, CLI tools, and MCP servers from OpenAPI specs. Shifted messaging from pure SDK generation to "engineer the platform" with managed MCP hosting.</div>
@@ -792,8 +904,11 @@ skill: null
         </div>
       </div>
       <div class="agen-relevance">
-        <h5>Agen Relevance</h5>
-        <p>Generates MCP server code but leaves identity, per-tenant scoping, and operations to the buyer. Could be an upstream tool whose output feeds into Agen. Threat when buyer has strong platform engineering and wants to own their MCP code.</p>
+        <h5>Agen for Work Relevance</h5>
+        <p><strong>Pillar overlap: None.</strong> Speakeasy generates MCP server code from API specs - a developer tool, not an enterprise governance platform. No identity-based permissions, no observability, no approval workflows, no compliance. Could be an upstream tool - enterprises use Speakeasy to create MCP servers, then use Agen for Work to govern employee access to those servers. Minimal Work threat.</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag none">No Pillar Overlap</span>
+        </div>
       </div>
     </div>
 
@@ -824,8 +939,11 @@ skill: null
         </div>
       </div>
       <div class="agen-relevance">
-        <h5>Agen Relevance</h5>
-        <p>Minimal direct overlap. Infrastructure for running coding agents, not for exposing SaaS products. Could be complementary - Agen governs what agents access, Runloop provides where agents execute.</p>
+        <h5>Agen for Work Relevance</h5>
+        <p><strong>Pillar overlap: Partial P3 only.</strong> Runloop's secure sandbox infrastructure and compliance certs touch P3 (reliability, privacy). But they provide execution environments for coding agents, not governance for enterprise agent usage. No identity permissions, no observability of agent-to-tool connections, no approval workflows. Complementary at best - Runloop provides where agents run, Agen governs what agents access.</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag scale">Partial P3 - Scale</span>
+        </div>
       </div>
     </div>
   </div>
@@ -842,7 +960,7 @@ skill: null
     <div class="competitor">
       <div class="competitor-header">
         <div><h3>Glean</h3><span class="url">glean.com</span></div>
-        <span class="threat-badge threat-watch">Watch</span>
+        <span class="threat-badge threat-medium">Medium Threat</span>
       </div>
       <div class="tagline"><p>"Work AI that works for all"</p></div>
       <div class="positioning">Enterprise AI platform combining search, AI assistant, and agents - all grounded in company knowledge across 100+ connected apps. Claims 110 hours saved per user annually and 93% adoption rates.</div>
@@ -865,8 +983,12 @@ skill: null
         </div>
       </div>
       <div class="agen-relevance">
-        <h5>Agen Relevance</h5>
-        <p>Limited direct overlap. Enterprise knowledge/productivity platform, not infrastructure for SaaS vendors. "Glean Protect" touches the "Agen for Work" governance narrative. Represents what enterprises are adopting internally - the kind of usage Guardians need to govern.</p>
+        <h5>Agen for Work Relevance</h5>
+        <p><strong>Pillar overlap: Partial P1, Partial P2.</strong> Elevated to Medium for Work. "Glean Protect" (permissions enforcement for AI) directly competes on Governed Access - they control which employees can access which company data through AI. Their 100+ app connections create a governed agent-to-tool layer. The gap: Glean is a productivity platform that embeds governance, not a governance platform. It governs its own agents accessing company data, not third-party agents (ChatGPT, Claude, n8n) accessing business tools. But if an enterprise adopts Glean as their primary AI interface, they may deprioritize governing external agents. Represents the "good enough governance bundled with productivity" threat.</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag governed">Partial P1 - Governed</span>
+          <span class="pillar-tag visibility">Partial P2 - Visibility</span>
+        </div>
       </div>
     </div>
 
@@ -874,7 +996,7 @@ skill: null
     <div class="competitor">
       <div class="competitor-header">
         <div><h3>Nudge Security</h3><span class="url">nudgesecurity.com</span></div>
-        <span class="threat-badge threat-low">Low Threat</span>
+        <span class="threat-badge threat-medium">Medium Threat</span>
       </div>
       <div class="tagline"><p>"Secure and govern every SaaS & AI app."</p></div>
       <div class="positioning">SaaS and AI security platform discovering shadow IT and unauthorized apps. Deploys in 5 minutes, discovers all SaaS apps on day one. Human-centric with "just-in-time guardrails" (nudges, not blocks).</div>
@@ -897,39 +1019,43 @@ skill: null
         </div>
       </div>
       <div class="agen-relevance">
-        <h5>Agen Relevance</h5>
-        <p>Adjacent, not competitive. Discovers shadow SaaS/AI adoption but doesn't govern agent-to-app connections. Could be a precursor tool that identifies the problem Agen solves.</p>
+        <h5>Agen for Work Relevance</h5>
+        <p><strong>Pillar overlap: Strong P2, Partial P3.</strong> Elevated to Medium for Work. Nudge's shadow IT discovery is directly relevant - shadow AI agent usage is the Work version of shadow SaaS. Their "discover all SaaS apps" extends naturally to "discover all agent connections." Cost reduction via spend optimization touches P3. The gap: Nudge discovers and nudges, but doesn't enforce. No identity-based agent permissions, no MCP-specific governance, no approval workflows. But their 5-minute deployment and discovery-first approach could be the entry point that leads to broader governance - and they might add agent governance features before Agen can win the deal.</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag visibility">Strong P2 - Visibility</span>
+          <span class="pillar-tag scale">Partial P3 - Scale</span>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- ==================== KEY TAKEAWAYS ==================== -->
   <div class="takeaways">
-    <h2>Key Takeaways</h2>
+    <h2>Key Takeaways for Agen for Work</h2>
     <div class="takeaway-grid">
       <div class="takeaway">
-        <h4>The "Agentic" Land Grab</h4>
-        <p>CrowdStrike rebranded to "Agentic Security Platform," Okta leads homepage with AI agent identity, Workato pivoted to "Enterprise MCP," Prefect launched Horizon. Every major platform is rushing to claim a piece of the agent stack.</p>
+        <h4>P1 (Governed Access) Is the Most Contested Pillar</h4>
+        <p>14 of 23 competitors claim some form of permissions or access control. But only Zenity, Peta, and Runlayer offer approval workflows. Agen's differentiation must be employee-identity-aware permissions tied to existing IAM - not just agent-level tokens or MCP-level RBAC.</p>
       </div>
       <div class="takeaway">
-        <h4>3 New Entrants to Track</h4>
-        <p><strong>Scalekit</strong> ("Auth Stack for AI") - add to Identity & Auth. <strong>Runlayer</strong> (MCP Control Plane) - competes with Agen for Work. <strong>Peta</strong> ("1Password for AI Agents") - clean MCP governance narrative.</p>
+        <h4>P2 (Total Visibility) Has Strong Incumbents</h4>
+        <p>Noma ($132M funded), CrowdStrike (Falcon platform), and Zenity all deliver deep observability. Agen's P2 differentiation must be behavioral discovery of shadow agent connections - not just audit logs, but proactively finding which employees are connecting which agents to which tools.</p>
       </div>
       <div class="takeaway">
-        <h4>Nobody Owns the SaaS Vendor Use Case</h4>
-        <p>None of these 23 companies specifically help SaaS vendors expose their own product to external agents with per-tenant, customer-level identity and entitlements. Security players govern agents that exist. Gateway players route MCP traffic. Agen sits uniquely at enablement + governance + identity.</p>
+        <h4>P3 (Scale) Is Where Bundling Kills</h4>
+        <p>Microsoft (Azure), CrowdStrike (Falcon), and Workato (iPaaS) can bundle "good enough" reliability and compliance into existing enterprise agreements. Agen's P3 story must lead with cost optimization - something no incumbent offers today - plus multi-geo privacy controls.</p>
       </div>
       <div class="takeaway">
-        <h4>Bundling Threats Are Real</h4>
-        <p>Microsoft (Azure APIM), CrowdStrike (Falcon), and Okta (Entra) can all bundle basic MCP governance into existing enterprise agreements. "Free" is hard to compete with even when the functionality is thinner.</p>
+        <h4>7 High Threats, Up from 5</h4>
+        <p>Zenity, Peta, and Runlayer are elevated to High Threat when evaluated through the Work lens. All three are purpose-built for the "govern agent access in the enterprise" use case. Workato is elevated because its 1,400+ connectors solve the "connect agents to tools" problem with bundled governance.</p>
       </div>
       <div class="takeaway">
-        <h4>Market Clustering Into Lanes</h4>
-        <p><strong>Security overlays:</strong> Zenity, Noma, Prompt, Eve, Fiddler. <strong>MCP gateways:</strong> Kong, Prefect, IBM, Microsoft, Workato. <strong>Identity:</strong> Okta, Scalekit, Teleport, Strata. <strong>Control planes:</strong> Runlayer, Airia, Obot, Peta.</p>
+        <h4>Nobody Owns All Three Pillars</h4>
+        <p>No competitor delivers strong coverage across Governed Access + Total Visibility + Scale simultaneously. Zenity comes closest (Strong P1, Strong P2, Partial P3) but lacks cost optimization and identity-native architecture. Agen's win condition: be the only platform that delivers all three pillars from an identity-first foundation.</p>
       </div>
       <div class="takeaway">
-        <h4>Messaging Convergence</h4>
-        <p>Multiple companies use nearly identical taglines: "Secure AI Everywhere" (Zenity, Noma, Prompt), "Control Plane for AI/MCP" (Fiddler, Peta, Runlayer). Differentiation is becoming harder to communicate. Agen's identity-aware, per-tenant SaaS exposure story remains distinct.</p>
+        <h4>The Trust Narrative Is Crowded</h4>
+        <p>"Adopt AI safely," "Build trust into AI," "Adopt with confidence" - Zenity, Fiddler, Eve, and Peta all use trust-unblocking language. Agen must differentiate not on the narrative (trust) but on the mechanism (identity infrastructure). "We don't just secure agents - we connect them to your identity layer so security teams say yes."</p>
       </div>
     </div>
   </div>
@@ -937,7 +1063,7 @@ skill: null
 </div>
 
 <footer>
-  Competitive Intelligence - March 2026 - Generated with Claude Code
+  Competitive Intelligence (Agen for Work Lens) - March 2026 - Generated with Claude Code
 </footer>
 
 <script>
