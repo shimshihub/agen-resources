@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<!-- GTM-META
+title: Agen for Work - Personas & Messaging Plan
+date: 2026-03-11
+category: strategy
+tags: agen-for-work, messaging, personas, gtm, positioning, ciso, revops, strategy
+description: Target personas, messaging by role, narrative arcs, and discovery questions for Agen.co for Work go-to-market
+skill: null
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agen for Work - Personas & Messaging Plan</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.7; }
+
+  .hero { padding: 48px 20px 36px; text-align: center; background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%); border-bottom: 1px solid #334155; }
+  .hero h1 { font-size: 32px; font-weight: 800; color: #f8fafc; margin-bottom: 6px; }
+  .hero h1 span { color: #f97316; }
+  .hero .subtitle { color: #94a3b8; font-size: 16px; margin-bottom: 20px; }
+  .hero .pitch { color: #cbd5e1; font-size: 15px; max-width: 720px; margin: 0 auto; line-height: 1.7; padding: 16px 24px; background: rgba(249,115,22,0.06); border: 1px solid rgba(249,115,22,0.15); border-radius: 10px; }
+
+  .container { max-width: 1000px; margin: 0 auto; padding: 36px 20px; }
+
+  /* Motion diagram */
+  .motion { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 28px; margin-bottom: 40px; }
+  .motion h2 { font-size: 20px; color: #f8fafc; margin-bottom: 16px; text-align: center; }
+  .motion-flow { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; padding: 16px; }
+  .motion-node { border-radius: 10px; padding: 14px 18px; text-align: center; min-width: 160px; }
+  .motion-node h5 { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+  .motion-node p { font-size: 11px; opacity: 0.8; }
+  .motion-node.demand { background: rgba(236,72,153,0.12); border: 1px solid rgba(236,72,153,0.3); color: #f472b6; }
+  .motion-node.champion { background: rgba(249,115,22,0.12); border: 1px solid rgba(249,115,22,0.3); color: #fb923c; }
+  .motion-node.buyer { background: rgba(139,92,246,0.12); border: 1px solid rgba(139,92,246,0.3); color: #a78bfa; }
+  .motion-node.outcome { background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.3); color: #4ade80; }
+  .motion-arrow { color: #475569; font-size: 20px; }
+
+  /* Persona cards */
+  .persona-section { margin-bottom: 48px; }
+  .persona-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #334155; }
+  .persona-header h2 { font-size: 22px; color: #f8fafc; }
+  .persona-badge { font-size: 11px; font-weight: 700; padding: 3px 12px; border-radius: 12px; margin-left: auto; }
+  .badge-buyer { background: rgba(139,92,246,0.15); color: #a78bfa; }
+  .badge-champion { background: rgba(249,115,22,0.15); color: #fb923c; }
+  .badge-demand { background: rgba(236,72,153,0.15); color: #f472b6; }
+  .badge-influencer { background: rgba(59,130,246,0.15); color: #60a5fa; }
+
+  .persona-card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+  .persona-card h3 { color: #f8fafc; font-size: 18px; margin-bottom: 4px; }
+  .persona-card .role-desc { color: #94a3b8; font-size: 14px; margin-bottom: 16px; }
+
+  .pain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  @media (max-width: 700px) { .pain-grid { grid-template-columns: 1fr; } }
+
+  .pain-box { background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.12); border-radius: 8px; padding: 14px; }
+  .pain-box h5 { color: #f87171; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .pain-box ul { list-style: none; padding: 0; }
+  .pain-box li { color: #94a3b8; font-size: 13px; padding: 3px 0 3px 14px; position: relative; }
+  .pain-box li::before { content: ''; position: absolute; left: 0; top: 11px; width: 6px; height: 6px; border-radius: 50%; background: #f87171; opacity: 0.5; }
+
+  .msg-box { background: rgba(34,197,94,0.05); border: 1px solid rgba(34,197,94,0.12); border-radius: 8px; padding: 14px; }
+  .msg-box h5 { color: #4ade80; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .msg-box ul { list-style: none; padding: 0; }
+  .msg-box li { color: #cbd5e1; font-size: 13px; padding: 3px 0 3px 14px; position: relative; }
+  .msg-box li::before { content: ''; position: absolute; left: 0; top: 11px; width: 6px; height: 6px; border-radius: 50%; background: #4ade80; opacity: 0.5; }
+
+  .discovery { margin-bottom: 16px; }
+  .discovery h5 { color: #f97316; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .discovery ol { padding-left: 20px; }
+  .discovery li { color: #94a3b8; font-size: 13px; padding: 3px 0; }
+
+  .outreach { background: rgba(249,115,22,0.06); border-left: 3px solid #f97316; padding: 12px 18px; border-radius: 0 8px 8px 0; }
+  .outreach p { color: #cbd5e1; font-size: 14px; font-style: italic; }
+  .outreach .label { color: #f97316; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; display: block; font-style: normal; }
+
+  /* Messaging arc */
+  .messaging-section { margin-bottom: 48px; }
+  .msg-arc { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 24px; margin-bottom: 16px; border-left: 4px solid #f97316; }
+  .msg-arc h3 { color: #f8fafc; font-size: 18px; margin-bottom: 4px; }
+  .msg-arc .target { color: #94a3b8; font-size: 12px; margin-bottom: 12px; }
+  .msg-arc .core-msg { background: rgba(249,115,22,0.06); border-radius: 8px; padding: 12px 16px; margin-bottom: 14px; }
+  .msg-arc .core-msg p { color: #cbd5e1; font-size: 14px; }
+  .arc-steps { display: flex; gap: 8px; flex-wrap: wrap; }
+  .arc-step { background: rgba(0,0,0,0.2); border-radius: 8px; padding: 10px 14px; flex: 1; min-width: 140px; text-align: center; }
+  .arc-step .step-num { color: #f97316; font-size: 20px; font-weight: 800; display: block; }
+  .arc-step p { color: #94a3b8; font-size: 12px; }
+
+  /* Narratives */
+  .narrative { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+  .narrative h3 { color: #f8fafc; font-size: 18px; margin-bottom: 4px; }
+  .narrative .emotion { color: #f97316; font-size: 12px; font-weight: 600; margin-bottom: 8px; }
+  .narrative .story { color: #cbd5e1; font-size: 14px; margin-bottom: 12px; line-height: 1.7; }
+  .narrative .meta { display: flex; gap: 8px; flex-wrap: wrap; }
+  .narrative .meta-tag { font-size: 11px; padding: 2px 8px; border-radius: 10px; }
+  .meta-tag.persona { background: rgba(139,92,246,0.1); color: #a78bfa; }
+  .meta-tag.pillar { background: rgba(249,115,22,0.1); color: #fb923c; }
+
+  footer { text-align: center; padding: 28px 20px; color: #475569; font-size: 13px; border-top: 1px solid #1e293b; margin-top: 40px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1><span>Agen for Work</span> - Messaging Plan</h1>
+  <div class="subtitle">Target personas, messaging by role, and narrative arcs</div>
+  <div class="pitch">
+    <strong>Elevator Pitch:</strong> The corporate bottleneck to AI agent productivity isn't the AI - it's trust. Employees want autonomous agents to automate workflows, but Security teams block them because agents lack guardrails. Agen.co Work provides the identity and access infrastructure to safely connect AI agents to your internal tools.
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- BUYING MOTION -->
+  <div class="motion">
+    <h2>The Buying Motion</h2>
+    <div class="motion-flow">
+      <div class="motion-node demand">
+        <h5>Demand Creator</h5>
+        <p>Business Unit Leaders</p>
+        <p>"Our team needs agents"</p>
+      </div>
+      <div class="motion-arrow">&rarr;</div>
+      <div class="motion-node champion">
+        <h5>Champion</h5>
+        <p>Ops Leader / VP IT</p>
+        <p>"Here's a way to do it safely"</p>
+      </div>
+      <div class="motion-arrow">&rarr;</div>
+      <div class="motion-node buyer">
+        <h5>Buyer</h5>
+        <p>CISO</p>
+        <p>"I can approve this"</p>
+      </div>
+      <div class="motion-arrow">&rarr;</div>
+      <div class="motion-node outcome">
+        <h5>Outcome</h5>
+        <p>Governed Agent Access</p>
+        <p>"Security said yes"</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PERSONAS -->
+  <div class="persona-section">
+    <div class="persona-header">
+      <h2>Target Personas</h2>
+    </div>
+
+    <!-- CISO -->
+    <div class="persona-card">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+        <h3>CISO / Head of Security</h3>
+        <span class="persona-badge badge-buyer">Primary Buyer</span>
+      </div>
+      <div class="role-desc">The person currently blocking agent adoption. Responsible for the org's security posture. Under pressure from business teams to enable agents but lacks the controls to say "yes."</div>
+
+      <div class="pain-grid">
+        <div class="pain-box">
+          <h5>Pain Points</h5>
+          <ul>
+            <li>Shadow AI: employees using agents without monitoring</li>
+            <li>No visibility into which agents access which tools</li>
+            <li>Compliance risk: no audit trails (SOC2, GDPR)</li>
+            <li>Fear of being responsible when a breach happens</li>
+            <li>Pressure from business teams to "just allow it"</li>
+          </ul>
+        </div>
+        <div class="msg-box">
+          <h5>What They Need to Hear</h5>
+          <ul>
+            <li>"Say yes without compromising your security posture"</li>
+            <li>"Every agent action tied to an employee identity"</li>
+            <li>"Human-in-the-loop for sensitive operations"</li>
+            <li>"Compliance-ready logs, not just monitoring"</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="discovery">
+        <h5>Discovery Questions</h5>
+        <ol>
+          <li>Are employees using AI agents to access business tools today? Do you have visibility into it?</li>
+          <li>What's your current policy - blanket block or case-by-case?</li>
+          <li>What compliance frameworks do agent interactions need to satisfy?</li>
+          <li>If you could see and control every agent-to-tool connection, would you approve broader access?</li>
+        </ol>
+      </div>
+
+      <div class="outreach">
+        <span class="label">Outreach Snippet</span>
+        <p>"Your employees are already using agents - you just can't see it. Agen gives you the identity-aware controls and audit trails to say 'yes' to agent adoption without compromising your security standards."</p>
+      </div>
+    </div>
+
+    <!-- VP IT -->
+    <div class="persona-card">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+        <h3>VP of IT / IT Operations</h3>
+        <span class="persona-badge badge-champion">Champion</span>
+      </div>
+      <div class="role-desc">Stuck between Security saying "no" and business teams saying "we need this." Owns the infrastructure where agents connect to business tools. Needs a solution that satisfies both sides.</div>
+
+      <div class="pain-grid">
+        <div class="pain-box">
+          <h5>Pain Points</h5>
+          <ul>
+            <li>Stuck between Security blocking and teams demanding</li>
+            <li>Agent access requests from multiple teams, no standard process</li>
+            <li>No way to integrate agent governance with existing IAM</li>
+            <li>Managing agent sprawl without centralized control</li>
+          </ul>
+        </div>
+        <div class="msg-box">
+          <h5>What They Need to Hear</h5>
+          <ul>
+            <li>"Extends your existing IAM - no rip and replace"</li>
+            <li>"One control plane for all agent-to-tool connections"</li>
+            <li>"Self-service approval workflows - you're not the bottleneck"</li>
+            <li>"Works with your Okta/Entra/SSO stack"</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="discovery">
+        <h5>Discovery Questions</h5>
+        <ol>
+          <li>How are you handling agent access requests from teams today?</li>
+          <li>Does your existing IAM have any visibility into AI agent connections?</li>
+          <li>How many different teams are asking for agent access?</li>
+          <li>What would a centralized agent governance model look like?</li>
+        </ol>
+      </div>
+
+      <div class="outreach">
+        <span class="label">Outreach Snippet</span>
+        <p>"You shouldn't have to choose between blocking agents and losing control. Agen plugs into your existing IAM and gives every team governed agent access through one platform."</p>
+      </div>
+    </div>
+
+    <!-- Ops Leader -->
+    <div class="persona-card">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+        <h3>Ops Leader (GTM Ops / RevOps / BizOps)</h3>
+        <span class="persona-badge badge-champion">Champion</span>
+      </div>
+      <div class="role-desc">The person who's already proven agents work. Builds automations in n8n, Zapier, connects agents to Salesforce, HubSpot, Jira. Creates the internal demand and can articulate ROI in business terms. Often the first to adopt agents informally (shadow AI risk).</div>
+
+      <div class="pain-grid">
+        <div class="pain-box">
+          <h5>Pain Points</h5>
+          <ul>
+            <li>Built agent workflows that work but can't scale them</li>
+            <li>Security blocks access to tools agents need to reach</li>
+            <li>No way to prove to Security that usage is safe and controlled</li>
+            <li>Manual workarounds because automated access isn't approved</li>
+            <li>Shadow AI risk: already using agents without formal approval</li>
+          </ul>
+        </div>
+        <div class="msg-box">
+          <h5>What They Need to Hear</h5>
+          <ul>
+            <li>"Get your agent workflows approved by Security"</li>
+            <li>"Show exactly which agents access which tools"</li>
+            <li>"Scale the automations you've proven work"</li>
+            <li>"Quantifiable ROI: hours saved, pipeline velocity"</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="discovery">
+        <h5>Discovery Questions</h5>
+        <ol>
+          <li>What automations have you built with AI agents that are working well?</li>
+          <li>What tools do you wish agents could access but Security won't approve?</li>
+          <li>How do you demonstrate the value of agent workflows to leadership?</li>
+          <li>If agent access was governed and auditable, what would you build next?</li>
+        </ol>
+      </div>
+
+      <div class="outreach">
+        <span class="label">Outreach Snippet</span>
+        <p>"You've proven AI agents work for your team. Agen gives you the governed, auditable access layer that gets Security to say yes - so you can scale those workflows org-wide."</p>
+      </div>
+    </div>
+
+    <!-- Compliance -->
+    <div class="persona-card">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+        <h3>Compliance Manager</h3>
+        <span class="persona-badge badge-influencer">Influencer</span>
+      </div>
+      <div class="role-desc">Ensures regulatory compliance. Needs audit trails, policy enforcement, and documentation for AI agent interactions. Auditors are starting to ask about AI governance.</div>
+
+      <div class="pain-grid">
+        <div class="pain-box">
+          <h5>Pain Points</h5>
+          <ul>
+            <li>No documentation for AI agent interactions</li>
+            <li>Regulatory uncertainty around agent data access</li>
+            <li>Auditors asking about AI governance - no answers</li>
+          </ul>
+        </div>
+        <div class="msg-box">
+          <h5>What They Need to Hear</h5>
+          <ul>
+            <li>"Full audit trails - GDPR, SOC2 ready"</li>
+            <li>"Policy enforcement at the identity level"</li>
+            <li>"Compliance-ready from day one"</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="outreach">
+        <span class="label">Outreach Snippet</span>
+        <p>"Auditors are going to ask about your AI agent governance. Agen gives you the audit trails, access logs, and policy controls to have a clear answer."</p>
+      </div>
+    </div>
+
+    <!-- Demand Creator -->
+    <div class="persona-card">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+        <h3>Business Unit Leaders (VP Sales, VP Marketing, etc.)</h3>
+        <span class="persona-badge badge-demand">Demand Creator</span>
+      </div>
+      <div class="role-desc">Their teams want to use AI agents but can't. They create internal pressure that forces Security to find a solution. They don't buy Agen directly but create the urgency and budget justification.</div>
+
+      <div class="pain-grid">
+        <div class="pain-box">
+          <h5>Pain Points</h5>
+          <ul>
+            <li>Teams losing productivity without agent access</li>
+            <li>Competitors using AI agents while they're stuck</li>
+            <li>Slow IT approval processes frustrating employees</li>
+          </ul>
+        </div>
+        <div class="msg-box">
+          <h5>What They Need to Hear</h5>
+          <ul>
+            <li>"Unblock your team's AI agent access"</li>
+            <li>"Security will approve it because it meets their standards"</li>
+            <li>"Your competitors are already using governed agents"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MESSAGING ARCS -->
+  <div class="messaging-section">
+    <div class="persona-header">
+      <h2>Messaging Arcs by Persona</h2>
+    </div>
+
+    <div class="msg-arc">
+      <h3>For the CISO: "Control Without Blocking"</h3>
+      <div class="target">Target: CISO / Head of Security | Pillars: P1 (Governed Access) + P2 (Total Visibility)</div>
+      <div class="core-msg"><p>You can enable AI agent adoption without compromising your security posture. Agen provides identity-aware governance, complete visibility, and compliance-ready audit trails for every agent interaction.</p></div>
+      <div class="arc-steps">
+        <div class="arc-step"><span class="step-num">1</span><p>Employees are already using agents (shadow AI)</p></div>
+        <div class="arc-step"><span class="step-num">2</span><p>Blocking pushes usage underground</p></div>
+        <div class="arc-step"><span class="step-num">3</span><p>The answer is governed access with visibility</p></div>
+        <div class="arc-step"><span class="step-num">4</span><p>Every action tied to identity, scoped, auditable</p></div>
+      </div>
+    </div>
+
+    <div class="msg-arc">
+      <h3>For VP IT: "Extend What You Already Have"</h3>
+      <div class="target">Target: VP of IT | Pillars: P1 (Governed Access)</div>
+      <div class="core-msg"><p>Agen integrates with your existing identity infrastructure (Okta, Entra, SSO) to add an agent governance layer - no rip and replace, no new identity stack.</p></div>
+      <div class="arc-steps">
+        <div class="arc-step"><span class="step-num">1</span><p>Agent requests coming from every team</p></div>
+        <div class="arc-step"><span class="step-num">2</span><p>No standard way to evaluate or govern</p></div>
+        <div class="arc-step"><span class="step-num">3</span><p>One control plane for all connections</p></div>
+        <div class="arc-step"><span class="step-num">4</span><p>Self-service approvals, not bottleneck</p></div>
+      </div>
+    </div>
+
+    <div class="msg-arc">
+      <h3>For Ops Leaders: "Scale What's Already Working"</h3>
+      <div class="target">Target: GTM Ops / RevOps / BizOps | Pillars: P1 + P2 + P3</div>
+      <div class="core-msg"><p>You've proven AI agents save time and drive results. Agen gives you the governed access layer that gets Security's approval - so you can scale those workflows from your team to the entire org.</p></div>
+      <div class="arc-steps">
+        <div class="arc-step"><span class="step-num">1</span><p>You've built automations that work</p></div>
+        <div class="arc-step"><span class="step-num">2</span><p>Limited because Security hasn't approved</p></div>
+        <div class="arc-step"><span class="step-num">3</span><p>Agen makes workflows auditable + governed</p></div>
+        <div class="arc-step"><span class="step-num">4</span><p>Show Security, get approval, scale org-wide</p></div>
+      </div>
+    </div>
+
+    <div class="msg-arc">
+      <h3>For Compliance: "Audit-Ready from Day One"</h3>
+      <div class="target">Target: Compliance Manager | Pillar: P2 (Total Visibility)</div>
+      <div class="core-msg"><p>Every agent interaction is logged, traceable, and compliant. Agen provides the documentation and policy enforcement that auditors expect for AI governance.</p></div>
+      <div class="arc-steps">
+        <div class="arc-step"><span class="step-num">1</span><p>Regulators asking about AI governance</p></div>
+        <div class="arc-step"><span class="step-num">2</span><p>Zero documentation today</p></div>
+        <div class="arc-step"><span class="step-num">3</span><p>Compliance-ready audit trails from day one</p></div>
+        <div class="arc-step"><span class="step-num">4</span><p>Policy enforcement at identity level</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NARRATIVES -->
+  <div class="persona-section">
+    <div class="persona-header">
+      <h2>Narratives</h2>
+    </div>
+
+    <div class="narrative">
+      <h3>The Shadow Agent Crisis</h3>
+      <div class="emotion">Emotional Angle: Fear of the unknown</div>
+      <div class="story">Your employees are already connecting AI agents to business tools - through ChatGPT, Claude, n8n, or random MCPs they found on GitHub. You just can't see it. Every unmonitored agent connection is a potential data breach waiting to happen.</div>
+      <div class="meta">
+        <span class="meta-tag persona">CISO</span>
+        <span class="meta-tag persona">VP of IT</span>
+        <span class="meta-tag pillar">P2: Total Visibility</span>
+      </div>
+    </div>
+
+    <div class="narrative">
+      <h3>The Productivity Bottleneck</h3>
+      <div class="emotion">Emotional Angle: Frustration with being blocked</div>
+      <div class="story">Your best employees want to use AI agents to automate tedious workflows. Security says no. So they either work around the rules (shadow AI) or slow down. Either way, you lose. The bottleneck isn't the AI - it's trust.</div>
+      <div class="meta">
+        <span class="meta-tag persona">Ops Leaders</span>
+        <span class="meta-tag persona">Business Leaders</span>
+        <span class="meta-tag pillar">P1: Governed Access</span>
+      </div>
+    </div>
+
+    <div class="narrative">
+      <h3>The Trust Bridge</h3>
+      <div class="emotion">Emotional Angle: Resolution - the way forward</div>
+      <div class="story">What if Security could say "yes" to agents? Not because they lowered their standards, but because every agent action is tied to an employee identity, scoped to specific tools, and fully auditable. That's what governed agent access looks like.</div>
+      <div class="meta">
+        <span class="meta-tag persona">CISO</span>
+        <span class="meta-tag persona">VP of IT</span>
+        <span class="meta-tag pillar">P1 + P2</span>
+      </div>
+    </div>
+
+    <div class="narrative">
+      <h3>The Cost of Ungoverned AI</h3>
+      <div class="emotion">Emotional Angle: Financial risk</div>
+      <div class="story">Unmonitored agents making redundant API calls, hallucinated requests hitting production APIs, no visibility into agent-driven costs per team. Without governance, your AI agent bill is a black box growing every month.</div>
+      <div class="meta">
+        <span class="meta-tag persona">CFO</span>
+        <span class="meta-tag persona">VP of IT</span>
+        <span class="meta-tag persona">Ops Leaders</span>
+        <span class="meta-tag pillar">P3: Scale</span>
+      </div>
+    </div>
+
+    <div class="narrative">
+      <h3>The Compliance Clock</h3>
+      <div class="emotion">Emotional Angle: Urgency</div>
+      <div class="story">Regulators and auditors are starting to ask about AI agent governance. Most organizations have zero documentation for agent interactions. The window to get ahead of this is closing - build the audit trail now, before the audit happens.</div>
+      <div class="meta">
+        <span class="meta-tag persona">Compliance</span>
+        <span class="meta-tag persona">CISO</span>
+        <span class="meta-tag pillar">P2: Total Visibility</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Agen for Work - Personas & Messaging Plan - March 2026 - Generated with Claude Code
+</footer>
+
+</body>
+</html>
