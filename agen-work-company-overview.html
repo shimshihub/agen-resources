@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<!-- GTM-META
+name: Agen for Work - Company & Product Overview
+type: brand
+category: internal
+tags: company-overview, agen-for-work, product, GTM, ICP, narratives
+created: 2026-03-13
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agen for Work - Company & Product Overview</title>
+<style>
+  :root {
+    --bg: #06060b;
+    --surface: #0e0e18;
+    --surface-2: #151524;
+    --surface-3: #1c1c30;
+    --border: #252540;
+    --border-light: #3a3a5c;
+    --text: #e4e4f0;
+    --text-muted: #8585a8;
+    --text-dim: #5c5c80;
+    --accent: #6c5ce7;
+    --accent-light: #a29bfe;
+    --accent-glow: rgba(108, 92, 231, 0.15);
+    --red: #ff6b6b;
+    --red-bg: rgba(255, 107, 107, 0.08);
+    --orange: #ffa94d;
+    --orange-bg: rgba(255, 169, 77, 0.08);
+    --green: #51cf66;
+    --green-bg: rgba(81, 207, 102, 0.08);
+    --blue: #74b9ff;
+    --blue-bg: rgba(116, 185, 255, 0.08);
+    --cyan: #22d3ee;
+    --cyan-bg: rgba(34, 211, 238, 0.08);
+    --pink: #f783ac;
+    --pink-bg: rgba(247, 131, 172, 0.08);
+    --yellow: #ffd43b;
+    --yellow-bg: rgba(255, 212, 59, 0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* Navigation */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(6, 6, 11, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    padding: 0 24px;
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 52px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav-inner::-webkit-scrollbar { display: none; }
+
+  .nav-link {
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .nav-link:hover, .nav-link.active {
+    background: var(--accent-glow);
+    color: var(--accent-light);
+  }
+
+  /* Hero */
+  .hero {
+    padding: 120px 24px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(108, 92, 231, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    padding: 4px 16px;
+    background: var(--accent-glow);
+    border: 1px solid rgba(108, 92, 231, 0.3);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: var(--accent-light);
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+  }
+
+  .hero h1 {
+    font-size: 3.2rem;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    background: linear-gradient(135deg, #fff 0%, var(--accent-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-sub {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    max-width: 680px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .hero-stat {
+    text-align: center;
+  }
+
+  .hero-stat .value {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--accent-light);
+  }
+
+  .hero-stat .label {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  /* Section */
+  .section {
+    padding: 80px 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-light);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.25;
+  }
+
+  .section-desc {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 700px;
+    margin-bottom: 40px;
+  }
+
+  /* Cards */
+  .card-grid {
+    display: grid;
+    gap: 16px;
+  }
+
+  .card-grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .card-grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    transition: all 0.25s;
+  }
+
+  .card:hover {
+    border-color: var(--border-light);
+    transform: translateY(-2px);
+  }
+
+  .card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+  }
+
+  .card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .card p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .card ul {
+    list-style: none;
+    margin-top: 12px;
+  }
+
+  .card ul li {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    padding: 4px 0;
+    padding-left: 18px;
+    position: relative;
+  }
+
+  .card ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.6;
+  }
+
+  /* Quote blocks */
+  .quote-block {
+    background: var(--surface);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 12px 12px 0;
+    padding: 24px 28px;
+    margin: 24px 0;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* Problem section */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 32px;
+  }
+
+  .problem-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+  }
+
+  .problem-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .problem-card ul {
+    list-style: none;
+  }
+
+  .problem-card ul li {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .problem-card.problems ul li::before {
+    content: '!';
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--red-bg);
+    color: var(--red);
+    font-size: 0.65rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .problem-card.risks ul li::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 12px;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--orange);
+    opacity: 0.5;
+    transform: rotate(45deg);
+  }
+
+  /* Two-track section */
+  .tracks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 32px;
+  }
+
+  .track {
+    border-radius: 16px;
+    padding: 32px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .track::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+  }
+
+  .track-security { background: var(--red-bg); }
+  .track-security::before { background: linear-gradient(90deg, var(--red), transparent); }
+
+  .track-enablement { background: var(--blue-bg); }
+  .track-enablement::before { background: linear-gradient(90deg, var(--blue), transparent); }
+
+  .track-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .track-security .track-label { color: var(--red); }
+  .track-enablement .track-label { color: var(--blue); }
+
+  .track h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .track .track-buyer {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  .track .track-mindset {
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--text);
+    margin-bottom: 20px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.2);
+  }
+
+  .track h4 {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
+
+  .track ul {
+    list-style: none;
+  }
+
+  .track ul li {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    padding: 4px 0;
+    padding-left: 18px;
+    position: relative;
+  }
+
+  .track-security ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 8px;
+    height: 2px;
+    background: var(--red);
+    opacity: 0.5;
+  }
+
+  .track-enablement ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 8px;
+    height: 2px;
+    background: var(--blue);
+    opacity: 0.5;
+  }
+
+  .track .why-buy {
+    margin-top: 20px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .track-security .why-buy {
+    background: rgba(255, 107, 107, 0.06);
+    border-left: 2px solid var(--red);
+    color: var(--text);
+  }
+
+  .track-enablement .why-buy {
+    background: rgba(116, 185, 255, 0.06);
+    border-left: 2px solid var(--blue);
+    color: var(--text);
+  }
+
+  /* Features */
+  .feature-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+  }
+
+  .feature-card:nth-child(1)::before { background: linear-gradient(90deg, var(--green), transparent); }
+  .feature-card:nth-child(2)::before { background: linear-gradient(90deg, var(--cyan), transparent); }
+  .feature-card:nth-child(3)::before { background: linear-gradient(90deg, var(--pink), transparent); }
+
+  .feature-number {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+
+  .feature-card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .feature-card .value-prop {
+    font-size: 0.92rem;
+    color: var(--accent-light);
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+
+  .feature-item {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(37, 37, 64, 0.5);
+  }
+
+  .feature-item:last-child { border-bottom: none; }
+
+  .feature-item strong {
+    display: block;
+    font-size: 0.88rem;
+    margin-bottom: 2px;
+  }
+
+  .feature-item span {
+    font-size: 0.83rem;
+    color: var(--text-muted);
+  }
+
+  /* Category */
+  .category-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 32px;
+  }
+
+  .what-list {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+  }
+
+  .what-list h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .what-list ul {
+    list-style: none;
+  }
+
+  .what-list ul li {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    padding: 8px 0;
+    padding-left: 24px;
+    position: relative;
+    border-bottom: 1px solid rgba(37, 37, 64, 0.4);
+  }
+
+  .what-list ul li:last-child { border-bottom: none; }
+
+  .what-list.positive ul li::before {
+    content: '\2713';
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+
+  .what-list.negative ul li::before {
+    content: '\2717';
+    position: absolute;
+    left: 0;
+    color: var(--red);
+    opacity: 0.6;
+    font-size: 0.85rem;
+  }
+
+  /* Narratives */
+  .narrative-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 16px;
+  }
+
+  .narrative-meta {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+
+  .narrative-tag {
+    font-size: 0.7rem;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 500;
+  }
+
+  .tag-security { background: var(--red-bg); color: var(--red); }
+  .tag-enablement { background: var(--blue-bg); color: var(--blue); }
+  .tag-pillar { background: var(--accent-glow); color: var(--accent-light); }
+  .tag-emotion { background: var(--yellow-bg); color: var(--yellow); }
+
+  .narrative-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .narrative-card .narrative-text {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* Supporting personas */
+  .persona-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .persona-mini {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .persona-mini .role-tag {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+  }
+
+  .persona-mini h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .persona-mini p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  /* Messaging pillars */
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .pillar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .pillar-icon {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+
+  .pillar h4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .pillar p {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* GTM Motions */
+  .motion-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+    margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .motion-number {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--accent-glow);
+    border: 1px solid rgba(108, 92, 231, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent-light);
+    flex-shrink: 0;
+  }
+
+  .motion-content h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .motion-content .motion-hook {
+    font-size: 0.9rem;
+    color: var(--accent-light);
+    font-style: italic;
+    margin-bottom: 12px;
+  }
+
+  .motion-content p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .motion-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .motion-detail {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+  }
+
+  .motion-detail strong {
+    color: var(--text-muted);
+  }
+
+  /* Footer */
+  .footer {
+    padding: 48px 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 2rem; }
+    .card-grid-2, .card-grid-3, .tracks, .problem-grid, .category-grid, .persona-row { grid-template-columns: 1fr; }
+    .pillar-grid { grid-template-columns: repeat(2, 1fr); }
+    .motion-card { grid-template-columns: 1fr; }
+    .motion-details { grid-template-columns: 1fr; }
+    .hero-stats { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-link" href="#mission">Mission</a>
+    <a class="nav-link" href="#problem">Problem</a>
+    <a class="nav-link" href="#product">Product</a>
+    <a class="nav-link" href="#category">Category</a>
+    <a class="nav-link" href="#audiences">Audiences</a>
+    <a class="nav-link" href="#messaging">Messaging</a>
+    <a class="nav-link" href="#narratives">Narratives</a>
+    <a class="nav-link" href="#gtm">GTM Motions</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-badge">AI Agent Identity & Access Infrastructure</div>
+  <h1>Agen.co for Work</h1>
+  <p class="hero-sub">The identity and access infrastructure to safely connect AI agents to your internal tools - so employees can use agents without security blocking them.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="value">50+</div>
+      <div class="label">Employee companies</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value">2</div>
+      <div class="label">Buyer tracks</div>
+    </div>
+    <div class="hero-stat">
+      <div class="value">3</div>
+      <div class="label">Product pillars</div>
+    </div>
+  </div>
+</section>
+
+<!-- Mission -->
+<section class="section" id="mission">
+  <div class="section-inner">
+    <div class="section-label">Mission & Vision</div>
+    <div class="section-title">Why We Exist</div>
+
+    <div class="quote-block">
+      The corporate bottleneck to AI agent productivity isn't the AI. It's trust. Employees want to use autonomous agents to automate workflows, but Security teams block them because agents lack guardrails. Agen provides the identity and access infrastructure to safely connect AI agents to your internal tools.
+    </div>
+
+    <div class="card-grid card-grid-2" style="margin-top: 32px;">
+      <div class="card">
+        <div class="card-icon" style="background: var(--accent-glow); color: var(--accent-light);">&#9733;</div>
+        <h3>Mission</h3>
+        <p>Empower internal teams to leverage AI agents while providing the necessary security measures to meet CISO standards.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background: var(--cyan-bg); color: var(--cyan);">&#9672;</div>
+        <h3>One-liner</h3>
+        <p>Agen provides the identity and access infrastructure to safely connect AI agents to your internal tools - so employees can use agents without security blocking them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Problem -->
+<section class="section" id="problem">
+  <div class="section-inner">
+    <div class="section-label">The Core Problem</div>
+    <div class="section-title">What We Solve</div>
+    <div class="section-desc">Every organization faces the same tension: employees want AI agents, security teams block them. Both sides are right. The missing piece is governed access.</div>
+
+    <div class="problem-grid">
+      <div class="problem-card problems">
+        <h3><span style="color: var(--red);">&#9888;</span> The Problem</h3>
+        <ul>
+          <li>Giving internal agents access to key tools poses security risks</li>
+          <li>Lack of visibility into internal agent usage becomes a "black box" of security risks</li>
+          <li>Security teams block agent adoption because agents lack guardrails</li>
+        </ul>
+      </div>
+      <div class="problem-card risks">
+        <h3><span style="color: var(--orange);">&#9889;</span> The Risk of Inaction</h3>
+        <ul>
+          <li>No internally integrated agents reduces velocity across the business</li>
+          <li>Unhappy employees unable to leverage the tools they want</li>
+          <li>Secret use of agents without proper monitoring (shadow AI)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Product -->
+<section class="section" id="product">
+  <div class="section-inner">
+    <div class="section-label">Product</div>
+    <div class="section-title">Three Pillars of Agen for Work</div>
+    <div class="section-desc">Governed access, total visibility, and scalable infrastructure for AI agent workforces.</div>
+
+    <div class="card-grid card-grid-3">
+      <div class="feature-card">
+        <div class="feature-number">Pillar 1</div>
+        <h3>Governed Access</h3>
+        <div class="value-prop">Allow employees to use agents without losing control.</div>
+        <div class="feature-item">
+          <strong>Identity-Based Permissions</strong>
+          <span>Link agent actions to specific employee identities and roles</span>
+        </div>
+        <div class="feature-item">
+          <strong>Scope Control</strong>
+          <span>Granularly define which internal apps an agent can trigger</span>
+        </div>
+        <div class="feature-item">
+          <strong>Approval Workflows</strong>
+          <span>Human-in-the-loop triggers for sensitive tasks</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-number">Pillar 2</div>
+        <h3>Total Visibility</h3>
+        <div class="value-prop">Eliminate the "Black Box" of internal AI usage.</div>
+        <div class="feature-item">
+          <strong>Agent Observability</strong>
+          <span>Real-time monitoring of how and when agents access apps</span>
+        </div>
+        <div class="feature-item">
+          <strong>Behavioral Discovery</strong>
+          <span>Identify high-value workflows employees are offloading to agents</span>
+        </div>
+        <div class="feature-item">
+          <strong>Compliance-Ready Logs</strong>
+          <span>Full audit trails for GDPR/SOC2 compliance</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-number">Pillar 3</div>
+        <h3>Scale</h3>
+        <div class="value-prop">Scale your AI workforce on an efficient and reliable foundation.</div>
+        <div class="feature-item">
+          <strong>Redundant Infrastructure</strong>
+          <span>>99.99% uptime for business-critical agent workflows</span>
+        </div>
+        <div class="feature-item">
+          <strong>Cost Optimization</strong>
+          <span>Prevent redundant or hallucinated API calls that spike costs</span>
+        </div>
+        <div class="feature-item">
+          <strong>Global Privacy</strong>
+          <span>Multi-Geo hosting for data residency requirements</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Messaging pillars -->
+    <div class="pillar-grid">
+      <div class="pillar">
+        <div class="pillar-icon" style="color: var(--red);">&#9632;</div>
+        <h4>Secure</h4>
+        <p>Identity-aware governance for every agent interaction</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon" style="color: var(--orange);">&#9632;</div>
+        <h4>Enforce</h4>
+        <p>Policy controls and approval workflows</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon" style="color: var(--green);">&#9632;</div>
+        <h4>Connect</h4>
+        <p>Safely bridge agents to internal tools and apps</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon" style="color: var(--blue);">&#9632;</div>
+        <h4>Speed</h4>
+        <p>Unblock employee AI adoption across the business</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon" style="color: var(--pink);">&#9632;</div>
+        <h4>Scale</h4>
+        <p>Reliable, cost-efficient infrastructure for agent workforces</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Category -->
+<section class="section" id="category">
+  <div class="section-inner">
+    <div class="section-label">Category Definition</div>
+    <div class="section-title">AI Agent Identity & Access</div>
+
+    <div class="quote-block">
+      Agen defines the AI Agent Identity & Access category - the trust layer between employees, AI agents, and business tools. We sit at the intersection of Identity, Security, and AI Runtime.
+    </div>
+
+    <div class="category-grid">
+      <div class="what-list positive">
+        <h3><span style="color: var(--green);">&#10003;</span> What We Are</h3>
+        <ul>
+          <li>The identity and access infrastructure for AI agents</li>
+          <li>The trust layer that lets Security say "yes" to agent adoption</li>
+          <li>Governed access, total visibility, and scalable infrastructure for agent workforces</li>
+        </ul>
+      </div>
+      <div class="what-list negative">
+        <h3><span style="color: var(--red);">&#10007;</span> What We Are Not</h3>
+        <ul>
+          <li>Not a chatbot builder or conversational AI</li>
+          <li>Not a security monitoring overlay (we govern, not just observe)</li>
+          <li>Not an agent development platform</li>
+          <li>Not a point-to-point MCP connector</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Audiences -->
+<section class="section" id="audiences">
+  <div class="section-inner">
+    <div class="section-label">Ideal Customer Profile</div>
+    <div class="section-title">Two Buyer Tracks, One Product</div>
+    <div class="section-desc">Any company with 50+ employees adopting AI agents. Same product, different lens - Security talks governance, IT talks enablement.</div>
+
+    <div class="tracks">
+      <div class="track track-security">
+        <div class="track-label">Track 1: Security</div>
+        <h3>CISOs & Security Leaders</h3>
+        <div class="track-buyer">Primary Buyer</div>
+        <div class="track-mindset">"I need to control this before it becomes a risk."</div>
+
+        <h4>Key Characteristics</h4>
+        <ul>
+          <li>Owns security and compliance decisions</li>
+          <li>Currently blocking or limiting AI agent usage</li>
+          <li>Under pressure from business teams to enable agents</li>
+          <li>Needs audit trails, identity-aware controls, and compliance assurance</li>
+          <li>Reports to CEO/Board on security posture</li>
+        </ul>
+
+        <h4>What They Need to Hear</h4>
+        <ul>
+          <li>Visibility into every agent-to-tool connection</li>
+          <li>Identity-aware controls and audit trails</li>
+          <li>Human-in-the-loop approval for sensitive operations</li>
+          <li>Compliance-ready logs (SOC2, GDPR)</li>
+        </ul>
+
+        <div class="why-buy">
+          <strong>Why They Buy:</strong> Transform from blocker to enabler. They can say "yes" to agent adoption because Agen gives them the controls they need.
+        </div>
+      </div>
+
+      <div class="track track-enablement">
+        <div class="track-label">Track 2: Enablement</div>
+        <h3>CIOs & IT Leaders</h3>
+        <div class="track-buyer">Primary Buyer</div>
+        <div class="track-mindset">"I need to enable this before we fall behind."</div>
+
+        <h4>Key Characteristics</h4>
+        <ul>
+          <li>Owns IT strategy and technology enablement</li>
+          <li>Receives agent access requests from multiple teams</li>
+          <li>Needs to integrate with existing SSO/IAM (Okta, Entra)</li>
+          <li>Responsible for enabling productivity while maintaining governance</li>
+          <li>Bridge between Security and business teams</li>
+        </ul>
+
+        <h4>What They Need to Hear</h4>
+        <ul>
+          <li>Integrates with existing identity infrastructure</li>
+          <li>Self-service for teams, no bottleneck</li>
+          <li>One control plane for all agent-to-tool connections</li>
+          <li>Speed to value, no rip and replace</li>
+        </ul>
+
+        <div class="why-buy">
+          <strong>Why They Buy:</strong> Enable AI agent adoption at scale without building custom governance from scratch. Agen plugs into existing identity infrastructure.
+        </div>
+      </div>
+    </div>
+
+    <!-- Supporting personas -->
+    <div style="margin-top: 32px;">
+      <h3 style="font-size: 1rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px;">Supporting Personas</h3>
+      <div class="persona-row">
+        <div class="persona-mini">
+          <div class="role-tag">Champion</div>
+          <h4>Ops Leaders (GTM / Rev / Biz Ops)</h4>
+          <p>They've already proven agents work - building automations in n8n, Zapier, connecting to Salesforce, HubSpot, Jira. They just need Security and IT to let them do it at scale. They create internal demand and can articulate ROI in business terms.</p>
+        </div>
+        <div class="persona-mini">
+          <div class="role-tag">Demand Creator</div>
+          <h4>Business Unit Leaders</h4>
+          <p>VPs and directors whose teams want to use AI agents but can't. They create the internal pressure that forces Security/IT to find a solution. They don't buy Agen directly but create the urgency and budget justification.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Messaging -->
+<section class="section" id="messaging">
+  <div class="section-inner">
+    <div class="section-label">Messaging</div>
+    <div class="section-title">How We Talk to Each Buyer</div>
+
+    <div class="card-grid card-grid-2" style="margin-top: 32px;">
+      <div class="card" style="border-left: 3px solid var(--red);">
+        <h3 style="color: var(--red); margin-bottom: 12px;">For the CISO: "Control Without Blocking"</h3>
+        <p style="margin-bottom: 16px;">You can enable AI agent adoption without compromising your security posture. Agen provides identity-aware governance, complete visibility, and compliance-ready audit trails for every agent interaction.</p>
+        <p style="font-size: 0.82rem; color: var(--text-dim); margin-bottom: 8px;">NARRATIVE ARC:</p>
+        <ul>
+          <li>Your employees are already using agents (shadow AI)</li>
+          <li>Blocking isn't working - it pushes usage underground</li>
+          <li>The answer is governed access with full visibility</li>
+          <li>Agen ties every agent action to an identity with approval workflows</li>
+        </ul>
+      </div>
+
+      <div class="card" style="border-left: 3px solid var(--blue);">
+        <h3 style="color: var(--blue); margin-bottom: 12px;">For the CIO: "Enable Without Building"</h3>
+        <p style="margin-bottom: 16px;">Agen integrates with your existing identity infrastructure (Okta, Entra, SSO) to add an agent governance layer - no rip and replace, no new identity stack.</p>
+        <p style="font-size: 0.82rem; color: var(--text-dim); margin-bottom: 8px;">NARRATIVE ARC:</p>
+        <ul>
+          <li>Agent access requests are coming from every team</li>
+          <li>You don't have a standard way to evaluate or govern them</li>
+          <li>Agen gives you one control plane for all agent connections</li>
+          <li>Self-service workflows mean you're not the bottleneck</li>
+        </ul>
+      </div>
+
+      <div class="card" style="border-left: 3px solid var(--green);">
+        <h3 style="color: var(--green); margin-bottom: 12px;">For Ops Leaders: "Scale What Works"</h3>
+        <p style="margin-bottom: 16px;">You've proven AI agents save time and drive results. Agen gives you the governed access layer that gets Security's approval - so you can scale those workflows org-wide.</p>
+        <p style="font-size: 0.82rem; color: var(--text-dim); margin-bottom: 8px;">NARRATIVE ARC:</p>
+        <ul>
+          <li>You've built automations that work</li>
+          <li>But they're limited because Security hasn't approved broader access</li>
+          <li>Agen makes your agent workflows auditable and governed</li>
+          <li>Show Security what's happening, get approval, roll out org-wide</li>
+        </ul>
+      </div>
+
+      <div class="card" style="border-left: 3px solid var(--yellow);">
+        <h3 style="color: var(--yellow); margin-bottom: 12px;">For Compliance: "Audit-Ready from Day One"</h3>
+        <p style="margin-bottom: 16px;">Every agent interaction is logged, traceable, and compliant. Agen provides the documentation and policy enforcement that auditors expect for AI governance.</p>
+        <p style="font-size: 0.82rem; color: var(--text-dim); margin-bottom: 8px;">NARRATIVE ARC:</p>
+        <ul>
+          <li>Regulators and auditors are asking about AI governance</li>
+          <li>Most organizations have zero documentation for agent interactions</li>
+          <li>Agen provides compliance-ready audit trails from day one</li>
+          <li>Policy enforcement at the identity level, not reactive monitoring</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Narratives -->
+<section class="section" id="narratives">
+  <div class="section-inner">
+    <div class="section-label">Narratives</div>
+    <div class="section-title">Stories That Sell</div>
+    <div class="section-desc">Each narrative targets a specific emotion and maps to a product pillar. Use these to frame conversations and content.</div>
+
+    <div class="narrative-card">
+      <div class="narrative-meta">
+        <span class="narrative-tag tag-security">CISO</span>
+        <span class="narrative-tag tag-enablement">CIO</span>
+        <span class="narrative-tag tag-pillar">P2: Total Visibility</span>
+        <span class="narrative-tag tag-emotion">Fear of the unknown</span>
+      </div>
+      <h3>The Shadow Agent Crisis</h3>
+      <p class="narrative-text">Your employees are already connecting AI agents to business tools - through ChatGPT, Claude, n8n, or random MCPs they found on GitHub. You just can't see it. Every unmonitored agent connection is a potential data breach waiting to happen.</p>
+    </div>
+
+    <div class="narrative-card">
+      <div class="narrative-meta">
+        <span class="narrative-tag tag-enablement">CIO</span>
+        <span class="narrative-tag tag-pillar">P1: Governed Access</span>
+        <span class="narrative-tag tag-emotion">Frustration</span>
+      </div>
+      <h3>The Productivity Bottleneck</h3>
+      <p class="narrative-text">Your best employees want to use AI agents to automate tedious workflows. Security says no. So they either work around the rules (shadow AI) or slow down. Either way, you lose. The bottleneck isn't the AI - it's trust.</p>
+    </div>
+
+    <div class="narrative-card">
+      <div class="narrative-meta">
+        <span class="narrative-tag tag-security">CISO</span>
+        <span class="narrative-tag tag-enablement">CIO</span>
+        <span class="narrative-tag tag-pillar">P1 + P2</span>
+        <span class="narrative-tag tag-emotion">Resolution</span>
+      </div>
+      <h3>The Trust Bridge</h3>
+      <p class="narrative-text">What if Security could say "yes" to agents? Not because they lowered their standards, but because every agent action is tied to an employee identity, scoped to specific tools, and fully auditable. That's what governed agent access looks like.</p>
+    </div>
+
+    <div class="narrative-card">
+      <div class="narrative-meta">
+        <span class="narrative-tag tag-enablement">CIO</span>
+        <span class="narrative-tag tag-pillar">P3: Scale</span>
+        <span class="narrative-tag tag-emotion">Financial risk</span>
+      </div>
+      <h3>The Cost of Ungoverned AI</h3>
+      <p class="narrative-text">Unmonitored agents making redundant API calls, hallucinated requests hitting production APIs, no visibility into agent-driven costs per team. Without governance, your AI agent bill is a black box growing every month.</p>
+    </div>
+
+    <div class="narrative-card">
+      <div class="narrative-meta">
+        <span class="narrative-tag tag-security">CISO</span>
+        <span class="narrative-tag tag-pillar">P2: Total Visibility</span>
+        <span class="narrative-tag tag-emotion">Urgency</span>
+      </div>
+      <h3>The Compliance Clock</h3>
+      <p class="narrative-text">Regulators and auditors are starting to ask about AI agent governance. Most organizations have zero documentation for agent interactions. The window to get ahead of this is closing - build the audit trail now, before the audit happens.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GTM Motions -->
+<section class="section" id="gtm">
+  <div class="section-inner">
+    <div class="section-label">Go-To-Market</div>
+    <div class="section-title">GTM Motions</div>
+    <div class="section-desc">How we go to market across different segments and buyer contexts.</div>
+
+    <div class="motion-card">
+      <div class="motion-number">0</div>
+      <div class="motion-content">
+        <h3>Brand Positioning</h3>
+        <div class="motion-hook">This is not a sales motion - it's how the world learns our language.</div>
+        <p>Not everything ladders directly to pipeline, but everything ladders to standardization. This motion builds gravitational pull toward Frontegg/Agen as the category definer.</p>
+        <div class="motion-details">
+          <div class="motion-detail"><strong>Target:</strong> Industry ecosystem (market-wide)</div>
+          <div class="motion-detail"><strong>Plays:</strong> Billboards, ghost narrative, podcasts, thought leadership, certification</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="motion-card">
+      <div class="motion-number">1</div>
+      <div class="motion-content">
+        <h3>Cross-sell to CIAM Customers</h3>
+        <div class="motion-hook">You're already a Frontegg CIAM customer - adding an enterprise-grade MCP is super easy!</div>
+        <p>Turn our most trusted base into the first wave of AI-ready SaaS. These customers already believe in us - now we help them lead the AI transition.</p>
+        <div class="motion-details">
+          <div class="motion-detail"><strong>Universe:</strong> ~300 existing Frontegg customers</div>
+          <div class="motion-detail"><strong>Goal:</strong> 80 AgentLink integrations, NRR > 120%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="motion-card">
+      <div class="motion-number">2</div>
+      <div class="motion-content">
+        <h3>Eclipsed Competitors</h3>
+        <div class="motion-hook">You have a listed competitor and if you won't react fast - you'll end up a ghost!</div>
+        <p>Find SaaS companies being eclipsed by AI-native alternatives. Show them the gap - and the fast path to parity.</p>
+        <div class="motion-details">
+          <div class="motion-detail"><strong>Universe:</strong> 2,000+ companies with AI-native competitors</div>
+          <div class="motion-detail"><strong>Goal:</strong> 100+ parity wins, competitive win rate > 65%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="motion-card">
+      <div class="motion-number">3</div>
+      <div class="motion-content">
+        <h3>Early MCP Adopters</h3>
+        <div class="motion-hook">You have some sort of MCP but it's not production grade. Let's make it enterprise-ready.</div>
+        <p>Companies that have started experimenting with MCP but need governance, identity, and production reliability.</p>
+        <div class="motion-details">
+          <div class="motion-detail"><strong>Target:</strong> Companies with early MCP implementations</div>
+          <div class="motion-detail"><strong>Angle:</strong> Enterprise-readiness narrative</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="motion-card">
+      <div class="motion-number">4</div>
+      <div class="motion-content">
+        <h3>AI Marketplaces</h3>
+        <div class="motion-hook">We can help you build the most rich and secure marketplace of connectors.</div>
+        <p>Enable market leaders to build secure, certified connector marketplaces through MCP certification and governance programs.</p>
+        <div class="motion-details">
+          <div class="motion-detail"><strong>Target:</strong> Platform companies with marketplace ambitions</div>
+          <div class="motion-detail"><strong>Angle:</strong> MCP certification + governance</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  Agen.co for Work - Company & Product Overview | Generated 2026-03-13 | Frontegg
+</footer>
+
+<script>
+  // Active nav on scroll
+  const sections = document.querySelectorAll('.section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-100px 0px -60% 0px' });
+
+  sections.forEach(section => observer.observe(section));
+
+  // Smooth scroll
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
