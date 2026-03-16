@@ -1,0 +1,2023 @@
+<!DOCTYPE html>
+<!-- GTM-META
+title: HubSpot Workflow Naming Convention Audit
+date: 2026-02-26
+category: technical
+tags: hubspot, workflows, naming, operations, cleanup
+description: Audit of HubSpot workflow naming conventions with recommendations for standardization
+skill: hubspot
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HubSpot Workflow Naming Convention Audit - Frontegg/Agen</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #232735;
+    --surface3: #2c3044;
+    --accent: #6c5ce7;
+    --accent-light: #a29bfe;
+    --accent-dim: #4a3fb5;
+    --text: #e2e4ed;
+    --text-muted: #8b8fa3;
+    --text-dim: #5a5e72;
+    --green: #00b894;
+    --green-dim: #00b89422;
+    --red: #ff6b6b;
+    --red-dim: #ff6b6b22;
+    --orange: #fdcb6e;
+    --orange-dim: #fdcb6e22;
+    --blue: #74b9ff;
+    --blue-dim: #74b9ff22;
+    --pink: #fd79a8;
+    --pink-dim: #fd79a822;
+    --cyan: #81ecec;
+    --cyan-dim: #81ecec22;
+    --border: #2d3148;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    padding: 0;
+  }
+
+  .header {
+    background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 40px 48px 32px;
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .header-badge {
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  .header-portal {
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  .header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .header p {
+    color: var(--text-muted);
+    font-size: 15px;
+    max-width: 700px;
+  }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 48px 64px;
+  }
+
+  /* Stats Row */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent-light);
+    line-height: 1.1;
+  }
+
+  .stat-number.red { color: var(--red); }
+  .stat-number.orange { color: var(--orange); }
+  .stat-number.green { color: var(--green); }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 6px;
+  }
+
+  /* Object Type Bar */
+  .object-bar {
+    display: flex;
+    gap: 0;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 40px;
+  }
+
+  .object-segment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+    padding: 0 12px;
+  }
+
+  .object-segment.contacts { background: var(--accent); flex: 208; }
+  .object-segment.companies { background: #e17055; flex: 40; }
+  .object-segment.deals { background: var(--green); flex: 91; }
+  .object-segment.tickets { background: var(--orange); flex: 4; min-width: 60px; }
+
+  .object-legend {
+    display: flex;
+    gap: 24px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+  }
+
+  .legend-dot.contacts { background: var(--accent); }
+  .legend-dot.companies { background: #e17055; }
+  .legend-dot.deals { background: var(--green); }
+  .legend-dot.tickets { background: var(--orange); }
+
+  /* Section */
+  section {
+    margin-bottom: 48px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .section-number {
+    background: var(--accent);
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  h3 {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  p.section-desc {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 20px;
+    max-width: 800px;
+  }
+
+  /* Badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 4px 10px;
+    border-radius: 5px;
+  }
+
+  .badge-critical { background: var(--red-dim); color: var(--red); border: 1px solid #ff6b6b33; }
+  .badge-warning { background: var(--orange-dim); color: var(--orange); border: 1px solid #fdcb6e33; }
+  .badge-info { background: var(--blue-dim); color: var(--blue); border: 1px solid #74b9ff33; }
+  .badge-minor { background: var(--cyan-dim); color: var(--cyan); border: 1px solid #81ecec33; }
+  .badge-fix { background: var(--green-dim); color: var(--green); border: 1px solid #00b89433; }
+  .badge-accent { background: rgba(108,92,231,0.15); color: var(--accent-light); border: 1px solid rgba(108,92,231,0.3); }
+
+  /* Problem Card */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .problem-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    border-left: 3px solid var(--border);
+  }
+
+  .problem-card.critical { border-left-color: var(--red); }
+  .problem-card.warning { border-left-color: var(--orange); }
+  .problem-card.info { border-left-color: var(--blue); }
+  .problem-card.minor { border-left-color: var(--cyan); }
+
+  .problem-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .problem-count {
+    font-size: 11px;
+    color: var(--text-muted);
+    background: var(--surface2);
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+
+  .problem-examples {
+    margin-top: 10px;
+  }
+
+  .problem-example {
+    font-size: 12px;
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+    color: var(--text-muted);
+    background: var(--bg);
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-top: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .problem-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  table th {
+    text-align: left;
+    padding: 12px 16px;
+    background: var(--surface2);
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  table tr:last-child td { border-bottom: none; }
+
+  table.striped tr:nth-child(even) td { background: var(--surface); }
+  table.striped tr:nth-child(odd) td { background: var(--bg); }
+
+  .table-wrapper {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  /* Before/After */
+  .ba-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ba-row:last-child { border-bottom: none; }
+
+  .ba-before {
+    font-size: 12px;
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+    color: var(--red);
+    background: var(--red-dim);
+    padding: 6px 10px;
+    border-radius: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .ba-arrow {
+    color: var(--text-dim);
+    font-size: 18px;
+    padding: 0 16px;
+    flex-shrink: 0;
+  }
+
+  .ba-after {
+    font-size: 12px;
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+    color: var(--green);
+    background: var(--green-dim);
+    padding: 6px 10px;
+    border-radius: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .ba-tag {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-right: 6px;
+  }
+
+  .ba-tag.unnamed { background: var(--red-dim); color: var(--red); }
+  .ba-tag.caps { background: var(--orange-dim); color: var(--orange); }
+  .ba-tag.long { background: var(--blue-dim); color: var(--blue); }
+  .ba-tag.arrow { background: var(--cyan-dim); color: var(--cyan); }
+  .ba-tag.temp { background: var(--pink-dim); color: var(--pink); }
+  .ba-tag.personal { background: var(--orange-dim); color: var(--orange); }
+  .ba-tag.date { background: var(--blue-dim); color: var(--blue); }
+
+  /* Category Cards */
+  .cat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .cat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--accent);
+  }
+
+  .cat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  .cat-prefix {
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent-light);
+    background: rgba(108,92,231,0.15);
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+
+  .cat-count {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .cat-count strong {
+    color: var(--text);
+  }
+
+  .cat-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .cat-samples {
+    margin-top: 12px;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+
+  .cat-sample {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 6px;
+    font-size: 11px;
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+  }
+
+  .cat-sample-before {
+    color: var(--text-dim);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .cat-sample-arrow {
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+
+  .cat-sample-after {
+    color: var(--green);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Quick Win Card */
+  .qw-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+
+  .qw-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .qw-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .qw-effort {
+    font-size: 11px;
+    color: var(--green);
+    margin-bottom: 10px;
+  }
+
+  .qw-items {
+    list-style: none;
+    padding: 0;
+  }
+
+  .qw-items li {
+    font-size: 12px;
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+    color: var(--text-muted);
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .qw-items li:last-child { border-bottom: none; }
+
+  /* Cleanup */
+  .cleanup-table td.name {
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    max-width: 500px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .cleanup-reason {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* Convention Rules */
+  .rules-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .rule {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+
+  .rule-icon {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .rule-icon.do { background: var(--green-dim); color: var(--green); }
+  .rule-icon.dont { background: var(--red-dim); color: var(--red); }
+
+  .rule-text {
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .rule-text code {
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+    background: var(--surface2);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 12px;
+    color: var(--accent-light);
+  }
+
+  /* Prefix table */
+  .prefix-table td:first-child {
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+    font-weight: 700;
+    color: var(--accent-light);
+    white-space: nowrap;
+  }
+
+  .prefix-table td:nth-child(3) {
+    text-align: center;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .prefix-table td:nth-child(4) {
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .stats-row { grid-template-columns: repeat(3, 1fr); }
+    .problem-grid, .cat-grid, .rules-grid { grid-template-columns: 1fr; }
+    .qw-grid { grid-template-columns: 1fr; }
+    .header { padding: 24px; }
+    .container { padding: 24px; }
+    .ba-row { grid-template-columns: 1fr; gap: 4px; }
+    .ba-arrow { display: none; }
+  }
+
+  /* Scroll hint */
+  .scroll-hint {
+    font-size: 11px;
+    color: var(--text-dim);
+    text-align: right;
+    margin-bottom: 6px;
+  }
+
+  /* Impact Score */
+  .impact-bar {
+    display: flex;
+    gap: 2px;
+    margin-top: 8px;
+  }
+
+  .impact-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--surface3);
+  }
+
+  .impact-dot.filled { background: var(--accent); }
+  .impact-dot.filled.red { background: var(--red); }
+  .impact-dot.filled.orange { background: var(--orange); }
+
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 40px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .toc a {
+    color: var(--accent-light);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .toc a:hover { color: var(--text); }
+
+  .toc-num {
+    color: var(--text-dim);
+    margin-right: 4px;
+    font-size: 11px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <span class="header-badge">Operations Audit</span>
+    <span class="header-portal">Portal 7615593 - Frontegg/Agen</span>
+  </div>
+  <h1>HubSpot Workflow Naming Convention Audit</h1>
+  <p>Comprehensive analysis of 344 active workflows with naming issues, proposed conventions, and prioritized cleanup actions. Generated 2026-02-26. Updated 2026-03-02.</p>
+</div>
+
+<!-- Progress Banner -->
+<div style="background: linear-gradient(135deg, #00b89422, #00b89411); border-bottom: 1px solid #00b89444; padding: 20px 48px;">
+  <div style="display: flex; align-items: center; gap: 24px; max-width: 1200px; margin: 0 auto;">
+    <div style="flex-shrink: 0;">
+      <div style="font-size: 36px; font-weight: 700; color: #00b894;">185</div>
+      <div style="font-size: 11px; color: #8b8fa3; text-transform: uppercase; letter-spacing: 0.5px;">Renamed</div>
+    </div>
+    <div style="flex: 1;">
+      <div style="font-size: 15px; font-weight: 600; color: #e2e4ed; margin-bottom: 8px;">Batch Rename Progress</div>
+      <div style="font-size: 13px; color: #8b8fa3; margin-bottom: 4px;">
+        <span style="color: #00b894; font-weight: 600;">SYNC:</span> 58 renamed - <a href="2026-03-01-hubspot-sync-workflow-review.html" style="color: #a29bfe; text-decoration: none;">View review</a>
+      </div>
+      <div style="font-size: 13px; color: #8b8fa3; margin-bottom: 4px;">
+        <span style="color: #fdcb6e; font-weight: 600;">CMP:</span> 60 renamed - <a href="2026-03-01-hubspot-cmp-workflow-review.html" style="color: #a29bfe; text-decoration: none;">View review</a>
+      </div>
+      <div style="font-size: 13px; color: #8b8fa3;">
+        <span style="color: #81ecec; font-weight: 600;">LFC:</span> 67 renamed - <a href="2026-03-01-hubspot-lfc-workflow-review.html" style="color: #a29bfe; text-decoration: none;">View review</a>
+      </div>
+    </div>
+    <div style="display: flex; gap: 16px; flex-shrink: 0;">
+      <div style="text-align: center;">
+        <div style="font-size: 18px; font-weight: 700; color: #e2e4ed;">~344</div>
+        <div style="font-size: 10px; color: #8b8fa3;">Total Active</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-size: 18px; font-weight: 700; color: #00b894;">185</div>
+        <div style="font-size: 10px; color: #8b8fa3;">Completed</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-size: 18px; font-weight: 700; color: #e2e4ed;">0</div>
+        <div style="font-size: 10px; color: #8b8fa3;">Skipped</div>
+      </div>
+    </div>
+  </div>
+  <!-- Progress bar -->
+  <div style="max-width: 1200px; margin: 12px auto 0; height: 4px; background: #2d3148; border-radius: 2px; overflow: hidden;">
+    <div style="width: 54%; height: 100%; background: #00b894; border-radius: 2px;"></div>
+  </div>
+  <div style="max-width: 1200px; margin: 6px auto 0; display: flex; justify-content: space-between; font-size: 10px; color: #5a5e72;">
+    <span>SYNC (58) + CMP (60) + LFC (67) done</span>
+    <span>Remaining: DOP (~20) - ALT (~15) - NRT (~15) - RTG (~15) - ENR (~5) - STG (~5) - TRK (~10) - AGN (~10) - OPS (~10) - FIX (~5)</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Table of Contents -->
+  <nav class="toc">
+    <a href="#stats"><span class="toc-num">1.</span> Summary Stats</a>
+    <a href="#problems"><span class="toc-num">2.</span> Current Problems</a>
+    <a href="#convention"><span class="toc-num">3.</span> Proposed Convention</a>
+    <a href="#before-after"><span class="toc-num">4.</span> Before/After Examples</a>
+    <a href="#categories"><span class="toc-num">5.</span> Category Breakdown</a>
+    <a href="#quick-wins"><span class="toc-num">6.</span> Quick Wins</a>
+    <a href="#cleanup"><span class="toc-num">7.</span> Cleanup Candidates</a>
+  </nav>
+
+  <!-- 1. Summary Stats -->
+  <section id="stats">
+    <div class="section-header">
+      <div class="section-number">1</div>
+      <h2>Summary Stats</h2>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-number">344</div>
+        <div class="stat-label">Active Workflows</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">208</div>
+        <div class="stat-label">Contacts (0-1)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">40</div>
+        <div class="stat-label">Companies (0-2)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">91</div>
+        <div class="stat-label">Deals (0-3)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Tickets (0-5)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number red">10</div>
+        <div class="stat-label">Issues Found</div>
+      </div>
+    </div>
+
+    <div class="object-bar">
+      <div class="object-segment contacts">Contacts - 208 (60%)</div>
+      <div class="object-segment companies">Companies - 40 (12%)</div>
+      <div class="object-segment deals">Deals - 91 (26%)</div>
+      <div class="object-segment tickets">Tickets - 4 (1%)</div>
+    </div>
+
+    <div class="object-legend">
+      <span class="legend-item"><span class="legend-dot contacts"></span> Contacts (0-1)</span>
+      <span class="legend-item"><span class="legend-dot companies"></span> Companies (0-2)</span>
+      <span class="legend-item"><span class="legend-dot deals"></span> Deals (0-3)</span>
+      <span class="legend-item"><span class="legend-dot tickets"></span> Tickets (0-5)</span>
+    </div>
+  </section>
+
+  <!-- 2. Current Problems -->
+  <section id="problems">
+    <div class="section-header">
+      <div class="section-number">2</div>
+      <h2>Current Problems</h2>
+    </div>
+    <p class="section-desc">10 distinct naming issues identified across 344 active workflows. Severity indicates impact on discoverability, maintainability, and operational risk.</p>
+
+    <div class="problem-grid">
+
+      <!-- 1 -->
+      <div class="problem-card critical">
+        <div class="problem-title">
+          <span class="badge badge-critical">Critical</span>
+          Multiple Competing Conventions
+        </div>
+        <div class="problem-desc">At least 8 different naming patterns are used simultaneously. No single pattern covers even 25% of workflows, making the list impossible to scan or filter consistently.</div>
+        <div class="problem-examples">
+          <div class="problem-example">Automation | Tag Disqualified Lead</div>
+          <div class="problem-example">NRT-2025_EVG-Buyers_guide - Start Nurture</div>
+          <div class="problem-example">Routing - Set company tier</div>
+          <div class="problem-example">[Brand Routing] Agen - Product Association</div>
+          <div class="problem-example">Operational | Renewal Deals Identifier</div>
+          <div class="problem-example">01. Lifecycle | AQL stamping</div>
+        </div>
+        <div class="impact-bar">
+          <div class="impact-dot filled red"></div><div class="impact-dot filled red"></div><div class="impact-dot filled red"></div><div class="impact-dot filled red"></div><div class="impact-dot filled red"></div>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="problem-card critical">
+        <div class="problem-title">
+          <span class="badge badge-critical">Critical</span>
+          22 Auto-Generated Pipeline Stage Names
+          <span class="problem-count">22 workflows</span>
+        </div>
+        <div class="problem-desc">Pipeline stage workflows use the full auto-generated HubSpot name, making them extremely long (60-80+ chars) and impossible to scan. They dominate the list.</div>
+        <div class="problem-examples">
+          <div class="problem-example">Pipeline is "Frontegg's Sales Pipeline", deal stage is "Stage 3: Tech Evaluation"</div>
+          <div class="problem-example">Pipeline is "Frontegg's AgentLink Sales Pipeline", deal stage is "Closed won"</div>
+        </div>
+        <div class="impact-bar">
+          <div class="impact-dot filled red"></div><div class="impact-dot filled red"></div><div class="impact-dot filled red"></div><div class="impact-dot filled red"></div><div class="impact-dot filled red"></div>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="problem-card warning">
+        <div class="problem-title">
+          <span class="badge badge-warning">Warning</span>
+          Inconsistent Arrow Notation
+          <span class="problem-count">~30 workflows</span>
+        </div>
+        <div class="problem-desc">Four different arrow symbols are used interchangeably to indicate data sync direction. No consistency in what symbol means what.</div>
+        <div class="problem-examples">
+          <div class="problem-example">Closed Lost Renewal Deal -> copy date to company field</div>
+          <div class="problem-example">Company Co-Tier --> Contact Co-Tier</div>
+          <div class="problem-example">Effective Date (deal) => Effective date (company)</div>
+          <div class="problem-example">co-tier company > contacts</div>
+        </div>
+        <div class="impact-bar">
+          <div class="impact-dot filled orange"></div><div class="impact-dot filled orange"></div><div class="impact-dot filled orange"></div><div class="impact-dot filled orange"></div><div class="impact-dot"></div>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="problem-card warning">
+        <div class="problem-title">
+          <span class="badge badge-warning">Warning</span>
+          Case Inconsistency
+          <span class="problem-count">~15 workflows</span>
+        </div>
+        <div class="problem-desc">Workflow names range from ALL CAPS to all lowercase to mixed case. No standard casing rule is followed.</div>
+        <div class="problem-examples">
+          <div class="problem-example">OPEN TASK TO CHECK ON A FREEMIUM DEALS</div>
+          <div class="problem-example">co-tier company > contacts</div>
+          <div class="problem-example">delete fake leads</div>
+          <div class="problem-example">[PATCH] SENDS HUNTER ALERT FOR 2022 RENEWALS</div>
+        </div>
+        <div class="impact-bar">
+          <div class="impact-dot filled orange"></div><div class="impact-dot filled orange"></div><div class="impact-dot filled orange"></div><div class="impact-dot"></div><div class="impact-dot"></div>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="problem-card warning">
+        <div class="problem-title">
+          <span class="badge badge-warning">Warning</span>
+          Temporal Markers in Names
+          <span class="problem-count">~10 workflows</span>
+        </div>
+        <div class="problem-desc">Dates embedded in workflow names that should be in the description field. Some date back to 2022-2023 and may be obsolete.</div>
+        <div class="problem-examples">
+          <div class="problem-example">Nurture: New Onboarding Marketing Sequences - Portal Sign up (Sept 2023)</div>
+          <div class="problem-example">NEW: Lead source update (May2022)</div>
+          <div class="problem-example">Routing - setting region from IP/region ( Jan 24')</div>
+          <div class="problem-example">NRT-2025_EVG-Onboarding_Nurture_for_Developers (August 2025)</div>
+        </div>
+        <div class="impact-bar">
+          <div class="impact-dot filled orange"></div><div class="impact-dot filled orange"></div><div class="impact-dot filled orange"></div><div class="impact-dot"></div><div class="impact-dot"></div>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="problem-card critical">
+        <div class="problem-title">
+          <span class="badge badge-critical">Critical</span>
+          Status Markers in Production Names
+          <span class="problem-count">~8 workflows</span>
+        </div>
+        <div class="problem-desc">Active workflows contain [TEMP], (cloned), (new), test, or testing in their name - suggesting they may not belong in production, or were never cleaned up after promotion.</div>
+        <div class="problem-examples">
+          <div class="problem-example">Sourceforge identification - set source and vendor [TEMP]</div>
+          <div class="problem-example">Change Demo date based on meeting outcome (cloned)</div>
+          <div class="problem-example">Nurture - OptinMonster Demo Workflow (new)</div>
+          <div class="problem-example">Send to Webinar sequence (testing)</div>
+          <div class="problem-example">ZZZ Test Form - Filled Out Form</div>
+          <div class="problem-example">test n8n webhook</div>
+        </div>
+        <div class="impact-bar">
+          <div class="impact-dot filled red"></div><div class="impact-dot filled red"></div><div class="impact-dot filled red"></div><div class="impact-dot filled red"></div><div class="impact-dot"></div>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="problem-card warning">
+        <div class="problem-title">
+          <span class="badge badge-warning">Warning</span>
+          Personal Names
+          <span class="problem-count">3 workflows</span>
+        </div>
+        <div class="problem-desc">Workflows named after individuals. If that person leaves, the context of the workflow is lost.</div>
+        <div class="problem-examples">
+          <div class="problem-example">Dana's SDR follow up nurture</div>
+          <div class="problem-example">Book a Demo with Guy</div>
+          <div class="problem-example">Send Notification | Meeting scheduled with Oz | Saasmql</div>
+        </div>
+        <div class="impact-bar">
+          <div class="impact-dot filled orange"></div><div class="impact-dot filled orange"></div><div class="impact-dot"></div><div class="impact-dot"></div><div class="impact-dot"></div>
+        </div>
+      </div>
+
+      <!-- 8 -->
+      <div class="problem-card critical">
+        <div class="problem-title">
+          <span class="badge badge-critical">Critical</span>
+          Unnamed Workflows
+          <span class="problem-count">4 workflows</span>
+        </div>
+        <div class="problem-desc">Four workflows have the auto-generated HubSpot name with only a timestamp. These are actively running with zero context about what they do.</div>
+        <div class="problem-examples">
+          <div class="problem-example">Unnamed workflow - Thu Jul 13 2023 21:30:42 GMT+0000</div>
+          <div class="problem-example">Unnamed workflow - Sat Mar 08 2025 00:16:30 GMT+02:00</div>
+          <div class="problem-example">Unnamed workflow - 2025-02-06 19:34:51 GMT+0000</div>
+          <div class="problem-example">Unnamed workflow - Mon Apr 21 2025 17:02:43 GMT</div>
+        </div>
+        <div class="impact-bar">
+          <div class="impact-dot filled red"></div><div class="impact-dot filled red"></div><div class="impact-dot filled red"></div><div class="impact-dot filled red"></div><div class="impact-dot filled red"></div>
+        </div>
+      </div>
+
+      <!-- 9 -->
+      <div class="problem-card info">
+        <div class="problem-title">
+          <span class="badge badge-info">Info</span>
+          Duplicate Names
+          <span class="problem-count">2 workflows</span>
+        </div>
+        <div class="problem-desc">Two workflows share the exact same name. Impossible to tell them apart without opening each one individually.</div>
+        <div class="problem-examples">
+          <div class="problem-example">When a contact clicks a link in the email (x2)</div>
+        </div>
+        <div class="impact-bar">
+          <div class="impact-dot filled"></div><div class="impact-dot filled"></div><div class="impact-dot"></div><div class="impact-dot"></div><div class="impact-dot"></div>
+        </div>
+      </div>
+
+      <!-- 10 -->
+      <div class="problem-card info">
+        <div class="problem-title">
+          <span class="badge badge-info">Info</span>
+          Inconsistent Terminology
+        </div>
+        <div class="problem-desc">"Company" vs "Account", "Deal" vs "Opportunity" used interchangeably across workflow names. Confusing for anyone unfamiliar with the portal's history.</div>
+        <div class="problem-examples">
+          <div class="problem-example">Opportunity -> Deal amount  vs  Deal amount -> Opportunity amount</div>
+          <div class="problem-example">Account Level - Deal demo status  vs  Company Owner Assignment Rules</div>
+        </div>
+        <div class="impact-bar">
+          <div class="impact-dot filled"></div><div class="impact-dot filled"></div><div class="impact-dot"></div><div class="impact-dot"></div><div class="impact-dot"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3. Proposed Convention -->
+  <section id="convention">
+    <div class="section-header">
+      <div class="section-number">3</div>
+      <h2>Proposed Naming Convention</h2>
+    </div>
+    <p class="section-desc">A two-tier system: every workflow gets a functional category prefix (Tier 1) and follows consistent patterns within that category (Tier 2). This makes the full list scannable, filterable, and self-documenting.</p>
+
+    <h3>Tier 1: Functional Category Prefixes</h3>
+    <div class="table-wrapper" style="margin-bottom: 24px;">
+      <table class="striped prefix-table">
+        <thead>
+          <tr>
+            <th>Prefix</th>
+            <th>Purpose</th>
+            <th>Est. Count</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background: rgba(0,184,148,0.08);">
+            <td>SYNC: <span style="font-size: 9px; color: #00b894; font-weight: 400;">DONE</span></td>
+            <td>Property sync between objects (Contact, Company, Deal)</td>
+            <td style="color: #00b894;">58</td>
+            <td>SYNC: Lead Source 2 | Contact >> Company</td>
+          </tr>
+          <tr>
+            <td>LFC: <span style="font-size: 9px; color: #00b894; font-weight: 400;">DONE</span></td>
+            <td>Lifecycle stage management &amp; lead stamping</td>
+            <td>67</td>
+            <td>LFC: Frontegg Pipeline | S2 - SQO Stamp</td>
+          </tr>
+          <tr>
+            <td>RTG:</td>
+            <td>Routing, assignment &amp; region logic</td>
+            <td>~15</td>
+            <td>RTG: Company Country >> Account Region</td>
+          </tr>
+          <tr>
+            <td>CMP: <span style="font-size: 9px; color: #00b894; font-weight: 400;">DONE</span></td>
+            <td>Campaign &amp; event-specific workflows</td>
+            <td>60</td>
+            <td>CMP: WI-2025-49ers Suite | AE Personal Invitation</td>
+          </tr>
+          <tr>
+            <td>NRT:</td>
+            <td>Nurture sequences &amp; email workflows</td>
+            <td>~15</td>
+            <td>NRT: Onboarding Nurture - Developers</td>
+          </tr>
+          <tr>
+            <td>ENR:</td>
+            <td>Data enrichment (Clearbit, CommonRoom, HubSpot)</td>
+            <td>~5</td>
+            <td>ENR: Country | HubSpot + Clearbit</td>
+          </tr>
+          <tr>
+            <td>ALT:</td>
+            <td>Alerts &amp; notifications (Slack, tasks, email alerts)</td>
+            <td>~15</td>
+            <td>ALT: Slack - Deal Stuck at Stage 0</td>
+          </tr>
+          <tr>
+            <td>STG:</td>
+            <td>Pipeline stage automations &amp; triggers</td>
+            <td>~22</td>
+            <td>STG: Sales Pipeline - Stage 3 Tech Eval</td>
+          </tr>
+          <tr>
+            <td>DOP:</td>
+            <td>Deal operations (renewals, ARR calc, forecasting)</td>
+            <td>~20</td>
+            <td>DOP: Create Renewal Deal</td>
+          </tr>
+          <tr>
+            <td>TRK:</td>
+            <td>Analytics tracking (GA4, attribution, stamps)</td>
+            <td>~10</td>
+            <td>TRK: GA4 Event - MQL</td>
+          </tr>
+          <tr>
+            <td>AGN:</td>
+            <td>Agen product-specific workflows</td>
+            <td>~10</td>
+            <td>AGN: Target Accounts Assignment</td>
+          </tr>
+          <tr>
+            <td>OPS:</td>
+            <td>Operational / utility / misc automations</td>
+            <td>~10</td>
+            <td>OPS: Copy Record ID to New Field</td>
+          </tr>
+          <tr>
+            <td>FIX:</td>
+            <td>Patches, temporary fixes, retro-updates</td>
+            <td>~5</td>
+            <td>FIX: Unenroll from RSA Sequence</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Tier 2: Consistent Patterns Within Categories</h3>
+    <div class="table-wrapper" style="margin-bottom: 24px;">
+      <table class="striped">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Pattern</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background: rgba(0,184,148,0.08);">
+            <td><strong>SYNC</strong> <span style="font-size: 9px; color: #00b894;">LIVE</span></td>
+            <td>Always use <code>>></code> for direction. Source on left, target on right. Use <code>|</code> to separate property from direction.</td>
+            <td><code>SYNC: Lead Source 2 | Contact >> Company</code></td>
+          </tr>
+          <tr>
+            <td><strong>CMP</strong> <span style="font-size: 9px; color: #00b894;">LIVE</span></td>
+            <td>Keep channel-year code, use <code>|</code> separator: <code>CMP: CODE | Action</code></td>
+            <td><code>CMP: WI-2025-Referral Partner | 02 Application Approved</code></td>
+          </tr>
+          <tr>
+            <td><strong>ALT</strong></td>
+            <td>Channel then condition: <code>ALT: Channel - Condition</code></td>
+            <td><code>ALT: Slack - Deal Stuck at Stage 1 (7+ days)</code></td>
+          </tr>
+          <tr>
+            <td><strong>STG</strong></td>
+            <td>Pipeline abbreviation + stage: <code>STG: Pipeline - Stage Name</code></td>
+            <td><code>STG: Agen Pipeline - Stage 3 Tech Eval</code></td>
+          </tr>
+          <tr>
+            <td><strong>ENR</strong></td>
+            <td>Property, then sources: <code>ENR: Property | Sources</code></td>
+            <td><code>ENR: Country | HubSpot + Clearbit</code></td>
+          </tr>
+          <tr>
+            <td><strong>NRT</strong></td>
+            <td>Campaign code then audience: <code>NRT: Code - Audience</code></td>
+            <td><code>NRT: Onboarding Nurture - InfoSec</code></td>
+          </tr>
+          <tr>
+            <td><strong>LFC</strong> <span style="font-size: 9px; color: #00b894;">LIVE</span></td>
+            <td>Context + action with <code>|</code> separator: <code>LFC: Context | Action</code></td>
+            <td><code>LFC: Frontegg Pipeline | S2 - SQO Stamp</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Naming Rules</h3>
+    <div class="rules-grid">
+      <div class="rule">
+        <div class="rule-icon do">+</div>
+        <div class="rule-text">Always <strong>Title Case</strong> after the prefix colon</div>
+      </div>
+      <div class="rule">
+        <div class="rule-icon do">+</div>
+        <div class="rule-text">Use <code>>></code> for all data sync direction (replaces ->, >, -->, =>)</div>
+      </div>
+      <div class="rule">
+        <div class="rule-icon do">+</div>
+        <div class="rule-text">Use <code>|</code> to separate sub-components within a name</div>
+      </div>
+      <div class="rule">
+        <div class="rule-icon do">+</div>
+        <div class="rule-text">Keep names under <strong>~60 characters</strong> total</div>
+      </div>
+      <div class="rule">
+        <div class="rule-icon dont">x</div>
+        <div class="rule-text">No dates in workflow names - use the HubSpot description field</div>
+      </div>
+      <div class="rule">
+        <div class="rule-icon dont">x</div>
+        <div class="rule-text">No personal names (Dana's, Guy, Oz) - describe the function</div>
+      </div>
+      <div class="rule">
+        <div class="rule-icon dont">x</div>
+        <div class="rule-text">No ALL CAPS or all lowercase - stick to Title Case</div>
+      </div>
+      <div class="rule">
+        <div class="rule-icon dont">x</div>
+        <div class="rule-text">No status markers: <code>[TEMP]</code>, <code>(cloned)</code>, <code>(new)</code>, <code>test</code> in production names</div>
+      </div>
+      <div class="rule">
+        <div class="rule-icon dont">x</div>
+        <div class="rule-text">No unnamed workflows - name them or disable them</div>
+      </div>
+      <div class="rule">
+        <div class="rule-icon do">+</div>
+        <div class="rule-text">Standardize on <strong>"Company"</strong> (not "Account") and <strong>"Deal"</strong> (not "Opportunity")</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Before/After Examples -->
+  <section id="before-after">
+    <div class="section-header">
+      <div class="section-number">4</div>
+      <h2>Before / After Examples</h2>
+    </div>
+    <p class="section-desc">20 representative workflows showing the current name and proposed renamed version. Covers the worst offenders: unnamed, ALL CAPS, long auto-generated names, inconsistent arrows, temporal markers, personal names, and status markers.</p>
+
+    <div class="table-wrapper">
+      <div class="ba-row" style="background: var(--surface2); padding: 10px 16px;">
+        <div style="font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px;">Current Name</div>
+        <div></div>
+        <div style="font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px;">Proposed Name</div>
+      </div>
+
+      <!-- Unnamed -->
+      <div class="ba-row">
+        <div class="ba-before"><span class="ba-tag unnamed">Unnamed</span>Unnamed workflow - Thu Jul 13 2023 21:30:42 GMT+0000</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">OPS: [Audit Required] Unnamed Jul 2023</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-before"><span class="ba-tag unnamed">Unnamed</span>Unnamed workflow - Mon Apr 21 2025 17:02:43 GMT</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">OPS: [Audit Required] Unnamed Apr 2025</div>
+      </div>
+
+      <!-- ALL CAPS -->
+      <div class="ba-row">
+        <div class="ba-before"><span class="ba-tag caps">ALL CAPS</span>OPEN TASK TO CHECK ON A FREEMIUM DEALS</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">ALT: Task - Check Freemium Deals</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-before"><span class="ba-tag caps">ALL CAPS</span>[PATCH] SENDS HUNTER ALERT FOR 2022 RENEWALS</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">FIX: Hunter Alert for Renewals</div>
+      </div>
+
+      <!-- Long pipeline names -->
+      <div class="ba-row">
+        <div class="ba-before"><span class="ba-tag long">Long</span>Pipeline is "Frontegg's Sales Pipeline", deal stage is "Stage 3: Tech Evaluation"</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">STG: Sales Pipeline - Stage 3 Tech Eval</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-before"><span class="ba-tag long">Long</span>Pipeline is "Frontegg's AgentLink Sales Pipeline", deal stage is "Stage 5: Vendor of Choice"</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">STG: Agen Pipeline - Stage 5 Vendor of Choice</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-before"><span class="ba-tag long">Long</span>Pipeline is "Feature Request Pipeline", Ticket status is "Requested"</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">STG: Feature Request - Status Requested</div>
+      </div>
+
+      <!-- Inconsistent arrows -->
+      <div class="ba-row">
+        <div class="ba-before"><span class="ba-tag arrow">Arrow</span>Company Co-Tier --> Contact Co-Tier</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">SYNC: Co-Tier | Company >> Contact</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-before"><span class="ba-tag arrow">Arrow</span>Effective Date (deal) => Effective date (company)</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">SYNC: Effective Date | Deal >> Company</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-before"><span class="ba-tag arrow">Arrow</span>co-tier company > contacts</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">SYNC: Co-Tier | Company >> Contact</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-before"><span class="ba-tag arrow">Arrow</span>Opportunity -> Deal amount</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">SYNC: Deal Amount | Opportunity >> Deal</div>
+      </div>
+
+      <!-- Personal names -->
+      <div class="ba-row">
+        <div class="ba-before"><span class="ba-tag personal">Personal</span>Dana's SDR follow up nurture</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">NRT: SDR Follow-Up Nurture</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-before"><span class="ba-tag personal">Personal</span>Book a Demo with Guy</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">OPS: Book a Demo Request</div>
+      </div>
+
+      <!-- Temporal markers -->
+      <div class="ba-row">
+        <div class="ba-before"><span class="ba-tag date">Date</span>Nurture: New Onboarding Marketing Sequences - Portal Sign up (Sept 2023)</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">NRT: Onboarding - Portal Sign Up</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-before"><span class="ba-tag date">Date</span>NEW: Lead source update (May2022)</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">SYNC: Lead Source Update</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-before"><span class="ba-tag date">Date</span>Account Level - Deal demo status and date Oct 2023</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">SYNC: Demo Status | Deal >> Company</div>
+      </div>
+
+      <!-- Status markers -->
+      <div class="ba-row">
+        <div class="ba-before"><span class="ba-tag temp">Status</span>Sourceforge identification - set source and vendor [TEMP]</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">TRK: Sourceforge - Set Source + Vendor</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-before"><span class="ba-tag temp">Status</span>Change Demo date based on meeting outcome (cloned)</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">OPS: Demo Date from Meeting Outcome</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-before"><span class="ba-tag temp">Status</span>n8n webhook - new contact created (test Dec2025)</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">OPS: n8n Webhook - New Contact Created</div>
+      </div>
+
+      <!-- Misc improvements -->
+      <div class="ba-row">
+        <div class="ba-before"><span class="ba-tag long">Long</span>Lead source: THIS FLOW WILL HANDLE LEADS THAT "APPEAR" IN HS</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">LFC: Lead Source - Auto-Classify New Leads</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Category Breakdown -->
+  <section id="categories">
+    <div class="section-header">
+      <div class="section-number">5</div>
+      <h2>Category Breakdown</h2>
+    </div>
+    <p class="section-desc">All 13 functional categories with estimated workflow counts and representative before/after samples.</p>
+
+    <div class="cat-grid">
+
+      <!-- SYNC -->
+      <div class="cat-card" style="border-color: var(--green); position: relative;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--green);"></div>
+        <div class="cat-header">
+          <span class="cat-prefix" style="background: rgba(0,184,148,0.15); color: var(--green);">SYNC:</span>
+          <span class="cat-count"><strong>58</strong> workflows <span style="color: var(--green); font-weight: 600; margin-left: 6px;">DONE</span></span>
+        </div>
+        <div class="cat-name">Property Sync Between Objects</div>
+        <p style="font-size: 12px; color: var(--text-muted);">Workflows that copy/sync properties between Contact, Company, and Deal records. The largest category by far. <strong style="color: var(--green);">All 58 active SYNC workflows renamed on March 2, 2026.</strong></p>
+        <div class="cat-samples">
+          <div class="cat-sample">
+            <span class="cat-sample-before">"Number of employees" from Company > Contacts</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">SYNC: Num Employees | Company >> Contact</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">Business Model (Deal) --> Business Model (Company)</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">SYNC: Business Model | Deal >> Company</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">Copy CSM Owner from Company to Deal (all pipelines)</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">SYNC: CSM Owner | Company >> Deal (All)</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">Lead source 2 (lead) --> Lead source 2 (company)</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">SYNC: Lead Source 2 | Contact >> Company</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CMP -->
+      <div class="cat-card" style="border-color: #00b89444; background: linear-gradient(135deg, var(--surface), #00b89408);">
+        <div class="cat-header">
+          <span class="cat-prefix">CMP:</span>
+          <span class="cat-count"><strong style="color: #00b894;">60 renamed</strong> <span style="font-size: 9px; color: #00b894; font-weight: 400;">DONE</span></span>
+        </div>
+        <div class="cat-name">Campaign &amp; Event Workflows</div>
+        <p style="font-size: 12px; color: var(--text-muted);">Event RSVPs, webinar registrations, list imports, and campaign-specific automations. Uses channel-year coding system. <strong style="color: var(--green);">All 60 active CMP workflows renamed on March 1, 2026.</strong></p>
+        <div class="cat-samples">
+          <div class="cat-sample">
+            <span class="cat-sample-before">WI-2025_EVG-49ers_gameday_suite - AE personal invitation</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">CMP: WI-2025-49ers Suite | AE Personal Invitation</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">WEB-2025_EVG-Buyers_guide - Filled Out Form</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">CMP: WEB-EVG-Buyers Guide | Filled Out Form</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">FE-2025_11_02-The_future_Identity_Stack... - Filled out form</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">CMP: FE-2025_11-Identity Stack Agent Era | Filled Out Form</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- LFC -->
+      <div class="cat-card" style="border-color: #00b89444; background: linear-gradient(135deg, var(--surface), #00b89408);">
+        <div class="cat-header">
+          <span class="cat-prefix">LFC:</span>
+          <span class="cat-count"><strong style="color: #00b894;">67 renamed</strong> <span style="font-size: 9px; color: #00b894; font-weight: 400;">DONE</span></span>
+        </div>
+        <div class="cat-name">Lifecycle &amp; Lead Management</div>
+        <p style="font-size: 12px; color: var(--text-muted);">MQL/AQL/SQL stamping, lifecycle stage changes, lead status updates, pipeline stage stamping, meeting outcomes, and lead qualification logic. Includes 22 pipeline stage stamping workflows (Frontegg + Agen.co). <strong style="color: var(--green);">All 67 active LFC workflows renamed on March 2, 2026.</strong></p>
+        <div class="cat-samples">
+          <div class="cat-sample">
+            <span class="cat-sample-before">Pipeline is "Frontegg's Sales Pipeline", deal stage is "Discovery"</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">LFC: Frontegg Pipeline | Discovery Stamp</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">01. Lifecycle | AQL stamping</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">LFC: AQL Stamping</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">Lead Status - update from deal</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">LFC: Lead Status | Update from Deal</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">Change Demo date based on completed meeting outcome</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">LFC: Meeting Outcome | Demo Date Stamp (Completed)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STG -->
+      <div class="cat-card">
+        <div class="cat-header">
+          <span class="cat-prefix">STG:</span>
+          <span class="cat-count"><strong>~22</strong> workflows</span>
+        </div>
+        <div class="cat-name">Pipeline Stage Automations</div>
+        <p style="font-size: 12px; color: var(--text-muted);">Auto-generated pipeline stage workflows for Sales Pipeline and Agen Pipeline. The most impactful rename - cuts names from 70+ chars to ~40.</p>
+        <div class="cat-samples">
+          <div class="cat-sample">
+            <span class="cat-sample-before">Pipeline is "Frontegg's Sales Pipeline", deal stage is "Discovery"</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">STG: Sales Pipeline - Discovery</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">Pipeline is "Frontegg's AgentLink Sales Pipeline", deal stage is "Closed won"</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">STG: Agen Pipeline - Closed Won</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">Pipeline is "Frontegg's Sales Pipeline", deal stage is "Stage 7: Negotiate"</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">STG: Sales Pipeline - Stage 7 Negotiate</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- DOP -->
+      <div class="cat-card">
+        <div class="cat-header">
+          <span class="cat-prefix">DOP:</span>
+          <span class="cat-count"><strong>~20</strong> workflows</span>
+        </div>
+        <div class="cat-name">Deal Operations</div>
+        <p style="font-size: 12px; color: var(--text-muted);">Renewal creation, ARR calculations, close dates, forecasting, deal stage counters, and deal-specific business logic.</p>
+        <div class="cat-samples">
+          <div class="cat-sample">
+            <span class="cat-sample-before">Create renewal deal</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">DOP: Create Renewal Deal</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">ARR Setting (Deal Renewals)</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">DOP: ARR Setting - Deal Renewals</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">Forecast Category Mapping for Pipeline: Frontegg's Sales Pipeline (custom))</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">DOP: Forecast Category Mapping - Sales</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RTG -->
+      <div class="cat-card">
+        <div class="cat-header">
+          <span class="cat-prefix">RTG:</span>
+          <span class="cat-count"><strong>~15</strong> workflows</span>
+        </div>
+        <div class="cat-name">Routing &amp; Assignment</div>
+        <p style="font-size: 12px; color: var(--text-muted);">Owner assignment, region routing, tier calculation, and company-to-contact owner propagation.</p>
+        <div class="cat-samples">
+          <div class="cat-sample">
+            <span class="cat-sample-before">Routing - Company country -> Account Region</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">RTG: Company Country >> Account Region</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">Company Owner Assignment Rules</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">RTG: Company Owner Assignment</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">Routing - setting region from IP/region ( Jan 24')</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">RTG: Region from IP / Company Info</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- NRT -->
+      <div class="cat-card">
+        <div class="cat-header">
+          <span class="cat-prefix">NRT:</span>
+          <span class="cat-count"><strong>~15</strong> workflows</span>
+        </div>
+        <div class="cat-name">Nurture &amp; Email Sequences</div>
+        <p style="font-size: 12px; color: var(--text-muted);">Marketing nurture sequences, follow-up emails, onboarding drips, and content-triggered nurtures.</p>
+        <div class="cat-samples">
+          <div class="cat-sample">
+            <span class="cat-sample-before">NRT-2025_EVG-Onboarding_Nurture_for_Developers (August 2025)</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">NRT: Onboarding Nurture - Developers</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">NRT-2025_EVG-Buyers_guide - Start Nurture</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">NRT: Buyers Guide - Start Nurture</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">Nurture - Start your Trial</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">NRT: Start Your Trial</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ALT -->
+      <div class="cat-card">
+        <div class="cat-header">
+          <span class="cat-prefix">ALT:</span>
+          <span class="cat-count"><strong>~15</strong> workflows</span>
+        </div>
+        <div class="cat-name">Alerts &amp; Notifications</div>
+        <p style="font-size: 12px; color: var(--text-muted);">Slack alerts, task creation, email notifications for deals, signups, lifecycle changes, and activity triggers.</p>
+        <div class="cat-samples">
+          <div class="cat-sample">
+            <span class="cat-sample-before">Slack Alert - Deal is under Stage 0 for 2 days</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">ALT: Slack - Deal Stuck at Stage 0 (2d)</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">Announce New Deal in Slack</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">ALT: Slack - New Deal Announced</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">G2 Alert</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">ALT: G2 Activity Alert</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRK -->
+      <div class="cat-card">
+        <div class="cat-header">
+          <span class="cat-prefix">TRK:</span>
+          <span class="cat-count"><strong>~10</strong> workflows</span>
+        </div>
+        <div class="cat-name">Analytics &amp; Tracking</div>
+        <p style="font-size: 12px; color: var(--text-muted);">GA4 event sending, lead gen attribution stamps, source tracking, UTM parameter management.</p>
+        <div class="cat-samples">
+          <div class="cat-sample">
+            <span class="cat-sample-before">Send GA4 Data - MQL</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">TRK: GA4 Event - MQL</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">LinkedIn Lead Generation Ads Attribution</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">TRK: LinkedIn Ads Attribution</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">set original utm parameters</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">TRK: Set Original UTM Parameters</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AGN -->
+      <div class="cat-card">
+        <div class="cat-header">
+          <span class="cat-prefix">AGN:</span>
+          <span class="cat-count"><strong>~10</strong> workflows</span>
+        </div>
+        <div class="cat-name">Agen Product-Specific</div>
+        <p style="font-size: 12px; color: var(--text-muted);">Workflows specific to the Agen/AgentLink product line - onboarding tracking, brand routing, demo flows.</p>
+        <div class="cat-samples">
+          <div class="cat-sample">
+            <span class="cat-sample-before">Agen - Target Accounts Assignment</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">AGN: Target Accounts Assignment</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">[Brand Routing] Agen - Product Association</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">AGN: Brand Routing - Product Association</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">Agen.co Tracking - Onboarding Started</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">AGN: Onboarding Started Tracking</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ENR -->
+      <div class="cat-card">
+        <div class="cat-header">
+          <span class="cat-prefix">ENR:</span>
+          <span class="cat-count"><strong>~5</strong> workflows</span>
+        </div>
+        <div class="cat-name">Data Enrichment</div>
+        <p style="font-size: 12px; color: var(--text-muted);">Clearbit, CommonRoom, and HubSpot enrichment for company and contact properties.</p>
+        <div class="cat-samples">
+          <div class="cat-sample">
+            <span class="cat-sample-before">Enrichment | Clearbit | Contact</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">ENR: Contact | Clearbit</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">Enrichment: Country | HubSpot Enrichment & Clearbit</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">ENR: Country | HubSpot + Clearbit</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- OPS -->
+      <div class="cat-card">
+        <div class="cat-header">
+          <span class="cat-prefix">OPS:</span>
+          <span class="cat-count"><strong>~10</strong> workflows</span>
+        </div>
+        <div class="cat-name">Operational / Utility</div>
+        <p style="font-size: 12px; color: var(--text-muted);">General-purpose automations, form handling, record maintenance, and integrations that don't fit other categories.</p>
+        <div class="cat-samples">
+          <div class="cat-sample">
+            <span class="cat-sample-before">Automation | Copy record id to new field</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">OPS: Copy Record ID to New Field</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">Create Associated Company for Personal Emails</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">OPS: Create Company for Personal Emails</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">delete fake leads</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">OPS: Delete Fake Leads</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FIX -->
+      <div class="cat-card">
+        <div class="cat-header">
+          <span class="cat-prefix">FIX:</span>
+          <span class="cat-count"><strong>~5</strong> workflows</span>
+        </div>
+        <div class="cat-name">Patches &amp; Temporary Fixes</div>
+        <p style="font-size: 12px; color: var(--text-muted);">Retro-updates, data patches, one-time fixes, and sequence corrections. Review regularly for disabling.</p>
+        <div class="cat-samples">
+          <div class="cat-sample">
+            <span class="cat-sample-before">Fix - Unenroll from RSA Sequence</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">FIX: Unenroll from RSA Sequence</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">12.01.24 Retro update - Accounts Redistribution - CSM Owner</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">FIX: Retro - CSM Owner Redistribution</span>
+          </div>
+          <div class="cat-sample">
+            <span class="cat-sample-before">Amount deal won - retro update</span>
+            <span class="cat-sample-arrow">&rarr;</span>
+            <span class="cat-sample-after">FIX: Retro - Deal Won Amount Update</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 6. Quick Wins -->
+  <section id="quick-wins">
+    <div class="section-header">
+      <div class="section-number">6</div>
+      <h2>Quick Wins</h2>
+    </div>
+    <p class="section-desc">The easiest renames that can be done immediately with zero risk. No logic changes needed - just update the workflow name in HubSpot settings.</p>
+
+    <div class="qw-grid">
+
+      <div class="qw-card">
+        <div class="qw-title">Name the Unnamed</div>
+        <div class="qw-effort">4 workflows - 10 minutes</div>
+        <ul class="qw-items">
+          <li>Unnamed workflow - Thu Jul 13 2023 21:30:42 GMT+0000</li>
+          <li>Unnamed workflow - Sat Mar 08 2025 00:16:30 GMT+02:00</li>
+          <li>Unnamed workflow - 2025-02-06 19:34:51 GMT+0000</li>
+          <li>Unnamed workflow - Mon Apr 21 2025 17:02:43 GMT</li>
+        </ul>
+        <p style="font-size: 11px; color: var(--orange); margin-top: 8px;">Action: Open each, understand what it does, give it a proper prefixed name. If unclear - disable it.</p>
+      </div>
+
+      <div class="qw-card">
+        <div class="qw-title">Fix ALL CAPS &amp; Lowercase</div>
+        <div class="qw-effort">~6 workflows - 5 minutes</div>
+        <ul class="qw-items">
+          <li>OPEN TASK TO CHECK ON A FREEMIUM DEALS</li>
+          <li>[PATCH] SENDS HUNTER ALERT FOR 2022 RENEWALS</li>
+          <li>IAM SPLIT</li>
+          <li>co-tier company > contacts</li>
+          <li>delete fake leads</li>
+          <li>set original utm parameters</li>
+        </ul>
+        <p style="font-size: 11px; color: var(--green); margin-top: 8px;">Action: Rename to Title Case with the appropriate prefix.</p>
+      </div>
+
+      <div class="qw-card">
+        <div class="qw-title">Remove Personal Names</div>
+        <div class="qw-effort">3 workflows - 3 minutes</div>
+        <ul class="qw-items">
+          <li>Dana's SDR follow up nurture</li>
+          <li>Book a Demo with Guy</li>
+          <li>Send Notification | Meeting scheduled with Oz | Saasmql</li>
+        </ul>
+        <p style="font-size: 11px; color: var(--green); margin-top: 8px;">Action: Replace personal names with the function described.</p>
+      </div>
+
+      <div class="qw-card">
+        <div class="qw-title">Drop Status Markers</div>
+        <div class="qw-effort">~6 workflows - 5 minutes</div>
+        <ul class="qw-items">
+          <li>Sourceforge identification... [TEMP]</li>
+          <li>Change Demo date... (cloned)</li>
+          <li>Latest source snapshot (Updated)</li>
+          <li>Nurture - OptinMonster Demo Workflow (new)</li>
+          <li>Create renewal deal (manual updated)</li>
+        </ul>
+        <p style="font-size: 11px; color: var(--green); margin-top: 8px;">Action: Remove [TEMP], (cloned), (Updated), (new) from names. Move context to description.</p>
+      </div>
+
+      <div class="qw-card">
+        <div class="qw-title">Rename Pipeline Stage Workflows</div>
+        <div class="qw-effort">22 workflows - 20 minutes</div>
+        <ul class="qw-items">
+          <li>Pipeline is "Frontegg's Sales Pipeline"... (x11)</li>
+          <li>Pipeline is "Frontegg's AgentLink Sales Pipeline"... (x10)</li>
+          <li>Pipeline is "Feature Request Pipeline"... (x1)</li>
+        </ul>
+        <p style="font-size: 11px; color: var(--green); margin-top: 8px;">Action: Batch rename using STG: prefix pattern. Copy-paste friendly.</p>
+      </div>
+
+      <div class="qw-card">
+        <div class="qw-title">Deduplicate Names</div>
+        <div class="qw-effort">2 workflows - 5 minutes</div>
+        <ul class="qw-items">
+          <li>When a contact clicks a link in the email (x2)</li>
+        </ul>
+        <p style="font-size: 11px; color: var(--orange); margin-top: 8px;">Action: Open both, understand the difference, add distinguishing suffixes (e.g., "- Nurture A" vs "- Nurture B") or disable the duplicate.</p>
+      </div>
+
+    </div>
+
+    <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-top: 20px; display: flex; gap: 24px; align-items: center;">
+      <div>
+        <div style="font-size: 36px; font-weight: 700; color: var(--green);">43</div>
+        <div style="font-size: 12px; color: var(--text-muted);">Quick Win Renames</div>
+      </div>
+      <div style="flex: 1;">
+        <div style="font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px;">Total Quick Win Estimate: ~45 minutes</div>
+        <div style="font-size: 13px; color: var(--text-muted);">These 43 workflows can be renamed without any further investigation. They represent the most impactful low-effort improvement to the workflow list's readability.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Cleanup Candidates -->
+  <section id="cleanup">
+    <div class="section-header">
+      <div class="section-number">7</div>
+      <h2>Cleanup Candidates</h2>
+    </div>
+    <p class="section-desc">Workflows that should be reviewed for potential disabling. These are either test workflows, potential duplicates, or temporal automations that may have outlived their purpose.</p>
+
+    <h3 style="margin-top: 20px;">Test &amp; Debug Workflows <span class="badge badge-critical" style="margin-left: 8px;">Review for Disabling</span></h3>
+    <div class="table-wrapper" style="margin-bottom: 24px;">
+      <table class="striped">
+        <thead>
+          <tr>
+            <th>Current Name</th>
+            <th>Reason</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">test n8n webhook</td>
+            <td class="cleanup-reason">Test keyword in name - likely a dev test</td>
+            <td><span class="badge badge-critical">Disable</span></td>
+          </tr>
+          <tr>
+            <td class="name">testing-meeting-booked</td>
+            <td class="cleanup-reason">Testing keyword in name - likely a dev test</td>
+            <td><span class="badge badge-critical">Disable</span></td>
+          </tr>
+          <tr>
+            <td class="name">ZZZ Test Form - Filled Out Form</td>
+            <td class="cleanup-reason">"ZZZ Test" prefix - clearly a test workflow</td>
+            <td><span class="badge badge-critical">Disable</span></td>
+          </tr>
+          <tr>
+            <td class="name">Send to Webinar sequence (testing)</td>
+            <td class="cleanup-reason">"(testing)" suffix - still in test mode?</td>
+            <td><span class="badge badge-warning">Review</span></td>
+          </tr>
+          <tr>
+            <td class="name">Lifecycle stage = Internal (testing)</td>
+            <td class="cleanup-reason">"(testing)" suffix - may be a permanent internal-use workflow</td>
+            <td><span class="badge badge-warning">Review</span></td>
+          </tr>
+          <tr>
+            <td class="name">n8n webhook - new contact created (test Dec2025)</td>
+            <td class="cleanup-reason">"test Dec2025" - test from 2 months ago</td>
+            <td><span class="badge badge-warning">Review</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Unnamed Workflows <span class="badge badge-critical" style="margin-left: 8px;">Name or Disable</span></h3>
+    <div class="table-wrapper" style="margin-bottom: 24px;">
+      <table class="striped">
+        <thead>
+          <tr>
+            <th>Current Name</th>
+            <th>Age</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">Unnamed workflow - Thu Jul 13 2023 21:30:42 GMT+0000</td>
+            <td class="cleanup-reason">~2.5 years old</td>
+            <td><span class="badge badge-critical">Disable if unknown</span></td>
+          </tr>
+          <tr>
+            <td class="name">Unnamed workflow - Sat Mar 08 2025 00:16:30 GMT+02:00</td>
+            <td class="cleanup-reason">~1 year old</td>
+            <td><span class="badge badge-warning">Review + Name</span></td>
+          </tr>
+          <tr>
+            <td class="name">Unnamed workflow - 2025-02-06 19:34:51 GMT+0000</td>
+            <td class="cleanup-reason">~1 year old</td>
+            <td><span class="badge badge-warning">Review + Name</span></td>
+          </tr>
+          <tr>
+            <td class="name">Unnamed workflow - Mon Apr 21 2025 17:02:43 GMT</td>
+            <td class="cleanup-reason">~10 months old</td>
+            <td><span class="badge badge-warning">Review + Name</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Temporal / Possibly Obsolete <span class="badge badge-info" style="margin-left: 8px;">Check if Still Needed</span></h3>
+    <div class="table-wrapper" style="margin-bottom: 24px;">
+      <table class="striped">
+        <thead>
+          <tr>
+            <th>Current Name</th>
+            <th>Concern</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">NEW: Lead source update (May2022)</td>
+            <td class="cleanup-reason">Date from 2022 - "NEW" is 4 years old</td>
+            <td><span class="badge badge-warning">Review</span></td>
+          </tr>
+          <tr>
+            <td class="name">Nurture DZone Cybersecurity 2023Q2</td>
+            <td class="cleanup-reason">Campaign from Q2 2023 - likely completed</td>
+            <td><span class="badge badge-warning">Review</span></td>
+          </tr>
+          <tr>
+            <td class="name">Nurture: New Onboarding Marketing Sequences - Portal Sign up (Sept 2023)</td>
+            <td class="cleanup-reason">From Sept 2023 - superseded by newer onboarding?</td>
+            <td><span class="badge badge-warning">Review</span></td>
+          </tr>
+          <tr>
+            <td class="name">FY24Q1 Lead Dev post webinar followup</td>
+            <td class="cleanup-reason">FY24 Q1 - campaign long ended</td>
+            <td><span class="badge badge-warning">Review</span></td>
+          </tr>
+          <tr>
+            <td class="name">Deal Demo Status - Sep 2023</td>
+            <td class="cleanup-reason">Date-specific - may have been replaced</td>
+            <td><span class="badge badge-info">Check</span></td>
+          </tr>
+          <tr>
+            <td class="name">Account Level - Deal demo status and date Oct 2023</td>
+            <td class="cleanup-reason">Date-specific - may have been replaced</td>
+            <td><span class="badge badge-info">Check</span></td>
+          </tr>
+          <tr>
+            <td class="name">12.01.24 Retro update - Accounts Redistribution - CSM Owner</td>
+            <td class="cleanup-reason">One-time retro update from Jan 2024 - should be disabled after completion</td>
+            <td><span class="badge badge-warning">Likely disable</span></td>
+          </tr>
+          <tr>
+            <td class="name">Amount deal won - retro update</td>
+            <td class="cleanup-reason">"retro update" - one-time backfill?</td>
+            <td><span class="badge badge-info">Check</span></td>
+          </tr>
+          <tr>
+            <td class="name">[PATCH] SENDS HUNTER ALERT FOR 2022 RENEWALS</td>
+            <td class="cleanup-reason">Patch for 2022 renewals - still active in 2026?</td>
+            <td><span class="badge badge-critical">Likely disable</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Potential Duplicates <span class="badge badge-info" style="margin-left: 8px;">Consolidate</span></h3>
+    <div class="table-wrapper" style="margin-bottom: 24px;">
+      <table class="striped">
+        <thead>
+          <tr>
+            <th>Workflow A</th>
+            <th>Workflow B</th>
+            <th>Concern</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">When a contact clicks a link in the email</td>
+            <td class="name">When a contact clicks a link in the email</td>
+            <td class="cleanup-reason">Exact duplicate name - one may be obsolete</td>
+          </tr>
+          <tr>
+            <td class="name">Change Demo date based on completed meeting outcome</td>
+            <td class="name">Change Demo date based on meeting outcome (cloned)</td>
+            <td class="cleanup-reason">"(cloned)" suggests this replaced the original - check if both are needed</td>
+          </tr>
+          <tr>
+            <td class="name">Create renewal deal</td>
+            <td class="name">Create renewal deal (manual updated)</td>
+            <td class="cleanup-reason">"(manual updated)" version may supersede the original</td>
+          </tr>
+          <tr>
+            <td class="name">Co-Tier company > deal</td>
+            <td class="name">Company Size - Company Tier to Deal company Tier</td>
+            <td class="cleanup-reason">Possibly same sync in different wording</td>
+          </tr>
+          <tr>
+            <td class="name">Copy Deal Size from Deal to Company</td>
+            <td class="name">Copy Deal amount to Company's Deal size</td>
+            <td class="cleanup-reason">Very similar sync - verify not duplicated</td>
+          </tr>
+          <tr>
+            <td class="name">Deal amount -> Opportunity amount</td>
+            <td class="name">Opportunity -> Deal amount</td>
+            <td class="cleanup-reason">Could be inverse syncs, or one might be wrong direction</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-top: 20px;">
+      <div style="font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 8px;">Cleanup Summary</div>
+      <div style="display: flex; gap: 32px;">
+        <div>
+          <span style="font-size: 24px; font-weight: 700; color: var(--red);">6</span>
+          <span style="font-size: 12px; color: var(--text-muted); margin-left: 4px;">Test workflows to disable</span>
+        </div>
+        <div>
+          <span style="font-size: 24px; font-weight: 700; color: var(--orange);">4</span>
+          <span style="font-size: 12px; color: var(--text-muted); margin-left: 4px;">Unnamed to audit</span>
+        </div>
+        <div>
+          <span style="font-size: 24px; font-weight: 700; color: var(--blue);">9</span>
+          <span style="font-size: 12px; color: var(--text-muted); margin-left: 4px;">Temporal to review</span>
+        </div>
+        <div>
+          <span style="font-size: 24px; font-weight: 700; color: var(--cyan);">6</span>
+          <span style="font-size: 12px; color: var(--text-muted); margin-left: 4px;">Potential duplicates</span>
+        </div>
+      </div>
+      <p style="font-size: 13px; color: var(--text-muted); margin-top: 12px;">Estimated total: <strong>~25 workflows</strong> could potentially be disabled or consolidated, reducing the active count from 344 to ~320.</p>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>
