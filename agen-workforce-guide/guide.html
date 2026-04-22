@@ -192,7 +192,6 @@ description: Step-by-step walkthrough of the Agen workforce platform based on th
     <li><a href="#claude">End-user experience: Claude</a></li>
     <li><a href="#chatgpt">End-user experience: ChatGPT</a></li>
     <li><a href="#users">User lifecycle management</a></li>
-    <li><a href="#branding">Customize the login experience</a></li>
     <li><a href="#recap">Recap: what you just built</a></li>
   </ol>
 </div>
@@ -362,20 +361,8 @@ description: Step-by-step walkthrough of the Agen workforce platform based on th
   Offboarding is automatic. When HR deactivates an employee in Okta, they lose Agen access at the IdP layer - you don't have to remember to revoke them from a second system. No orphaned accounts.
 </div>
 
-<!-- ============ 9 ============ -->
-<h2 id="branding"><span class="step">9</span> Customize the login experience</h2>
-
-<p>Because Agen's workforce tenant is powered by Frontegg's identity infrastructure, you get the Frontegg Builder - a design tool for branding the login box employees see. You can match your corporate theme and toggle which auth methods are available.</p>
-
-<figure>
-  <img src="screenshots/14-frontegg-builder.jpg" alt="Frontegg Builder login box customization" />
-  <figcaption><span class="tag">29:50</span>Frontegg Builder at <code>portal.frontegg.com/builder/login-box</code>. Left rail: sign-in methods (Passkeys, SMS login, OIDC, SAML, Standard sign-in, Magic code). Right rail: Themes (Modern, Classic, Vivid, Dark), Colors, Social buttons, Layout, Logo image. Changes are autosaved.</figcaption>
-</figure>
-
-<p>For a workforce tenant, most customers leave SAML enabled and turn off the consumer-style options (SMS login, Magic code, Social buttons). The "Modern" theme is the default; you can drop your brand colors in the Colors panel.</p>
-
 <!-- ============ Recap ============ -->
-<h2 id="recap"><span class="step">10</span> Recap: what you just built</h2>
+<h2 id="recap"><span class="step">9</span> Recap: what you just built</h2>
 
 <p>If you followed this end to end, your organization now has:</p>
 
@@ -384,7 +371,6 @@ description: Step-by-step walkthrough of the Agen workforce platform based on th
   <li>Connectors wired up for the tools that matter (HubSpot, Google Calendar, GitHub, etc.), with per-employee OAuth handled just-in-time.</li>
   <li>Those connectors visible in Claude and ChatGPT, identity-scoped so each employee only sees and acts on their own data.</li>
   <li>User lifecycle tied to your IdP - no separate account list to maintain.</li>
-  <li>A branded login experience that matches your corporate identity.</li>
 </ol>
 
 <p>What you didn't have to do: build MCPs from scratch, register OAuth apps per employee, write policy code, or configure identity provisioning. All of that is the platform.</p>
