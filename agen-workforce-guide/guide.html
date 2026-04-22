@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<!-- GTM-META
+title: Agen Workforce - Hands-on Platform Guide
+category: internal
+tags: agen, workforce, guide, onboarding, okta, sso, connectors, mcp, claude, chatgpt
+created: 2026-04-22
+updated: 2026-04-22
+description: Step-by-step walkthrough of the Agen workforce platform based on the Nail demo recording. Covers empty tenant setup, Okta SSO configuration, connector library, end-user experience in Claude and ChatGPT, user lifecycle, and login-box customization. Built from 73 extracted video frames; 14 curated screenshots embedded inline.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agen Workforce - Hands-on Guide</title>
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --surface: #131829;
+    --surface2: #1a2035;
+    --border: #2a3050;
+    --text: #e8ecf5;
+    --text-dim: #a0a8bd;
+    --text-faint: #5d6580;
+    --accent: #ff6d5a;
+    --accent2: #6d8cff;
+    --green: #4ade80;
+    --yellow: #facc15;
+    --purple: #a78bfa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.65;
+    padding: 40px 20px 80px;
+  }
+  .container { max-width: 980px; margin: 0 auto; }
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+    margin-bottom: 40px;
+  }
+  h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.02em; }
+  .subtitle { color: var(--text-dim); font-size: 1.05rem; line-height: 1.5; }
+  .meta { color: var(--text-faint); font-size: 0.82rem; margin-top: 10px; }
+  h2 {
+    font-size: 1.55rem;
+    margin-top: 56px;
+    margin-bottom: 16px;
+    color: var(--accent2);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  h2 .step {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--bg);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  h3 {
+    font-size: 1.1rem;
+    margin-top: 26px;
+    margin-bottom: 10px;
+    color: var(--text);
+    font-weight: 600;
+  }
+  p { margin-bottom: 14px; color: var(--text); }
+  ul, ol { margin-left: 24px; margin-bottom: 16px; }
+  li { margin-bottom: 7px; }
+  code {
+    background: var(--surface2);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', Consolas, monospace;
+    font-size: 0.88em;
+  }
+  strong { color: var(--text); font-weight: 600; }
+  em { color: var(--accent2); font-style: italic; }
+  figure {
+    margin: 24px 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+  figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  figcaption {
+    padding: 12px 18px;
+    background: var(--surface2);
+    color: var(--text-dim);
+    font-size: 0.88rem;
+    border-top: 1px solid var(--border);
+  }
+  figcaption .tag {
+    display: inline-block;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-right: 8px;
+  }
+  .callout {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent2);
+    border-radius: 6px;
+    padding: 14px 20px;
+    margin: 20px 0;
+    font-size: 0.95rem;
+  }
+  .callout.tip { border-left-color: var(--green); }
+  .callout.warn { border-left-color: var(--yellow); }
+  .callout-label {
+    font-weight: 700;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent2);
+    margin-right: 8px;
+  }
+  .callout.tip .callout-label { color: var(--green); }
+  .callout.warn .callout-label { color: var(--yellow); }
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+  }
+  .toc ol { margin-left: 22px; }
+  .toc a { color: var(--accent2); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 18px 0;
+  }
+  .panel h3 { margin-top: 0; }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 720px) {
+    .grid-2 { grid-template-columns: 1fr; }
+  }
+  .footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>Agen Workforce - Hands-on Guide</h1>
+  <div class="subtitle">A step-by-step walkthrough of the platform: from an empty tenant to employees safely using AI agents with company data. Based on Nail's live product walkthrough, March 2026.</div>
+  <div class="meta">Source: demo recording (31 min), 73 extracted frames. Built: 2026-04-22.</div>
+</header>
+
+<div class="toc">
+  <strong>Contents</strong>
+  <ol>
+    <li><a href="#overview">What Agen Workforce is</a></li>
+    <li><a href="#day1">Day 1: Your empty tenant</a></li>
+    <li><a href="#sso">Connect your identity provider (Okta SSO)</a></li>
+    <li><a href="#okta-side">Verify on the Okta side</a></li>
+    <li><a href="#connectors">Configure the connector library</a></li>
+    <li><a href="#claude">End-user experience: Claude</a></li>
+    <li><a href="#chatgpt">End-user experience: ChatGPT</a></li>
+    <li><a href="#users">User lifecycle management</a></li>
+    <li><a href="#branding">Customize the login experience</a></li>
+    <li><a href="#recap">Recap: what you just built</a></li>
+  </ol>
+</div>
+
+<!-- ============ 1 ============ -->
+<h2 id="overview"><span class="step">1</span> What Agen Workforce is</h2>
+
+<p>Agen is a unified platform - one product, one admin surface. The <strong>workforce use case</strong> is the path for organizations that want their employees to use AI agents (Claude, ChatGPT, custom copilots) safely against company data and internal tools.</p>
+
+<p>The problem it solves: employees are already connecting LLMs to company systems - through ChatGPT plugins, random MCPs they found on GitHub, personal API keys. IT has no visibility and no standard. Agen gives every employee a governed, role-scoped path to connect their agents to company systems, without IT becoming the bottleneck.</p>
+
+<div class="callout tip">
+  <span class="callout-label">Mental model</span>
+  Agen sits between your identity provider (Okta, Entra, Google Workspace, Ping) and the tools employees want to reach with AI (HubSpot, Google Calendar, GitHub, Gmail, internal APIs). It generates a per-employee MCP that carries that employee's identity and permissions. Every agent request flows through Agen, which authorizes, masks, and audits in real time.
+</div>
+
+<!-- ============ 2 ============ -->
+<h2 id="day1"><span class="step">2</span> Day 1: Your empty tenant</h2>
+
+<p>When you first land in the Agen workforce console, you'll see your development tenant with empty widgets. This is deliberate - nothing is wired up yet.</p>
+
+<figure>
+  <img src="screenshots/01-empty-dashboard.jpg" alt="Empty Agen workforce dashboard" />
+  <figcaption><span class="tag">00:04</span>The workforce overview dashboard at <code>portal.frontegg.com/development/workforce/overview</code>. Tenant ID <code>dev-d1dabedd54</code>. Widgets: Using connectors, Policies enforcement, AI actions, Top active connectors, Pending requests, Recent active users.</figcaption>
+</figure>
+
+<p>The dashboard is read-only until data flows through. The seven widgets tell you what Agen tracks:</p>
+<ul>
+  <li><strong>Using connectors</strong> - which employees have any Agen-provisioned connector active</li>
+  <li><strong>Policies enforcement</strong> - allow/block decisions over time</li>
+  <li><strong>Top active tools</strong> - which apps employees' agents are hitting most</li>
+  <li><strong>AI actions</strong> - count of agent-initiated operations this month</li>
+  <li><strong>Top active connectors</strong> - popular connectors across your workforce</li>
+  <li><strong>Pending requests</strong> - employee access requests waiting on IT approval</li>
+  <li><strong>Recent active users</strong> - who's using Agen right now</li>
+</ul>
+
+<!-- ============ 3 ============ -->
+<h2 id="sso"><span class="step">3</span> Connect your identity provider (Okta SSO)</h2>
+
+<p>Before any employee can use Agen, you plug your existing IdP in. The demo uses Okta via SAML 2.0. The wizard walks you through the Okta side without you needing to know SAML.</p>
+
+<figure>
+  <img src="screenshots/02-sso-wizard-start.jpg" alt="Agen SSO setup wizard - SAML create app" />
+  <figcaption><span class="tag">00:24</span>The setup wizard's left rail is a five-step checklist: Create SAML application → Fill attribute statements → Assign users → Submit metadata → Confirmation. The right pane shows the exact Okta screens you should see, inline.</figcaption>
+</figure>
+
+<p>In Okta Admin: <strong>Applications</strong> → <strong>Create App Integration</strong> → pick <strong>SAML 2.0</strong>.</p>
+
+<figure>
+  <img src="screenshots/03-saml-app-selection.jpg" alt="Okta create app integration - SAML 2.0 selected" />
+  <figcaption><span class="tag">00:46</span>Agen's wizard tells you exactly which option to pick in Okta (SAML 2.0, not OIDC), and shows you a screenshot of the dialog so you can confirm you're in the right place.</figcaption>
+</figure>
+
+<h3>Step 2: Map attribute statements</h3>
+
+<p>Okta and Agen need to agree on how user data (first name, last name, group memberships) travels in the SAML assertion. The wizard pre-fills the mapping.</p>
+
+<figure>
+  <img src="screenshots/04-attribute-statements.jpg" alt="Attribute statements mapping in Okta" />
+  <figcaption><span class="tag">01:25</span>Three standard mappings: <code>firstName → ${user.firstName}</code>, <code>lastName → ${user.lastName}</code>, <code>groups → Okta groups (Contains "Acme")</code>. The group filter is how Agen scopes access based on which Okta group an employee belongs to.</figcaption>
+</figure>
+
+<h3>Step 3: Assign users to the Agen app</h3>
+
+<p>Decide who in your organization can use Agen. The simplest choice is to assign the "Everyone" group (all employees), then refine later with finer-grained Okta groups per team.</p>
+
+<figure>
+  <img src="screenshots/05-assign-users.jpg" alt="Assign Everyone group to the app" />
+  <figcaption><span class="tag">01:51</span>The Okta "Assign My Application Name to Groups" dialog. You can assign the default <strong>Everyone</strong> group (all users) or pick specific groups for a phased rollout.</figcaption>
+</figure>
+
+<div class="callout">
+  <span class="callout-label">Phased rollout tip</span>
+  You don't have to open the floodgates. Assign Agen to a pilot group (e.g. <code>agen-pilot</code>) in Okta, and only members of that group will be able to log in to Agen. When you're ready to expand, add more Okta groups - no Agen config change needed.
+</div>
+
+<!-- ============ 4 ============ -->
+<h2 id="okta-side"><span class="step">4</span> Verify on the Okta side</h2>
+
+<p>Once the SAML app exists in Okta, you can see Agen's view of the integration from the Okta admin console too.</p>
+
+<figure>
+  <img src="screenshots/06-okta-assignments.jpg" alt="Okta Admin Console - AgenCo Demo assignments" />
+  <figcaption><span class="tag">08:25</span>In Okta, the <strong>AgenCo Demo</strong> application shows who can sign in. Each row is a user assigned via their group membership. The Free Plan badge (bottom left) says "4 of 10 Active users" - useful for quick-assessment pilots.</figcaption>
+</figure>
+
+<figure>
+  <img src="screenshots/07-okta-saml-settings.jpg" alt="Okta SAML 2.0 settings with metadata URL" />
+  <figcaption><span class="tag">10:40</span>The Okta <strong>Sign On</strong> tab exposes the SAML metadata URL - this is what Agen needed in the wizard's step 4 (Submit metadata). In production you paste this URL back into Agen to complete the trust handshake.</figcaption>
+</figure>
+
+<!-- ============ 5 ============ -->
+<h2 id="connectors"><span class="step">5</span> Configure the connector library</h2>
+
+<p>Now the fun part. Agen's connector library is where you decide which internal tools your employees' agents can reach. Each connector can be configured with either Agen-managed credentials or bring-your-own.</p>
+
+<figure>
+  <img src="screenshots/08-hubspot-connector.jpg" alt="Agen HubSpot connector settings" />
+  <figcaption><span class="tag">20:06</span>HubSpot connector, <strong>Connected</strong>. Two tabs: <strong>Tools</strong> (which HubSpot capabilities agents can call) and <strong>Settings</strong> (how to authenticate). Two credential modes: <em>Frontegg credentials</em> (Agen manages the OAuth) or <em>Bring your own</em> (you paste in an existing HubSpot app's credentials).</figcaption>
+</figure>
+
+<p>The two credential modes matter for different buyers:</p>
+
+<div class="grid-2">
+  <div class="panel">
+    <h3>Frontegg credentials</h3>
+    <p>Agen handles the OAuth app registration and token management for you. Fastest path - pick a tool, flip it on, done. Best for pilots and smaller deployments where you don't want to manage yet-another-OAuth-app.</p>
+  </div>
+  <div class="panel">
+    <h3>Bring your own</h3>
+    <p>You paste in your own HubSpot (or whatever) OAuth app credentials. Your legal/security team gets full provenance - traffic flows through your OAuth app, not Agen's. Best for regulated industries and enterprise security teams who want to own every credential.</p>
+  </div>
+</div>
+
+<!-- ============ 6 ============ -->
+<h2 id="claude"><span class="step">6</span> End-user experience: Claude</h2>
+
+<p>Here's where the value shows up for employees. Once you've connected Agen, every Agen-provisioned connector appears directly in Claude's Organization settings → Connectors list. Employees don't set up MCPs themselves - Agen provisions them identity-scoped.</p>
+
+<figure>
+  <img src="screenshots/09-claude-connectors.jpg" alt="Claude.ai connectors populated with Agen MCPs" />
+  <figcaption><span class="tag">14:20</span>Claude Organization settings → Connectors page showing 23 connectors, all Agen-provisioned. Names like <code>bogdan workforce prod</code>, <code>bogdan workforce stg</code>, <code>daily-cart</code>, <code>DEMO</code>, plus ready-to-use ones like GitHub Integration, Gmail, Google Drive. Each appears as a "Web / Custom" or standard category.</figcaption>
+</figure>
+
+<p>Each connector that appears in Claude is scoped to the employee logged in. So when two employees open Claude, they see the same list of connector names, but each one is wired to <em>their own</em> tokens and permissions - not a shared service account.</p>
+
+<!-- ============ 7 ============ -->
+<h2 id="chatgpt"><span class="step">7</span> End-user experience: ChatGPT</h2>
+
+<p>Same story in ChatGPT. The employee types a natural-language request, mentions the connector with @-syntax, and Agen handles the authorization flow.</p>
+
+<figure>
+  <img src="screenshots/10-chatgpt-work-query.jpg" alt="ChatGPT @Work calendar query with OAuth prompt" />
+  <figcaption><span class="tag">17:45</span>User prompt: <strong>"@Work show my calendar events."</strong> ChatGPT detects the @Work connector, attempts to call the calendar-listing tool, and realizes the user hasn't authorized Google Calendar yet. Response: "Authorize here: <code>https://go.agen.co/heGKW0</code>. After that, send me 'try again'."</figcaption>
+</figure>
+
+<p>The OAuth flow is the key moment. Agen doesn't pre-connect every tool for every employee - that would over-grant permissions. Instead, when a user first asks for something a tool can't do without their consent, Agen kicks off just-in-time OAuth.</p>
+
+<figure>
+  <img src="screenshots/11-oauth-success.jpg" alt="Agen OAuth success callback page" />
+  <figcaption><span class="tag">19:02</span>After granting permission, the user lands on <code>mcp.marketplace.frontegg.com/integration-callback</code>: "Success! Your Account is Connected - you've successfully authorized your hubspot account. You can now return to the agent and continue the conversation where you left off."</figcaption>
+</figure>
+
+<div class="callout warn">
+  <span class="callout-label">Note</span>
+  The success page mentions "hubspot account" in the copy even though the demo flow was for Google Calendar. In production, this copy should be dynamic per connector. Worth flagging to engineering.
+</div>
+
+<!-- ============ 8 ============ -->
+<h2 id="users"><span class="step">8</span> User lifecycle management</h2>
+
+<p>Agen doesn't replace your IdP - it defers to it. When you need to add or remove an employee, you do it in Okta (or Entra, or whichever IdP you connected), and the change propagates to Agen automatically.</p>
+
+<figure>
+  <img src="screenshots/12-okta-sso-login.jpg" alt="Okta SSO login prompt for Agen" />
+  <figcaption><span class="tag">22:30</span>When an employee tries to access Agen, they're redirected to Okta to sign in with their work credentials - not an Agen password. "Connecting to Okta Dashboard" (that's the Okta Dashboard tile, not a separate Agen login). Username: <code>nail.sirazitdinov@agen.co</code>.</figcaption>
+</figure>
+
+<figure>
+  <img src="screenshots/13-okta-add-person.jpg" alt="Okta Admin Console - Add Person dialog" />
+  <figcaption><span class="tag">26:08</span>Okta Admin Console → Directory → People → <strong>Add Person</strong>. Standard Okta user creation. The new user's membership in assigned groups determines whether they can access Agen (and which connectors they'll see).</figcaption>
+</figure>
+
+<div class="callout tip">
+  <span class="callout-label">Why this matters</span>
+  Offboarding is automatic. When HR deactivates an employee in Okta, they lose Agen access at the IdP layer - you don't have to remember to revoke them from a second system. No orphaned accounts.
+</div>
+
+<!-- ============ 9 ============ -->
+<h2 id="branding"><span class="step">9</span> Customize the login experience</h2>
+
+<p>Because Agen's workforce tenant is powered by Frontegg's identity infrastructure, you get the Frontegg Builder - a design tool for branding the login box employees see. You can match your corporate theme and toggle which auth methods are available.</p>
+
+<figure>
+  <img src="screenshots/14-frontegg-builder.jpg" alt="Frontegg Builder login box customization" />
+  <figcaption><span class="tag">29:50</span>Frontegg Builder at <code>portal.frontegg.com/builder/login-box</code>. Left rail: sign-in methods (Passkeys, SMS login, OIDC, SAML, Standard sign-in, Magic code). Right rail: Themes (Modern, Classic, Vivid, Dark), Colors, Social buttons, Layout, Logo image. Changes are autosaved.</figcaption>
+</figure>
+
+<p>For a workforce tenant, most customers leave SAML enabled and turn off the consumer-style options (SMS login, Magic code, Social buttons). The "Modern" theme is the default; you can drop your brand colors in the Colors panel.</p>
+
+<!-- ============ Recap ============ -->
+<h2 id="recap"><span class="step">10</span> Recap: what you just built</h2>
+
+<p>If you followed this end to end, your organization now has:</p>
+
+<ol>
+  <li>A governed Agen tenant where your employees sign in with their existing Okta identity.</li>
+  <li>Connectors wired up for the tools that matter (HubSpot, Google Calendar, GitHub, etc.), with per-employee OAuth handled just-in-time.</li>
+  <li>Those connectors visible in Claude and ChatGPT, identity-scoped so each employee only sees and acts on their own data.</li>
+  <li>User lifecycle tied to your IdP - no separate account list to maintain.</li>
+  <li>A branded login experience that matches your corporate identity.</li>
+</ol>
+
+<p>What you didn't have to do: build MCPs from scratch, register OAuth apps per employee, write policy code, or configure identity provisioning. All of that is the platform.</p>
+
+<div class="footer">
+  Source: Nail Sirazitdinov's live walkthrough recording, March 2026 (31 minutes).<br>
+  Full frame catalog: <code>agen-resources/agen demo nail/frames/</code> (73 JPEGs, 1280×720).
+</div>
+
+</div>
+</body>
+</html>
