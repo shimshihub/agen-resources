@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!-- GTM-META
+title: Agen Landing Pages - ICP Variant Picker
+category: internal
+tags: landing, variants, icp, picker
+created: 2026-04-22
+updated: 2026-04-22
+description: Index / picker page for the three Agen landing page variants. Each variant targets a different ICP persona: CISO (Security Leader), CIO (Head of IT), and Department Owner/Builder. Use this page to review all three side-by-side.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agen Landing Pages - ICP Variants</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a; --surface: #131829; --surface2: #1a2035; --border: #2a3050;
+    --text: #e8ecf5; --text-dim: #a0a8bd; --text-faint: #5d6580;
+    --accent: #ff6d5a; --accent2: #6d8cff; --green: #4ade80; --red: #f87171;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+    padding: 60px 24px;
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+  header { margin-bottom: 48px; }
+  header h1 { font-size: 2.4rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 10px; }
+  header p { color: var(--text-dim); font-size: 1.1rem; max-width: 760px; line-height: 1.5; }
+  header .note { color: var(--text-faint); font-size: 0.85rem; margin-top: 14px; }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 960px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+    text-decoration: none;
+    color: inherit;
+    display: flex; flex-direction: column;
+    transition: transform 180ms ease, border-color 180ms ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .card:hover { transform: translateY(-4px); border-color: var(--text-dim); }
+  .card::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .card.ciso::before { background: var(--red); }
+  .card.cio::before { background: var(--accent2); }
+  .card.builder::before { background: var(--green); }
+
+  .card .badge {
+    display: inline-block;
+    font-size: 0.7rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.14em;
+    padding: 4px 10px; border-radius: 4px;
+    margin-bottom: 18px;
+    align-self: flex-start;
+  }
+  .card.ciso .badge { background: color-mix(in oklab, var(--red) 16%, transparent); color: var(--red); border: 1px solid color-mix(in oklab, var(--red) 40%, transparent); }
+  .card.cio .badge { background: color-mix(in oklab, var(--accent2) 16%, transparent); color: var(--accent2); border: 1px solid color-mix(in oklab, var(--accent2) 40%, transparent); }
+  .card.builder .badge { background: color-mix(in oklab, var(--green) 16%, transparent); color: var(--green); border: 1px solid color-mix(in oklab, var(--green) 40%, transparent); }
+
+  .card h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; line-height: 1.3; }
+  .card .headline { font-size: 1.5rem; font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 18px; }
+  .card .headline .hl { color: var(--accent); }
+  .card p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.55; margin-bottom: 20px; }
+
+  .meta { margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--text-faint); }
+  .meta-line { display: flex; justify-content: space-between; padding: 4px 0; }
+  .meta-line .label { color: var(--text-faint); }
+  .meta-line .value { color: var(--text); font-weight: 500; }
+
+  .card .go { margin-top: 18px; color: var(--accent); font-weight: 600; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px; }
+
+  .frame-grid {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .frame-grid iframe {
+    width: 100%; aspect-ratio: 16/10;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+  }
+  @media (max-width: 960px) { .frame-grid { grid-template-columns: 1fr; } }
+
+  footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--text-faint); font-size: 0.82rem; text-align: center; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>Landing page variants</h1>
+  <p>Three variants of the Agen homepage, each targeting a different buyer in our ICP. Open each one full-screen via the "Open variant" link to see it as a visitor would.</p>
+  <div class="note">Each variant uses the same design system (dark theme, coral accent, Inter). What changes is headline angle, emotional tone, problem framing, proof-points selected, and CTA copy.</div>
+</header>
+
+<div class="grid">
+
+  <a class="card ciso" href="ciso.html" target="_blank">
+    <div class="badge">Variant A · Security</div>
+    <div class="headline">Your employees are using AI with company data. <span class="hl">You just can't see it.</span></div>
+    <p>Leans on the Shadow Agent Crisis narrative. Emotional hook: fear of the unknown. Built around P2 (Runtime Governance) + P3 (Agent Trust Score).</p>
+    <div class="meta">
+      <div class="meta-line"><span class="label">Target</span><span class="value">CISO / Security Leader</span></div>
+      <div class="meta-line"><span class="label">Lead pillar</span><span class="value">P2 Runtime Governance</span></div>
+      <div class="meta-line"><span class="label">CTA</span><span class="value">30-min walkthrough</span></div>
+      <div class="meta-line"><span class="label">Tone</span><span class="value">Direct, urgent</span></div>
+    </div>
+    <span class="go">Open variant →</span>
+  </a>
+
+  <a class="card cio" href="cio.html" target="_blank">
+    <div class="badge">Variant B · IT</div>
+    <div class="headline">Every employee building with AI. <span class="hl">You, still in control.</span></div>
+    <p>Leans on the Trust Bridge narrative. Emotional hook: resolution, a way forward. Built around P1 (Safe Enablement) with a before/after frame (lock it down vs let it sprawl vs Agen).</p>
+    <div class="meta">
+      <div class="meta-line"><span class="label">Target</span><span class="value">CIO / Head of IT</span></div>
+      <div class="meta-line"><span class="label">Lead pillar</span><span class="value">P1 Safe Enablement</span></div>
+      <div class="meta-line"><span class="label">CTA</span><span class="value">See it live</span></div>
+      <div class="meta-line"><span class="label">Tone</span><span class="value">Pragmatic, confident</span></div>
+    </div>
+    <span class="go">Open variant →</span>
+  </a>
+
+  <a class="card builder" href="builder.html" target="_blank">
+    <div class="badge">Variant C · Builders</div>
+    <div class="headline">You have the AI ideas. Security says no. <span class="hl">Here's the fix.</span></div>
+    <p>Leans on the Productivity Bottleneck narrative. Emotional hook: frustration with being blocked. Walks through a real scenario (9:12 AM to 10:30 AM) to show the unblock.</p>
+    <div class="meta">
+      <div class="meta-line"><span class="label">Target</span><span class="value">Dept Owner / Builder</span></div>
+      <div class="meta-line"><span class="label">Lead pillar</span><span class="value">P1 (self-service angle)</span></div>
+      <div class="meta-line"><span class="label">CTA</span><span class="value">15-min demo</span></div>
+      <div class="meta-line"><span class="label">Tone</span><span class="value">Warm, solution-led</span></div>
+    </div>
+    <span class="go">Open variant →</span>
+  </a>
+
+</div>
+
+<div class="frame-grid">
+  <iframe src="ciso.html" title="CISO variant preview"></iframe>
+  <iframe src="cio.html" title="CIO variant preview"></iframe>
+  <iframe src="builder.html" title="Builder variant preview"></iframe>
+</div>
+
+<footer>
+  All three variants use the same platform facts. Only the angle, frame, and CTA change.
+</footer>
+
+</div>
+</body>
+</html>
