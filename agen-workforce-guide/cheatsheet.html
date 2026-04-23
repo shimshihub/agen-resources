@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<!-- GTM-META
+title: Agen.co Quick Start - Onboarding Cheat Sheet
+category: internal
+tags: agen, workforce, onboarding, cheatsheet, quickstart, sso, connectors
+created: 2026-04-22
+updated: 2026-04-22
+description: One-page cheat sheet for onboarding a new org to Agen.co. Condensed from the hands-on walkthrough guide into a printable quick reference covering setup, daily admin ops, end-user experience, and common questions.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agen.co Quick Start</title>
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --surface: #131829;
+    --surface2: #1a2035;
+    --border: #2a3050;
+    --text: #e8ecf5;
+    --text-dim: #a0a8bd;
+    --text-faint: #5d6580;
+    --accent: #ff6d5a;
+    --accent2: #6d8cff;
+    --green: #4ade80;
+    --yellow: #facc15;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.5;
+    padding: 28px 20px 60px;
+    font-size: 14px;
+  }
+  .container { max-width: 1180px; margin: 0 auto; }
+  header {
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 18px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  header h1 .sub {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--text-dim);
+    margin-top: 4px;
+    letter-spacing: 0.02em;
+  }
+  header .meta {
+    color: var(--text-faint);
+    font-size: 0.75rem;
+    text-align: right;
+    line-height: 1.45;
+  }
+  header .meta a { color: var(--accent2); text-decoration: none; }
+  .pitch {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 14px 20px;
+    margin-bottom: 28px;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+  .pitch strong { color: var(--accent); }
+  h2 {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--accent2);
+    font-weight: 700;
+    margin-top: 28px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .row {
+    display: grid;
+    gap: 18px;
+  }
+  .row-5 { grid-template-columns: repeat(5, 1fr); }
+  .row-3 { grid-template-columns: repeat(3, 1fr); }
+  .row-2 { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 960px) {
+    .row-5 { grid-template-columns: repeat(2, 1fr); }
+    .row-3, .row-2 { grid-template-columns: 1fr; }
+  }
+  .step {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+    position: relative;
+    min-height: 190px;
+  }
+  .step .num {
+    position: absolute;
+    top: -12px;
+    left: 14px;
+    background: var(--accent);
+    color: var(--bg);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.85rem;
+  }
+  .step h3 {
+    font-size: 0.98rem;
+    color: var(--text);
+    font-weight: 700;
+    margin-bottom: 6px;
+    margin-top: 6px;
+  }
+  .step .where {
+    font-size: 0.72rem;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+  }
+  .step ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+  }
+  .step li {
+    padding: 4px 0 4px 14px;
+    position: relative;
+    line-height: 1.45;
+  }
+  .step li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+  }
+  .card.green { border-left: 3px solid var(--green); }
+  .card.blue { border-left: 3px solid var(--accent2); }
+  .card.yellow { border-left: 3px solid var(--yellow); }
+  .card h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+  .card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+  }
+  .card li {
+    padding: 4px 0 4px 18px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .card.green li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+  .card.blue li::before { content: "◆"; position: absolute; left: 0; color: var(--accent2); font-size: 0.8em; top: 6px; }
+  .card.yellow li::before { content: "!"; position: absolute; left: 0; color: var(--yellow); font-weight: 700; }
+  code {
+    background: var(--surface2);
+    color: var(--accent);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-family: 'SF Mono', Consolas, monospace;
+    font-size: 0.82em;
+  }
+  .qa {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0;
+    font-size: 0.85rem;
+  }
+  .qa > div {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .qa > div.q {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .qa > div.a {
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .qa > div:nth-last-child(-n+2) { border-bottom: 0; }
+  @media (max-width: 720px) {
+    .qa { grid-template-columns: 1fr; }
+    .qa > div.q { border-bottom: 0; padding-bottom: 4px; }
+  }
+  .kit {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 10px;
+    font-size: 0.82rem;
+  }
+  .kit div {
+    background: var(--surface2);
+    padding: 10px 14px;
+    border-radius: 6px;
+    color: var(--text-dim);
+  }
+  .kit strong { color: var(--text); display: block; margin-bottom: 2px; font-weight: 600; font-size: 0.82rem; }
+  .footer {
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    color: var(--text-faint);
+    font-size: 0.75rem;
+    text-align: center;
+  }
+  @media print {
+    body { background: white; color: black; font-size: 11px; }
+    h1, h3 { color: black !important; }
+    .pitch, .step, .card { background: #f7f7f4; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>
+    Agen.co Quick Start
+    <span class="sub">Onboarding cheat sheet - from empty tenant to employees using agents with company data</span>
+  </h1>
+  <div class="meta">
+    Companion to the <a href="guide.html">full walkthrough guide</a><br>
+    Updated 2026-04-22
+  </div>
+</header>
+
+<div class="pitch">
+  <strong>Agen in one line:</strong> every employee gets a governed, per-identity path to connect AI agents (Claude, ChatGPT, custom) to your internal tools. You keep your existing IdP; Agen handles identity-aware access, runtime policy, and audit.
+</div>
+
+<!-- ============ BEFORE YOU START ============ -->
+<h2>Before you start - have these ready</h2>
+<div class="kit">
+  <div><strong>IdP admin access</strong>Okta, Entra, Ping, or Google Workspace</div>
+  <div><strong>Agen tenant URL</strong><code>portal.frontegg.com/development/workforce/overview</code></div>
+  <div><strong>Pilot group in your IdP</strong>e.g. <code>agen-pilot</code> — easier than flipping "Everyone"</div>
+  <div><strong>List of tools to expose</strong>HubSpot, Google Workspace, GitHub, Gmail, etc.</div>
+</div>
+
+<!-- ============ 5 STEPS ============ -->
+<h2>Setup in 5 steps (~30 minutes)</h2>
+<div class="row row-5">
+
+  <div class="step">
+    <div class="num">1</div>
+    <h3>Land in your tenant</h3>
+    <div class="where">Agen console</div>
+    <ul>
+      <li>Empty dashboard with 7 widgets</li>
+      <li>Tenant ID top-left (<code>dev-xxx</code>)</li>
+      <li>Nothing wired up yet - expected</li>
+    </ul>
+  </div>
+
+  <div class="step">
+    <div class="num">2</div>
+    <h3>Connect your IdP</h3>
+    <div class="where">Agen wizard + Okta admin</div>
+    <ul>
+      <li>Create SAML 2.0 app in Okta</li>
+      <li>Map attributes (firstName, lastName, groups)</li>
+      <li>Assign pilot group</li>
+      <li>Paste metadata URL back into Agen</li>
+    </ul>
+  </div>
+
+  <div class="step">
+    <div class="num">3</div>
+    <h3>Verify the handshake</h3>
+    <div class="where">Okta admin</div>
+    <ul>
+      <li>AgenCo app shows Assignments</li>
+      <li>SAML 2.0 Sign On tab has metadata URL</li>
+      <li>Trust established both ways</li>
+    </ul>
+  </div>
+
+  <div class="step">
+    <div class="num">4</div>
+    <h3>Turn on connectors</h3>
+    <div class="where">Agen console → Connectors</div>
+    <ul>
+      <li>Pick tools (HubSpot, GitHub, etc.)</li>
+      <li>Choose credential mode:</li>
+      <li><code>Frontegg credentials</code> for speed</li>
+      <li><code>Bring your own</code> for compliance</li>
+    </ul>
+  </div>
+
+  <div class="step">
+    <div class="num">5</div>
+    <h3>Test with a user</h3>
+    <div class="where">Claude or ChatGPT</div>
+    <ul>
+      <li>Employee logs in via Okta SSO</li>
+      <li>Connectors appear automatically</li>
+      <li>OAuth on first use → done</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ============ EXPERIENCES ============ -->
+<h2>What different people see</h2>
+<div class="row row-3">
+
+  <div class="card blue">
+    <h3>Admin (you)</h3>
+    <ul>
+      <li>Dashboard: connector usage, policies fired, AI actions/month</li>
+      <li>Connector library: enable/disable, credential mode</li>
+      <li>Pending requests from employees for new tool access</li>
+      <li>Audit trail of every agent action</li>
+    </ul>
+  </div>
+
+  <div class="card green">
+    <h3>Employee in Claude</h3>
+    <ul>
+      <li>Organization Settings → Connectors shows Agen-provisioned MCPs</li>
+      <li>Each connector is scoped to their identity</li>
+      <li>No MCP setup needed - it just appears</li>
+    </ul>
+  </div>
+
+  <div class="card green">
+    <h3>Employee in ChatGPT</h3>
+    <ul>
+      <li>Types <code>@Work</code> in a prompt to trigger Agen</li>
+      <li>First use of a tool → OAuth consent at <code>go.agen.co/xxx</code></li>
+      <li>After auth, "try again" and it works</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ============ DAILY OPS ============ -->
+<h2>Daily admin ops (90% of your time)</h2>
+<div class="row row-2">
+
+  <div class="card blue">
+    <h3>User lifecycle</h3>
+    <ul>
+      <li><strong>Add user:</strong> add them in your IdP, assign to the right Okta group → they can sign into Agen</li>
+      <li><strong>Remove user:</strong> deactivate in IdP → Agen access revokes automatically</li>
+      <li><strong>Change access:</strong> change Okta group membership → Agen scopes adjust</li>
+      <li>You never touch a separate user list in Agen</li>
+    </ul>
+  </div>
+
+  <div class="card blue">
+    <h3>Tool lifecycle</h3>
+    <ul>
+      <li><strong>New tool request:</strong> employee raises via self-service; you approve</li>
+      <li><strong>Enable a connector:</strong> flip it on in the library, pick credential mode</li>
+      <li><strong>Disable a connector:</strong> toggle off - all employees lose access instantly</li>
+      <li><strong>Rotate credentials:</strong> swap the OAuth app, existing sessions re-auth</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ============ COMMON QUESTIONS ============ -->
+<h2>Common questions on day one</h2>
+<div class="qa">
+  <div class="q">Do employees have to set up MCPs themselves?</div>
+  <div class="a">No. Agen provisions MCPs per employee, scoped to their identity. They just appear in Claude and ChatGPT.</div>
+
+  <div class="q">What if we don't have Okta?</div>
+  <div class="a">Works with Entra, Ping, and Google Workspace too. Same SAML 2.0 flow.</div>
+
+  <div class="q">Does Agen store my employees' passwords?</div>
+  <div class="a">No. Authentication always happens at your IdP. Agen never sees credentials.</div>
+
+  <div class="q">What happens when an employee leaves?</div>
+  <div class="a">Deactivate in your IdP. Agen access revokes automatically. No orphaned accounts.</div>
+
+  <div class="q">Can we scope pilot access to a subset of the org?</div>
+  <div class="a">Yes. Assign Agen to a single Okta group (e.g. <code>agen-pilot</code>). Only those users can sign in. Expand by adding more groups - no Agen config change.</div>
+
+  <div class="q">What if an employee's agent asks for a tool they don't have access to?</div>
+  <div class="a">The agent gets a polite "access denied" with a link to the self-service request portal. IT reviews and approves from the Pending Requests widget.</div>
+
+  <div class="q">Frontegg vs "Bring your own" credentials - which do we pick?</div>
+  <div class="a"><strong>Frontegg credentials</strong> for speed (pilots, mid-market). <strong>Bring your own</strong> for compliance (regulated industries, security teams who need to own every OAuth app).</div>
+</div>
+
+<div class="footer">
+  Built from Nail's live walkthrough (March 2026). For the step-by-step version with screenshots, see the <a href="guide.html" style="color: var(--accent2);">full walkthrough guide</a>.
+</div>
+
+</div>
+</body>
+</html>
