@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<!--
+GTM-META
+title: Customer Expansion GTM Plan - Cross-Sell Agen.co into the Frontegg Base
+type: internal-plan
+date: 2026-07-06
+purpose: Go-to-market plan for the CSM-run cross-sell of the Agen.co agent product into the existing Frontegg CIAM customer base (the /customer-expansion workspace, seeded from HubSpot list "Frontegg Customers without Agen.co" #16837). Covers base segmentation, a champion-to-buyer mapping step (our Frontegg contact is usually a developer or platform lead while the agent-governance buyer is security leadership), the offer portfolio (hook vs conversion offers, tested across the base), a base-only low-spend demand-gen plan, a co-founder LinkedIn InMail motion from Sagi and Aviad with a tiered incentive, and a CSM compensation model built for the book-meeting-hand-to-AE motion with qualified meetings booked as the primary KPI. Decisions locked with Ori 2026-07-06: CSM books + hands to AE (spiff + close bonus); experiment with all four offers; base-only low spend; optimize for qualified meetings.
+source: CLAUDE.md Motion 1 (Cross-sell to CIAM Customers) + project_customer_expansion_section + call-feedback Hard Rules + Ori's brief 2026-07-06
+-->
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Customer Expansion GTM Plan</title>
+<style>
+:root{--green:#16a34a;--green-soft:#dcfce7;--green-ink:#15803d;--ink:#0f172a;--muted:#475569;--faint:#94a3b8;--line:#e7ebf0;--bg:#f6f8fa;--card:#fff;--amber:#b45309;--amber-soft:#fef3c7;--blue:#1d4ed8;--blue-soft:#eff6ff;--purple:#7c3aed;--purple-soft:#f3e8ff;--coral:#e11d48;--coral-soft:#ffe4e6;}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:14.5px;line-height:1.62}
+.wrap{max-width:1060px;margin:0 auto;padding:30px 20px 100px}
+.hero{background:linear-gradient(135deg,#0f172a,#2a1a4d 60%,#3a1d3d);color:#fff;border-radius:16px;padding:30px 34px;margin-bottom:22px}
+.hero .tag{display:inline-block;background:rgba(124,58,237,.28);color:#ddd6fe;border:1px solid rgba(124,58,237,.5);border-radius:20px;font-size:11px;padding:3px 12px;margin-bottom:12px;letter-spacing:.3px}
+.hero h1{margin:0 0 8px;font-size:26px;line-height:1.2}
+.hero p{margin:0;color:#cbd5e1;font-size:14.5px;max-width:880px}
+.hero .kpis{display:flex;flex-wrap:wrap;gap:22px;margin-top:18px}
+.hero .kpi{border-left:2px solid rgba(148,163,184,.4);padding-left:12px}
+.hero .kpi b{display:block;font-size:20px;color:#fff}
+.hero .kpi span{font-size:11.5px;color:#94a3b8;text-transform:uppercase;letter-spacing:.4px}
+h2{font-size:19px;margin:36px 0 8px;display:flex;align-items:center;gap:10px}
+h2 .n{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--purple),var(--blue));color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex:0 0 auto}
+h3{font-size:15px;margin:20px 0 6px;color:var(--ink)}
+.lede{color:var(--muted);font-size:14px;margin:2px 0 14px;max-width:900px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin:14px 0}
+.sub{color:var(--muted);font-size:13px;margin:0 0 12px}
+ul{margin:8px 0;padding-left:20px;color:var(--muted)}li{margin:6px 0}li b{color:var(--ink)}
+code{background:#eef2f6;padding:1px 6px;border-radius:5px;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;color:var(--purple)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cols3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+@media(max-width:820px){.cols,.cols3{grid-template-columns:1fr}}
+.mini{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.mini h4{margin:0 0 8px;font-size:14px;color:var(--ink);display:flex;align-items:center;gap:8px}
+.mini p{margin:0 0 6px;color:var(--muted);font-size:13px}
+.pill{display:inline-block;border-radius:20px;font-size:10.5px;padding:2px 10px;font-weight:600;letter-spacing:.2px}
+.pill.a{background:var(--green-soft);color:var(--green-ink)}
+.pill.b{background:var(--blue-soft);color:var(--blue)}
+.pill.c{background:var(--purple-soft);color:var(--purple)}
+.pill.hook{background:var(--amber-soft);color:var(--amber)}
+.pill.conv{background:var(--coral-soft);color:var(--coral)}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--faint);padding:9px 11px;border-bottom:2px solid var(--line)}
+td{padding:11px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--muted)}
+td b{color:var(--ink)}
+tr:last-child td{border-bottom:none}
+.tint th{background:#faf9fe}
+.box{border-radius:12px;padding:14px 18px;margin:14px 0;font-size:13.5px}
+.info{background:var(--blue-soft);border:1px solid #bfdbfe;color:#1e3a8a}
+.warn{background:var(--amber-soft);border:1px solid #fde68a;color:#92400e}
+.good{background:var(--green-soft);border:1px solid #bbf7d0;color:var(--green-ink)}
+.box b{color:inherit}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:12px 0}
+.step{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 13px;font-size:12.5px;color:var(--ink);font-weight:600}
+.step small{display:block;font-weight:400;color:var(--faint);font-size:10.5px}
+.arr{color:var(--faint);font-size:16px}
+.grid-num{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:8px 0}
+@media(max-width:820px){.grid-num{grid-template-columns:repeat(2,1fr)}}
+.stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-align:center}
+.stat b{display:block;font-size:24px;color:var(--purple)}
+.stat span{font-size:11.5px;color:var(--muted)}
+.callout{border-left:3px solid var(--purple);background:#faf9fe;border-radius:0 10px 10px 0;padding:10px 16px;margin:12px 0;font-size:13.5px;color:var(--muted)}
+.callout b{color:var(--ink)}
+.foot{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);color:var(--faint);font-size:12px}
+.tl{position:relative;margin:14px 0 0 6px;padding-left:22px;border-left:2px solid var(--line)}
+.tl .ph{position:relative;margin-bottom:18px}
+.tl .ph::before{content:"";position:absolute;left:-29px;top:3px;width:12px;height:12px;border-radius:50%;background:var(--purple);border:3px solid #fff;box-shadow:0 0 0 2px var(--purple)}
+.tl .ph h4{margin:0 0 4px;font-size:14px}
+.tl .ph .w{font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--faint)}
+.tl .ph p{margin:4px 0 0;color:var(--muted);font-size:13px}
+@media print{body{background:#fff}.card,.mini,.stat{break-inside:avoid}.hero{background:#1e1b4b !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style></head>
+<body><div class="wrap">
+
+<div class="hero">
+  <span class="tag">MOTION 1 · CROSS-SELL TO THE FRONTEGG BASE</span>
+  <h1>Customer Expansion GTM Plan</h1>
+  <p>Turn the ~200 existing Frontegg identity customers into the first wave of Agen.co agent-access customers. CSMs already own these relationships, the identity layer is already in place, and the message writes itself: you are already a Frontegg customer, so the secure agent layer is a short step, not a rebuild. This plan covers who we go after, what we put in front of them, how we generate meetings on a modest budget, and how we pay CSMs to make it happen.</p>
+  <div class="kpis">
+    <div class="kpi"><b>~200</b><span>customers in the base</span></div>
+    <div class="kpi"><b>Qualified meetings</b><span>primary Q3 KPI</span></div>
+    <div class="kpi"><b>CSM books → AE closes</b><span>the motion</span></div>
+    <div class="kpi"><b>Base-only</b><span>low-spend demand gen</span></div>
+  </div>
+</div>
+
+<div class="box info"><b>How this plan reflects your four decisions.</b> CSMs source and book the qualified expansion meeting, then hand to an AE for demo-to-close, so comp is built on an accepted-meeting spiff plus a closed-won kicker. We run all four offers as an experiment, split into hook offers that earn the meeting and conversion offers that close the deal. Demand gen stays inside the base with minimal paid spend. Everything is weighted toward the leading indicator you chose: qualified meetings booked.</div>
+
+<!-- ============ 1 ============ -->
+<h2><span class="n">1</span> The play in one paragraph</h2>
+<p class="lede">This is not net-new prospecting. Every account already trusts us with identity and policy, most are mid-market to enterprise B2B SaaS, and many are already discussing AI internally. The job is to give each CSM a short, repeatable reason to open a conversation, a low-friction meeting hook, and a clean handoff to an AE, then pay them in a way that keeps meetings flowing without inviting junk.</p>
+<div class="flow">
+  <div class="step">Segment the base<small>3 tiers in /customer-expansion</small></div>
+  <span class="arr">→</span>
+  <div class="step">Offer a hook<small>assessment or done-for-you MCP</small></div>
+  <span class="arr">→</span>
+  <div class="step">CSM books meeting<small>via Slack / email / in-product</small></div>
+  <span class="arr">→</span>
+  <div class="step">AE accepts + runs it<small>Create Opportunity in Agen pipeline</small></div>
+  <span class="arr">→</span>
+  <div class="step">Convert on an offer<small>pilot / early-bird / bundle</small></div>
+</div>
+<div class="callout"><b>The one-liner CSMs lead with:</b> "You are already running Frontegg for identity. We can turn on a secure, governed agent layer on top of it, and we will do a free 20-minute discovery that almost always surfaces agents already connected to your systems that nobody has visibility into." That last part is the strongest hook we have, and it works on the whole base.</div>
+
+<!-- ============ 2 ============ -->
+<h2><span class="n">2</span> Segment the base into three tiers</h2>
+<p class="lede">The workspace already exposes the fields we need to tier: Company Co-Tier (<code>company_co_tier</code>), employee count (<code>numberofemployees</code>), CSM owner (<code>csm_owner</code>), and whether an Agen deal is already open. Add one signal per account: is there a known AI or agent initiative. That gives us three treatment groups, each with a different level of effort.</p>
+<div class="cols3">
+  <div class="mini">
+    <h4><span class="pill a">Tier A</span> White-glove</h4>
+    <p><b>Who:</b> strategic and top-tier accounts, active exec relationship, a known AI initiative, healthy usage.</p>
+    <p><b>Treatment:</b> CSM + AE tandem, a pre-built done-for-you MCP as the wow, exec roundtable invite.</p>
+    <p><b>Volume:</b> roughly the top 15-20% of the base, worked by name.</p>
+  </div>
+  <div class="mini">
+    <h4><span class="pill b">Tier B</span> Volume core</h4>
+    <p><b>Who:</b> healthy mid-market accounts, good relationship, AI on the radar but not committed.</p>
+    <p><b>Treatment:</b> free Agent Discovery assessment as the hook, personalized email + in-product + CSM Slack nudge.</p>
+    <p><b>Volume:</b> the bulk of the base, the engine of the meeting number.</p>
+  </div>
+  <div class="mini">
+    <h4><span class="pill c">Tier C</span> Long tail / self-serve</h4>
+    <p><b>Who:</b> smaller accounts, lighter relationship, or renewal-only touch.</p>
+    <p><b>Treatment:</b> automated nurture and an early-bird founding-customer offer. CSM only engages on a reply.</p>
+    <p><b>Volume:</b> the remainder, worked with low effort per account.</p>
+  </div>
+</div>
+<div class="box warn"><b>Do this first.</b> Before any outreach, have each CSM spend 30 minutes tiering their own accounts in <code>/customer-expansion</code> using the filters that already exist (company size, co-tier, Agen-deal status). Meetings come from CSMs who know which 20 accounts to call this week, not from a blast to all 200.</div>
+
+<!-- ============ 3 ============ -->
+<h2><span class="n">3</span> Map the account: our champion is rarely the buyer</h2>
+<p class="lede">This is the trap that quietly stalls a cross-sell. Our warm relationship at a Frontegg account usually sits with whoever implemented identity, a developer, a platform lead, or an eng manager. The agent-governance product is bought somewhere else entirely, in security leadership and sometimes IT. So the person we know is a door into the account, not the person who signs. If we pitch the champion as if they were the buyer, the conversation stays friendly and goes nowhere.</p>
+
+<h3>Who we have vs who we need</h3>
+<table>
+  <tr><th>Role</th><th>Usually who</th><th>Their job in this motion</th></tr>
+  <tr><td><b>Our Frontegg champion</b></td><td>Developer, platform lead, or eng manager who set up identity</td><td>Warm door and technical validator. Best used to point us to the buyer and make the intro, not to close.</td></tr>
+  <tr><td><b>The buyer we need</b></td><td>Security leadership: CISO, VP or Head of Security. Sometimes CIO or Head of IT.</td><td>Owns agent governance, risk, and the budget. This is who the meeting needs to reach.</td></tr>
+  <tr><td><b>The internal champion for Agen</b></td><td>Head of AI, platform security, or the eng lead already feeling the shadow-agent pain</td><td>Feels the problem first and can build the case internally toward the security buyer.</td></tr>
+</table>
+
+<h3>So run two tracks per account</h3>
+<div class="cols">
+  <div class="mini">
+    <h4>Track A · champion-led intro <span class="pill a">preferred</span></h4>
+    <p>Go to the contact we already have and ask one thing: who owns AI and agent security here, and would you introduce me. A warm intro from a trusted colleague beats any cold path to the same exec.</p>
+  </div>
+  <div class="mini">
+    <h4>Track B · direct to the buyer <span class="pill b">parallel</span></h4>
+    <p>Reach the security leader directly, opening with "you already run Frontegg" and, where the champion is willing, naming them as the referrer. Run this alongside Track A so we are not blocked if the champion goes quiet.</p>
+  </div>
+</div>
+
+<div class="box warn"><b>What this changes about "a qualified meeting."</b> A meeting counts when it reaches the buyer or a buyer-side stakeholder, not just any contact we happen to have. Mapping the right person is part of the CSM's qualification, and the accepted-meeting bar in the comp model should reflect that, so we are not paying for friendly meetings with the wrong persona.</div>
+
+<h3>Where the rest of the plan has to flex</h3>
+<ul>
+  <li><b>The workspace.</b> The contacts on file in <code>/customer-expansion</code> are often the wrong persona. Each account should surface that gap and prompt the CSM to find the security decision-maker by title through Amplemarket, rather than just listing the contacts we already have. This is a small product tweak worth its own Lovable prompt.</li>
+  <li><b>Outreach.</b> On any account where our only contact is technical, the first move is an intro-ask to the champion, not a pitch. The founder InMail splits cleanly here: Aviad nurtures the technical champion while Sagi goes to the security exec.</li>
+  <li><b>Enablement.</b> Give every CSM one discovery question ("who owns agent and AI security for you?") and a short intro-ask script, so the champion-to-buyer handoff is routine rather than improvised.</li>
+</ul>
+<div class="callout"><b>The reframe in one line:</b> treat the champion as our best route to the buyer, not as the buyer. The relationship is still the advantage, we are just pointing it at the right person.</div>
+
+<!-- ============ 4 ============ -->
+<h2><span class="n">4</span> The offer portfolio: hook offers vs conversion offers</h2>
+<p class="lede">You want to experiment with all four offers, so the cleanest way to think about them is by their job. Two offers exist to earn the meeting (low friction, no commitment). Two exist to convert the meeting into a signed expansion (they carry price and terms). Because the Q3 KPI is meetings booked, we lead with the hook offers and hold the conversion offers for the AE conversation.</p>
+
+<div class="cols">
+  <div class="mini">
+    <h4><span class="pill hook">HOOK</span> Free Agent Discovery assessment</h4>
+    <p><b>Job:</b> get the meeting. Lowest friction, no purchase, high curiosity.</p>
+    <p><b>Why it works:</b> the shadow-agent angle almost always finds agents already connected that nobody knew about. It reframes the call from "buy something" to "let us show you what is already happening."</p>
+    <p><b>Best for:</b> all tiers, default hook for Tier B and C.</p>
+  </div>
+  <div class="mini">
+    <h4><span class="pill hook">HOOK</span> Done-for-you MCP</h4>
+    <p><b>Job:</b> get the meeting with a wow. We pre-build a starter MCP for their product before the call.</p>
+    <p><b>Why it works:</b> it proves "we already built it for you" instead of asserting it. Very high open and reply on Tier A.</p>
+    <p><b>Best for:</b> Tier A, hand-picked Tier B. Higher effort per account, so reserve it.</p>
+  </div>
+  <div class="mini">
+    <h4><span class="pill conv">CONVERT</span> Free pilot / early-bird</h4>
+    <p><b>Job:</b> close the expansion. A time-boxed founding-customer cohort with free or heavily discounted access.</p>
+    <p><b>Why it works:</b> removes budget as a blocker and creates urgency through a limited cohort and a deadline.</p>
+    <p><b>Best for:</b> the AE conversation, any tier that reaches evaluation.</p>
+  </div>
+  <div class="mini">
+    <h4><span class="pill conv">CONVERT</span> Bundle / loyalty pricing</h4>
+    <p><b>Job:</b> close the expansion by tying the agent add-on to the CIAM renewal or a loyalty bundle.</p>
+    <p><b>Why it works:</b> lands cleanly on accounts near renewal and makes the add-on a small delta on an existing spend.</p>
+    <p><b>Best for:</b> accounts within ~120 days of renewal, larger Tier A deals.</p>
+  </div>
+</div>
+
+<h3>How to run the experiment</h3>
+<p class="lede">Keep it simple enough that we can actually read the result. Randomize the hook offer within each tier and hold everything else constant, then read reply rate and accepted-meeting rate per hook. Conversion offers are chosen by the AE based on renewal timing and deal size, so we measure those on close rate, not meeting rate.</p>
+<table class="tint">
+  <tr><th>Test</th><th>Variable</th><th>Held constant</th><th>Read on</th><th>Decision after ~4 weeks</th></tr>
+  <tr><td><b>Hook A/B</b></td><td>Assessment vs done-for-you MCP</td><td>Tier, sender, sequence timing</td><td>Reply rate → accepted-meeting rate</td><td>Standardize the winning hook per tier</td></tr>
+  <tr><td><b>Channel</b></td><td>Email-first vs CSM-Slack-first</td><td>Offer, tier</td><td>Response speed, meeting rate</td><td>Set the default first-touch channel</td></tr>
+  <tr><td><b>Conversion</b></td><td>Free pilot vs bundle/loyalty</td><td>AE, discovery quality</td><td>Meeting → opportunity → close rate</td><td>Recommend a default close motion by segment</td></tr>
+</table>
+<div class="box good"><b>Prediction to validate, not assume.</b> The free Agent Discovery assessment will likely win as the broad hook because it asks for the least, and the done-for-you MCP will win on Tier A because it earns attention from busy execs. Let the data confirm it rather than committing budget up front.</div>
+
+<!-- ============ 5 ============ -->
+<h2><span class="n">5</span> Demand generation: base-only, low spend</h2>
+<p class="lede">These are customers, not strangers, so the highest-yield channels are the ones we already own and cost almost nothing. Paid is a thin retargeting layer on top, not the engine. The whole point of this motion is that the relationship does the work.</p>
+<div class="cols">
+  <div class="mini">
+    <h4>1 · CSM shared Slack channels <span class="pill a">owned</span></h4>
+    <p>CSMs already sit in shared Slack channels with many customers. A warm, specific note ("saw agent access come up, want me to run our free discovery on your side?") is the single highest-converting first touch we have. Cost: zero.</p>
+  </div>
+  <div class="mini">
+    <h4>2 · Personalized CSM email sequence <span class="pill a">owned</span></h4>
+    <p>Three touches from the CSM, not marketing: the hook offer, a proof point tied to their stack, and a soft break-up. Tuned to the account AI summary the workspace already generates. Cost: near zero.</p>
+  </div>
+  <div class="mini">
+    <h4>3 · In-product placement <span class="pill a">owned</span></h4>
+    <p>An in-app message inside the Frontegg admin console for the target accounts: "Turn on secure agent access." We set this up in Appcues ourselves, so no eng time, and it reaches the exact admins we want, where they already work. Cost: near zero.</p>
+  </div>
+  <div class="mini">
+    <h4>4 · LinkedIn retargeting of the known 200 <span class="pill b">low spend</span></h4>
+    <p>Upload the base as a matched audience and run light reinforcement ads to the buying committee at those exact accounts. This is air cover for the CSM outreach, not a lead source. Small, capped budget.</p>
+  </div>
+  <div class="mini">
+    <h4>5 · Lifecycle triggers <span class="pill a">owned</span></h4>
+    <p>Fire outreach on renewal windows, QBRs, and any support or product signal touching AI or agents. These moments already have the customer's attention, so the meeting ask lands naturally. Cost: zero, just workflow.</p>
+  </div>
+</div>
+<div class="callout"><b>Where the budget actually goes:</b> a modest LinkedIn retargeting cap for the matched audience and LinkedIn Sponsored Messaging for the co-founder InMail at scale (see section 6). Everything else is CSM time, a slice of two founders' time, and a little eng time for the in-product placement. For a base-only motion, spending big on broad paid would be spending against a door that is already open.</div>
+
+<!-- ============ 6 ============ -->
+<h2><span class="n">6</span> Co-founder LinkedIn InMail motion</h2>
+<p class="lede">For the top of the base, a personal note from a co-founder beats anything a rep or an ad can send. When Sagi or Aviad reach out directly to an exec at an account that already runs Frontegg, it carries weight no sequence can manufacture: it reads as the people who built the company caring enough to reach out in person. We run this as a focused, personalized layer on Tier A and hand-picked Tier B, not a blast.</p>
+
+<h3>Two ways to run it</h3>
+<div class="cols">
+  <div class="mini">
+    <h4>Manual founder InMail <span class="pill a">Tier A</span></h4>
+    <p>Sagi and Aviad send from their own LinkedIn profiles through Sales Navigator, fully personalized to the account. Highest touch, lowest volume. Reserve for named strategic accounts and warm exec relationships.</p>
+  </div>
+  <div class="mini">
+    <h4>Sponsored Messaging <span class="pill b">base scale</span></h4>
+    <p>LinkedIn Message ads sent to the matched audience with a co-founder set as the sender. Still lands as a personal note in the inbox, but scales across the base without manual sending. This is the low-spend paid line item.</p>
+  </div>
+</div>
+
+<h3>Who sends to whom</h3>
+<table>
+  <tr><th>Sender</th><th>Goes to</th><th>Angle they carry</th></tr>
+  <tr><td><b>Sagi (CEO)</b></td><td>Business and exec buyers: CEO, CIO, CISO, VP-level sponsors</td><td>Why we built the agent layer, you already trust us with identity, the founding-customer offer</td></tr>
+  <tr><td><b>Aviad (CTO)</b></td><td>Technical buyers: CTO, VP Eng, platform and security architects</td><td>How it works, the done-for-you MCP, the credibility of doing this on the identity you already run</td></tr>
+</table>
+
+<h3>Should we offer an incentive?</h3>
+<p class="lede">Worth testing, but the incentive has to fit the audience. For execs at companies that already pay us, status and access move the needle more than swag, and a gift card can actually cheapen a founder note. Lead with value-based incentives, and reserve any gift-style incentive for the long tail where the relationship is thin.</p>
+<table>
+  <tr><th>Incentive</th><th>Fit</th><th>Read</th></tr>
+  <tr><td><b>Founding-customer pricing, locked in</b></td><td>All tiers</td><td><span class="pill a">Recommended lead</span></td></tr>
+  <tr><td><b>Private founder roundtable or dinner invite</b></td><td>Tier A execs</td><td><span class="pill a">Recommended</span></td></tr>
+  <tr><td><b>Service credit or extended free pilot</b></td><td>Tier A / B</td><td>Strong, ties to the conversion offer</td></tr>
+  <tr><td><b>Charitable donation per completed discovery</b></td><td>Any</td><td>Brand-safe alternative to gift cards</td></tr>
+  <tr><td><b>Gift card for a completed assessment</b></td><td>Tier C / long tail only</td><td><span class="pill hook">Use sparingly</span></td></tr>
+</table>
+<div class="box info"><b>Recommendation:</b> lead every founder message with founding-customer status plus a roundtable invite for Tier A. Hold the pilot and pricing as the conversion offer for the AE conversation. Only test a gift-style incentive on the long tail, and tie it to completing the free discovery so we pay for an outcome, not just an open.</div>
+
+<h3>Content plan: a three-touch founder sequence</h3>
+<p class="lede">The messages alternate senders so a non-reply hears a second, different voice before the offer lands. Stop the sequence the moment anyone replies and route straight to the CSM to book and the AE to run. Send-ready drafts live in the content pack.</p>
+<table class="tint">
+  <tr><th>Touch</th><th>Sender</th><th>Job of the message</th><th>Incentive</th></tr>
+  <tr><td><b>1 · The founder note</b><br><span style="font-size:12px;color:var(--faint)">day 0</span></td><td>Sagi</td><td>Personal and short: why we built this, you already run Frontegg, a genuine ask for 20 minutes. No pitch.</td><td>None yet</td></tr>
+  <tr><td><b>2 · The builder follow-up</b><br><span style="font-size:12px;color:var(--faint)">day ~5, if no reply</span></td><td>Aviad</td><td>The how, plus the done-for-you MCP. Technical credibility, still personal.</td><td>Soft: "we already built a starter for you"</td></tr>
+  <tr><td><b>3 · The offer and close</b><br><span style="font-size:12px;color:var(--faint)">day ~10, if no reply</span></td><td>Sagi</td><td>The founding-customer program and the roundtable invite. Soft close and a graceful break-up.</td><td>Founding-customer status + roundtable</td></tr>
+</table>
+<div class="box warn"><b>Guardrails.</b> Cap manual founder InMail so it stays personal, a working set per week rather than hundreds. Never send from a founder to an account whose CSM has not been looped in first, so the founder note and the CSM outreach do not collide. Every reply routes to the CSM to book and the AE to run, which keeps this consistent with the book-and-hand-off comp model below.</div>
+<div class="callout"><b>Why this earns its place in a low-spend plan:</b> the only real cost is Sponsored Messaging for the scaled version plus a slice of two founders' time on Tier A. For a base that already knows us, a founder in the inbox is the highest-trust touch available, and it points straight at the KPI you chose: booked meetings.</div>
+
+<!-- ============ 7 ============ -->
+<h2><span class="n">7</span> CSM compensation model</h2>
+<p class="lede">The motion is book-and-hand-off, so we pay on the accepted meeting as the primary trigger, add a closed-won kicker so CSMs care about quality and outcome, and put guardrails in place so nobody games the meeting count. The numbers below are illustrative starting points to calibrate with RevOps and Finance, not final figures.</p>
+
+<div class="grid-num">
+  <div class="stat"><b>$150-250</b><span>per AE-accepted meeting</span></div>
+  <div class="stat"><b>$500-1,000</b><span>closed-won kicker (or 2-3% first-year ACV)</span></div>
+  <div class="stat"><b>4 / mo</b><span>baseline accepted-meeting target</span></div>
+  <div class="stat"><b>1.5×</b><span>accelerator above target</span></div>
+</div>
+
+<h3>The three components</h3>
+<table>
+  <tr><th>Component</th><th>Trigger</th><th>Why it is designed this way</th></tr>
+  <tr><td><b>Meeting spiff</b><br><span style="font-size:12px;color:var(--faint)">the engine</span></td><td>Paid per meeting the AE marks <b>accepted</b> (held + fits qualification), not merely booked.</td><td>Directly rewards the KPI you chose. Tying payout to AE acceptance, not the calendar invite, is what keeps quality honest.</td></tr>
+  <tr><td><b>Closed-won kicker</b><br><span style="font-size:12px;color:var(--faint)">the quality anchor</span></td><td>Flat bonus or a small % of first-year expansion ACV when a CSM-sourced account closes.</td><td>Without this, CSMs optimize for volume of weak meetings. The kicker makes them care whether the account was actually a fit.</td></tr>
+  <tr><td><b>Accelerator + pool</b><br><span style="font-size:12px;color:var(--faint)">the stretch</span></td><td>Per-meeting rate steps up above the monthly target; a quarterly team pool rewards the whole program hitting its number.</td><td>Drives stretch from the strong performers and a little team pull so the motion is shared, not solo.</td></tr>
+</table>
+
+<h3>Guardrails (non-negotiable)</h3>
+<ul>
+  <li><b>AE-accepted only.</b> A booked meeting that the AE declines or that no-shows does not earn. Acceptance is the gate.</li>
+  <li><b>Qualification bar.</b> The account must clear a light fit check (existing customer, right buyer in the room, a real reason to explore). The disqualify path (Not a fit / Not now) earns nothing and is logged in the account notes.</li>
+  <li><b>90-day account dedupe.</b> The same account cannot be re-booked for a fresh spiff inside 90 days, so nobody recycles the same logo.</li>
+  <li><b>Clawback on early churn.</b> The closed-won kicker claws back if the expansion cancels inside the first period, matching standard new-business terms.</li>
+</ul>
+
+<div class="box info"><b>Why not a full expansion quota with commission?</b> That model fits a full-cycle owner. Here the CSM hands off before close, so loading them with a revenue quota would pay them on outcomes an AE controls and would slow the meeting engine. A meeting spiff plus a close kicker keeps CSMs pointed at what they actually control (the relationship and the booked meeting) while still giving them upside on the result.</div>
+
+<h3>Beyond cash</h3>
+<p class="lede">A cross-sell into your own base is as much about recognition and momentum as it is about the spiff. Layer in a live leaderboard in the program channel, President's Club points for the top bookers, and first pick of the highest-potential expansion accounts for the CSMs who show up. These cost little and often move behavior more than the dollars.</p>
+
+<!-- ============ 8 ============ -->
+<h2><span class="n">8</span> The funnel math (illustrative)</h2>
+<p class="lede">A rough model to size the program and set the meeting target. Swap in your real CSM count, base size, and conversion rates. The point is the shape, not the exact numbers.</p>
+<table class="tint">
+  <tr><th>Stage</th><th>Assumption</th><th>Result</th></tr>
+  <tr><td>CSMs on the program</td><td>8 CSMs</td><td><b>8</b></td></tr>
+  <tr><td>Accepted meetings per CSM / month</td><td>4 (baseline target)</td><td><b>32 / month</b></td></tr>
+  <tr><td>Accepted meetings / quarter</td><td>32 × 3</td><td><b>~96 meetings</b></td></tr>
+  <tr><td>Meeting → opportunity</td><td>~40% become an Agen-pipeline deal</td><td><b>~38 opportunities</b></td></tr>
+  <tr><td>Opportunity → closed-won</td><td>~30% (warm base, early-bird offer)</td><td><b>~11 expansions</b></td></tr>
+</table>
+<div class="callout">Track the whole chain in the Overview tab so we watch the leading indicator (accepted meetings) weekly and the lagging one (closed expansions) monthly. If meetings are flowing but opportunities are not, the problem is qualification or the AE handoff, not effort.</div>
+
+<!-- ============ 9 ============ -->
+<h2><span class="n">9</span> 90-day rollout</h2>
+<div class="tl">
+  <div class="ph"><div class="w">Weeks 0-2 · Set up</div><h4>Foundations and sign-off</h4><p>Segment the base into A/B/C inside <code>/customer-expansion</code>. Get comp sign-off from RevOps and Finance. Build the two hook offers (assessment one-pager, done-for-you MCP template). Enable CSMs on the talk track and the workspace. Stand up the leaderboard and the acceptance definition with AEs.</p></div>
+  <div class="ph"><div class="w">Weeks 3-6 · Pilot</div><h4>Prove it with 2-3 CSMs on Tier A</h4><p>Run the done-for-you MCP on hand-picked Tier A accounts and the assessment on a Tier B slice. CSM + AE tandem, with a first batch of manual founder InMail from Sagi and Aviad on a few flagship accounts. Read early reply and accepted-meeting rates. Fix the talk track and handoff before scaling.</p></div>
+  <div class="ph"><div class="w">Weeks 7-12 · Scale</div><h4>All CSMs, all channels on</h4><p>Turn on the email sequence, in-product placement, the LinkedIn retarget, and the co-founder InMail sequence from Sagi and Aviad on Tier A. Run the hook A/B and channel test across the base. Weekly leaderboard, weekly pipeline review of accepted meetings. Start reading which conversion offer closes best by segment.</p></div>
+  <div class="ph"><div class="w">Ongoing</div><h4>Double down on what wins</h4><p>Standardize the winning hook per tier, retire the weaker one, and feed the founding-customer wins back into the base as proof. Revisit the meeting target once real conversion rates are known.</p></div>
+</div>
+
+<!-- ============ 10 ============ -->
+<h2><span class="n">10</span> Enablement CSMs need on day one</h2>
+<div class="cols">
+  <div class="mini"><h4>The talk track</h4><p>Say the company name cleanly, lead with the shadow-agent discovery hook, and ask for a 20-minute assessment, not a demo. Qualify fit before booking. Confirm timezone and read the calendar invite back.</p></div>
+  <div class="mini"><h4>The Agent Discovery one-pager</h4><p>The free-assessment leave-behind that makes the hook concrete and gives the customer something to say yes to. Doubles as the same-day confirmation asset.</p></div>
+  <div class="mini"><h4>Objection handling</h4><p>"We are small" → clarify small on what: total headcount, or the team using agents today, which inside a big org is a beachhead. "No AI plans" → that is exactly why the free discovery is useful now.</p></div>
+  <div class="mini"><h4>The workspace itself</h4><p>How to tier accounts, set the cross-sell stage, log notes on the company object, and Create Opportunity into the Agen pipeline so the handoff to the AE is one click and fully tracked.</p></div>
+</div>
+
+<div class="box good"><b>The through-line.</b> We are not asking these customers to take a leap. They already trust us with identity, we already built the agent layer, and the first ask costs them nothing but 20 minutes. Pay CSMs for the meeting, give them a hook that opens the door, and keep the whole thing inside the base where the trust already lives.</div>
+
+<div class="foot">Internal GTM plan · Customer Expansion (cross-sell Agen.co into the Frontegg base) · 2026-07-06 · Dollar figures and conversion rates are illustrative starting points for calibration with RevOps and Finance, not final numbers. Built on Motion 1 and the /customer-expansion workspace.</div>
+
+</div></body></html>
