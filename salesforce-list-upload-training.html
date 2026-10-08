@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<!-- GTM-META
+title: List Upload to Salesforce - Partner Training Guide
+type: guide
+section: Outbound / Data Ops
+date: 2026-10-08
+category: guide
+summary: Partner-facing training version of the Salesforce list upload playbook: Amplemarket list prep, Salesforce import, Titan X scoring handoff, and the post-scoring import, with links to the three recorded handover sessions.
+tags: salesforce, list-upload, titan-x, frontspin, outbound-operators, data-ops, guide, training, partner
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>List Upload Training</title>
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --card: #ffffff;
+    --ink: #1a1d23;
+    --muted: #5b6472;
+    --line: #e3e6eb;
+    --accent: #0e6fff;
+    --accent-soft: #e8f1ff;
+    --warn: #b45309;
+    --warn-soft: #fef3e2;
+    --ok: #0f7a4d;
+    --ok-soft: #e6f6ee;
+    --phase1: #0e6fff;
+    --phase2: #7c3aed;
+    --handoff: #b45309;
+    --code-bg: #eef1f5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12141a;
+      --card: #1b1e26;
+      --ink: #e8eaf0;
+      --muted: #9aa3b2;
+      --line: #2b2f3a;
+      --accent: #5b9bff;
+      --accent-soft: #1b2940;
+      --warn: #f0a44a;
+      --warn-soft: #3a2a14;
+      --ok: #4ecb8f;
+      --ok-soft: #14301f;
+      --phase1: #5b9bff;
+      --phase2: #a78bfa;
+      --handoff: #f0a44a;
+      --code-bg: #262a34;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 40px 16px 80px; }
+  header.top { margin-bottom: 8px; }
+  h1 { font-size: 30px; line-height: 1.25; margin: 0 0 8px; }
+  .sub { color: var(--muted); font-size: 15px; margin-bottom: 24px; }
+  .sub a { color: var(--accent); text-decoration: none; }
+  h2 { font-size: 22px; margin: 44px 0 12px; }
+  h3 { font-size: 17px; margin: 26px 0 8px; }
+  p { margin: 10px 0; }
+  a { color: var(--accent); }
+  code {
+    background: var(--code-bg);
+    padding: 2px 7px;
+    border-radius: 5px;
+    font-size: 13.5px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    white-space: nowrap;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin: 14px 0;
+  }
+  .videos { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 16px 0; }
+  .videos .card { margin: 0; }
+  .videos .v-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--accent-soft); color: var(--accent);
+    font-weight: 700; font-size: 13px; margin-bottom: 8px;
+  }
+  .videos .v-title { font-weight: 650; margin-bottom: 4px; }
+  .videos .v-meta { color: var(--muted); font-size: 13.5px; margin-bottom: 8px; }
+  .videos .v-desc { font-size: 14px; margin-bottom: 10px; }
+  .videos a.watch {
+    display: inline-block; font-weight: 650; font-size: 14px;
+    text-decoration: none; color: var(--accent);
+  }
+  .flow { display: flex; flex-direction: column; gap: 0; margin: 20px 0; }
+  .flow-step {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 14px 18px;
+  }
+  .flow-arrow { text-align: center; color: var(--muted); font-size: 18px; line-height: 1; padding: 6px 0; }
+  .flow-num {
+    flex: 0 0 30px; height: 30px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 14px; color: #fff; margin-top: 2px;
+  }
+  .flow-step .t { font-weight: 650; }
+  .flow-step .d { color: var(--muted); font-size: 14.5px; }
+  .who {
+    display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .04em;
+    text-transform: uppercase; border-radius: 20px; padding: 2px 10px; margin-left: 8px;
+    vertical-align: 2px;
+  }
+  .who.me { background: var(--accent-soft); color: var(--accent); }
+  .who.andrew { background: var(--warn-soft); color: var(--warn); }
+  .phase-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .phase-badge .dot { width: 10px; height: 10px; border-radius: 50%; }
+  ol.steps { counter-reset: step; list-style: none; margin: 16px 0; padding: 0; }
+  ol.steps > li {
+    counter-increment: step;
+    position: relative;
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 16px 20px 16px 62px; margin: 10px 0;
+  }
+  ol.steps > li::before {
+    content: counter(step);
+    position: absolute; left: 18px; top: 17px;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--accent-soft); color: var(--accent);
+    font-weight: 700; font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  ol.steps.p2 > li::before { background: color-mix(in srgb, var(--phase2) 14%, var(--card)); color: var(--phase2); }
+  ol.steps > li .st { font-weight: 650; display: block; margin-bottom: 4px; }
+  ol.steps ul { margin: 8px 0 2px; padding-left: 20px; }
+  ol.steps li li { margin: 4px 0; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 14.5px; }
+  th, td { border: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+  th { background: var(--code-bg); font-size: 13px; text-transform: uppercase; letter-spacing: .03em; }
+  .note {
+    border-left: 4px solid var(--accent); background: var(--accent-soft);
+    border-radius: 0 10px 10px 0; padding: 12px 16px; margin: 14px 0; font-size: 14.5px;
+  }
+  .warn-box {
+    border-left: 4px solid var(--warn); background: var(--warn-soft);
+    border-radius: 0 10px 10px 0; padding: 12px 16px; margin: 14px 0; font-size: 14.5px;
+  }
+  .ok-box {
+    border-left: 4px solid var(--ok); background: var(--ok-soft);
+    border-radius: 0 10px 10px 0; padding: 12px 16px; margin: 14px 0; font-size: 14.5px;
+  }
+  .checklist { list-style: none; padding: 0; margin: 10px 0; }
+  .checklist li { padding: 7px 0 7px 32px; position: relative; border-bottom: 1px dashed var(--line); }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: ""; position: absolute; left: 2px; top: 11px;
+    width: 16px; height: 16px; border: 2px solid var(--muted); border-radius: 4px;
+  }
+  .meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin: 16px 0; }
+  .meta-grid .card { margin: 0; }
+  .meta-grid .k { font-size: 12.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  footer { margin-top: 56px; color: var(--muted); font-size: 13.5px; border-top: 1px solid var(--line); padding-top: 16px; }
+  footer a { color: var(--accent); text-decoration: none; }
+  @media (max-width: 560px) {
+    h1 { font-size: 24px; }
+    ol.steps > li { padding-left: 54px; }
+    ol.steps > li::before { left: 14px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>List Upload to Salesforce - Training Guide</h1>
+  <div class="sub">
+    The full playbook for taking a new outbound list from its raw Amplemarket export to the dialer: prep the sheet, import to Salesforce, export for scoring, hand off for Titan X enrichment, and load the scored file back so the P1 numbers reach the caller automatically.
+    This is the process you are taking over. Read it once, watch the three recorded sessions below, then run your first list alongside us.
+  </div>
+</header>
+
+<h2>Watch the recorded sessions</h2>
+<p>The whole process was handed over across three recorded working sessions. They show every click described in this guide, on real lists. Watch session 1 before your first list; use 2 and 3 as references for the phase you are working on.</p>
+
+<div class="videos">
+  <div class="card">
+    <div class="v-num">1</div>
+    <div class="v-title">The full process, end to end</div>
+    <div class="v-meta">Sep 15 · 53 min · Andrew walks through everything</div>
+    <div class="v-desc">The complete walkthrough: why the process looks like this, the column prep, the phone-number work, both Salesforce imports, and how scoring fits in. Watch this one first.</div>
+    <a class="watch" href="https://fathom.video/share/nFUsE71Hifmscebz8twPL_DX2Yt4KCyN">Watch session 1 &rarr;</a>
+  </div>
+  <div class="card">
+    <div class="v-num">2</div>
+    <div class="v-title">Phase 1 hands-on: prepping list 17</div>
+    <div class="v-meta">Sep 16 · 30 min · trainee drives, Andrew guides</div>
+    <div class="v-desc">A real list prepped live under guidance: the sheet copy, renames, phone splitting and tagging, and the first import. This is what your own first session should look like.</div>
+    <a class="watch" href="https://fathom.video/share/GbCZnehoNRfNuJfLYxp31aHikzpk-GX6">Watch session 2 &rarr;</a>
+  </div>
+  <div class="card">
+    <div class="v-num">3</div>
+    <div class="v-title">Phase 2: uploading the scored file</div>
+    <div class="v-meta">Sep 22 · 24 min · the post-scoring import</div>
+    <div class="v-desc">What happens when the Titan X file comes back: cleaning it to the headers template, the Update-existing import, the critical workflow-rules checkbox, and verifying on the P1 report.</div>
+    <a class="watch" href="https://fathom.video/share/vibpc8NW2WosQ39YUAFMhPBByzwxTJMK">Watch session 3 &rarr;</a>
+  </div>
+</div>
+
+<h2>The Big Picture</h2>
+<p>One list goes through two phases of work on your side, with Titan X scoring in the middle handled by Andrew (Outbound Operators). All the heavy lifting is in Phase 1 (20 to 30 minutes per list). Phase 2 is quick.</p>
+
+<div class="flow">
+  <div class="flow-step">
+    <div class="flow-num" style="background: var(--phase1)">1</div>
+    <div><span class="t">Prep the list <span class="who me">You</span></span>
+    <div class="d">Copy the list tab, clean and rename columns to Salesforce names, split and consolidate phone numbers, tag international numbers, add Contact Type and Campaign/List Name.</div></div>
+  </div>
+  <div class="flow-arrow">&#8595;</div>
+  <div class="flow-step">
+    <div class="flow-num" style="background: var(--phase1)">2</div>
+    <div><span class="t">Import to Salesforce <span class="who me">You</span></span>
+    <div class="d">Data Import Wizard, Accounts and Contacts, <b>Add new records</b>, match contact by Email and account by Name &amp; Site.</div></div>
+  </div>
+  <div class="flow-arrow">&#8595;</div>
+  <div class="flow-step">
+    <div class="flow-num" style="background: var(--phase1)">3</div>
+    <div><span class="t">Export for scoring <span class="who me">You</span></span>
+    <div class="d">Export the "export for scoring" template report (filtered on the new campaign list name), strip the NA - INTL numbers and the status columns, send the CSV to Andrew in Slack.</div></div>
+  </div>
+  <div class="flow-arrow">&#8595;</div>
+  <div class="flow-step">
+    <div class="flow-num" style="background: var(--handoff)">4</div>
+    <div><span class="t">Titan X scoring <span class="who andrew">Andrew</span></span>
+    <div class="d">Andrew runs the file through Titan X on his account (there is no Titan X login on our side; credits are purchased through him). Takes days. He sends back a scored CSV.</div></div>
+  </div>
+  <div class="flow-arrow">&#8595;</div>
+  <div class="flow-step">
+    <div class="flow-num" style="background: var(--phase2)">5</div>
+    <div><span class="t">Upload scored file <span class="who me">You</span></span>
+    <div class="d">Clean the Titan X file to the headers template, Data Import Wizard again, <b>Update existing records</b>, match by Salesforce.com ID, and check the "trigger workflow rules" box.</div></div>
+  </div>
+  <div class="flow-arrow">&#8595;</div>
+  <div class="flow-step">
+    <div class="flow-num" style="background: var(--ok)">6</div>
+    <div><span class="t">P1s flow to the dialer</span>
+    <div class="d">The Frontspin-connected P1 report picks up the new P1s automatically and the caller starts dialing them. Verify by watching the report count grow.</div></div>
+  </div>
+</div>
+
+<div class="meta-grid">
+  <div class="card"><div class="k">Time per list</div>20 to 30 minutes of prep (Phase 1). Phase 2 is a few minutes.</div>
+  <div class="card"><div class="k">Cadence</div>The dialer needs a fresh list every week or two. Rescoring older lists buys time.</div>
+  <div class="card"><div class="k">Why it's manual</div>"The list is the strategy." Bad data makes everything downstream worthless, so stay close to the data.</div>
+</div>
+
+<h2><span class="phase-badge" style="color: var(--phase1)"><span class="dot" style="background: var(--phase1)"></span>Phase 1 - Deep Dive: Prep and Upload a New List</span></h2>
+
+<h3>Step A. Start from a safe copy</h3>
+<ol class="steps">
+  <li><span class="st">Open the list spreadsheet and go to the new list tab</span>
+    The link posted in the Slack channel is the source of truth. Work off it, never in it.</li>
+  <li><span class="st">File &gt; Make a copy</span>
+    All the deleting that follows happens in the copy, so the original data is never lost. No special name needed, it's just the working file. Double-check you are on the correct tab before touching anything.</li>
+</ol>
+
+<h3>Step B. Rename and clean the columns</h3>
+<p>The whole point of renaming is that the headers then auto-map in the Salesforce import wizard. Exact spelling matters; capitalization does not.</p>
+
+<table>
+  <tr><th>Column in the raw list</th><th>What to do</th></tr>
+  <tr><td>Email</td><td>Keep as is.</td></tr>
+  <tr><td>Email Status</td><td>Delete.</td></tr>
+  <tr><td>LinkedIn_URL</td><td>Keep, rename to <code>LinkedIn URL</code> (underscore to space). Spot-check one value to confirm it is the <i>person</i> URL, not the company.</td></tr>
+  <tr><td>First_Name / Last_Name</td><td>Keep, fix to <code>First Name</code> / <code>Last Name</code>.</td></tr>
+  <tr><td>Title</td><td>Keep as is.</td></tr>
+  <tr><td>Simplified title, department, location fields (roughly F through K)</td><td>Delete. Check each has nothing we need first (highlight the column, look at the count, or Cmd+Down to check for values).</td></tr>
+  <tr><td>Company Name</td><td>Rename to <code>Account Name</code>.</td></tr>
+  <tr><td>Company Domain / Website</td><td>Duplicate the column. Name one <code>Account Website</code> and the other <code>Contact Website</code>.</td></tr>
+  <tr><td>Company LinkedIn</td><td>Spot-check it is the <i>company</i> URL, then duplicate. Name them <code>Account Company LinkedIn URL</code> and <code>Contact Company LinkedIn URL</code>.</td></tr>
+  <tr><td>Company LinkedIn ID</td><td>Delete.</td></tr>
+  <tr><td>Industry</td><td>Keep as is.</td></tr>
+  <tr><td>Company Size / Employees</td><td>Duplicate. Name one <code>Employees</code> and the other <code>Contact Company Employee Count</code>.</td></tr>
+  <tr><td>Country, "manually added", and the rest before the phones</td><td>Delete after checking they're empty or unneeded. Country is the company HQ country, not the person's location, so it does not matter here.</td></tr>
+</table>
+
+<div class="note">Add a handful of empty columns at the far right before you start the phone work. You will need the space for moving columns around.</div>
+
+<h3>Step C. Phone numbers - split, label, consolidate</h3>
+<ol class="steps">
+  <li><span class="st">Check every phone column for data</span>
+    Highlight each column and look at the count. Delete any phone column that is completely empty.</li>
+  <li><span class="st">Split the aggregated columns</span>
+    The raw lists pack many numbers into one cell separated by semicolons. For each column like that: move it to the end of the sheet, then <b>Data &gt; Split text to columns &gt; separator: semicolon</b>. Repeat for every column holding multiple numbers, and check the last split column each time to confirm nothing spilled further.</li>
+  <li><span class="st">Rename the resulting phone columns</span>
+    In order: <code>Mobile</code>, <code>Contact Phone</code>, <code>Phone 2</code>, <code>Phone 3</code>, <code>Phone 4</code>, <code>Phone 5</code>, then <code>Phone 6</code>, <code>Phone 7</code>... for the overflow. Salesforce only takes the first six (Mobile plus Contact Phone plus Phone 2 to 5).</li>
+  <li><span class="st">Add the status columns</span>
+    Insert a status column after each of the first six phone fields, named exactly: <code>Mobile Status</code>, <code>Contact Phone Status</code>, <code>Phone 2 Status</code>, <code>Phone 3 Status</code>, <code>Phone 4 Status</code>, <code>Phone 5 Status</code>. These exist in Salesforce and must map. No status columns for Phone 6 and up - those never go to Salesforce.</li>
+  <li><span class="st">Tag international numbers as NA - INTL</span>
+    For each of the six phone columns: sort the column Z to A so the plus-prefixed international numbers group together, and in its status column write <code>NA - INTL</code> for every non-US number (anything not +1).
+    <ul>
+      <li><b>Why not delete them:</b> NA means "needs attention" in the Titan X world - these get skipped in scoring, which saves credits, but the numbers still reach Salesforce in case we ever run an Australia or UK campaign.</li>
+    </ul></li>
+  <li><span class="st">Rescue numbers from the overflow columns</span>
+    For Phone 6 and up, sort each column Z to A and move any usable US number into an empty slot among the first six. A US number beats an international one, so you can even overwrite an INTL number with a US one from the overflow (the INTL data can be recovered later from Salesforce report comparisons if a second scoring pass is ever needed). Tip: select a whole run of numbers and cut-paste them together into one target column instead of one by one. Always move numbers as far left as possible.</li>
+  <li><span class="st">Final phone sweep, then delete the overflow</span>
+    Check Phone 5 (sort Z to A) for anything that can move left into an empty earlier slot. Then delete all Phone 6+ columns entirely.</li>
+</ol>
+
+<h3>Step D. The two mandatory fields at the end</h3>
+<ol class="steps">
+  <li><span class="st">Contact Type</span>
+    Add a column named <code>Contact Type</code>. The value is the persona segment, for example the CIO ITBA value. Do not guess the syntax: open Salesforce, open the CIO ITBA report (bookmarked), copy the exact contact type value from a row, paste it in and fill down. No list number goes here.</li>
+  <li><span class="st">Campaign / List Name</span>
+    Add a column named <code>Campaign / List Name</code>. Get the exact current value from the "export for scoring" template report filter in Salesforce, then increment both numbers: the first number is the running total of all lists ever uploaded, the second is the list number within the segment. Example from the sessions: after "24 ... 16" came <code>25 - CIO ITBA 17</code>. Fill down all rows.</li>
+</ol>
+
+<h3>Step E. Import to Salesforce</h3>
+<ol class="steps">
+  <li><span class="st">Download as CSV</span>
+    Name it with "up" in it (for example "List 17 up") so you know it is the Salesforce upload file among all the downloads.</li>
+  <li><span class="st">Open the Data Import Wizard</span>
+    Salesforce &gt; gear icon &gt; <b>Setup</b> &gt; type "import" in Quick Find &gt; <b>Data Import Wizard</b> &gt; Launch Wizard.</li>
+  <li><span class="st">Wizard settings for a NEW list</span>
+    <ul>
+      <li>Object: <b>Accounts and Contacts</b></li>
+      <li>Action: <b>Add new records</b></li>
+      <li>Match Contact by: <b>Email</b></li>
+      <li>Match Account by: <b>Name &amp; Site</b></li>
+    </ul>
+    Matching finds duplicates: a matched contact is not created again, but its fields (like a fresh phone number) may update on the existing record. The <code>Campaign / List Name</code> field is configured in the back end not to override on update, which is exactly what lets us isolate the new contacts afterwards.</li>
+  <li><span class="st">Upload the CSV and verify the mapping</span>
+    Every header should map automatically with no warning icons. Typical fixes: Company Name must be Account Name, and the phone field must map to the <i>contact</i> phone, not the account phone. Fix stragglers, hit Next, Start Import. It runs in batches, about two minutes.</li>
+  <li><span class="st">Check the result</span>
+    Setup &gt; Data Import Wizard area shows records created / updated. For a deeper look: <b>Bulk Data Load Jobs</b> &gt; click the contact job ID &gt; View Result downloads a log file where you can count errors.
+    <ul>
+      <li><b>Created</b> = genuinely new contacts (these are what goes to scoring).</li>
+      <li><b>Updated / matched</b> = already existed, skipped as new.</li>
+      <li>A small failure count (formatting, missing data) is normal; around 2 percent was typical.</li>
+      <li>If the duplicate share is unusually high (40 percent happened on list 16), flag it in Slack and investigate the source list for overlap with previous lists.</li>
+    </ul></li>
+</ol>
+
+<h3>Step F. Export for scoring and hand off to Andrew</h3>
+<ol class="steps">
+  <li><span class="st">Open the "export for scoring" template report</span>
+    Update its campaign list name filter to the new value (for example "25 - CIO ITBA 17") and refresh until the count stabilizes. Because campaign list name does not override on existing contacts, this report returns <b>only the newly created contacts</b> - all with today's created date and a blank bucket status.</li>
+  <li><span class="st">Export it</span>
+    Report arrow &gt; Export &gt; <b>Details Only</b> &gt; CSV.</li>
+  <li><span class="st">Clean the export</span>
+    <ul>
+      <li>Filter each phone status column for <code>NA - INTL</code> and delete those phone numbers (just the numbers in the phone column, per the tag).</li>
+      <li>Then delete all six status columns entirely.</li>
+      <li>Drop any leftover columns that are not in Andrew's headers template.</li>
+    </ul></li>
+  <li><span class="st">Send the CSV to Andrew in Slack</span>
+    He uploads it to Titan X under his account. Scoring takes days. Phase 1 done.</li>
+</ol>
+
+<h2><span class="phase-badge" style="color: var(--handoff)"><span class="dot" style="background: var(--handoff)"></span>The Handoff - What Titan X Sends Back</span></h2>
+<div class="card">
+  <p>Andrew messages back with the scored CSV ("list N is final"). What is in it:</p>
+  <ul>
+    <li>Every contact with every phone number, each number carrying a score: <b>P1</b> is a confirmed-good number (the ones that get dialed), down to P3 and bad data.</li>
+    <li><b>SF</b> flag means the number went through a spam filter or AI screener, but if the person still picked up, it stays a P1.</li>
+    <li><b>IVR</b> columns capture the phone path (extensions, dial-through directories).</li>
+  </ul>
+  <p>You only ever touch this file after Andrew sends it. There is no Titan X login on our side; Andrew is the Titan X manager and credits are purchased through him.</p>
+</div>
+
+<h2><span class="phase-badge" style="color: var(--phase2)"><span class="dot" style="background: var(--phase2)"></span>Phase 2 - Deep Dive: Upload the Scored File</span></h2>
+
+<ol class="steps p2">
+  <li><span class="st">Clean the Titan X file down to the template</span>
+    <ul>
+      <li>Delete the leading junk columns (in the session run: everything from A through J, up to and including the best-phone block).</li>
+      <li><b>Keep the Contact ID column</b> - that is the Salesforce.com ID and it is what the import matches on.</li>
+      <li>Delete every <b>phone-specific</b> IVR column. <b>Keep the one general IVR navigation column</b> - it aggregates the per-phone paths.</li>
+      <li>Delete the remaining columns not in the template (go by the template, not by column letter - it shifts between runs).</li>
+      <li>End state: columns A through M matching the <b>headers template</b>. Copy the template's header row and paste it over your headers so they are exact.</li>
+    </ul></li>
+  <li><span class="st">Download as CSV</span>
+    Same habit: short name (Salesforce has a length limit) with "up" in it.</li>
+  <li><span class="st">Data Import Wizard - settings for a SCORED file</span>
+    <ul>
+      <li>Object: <b>Accounts and Contacts</b></li>
+      <li>Action: <b>Update existing records</b> (they all exist now)</li>
+      <li>Match by: <b>Salesforce.com ID</b></li>
+      <li><b>CRITICAL: check the "trigger workflow rules and processes" checkbox.</b> In Andrew's words: "this is where everybody messes something up." Without it, the downstream automation (bucket status, Frontspin sync) does not fire.</li>
+    </ul></li>
+  <li><span class="st">Upload, verify mapping, start import</span>
+    Everything should map cleanly since the headers came from the template.</li>
+  <li><span class="st">Verify on the Frontspin P1 report</span>
+    Open the post-scoring report (a different report from the scoring export - this one is connected to Frontspin; filters: contact type CIO ITBA, company over 49 employees, bucket status P1, across all lists ever). Hit refresh and watch the total grow - in the session it went 1849 to 1965, meaning 120 fresh P1s pushed to the dialer. That growth is the confirmation the import worked.</li>
+</ol>
+
+<div class="ok-box"><b>Done.</b> The P1s are now in the Frontspin call list automatically. Nothing else to push.</div>
+
+<h2>Quick Checklist (print this part)</h2>
+<div class="card">
+  <b>Phase 1 - new list in:</b>
+  <ul class="checklist">
+    <li>Make a copy of the list tab (never edit the original)</li>
+    <li>Rename headers to Salesforce names; delete unused columns; duplicate Website, Company LinkedIn, Company Size into their Account/Contact pairs</li>
+    <li>Split semicolon-packed phone columns (Data &gt; Split text to columns)</li>
+    <li>Rename phones: Mobile, Contact Phone, Phone 2-5, then overflow Phone 6+</li>
+    <li>Add the six status columns (Mobile Status ... Phone 5 Status)</li>
+    <li>Sort each phone column Z-A, tag non-US numbers <code>NA - INTL</code> in the status column</li>
+    <li>Move usable US numbers from Phone 6+ into free slots, then delete Phone 6+</li>
+    <li>Add <code>Contact Type</code> (exact value copied from the Salesforce report)</li>
+    <li>Add <code>Campaign / List Name</code> (increment both numbers, e.g. 25 - CIO ITBA 17)</li>
+    <li>Download CSV ("... up"), Data Import Wizard: Add new records, match Email + Name &amp; Site</li>
+    <li>Fix mapping warnings (Account Name, contact-level Phone), import, check created vs duplicates</li>
+    <li>Update the scoring report filter to the new list name, Export &gt; Details Only</li>
+    <li>Delete NA - INTL numbers, delete status columns, send CSV to Andrew</li>
+  </ul>
+  <b>Phase 2 - scored file back:</b>
+  <ul class="checklist">
+    <li>Delete leading columns; keep Contact ID; keep only the general IVR column</li>
+    <li>Paste the template headers (columns A-M)</li>
+    <li>Data Import Wizard: Update existing records, match by Salesforce.com ID</li>
+    <li>CHECK "trigger workflow rules and processes"</li>
+    <li>Import, then refresh the Frontspin P1 report and confirm the count grew</li>
+  </ul>
+</div>
+
+<h2>Good to Know</h2>
+<div class="card">
+  <ul>
+    <li><b>Dialing lifecycle:</b> the caller makes 7 attempts over 2 weeks per contact; after that they drop into a no-answer bucket automatically. The <code>FS Total Calls</code> field on the contact shows attempt counts. Reactivate lists are generated off <code>bucket status</code>, not contact type.</li>
+    <li><b>Feeding the machine:</b> plan a new list every week or two. Andrew can rescore previous lists to buy time between fresh ones.</li>
+    <li><b>Reference material:</b> Andrew's written headers template (shared in Slack) is the source of truth for the Phase 2 column layout, and his video library covers list ops, Salesforce setup, Frontspin and Titan X in more depth - ask Ori for access.</li>
+    <li><b>Why duplicates are matched, not rejected:</b> if someone is on a list we sent, the assumption is we want them called (maybe with a better number), so existing records get their data refreshed while only genuinely new contacts are created and scored.</li>
+    <li><b>Questions:</b> process and Salesforce questions go to Ori; Titan X and scoring questions go to Andrew.</li>
+  </ul>
+</div>
+
+<footer>
+  Built from the three recorded handover sessions with Andrew Peck (Outbound Operators / Ronen Pessar):
+  <a href="https://fathom.video/share/nFUsE71Hifmscebz8twPL_DX2Yt4KCyN">Session 1 - The full process (Sep 15, 53 min)</a> ·
+  <a href="https://fathom.video/share/GbCZnehoNRfNuJfLYxp31aHikzpk-GX6">Session 2 - Phase 1 hands-on, list 17 (Sep 16, 30 min)</a> ·
+  <a href="https://fathom.video/share/vibpc8NW2WosQ39YUAFMhPBByzwxTJMK">Session 3 - Phase 2, scored file upload (Sep 22, 24 min)</a>.
+  Last updated 2026-10-08.
+</footer>
+
+</div>
+</body>
+</html>
